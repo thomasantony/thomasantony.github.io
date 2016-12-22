@@ -1,0 +1,16 @@
+# Site navigation links
+
+- title: Welcome
+  url: /welcome/
+
+#- title: Blog
+#  url: /posts/
+
+- title: Publications
+  url: /publications/
+
+- title: Curriculum Vitae
+  url: /cv/
+  
+- title: Contact
+  url: /contact/
