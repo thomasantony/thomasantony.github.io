@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>About Me</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="About Me">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="About Me">
+	<meta name="twitter:description" content="">
+	<meta name="twitter:site" content="@thomasantony">
+	<meta name="twitter:creator" content="@thomasantony">
+	<meta name="twitter:image:src" content="">
+	
+	
+	<meta name="og:title" content="About Me">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="https://www.example.com/about/">
+	<meta name="og:site_name" content="About Me">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:author" content="thomasantony">
+	<meta name="article:tag" content="">
+	<link rel="stylesheet" type="text/css" href="https://www.example.com/css/style.css">
+	<script src="https://www.example.com/js/caption.js"></script>
+</head>
+<body>
+
+<header >
+	<a href="https://www.example.com/" style="float: left;color:#777;"><strong>Random Thoughts of an Engineer</strong>
+	</a>
+	
+</strong></a> | 
+<a href="https://www.example.com/about/" style="color:#777;"><strong>About Me</strong></a>
+
+</header>
+
+
+<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
+<script>
+function fadeOut(el) {
+  el.style.opacity = 1;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
+    last = +new Date();
+    
+
+    if (el.style.opacity > 0) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    } else {
+    	el.style.display='none';
+    }
+  };
+
+  tick();
+}
+
+function ready(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+         el = document.getElementById('loadingMask');
+         fadeOut(el);
+        var elements = document.querySelectorAll("img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("alt")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("alt"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+window.onload = ready;
+</script>
+
+<div class="content">
+	<h1>About Me <aside></aside></h1>
+	<p>Something about me</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<footer>
+	
+	<p style="font-size:0.5em">This site was made with <a href="https://github.com/gohugoio/hugo">Hugo</a> using theme <a href="https://github.com/schollz/onetwothree">onetwothree</a> made by <a href="https://github.com/schollz">schollz</a>.</p>
+</footer>
+</body>
+</html>
