@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Random Thoughts of an Engineer</title>
-    <link>https://www.example.com/posts/</link>
+    <link>https://www.thomasantony.com/posts/</link>
     <description>Recent content in Posts on Random Thoughts of an Engineer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Wed, 16 Oct 2019 20:47:55 -0500</lastBuildDate>
     
-	<atom:link href="https://www.example.com/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.thomasantony.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hello World!</title>
-      <link>https://www.example.com/posts/hello-world/</link>
+      <link>https://www.thomasantony.com/posts/hello-world/</link>
       <pubDate>Wed, 16 Oct 2019 20:47:55 -0500</pubDate>
       
-      <guid>https://www.example.com/posts/hello-world/</guid>
+      <guid>https://www.thomasantony.com/posts/hello-world/</guid>
       <description>Yes. I too have started a blog &amp;hellip; again. This is probably my fourth attempt at starting a personal website of some kind. And as usual, I spent several hours looking at themes/templates before finally settling on this one.
 The intention of this blog is to share my thoughts and ideas on programming, engineering, spaceflight, and pretty much anything that catches my fancy. To whoever is reading this, welcome!</description>
     </item>
