@@ -8,7 +8,8 @@
 
 
   
-    
+    <meta name="description" content="I have been using Rust professionally for almost six months now and have tried it on and off for more than one year now. In this post, I will be writing a Sudoku solver using the SAT solver, varisat.
+What is an SAT solver and why use it? Peter Norvig has written an in-depth article about the various strategies for writing sudoku solvers. While this was my original plan, I came across SAT solvers in this (video)[https://youtu.">
   
 
 
@@ -31,11 +32,9 @@
 
 
 <meta name="generator" content="Hugo 0.58.3" />
-  <title>Untitled Coding Blog</title>
-  <link rel="canonical" href="https://www.thomasantony.com/">
+  <title>Writing A Sudoku Solver using varisat in Rust | Untitled Coding Blog</title>
+  <link rel="canonical" href="https://www.thomasantony.com/2020/sudoku-varisat/">
 
-
-  <link rel="alternate" type="application/rss+xml" href="https://www.thomasantony.com/index.xml" title="Untitled Coding Blog">
 
   
 
@@ -47,28 +46,8 @@
 
 
   
-
-  
-
-  
-
-  
-    
-    
-    
-    
     
   
-    
-    
-    
-    
-    
-  
-
-  
-
-
   
   <link rel="stylesheet" href="https://www.thomasantony.com/css/base.min.4293019d439550eab33acfe9d571666abdce0ce04ceb5f827433f6c546fe2345.css" integrity="sha256-QpMBnUOVUOqzOs/p1XFmar3ODOBM61&#43;CdDP2xUb&#43;I0U=" crossorigin="anonymous">
 
@@ -104,11 +83,8 @@
       <div class="u-padding">
         
 
-  
-
-  
-    <article>
-      <header class="Heading">
+  <article>
+    <header class="Heading">
   <h2 class="Heading-title">
     <a class="Heading-link u-clickable" href="https://www.thomasantony.com/2020/sudoku-varisat/" rel="bookmark">Writing A Sudoku Solver using varisat in Rust</a>
   </h2>
@@ -116,8 +92,7 @@
     <time datetime="2020-04-12T17:07:25-05:00">12 April, 2020</time>
   
 </header>
-      
-        
+    
 
 <p>I have been using Rust professionally for almost six months now and have tried it on and off for more than one year now. In this post, I will be writing a Sudoku solver using the SAT solver, <a href="https://crates.io/crates/varisat"><code>varisat</code></a>.</p>
 
@@ -224,39 +199,7 @@ for v in 1..10
 
 <p>With just the first three rules, the SAT solver will give a solution where all the numbers are  in single cells within each &ldquo;box&rdquo; on the board. To avoid this, an additional constraint needs to be added that says that each cell can only have one number set to TRUE at any time.</p>
 
-      
-      
-
-
-  
-
-  
-
-
-
-
-
-    </article>
     
-      <div class="Divider"></div>
-    
-  
-    <article>
-      <header class="Heading">
-  <h2 class="Heading-title">
-    <a class="Heading-link u-clickable" href="https://www.thomasantony.com/2019/hello-world/" rel="bookmark">Hello World!</a>
-  </h2>
-  
-    <time datetime="2019-10-16T20:47:55-05:00">16 October, 2019</time>
-  
-</header>
-      
-        <p>Yes. I have started a blog &hellip; again. This is probably my fourth attempt at creating a personal website. And as usual, I spent several hours looking at themes/templates before finally settling on this one.</p>
-
-<p>The intention of this blog is to share my thoughts and ideas on programming, engineering, spaceflight, and pretty much anything that catches my fancy. To whoever is reading this, welcome!</p>
-
-      
-      
 
 
   
@@ -267,15 +210,10 @@ for v in 1..10
 
 
 
-    </article>
-    
-      <div class="Divider"></div>
     
   
 
-  
-
-
+  </article>
 
 
       </div>

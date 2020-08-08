@@ -1,14 +1,135 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="https://www.thomasantony.com/xml/base.min.xml" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Random Thoughts of an Engineer</title>
+    <title>Tags on Untitled Coding Blog</title>
     <link>https://www.thomasantony.com/tags/</link>
-    <description>Recent content in Tags on Random Thoughts of an Engineer</description>
+    <description>Recent content in Tags on Untitled Coding Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    
-	<atom:link href="https://www.thomasantony.com/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://www.thomasantony.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Writing A Sudoku Solver using varisat in Rust</title>
+      <link>https://www.thomasantony.com/2020/sudoku-varisat/</link>
+      <pubDate>Sun, 12 Apr 2020 17:07:25 -0500</pubDate>
+      <guid>https://www.thomasantony.com/2020/sudoku-varisat/</guid>
+      <description>
+
+&lt;p&gt;I have been using Rust professionally for almost six months now and have tried it on and off for more than one year now. In this post, I will be writing a Sudoku solver using the SAT solver, &lt;a href=&#34;https://crates.io/crates/varisat&#34;&gt;&lt;code&gt;varisat&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-is-an-sat-solver-and-why-use-it&#34;&gt;What is an SAT solver and why use it?&lt;/h2&gt;
+
+&lt;p&gt;Peter Norvig has written an in-depth &lt;a href=&#34;https://norvig.com/sudoku.html&#34;&gt;article&lt;/a&gt; about the various strategies for writing sudoku solvers. While this was my original plan, I came across SAT solvers in this (video)[&lt;a href=&#34;https://youtu.be/_GP9OpZPUYc?t=889&#34;&gt;https://youtu.be/_GP9OpZPUYc?t=889&lt;/a&gt;] by Raymond Hettinger. Not having a computer science background meant that I had never heard of this before and was intrigued. This (video)[&lt;a href=&#34;https://www.youtube.com/watch?v=x2XtpCn0-bM&#34;&gt;https://www.youtube.com/watch?v=x2XtpCn0-bM&lt;/a&gt;] by Martin Hořeňovský also helped me in understanding how to express a Sudoku puzzle as an SAT problem. There are many similarities between his C++ code and my Rust code.&lt;/p&gt;
+
+&lt;h2 id=&#34;boolean-satisfiability-problem&#34;&gt;Boolean Satisfiability Problem&lt;/h2&gt;
+
+&lt;p&gt;According to Wikipedia,&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;the Boolean Satisfiability problem is the problem of determining if there exists an interpretation that satisfies a given Boolean formula.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;What this means is that if you can express your problem as a collection of expressions of boolean variables evaluating to TRUE or FALSE, an SAT solver can tell you if your boolean variables should be TRUE or FALSE for these conditions to be satisfied (or that there is no solution if that s the case).&lt;/p&gt;
+
+&lt;p&gt;Most SAT solvers (including &lt;code&gt;varisat&lt;/code&gt;) require that the problems be expressed in the &amp;ldquo;Conjunctive-Normal Form&amp;rdquo; or CNF. This means that the expression should consist of a collection of clauses ANDed together, each of them containing one or more literals ORed with each other. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;X1 AND (X2 OR X3) AND (X4 OR X5)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;sudoku-as-an-sat-problem-statement&#34;&gt;Sudoku as an SAT problem statement&lt;/h2&gt;
+
+&lt;p&gt;A Sudoku puzzle can be expressed as a set of boolean expressions with &lt;code&gt;9x9x9 = 729&lt;/code&gt; boolean variables. Each variable denotes whether a specific cell on the board has a specific value. The rules of sudoku can be expressed using these boolean variables and given to an SAT solver to obtain a solution. The boolean variable coresponding to a value in a row and column can be written as: &lt;code&gt;row*9*9 + col*9 + value&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;For example, if the puzzle has a &amp;ldquo;3&amp;rdquo; in row 0, column 4, the corresponding boolean variable would be the one with index &lt;code&gt;0*9*9 + 4*9 + (3 - 1) = 38&lt;/code&gt;. The expression has &lt;code&gt;(3-1)&lt;/code&gt; since we are using zero-based indexing. &lt;code&gt;1&lt;/code&gt; on the board will correspond to &lt;code&gt;0&lt;/code&gt; in the expression and so on.&lt;/p&gt;
+
+&lt;h2 id=&#34;rules-of-sudoku-as-sat-expressions&#34;&gt;Rules of Sudoku as SAT expressions&lt;/h2&gt;
+
+&lt;p&gt;In the following sections, the boolean variables representing row &lt;code&gt;R&lt;/code&gt;, column &lt;code&gt;C&lt;/code&gt; and value &lt;code&gt;V&lt;/code&gt; will be denoted as &lt;code&gt;X[R,C,V]&lt;/code&gt;. &lt;code&gt;R&lt;/code&gt; and &lt;code&gt;C&lt;/code&gt; both run from &lt;code&gt;0-8&lt;/code&gt; and &lt;code&gt;V&lt;/code&gt; goes from &lt;code&gt;1-9&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;1-each-row-has-all-numbers-from-1-9-exactly-once&#34;&gt;1. Each row has all numbers from 1..9 exactly once&lt;/h3&gt;
+
+&lt;p&gt;Pseudo-code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let formula = TRUE
+for r in 0..9
+{
+    for v in 1..10
+    {
+        clause = X[r,0,v] OR X[r,1,v] ... OR X[r,8,v]
+    }
+    formula = formula AND clause
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The corresponding Rust code using &lt;code&gt;varisat&lt;/code&gt; is given below. The &lt;code&gt;iproduct&lt;/code&gt; macro from the &lt;a href=&#34;https://crates.io/crates/itertools&#34;&gt;&lt;code&gt;itertools&lt;/code&gt;&lt;/a&gt; crate is used here to simplify the iterations.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-rust&#34;&gt;use varisat::Lit;
+use itertools::iproduct;
+
+// Initialize new instance of `Solver`
+let mut solver = Solver::new();
+
+for (row, value) in iproduct!(0..9, 0..9)
+{
+    let mut literals: Vec&amp;lt;Lit&amp;gt; = Vec::new();
+    for col in 0..9 
+    {
+        literals.push(lit_from_value(row, col, value));
+    }
+    solver.add_clause(&amp;amp;literals);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-each-column-has-all-numbers-from-1-9-exactly-once&#34;&gt;2. Each column has all numbers from 1..9 exactly once&lt;/h3&gt;
+
+&lt;p&gt;Pseudo-code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let formula = TRUE
+for c in 0..9
+{
+    for v in 1..10
+    {
+        clause = X[0,c,v] OR X[1,c,v] ... OR X[8,c,v]
+    }
+    formula = formula AND clause
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-each-box-has-all-numbers-from-1-9-exactly-once&#34;&gt;3. Each &amp;ldquo;box&amp;rdquo; has all numbers from 1..9 exactly once&lt;/h3&gt;
+
+&lt;p&gt;The logic here is a little more complicated than the last two as it involves iterating over &amp;ldquo;boxes&amp;rdquo; on the board rather than rows and columns.&lt;/p&gt;
+
+&lt;p&gt;Pseudo-code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let formula = TRUE
+for v in 1..10
+{
+    for box in boxes[0-9]
+    {
+        clause = FALSE
+        for cell_row, cell_col in box
+        {
+            clause = clause OR X[cell_row,cell_col,v]
+        }
+        formula = formula AND clause
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-each-cell-should-only-hold-one-number&#34;&gt;4. Each cell should only hold one number&lt;/h3&gt;
+
+&lt;p&gt;With just the first three rules, the SAT solver will give a solution where all the numbers are  in single cells within each &amp;ldquo;box&amp;rdquo; on the board. To avoid this, an additional constraint needs to be added that says that each cell can only have one number set to TRUE at any time.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Hello World!</title>
+      <link>https://www.thomasantony.com/2019/hello-world/</link>
+      <pubDate>Wed, 16 Oct 2019 20:47:55 -0500</pubDate>
+      <guid>https://www.thomasantony.com/2019/hello-world/</guid>
+      <description>&lt;p&gt;Yes. I have started a blog &amp;hellip; again. This is probably my fourth attempt at creating a personal website. And as usual, I spent several hours looking at themes/templates before finally settling on this one.&lt;/p&gt;
+
+&lt;p&gt;The intention of this blog is to share my thoughts and ideas on programming, engineering, spaceflight, and pretty much anything that catches my fancy. To whoever is reading this, welcome!&lt;/p&gt;
+</description>
+    </item>
   </channel>
 </rss>
