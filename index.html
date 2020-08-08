@@ -56,11 +56,8 @@
     
     
     
-    
-    
-  
-    
-    
+      
+      
     
     
     
@@ -106,140 +103,6 @@
 
   
 
-  
-    <article>
-      <header class="Heading">
-  <h2 class="Heading-title">
-    <a class="Heading-link u-clickable" href="https://www.thomasantony.com/2020/sudoku-varisat/" rel="bookmark">Writing A Sudoku Solver using varisat in Rust</a>
-  </h2>
-  
-    <time datetime="2020-04-12T17:07:25-05:00">12 April, 2020</time>
-  
-</header>
-      
-        
-
-<p>I have been using Rust professionally for almost six months now and have tried it on and off for more than one year now. In this post, I will be writing a Sudoku solver using the SAT solver, <a href="https://crates.io/crates/varisat"><code>varisat</code></a>.</p>
-
-<h2 id="what-is-an-sat-solver-and-why-use-it">What is an SAT solver and why use it?</h2>
-
-<p>Peter Norvig has written an in-depth <a href="https://norvig.com/sudoku.html">article</a> about the various strategies for writing sudoku solvers. While this was my original plan, I came across SAT solvers in this (video)[<a href="https://youtu.be/_GP9OpZPUYc?t=889">https://youtu.be/_GP9OpZPUYc?t=889</a>] by Raymond Hettinger. Not having a computer science background meant that I had never heard of this before and was intrigued. This (video)[<a href="https://www.youtube.com/watch?v=x2XtpCn0-bM">https://www.youtube.com/watch?v=x2XtpCn0-bM</a>] by Martin Hořeňovský also helped me in understanding how to express a Sudoku puzzle as an SAT problem. There are many similarities between his C++ code and my Rust code.</p>
-
-<h2 id="boolean-satisfiability-problem">Boolean Satisfiability Problem</h2>
-
-<p>According to Wikipedia,</p>
-
-<blockquote>
-<p>the Boolean Satisfiability problem is the problem of determining if there exists an interpretation that satisfies a given Boolean formula.</p>
-</blockquote>
-
-<p>What this means is that if you can express your problem as a collection of expressions of boolean variables evaluating to TRUE or FALSE, an SAT solver can tell you if your boolean variables should be TRUE or FALSE for these conditions to be satisfied (or that there is no solution if that s the case).</p>
-
-<p>Most SAT solvers (including <code>varisat</code>) require that the problems be expressed in the &ldquo;Conjunctive-Normal Form&rdquo; or CNF. This means that the expression should consist of a collection of clauses ANDed together, each of them containing one or more literals ORed with each other. For example:</p>
-
-<pre><code>X1 AND (X2 OR X3) AND (X4 OR X5)
-</code></pre>
-
-<h2 id="sudoku-as-an-sat-problem-statement">Sudoku as an SAT problem statement</h2>
-
-<p>A Sudoku puzzle can be expressed as a set of boolean expressions with <code>9x9x9 = 729</code> boolean variables. Each variable denotes whether a specific cell on the board has a specific value. The rules of sudoku can be expressed using these boolean variables and given to an SAT solver to obtain a solution. The boolean variable coresponding to a value in a row and column can be written as: <code>row*9*9 + col*9 + value</code>.</p>
-
-<p>For example, if the puzzle has a &ldquo;3&rdquo; in row 0, column 4, the corresponding boolean variable would be the one with index <code>0*9*9 + 4*9 + (3 - 1) = 38</code>. The expression has <code>(3-1)</code> since we are using zero-based indexing. <code>1</code> on the board will correspond to <code>0</code> in the expression and so on.</p>
-
-<h2 id="rules-of-sudoku-as-sat-expressions">Rules of Sudoku as SAT expressions</h2>
-
-<p>In the following sections, the boolean variables representing row <code>R</code>, column <code>C</code> and value <code>V</code> will be denoted as <code>X[R,C,V]</code>. <code>R</code> and <code>C</code> both run from <code>0-8</code> and <code>V</code> goes from <code>1-9</code></p>
-
-<h3 id="1-each-row-has-all-numbers-from-1-9-exactly-once">1. Each row has all numbers from 1..9 exactly once</h3>
-
-<p>Pseudo-code:</p>
-
-<pre><code>let formula = TRUE
-for r in 0..9
-{
-    for v in 1..10
-    {
-        clause = X[r,0,v] OR X[r,1,v] ... OR X[r,8,v]
-    }
-    formula = formula AND clause
-}
-</code></pre>
-
-<p>The corresponding Rust code using <code>varisat</code> is given below. The <code>iproduct</code> macro from the <a href="https://crates.io/crates/itertools"><code>itertools</code></a> crate is used here to simplify the iterations.</p>
-
-<pre><code class="language-rust">use varisat::Lit;
-use itertools::iproduct;
-
-// Initialize new instance of `Solver`
-let mut solver = Solver::new();
-
-for (row, value) in iproduct!(0..9, 0..9)
-{
-    let mut literals: Vec&lt;Lit&gt; = Vec::new();
-    for col in 0..9 
-    {
-        literals.push(lit_from_value(row, col, value));
-    }
-    solver.add_clause(&amp;literals);
-}
-</code></pre>
-
-<h3 id="2-each-column-has-all-numbers-from-1-9-exactly-once">2. Each column has all numbers from 1..9 exactly once</h3>
-
-<p>Pseudo-code:</p>
-
-<pre><code>let formula = TRUE
-for c in 0..9
-{
-    for v in 1..10
-    {
-        clause = X[0,c,v] OR X[1,c,v] ... OR X[8,c,v]
-    }
-    formula = formula AND clause
-}
-</code></pre>
-
-<h3 id="3-each-box-has-all-numbers-from-1-9-exactly-once">3. Each &ldquo;box&rdquo; has all numbers from 1..9 exactly once</h3>
-
-<p>The logic here is a little more complicated than the last two as it involves iterating over &ldquo;boxes&rdquo; on the board rather than rows and columns.</p>
-
-<p>Pseudo-code:</p>
-
-<pre><code>let formula = TRUE
-for v in 1..10
-{
-    for box in boxes[0-9]
-    {
-        clause = FALSE
-        for cell_row, cell_col in box
-        {
-            clause = clause OR X[cell_row,cell_col,v]
-        }
-        formula = formula AND clause
-    }
-}
-</code></pre>
-
-<h3 id="4-each-cell-should-only-hold-one-number">4. Each cell should only hold one number</h3>
-
-<p>With just the first three rules, the SAT solver will give a solution where all the numbers are  in single cells within each &ldquo;box&rdquo; on the board. To avoid this, an additional constraint needs to be added that says that each cell can only have one number set to TRUE at any time.</p>
-
-      
-      
-
-
-  
-
-  
-
-
-
-
-
-    </article>
-    
-      <div class="Divider"></div>
-    
   
     <article>
       <header class="Heading">
