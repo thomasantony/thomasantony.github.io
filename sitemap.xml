@@ -1,33 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
-  <url>
-    <loc>https://www.thomasantony.com/2019/hello-world/</loc>
-    <lastmod>2019-10-16T20:47:55-05:00</lastmod>
-  </url>
+    <url>
+      <loc>https://www.thomasantony.com/2019/hello-world/</loc>
+      
+      <lastmod>2019-10-16T20:47:55-05:00</lastmod>
+      
+      
+      
+      
+    </url>
   
-  <url>
-    <loc>https://www.thomasantony.com/posts/</loc>
-    <lastmod>2019-10-16T20:47:55-05:00</lastmod>
-  </url>
+    <url>
+      <loc>https://www.thomasantony.com/posts/</loc>
+      
+      <lastmod>2019-10-16T20:47:55-05:00</lastmod>
+      
+      
+      
+      
+    </url>
   
-  <url>
-    <loc>https://www.thomasantony.com/</loc>
-    <lastmod>2019-10-16T20:47:55-05:00</lastmod>
-  </url>
+    <url>
+      <loc>https://www.thomasantony.com/</loc>
+      
+      <lastmod>2019-10-16T20:47:55-05:00</lastmod>
+      
+      
+      
+      
+    </url>
   
-  <url>
-    <loc>https://www.thomasantony.com/about/</loc>
-    <lastmod>2019-10-16T20:45:02-05:00</lastmod>
-  </url>
+    <url>
+      <loc>https://www.thomasantony.com/about/</loc>
+      
+      <lastmod>2019-10-16T20:45:02-05:00</lastmod>
+      
+      
+      
+      
+    </url>
   
-  <url>
-    <loc>https://www.thomasantony.com/categories/</loc>
-  </url>
+    <url>
+      <loc>https://www.thomasantony.com/categories/</loc>
+      
+      
+      
+      
+    </url>
   
-  <url>
-    <loc>https://www.thomasantony.com/tags/</loc>
-  </url>
+    <url>
+      <loc>https://www.thomasantony.com/tags/</loc>
+      
+      
+      
+      
+    </url>
   
 </urlset>
