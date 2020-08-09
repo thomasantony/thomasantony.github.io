@@ -1,35 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts on Thomas Antony&#39;s Website</title>
-    <link>https://www.thomasantony.com/posts/</link>
-    <description>Recent content in Posts on Thomas Antony&#39;s Website</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sat, 08 Aug 2020 12:39:52 -0500</lastBuildDate>
-    
-	<atom:link href="https://www.thomasantony.com/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Setting up the Orbiter 2016 SDK in Visual Studio 2019</title>
-      <link>https://www.thomasantony.com/2020/orbiter-sdk-vs-2019/</link>
-      <pubDate>Sat, 08 Aug 2020 12:39:52 -0500</pubDate>
-      
-      <guid>https://www.thomasantony.com/2020/orbiter-sdk-vs-2019/</guid>
-      <description>Orbiter is to space flight, what X-Plane is to aviation. Orbiter has been around since the early 2000s and it seems like some of the documentation for add-on development is a bit out-dated. This post is my attempt to document how to get an Orbiter 2016 addon development environment set-up in Windows 10, using tools available today (in 2020).
-Download Orbiter 2016 Download and install Orbiter following instructions at http://orbit.medphys.ucl.ac.uk/download.html. &amp;ldquo;TexFilms&amp;rdquo; on Youtube has a very good video detailing how to install Orbiter 2016 along with some essential add-ons.</description>
-    </item>
-    
-    <item>
-      <title>Hello World!</title>
-      <link>https://www.thomasantony.com/2019/hello-world/</link>
-      <pubDate>Wed, 16 Oct 2019 20:47:55 -0500</pubDate>
-      
-      <guid>https://www.thomasantony.com/2019/hello-world/</guid>
-      <description>Yes. I have started a blog &amp;hellip; again. This is probably my fourth attempt at creating a personal website. And as usual, I spent several hours looking at themes/templates before finally settling on this one.
-The intention of this blog is to share my thoughts and ideas on programming, engineering, spaceflight, and pretty much anything that catches my fancy. To whoever is reading this, welcome!</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Thomas Antony's Website</title><link>https://www.thomasantony.com/posts/</link><description>Recent content in Posts on Thomas Antony's Website</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 08 Aug 2020 12:39:52 -0500</lastBuildDate><atom:link href="https://www.thomasantony.com/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Setting up the Orbiter 2016 SDK in Visual Studio 2019</title><link>https://www.thomasantony.com/2020/orbiter-sdk-vs-2019/</link><pubDate>Sat, 08 Aug 2020 12:39:52 -0500</pubDate><guid>https://www.thomasantony.com/2020/orbiter-sdk-vs-2019/</guid><description>Orbiter is to space flight, what X-Plane is to aviation. Orbiter has been around since the early 2000s and it seems like some of the documentation for add-on development is a bit out-dated. This post is my attempt to document how to get an Orbiter 2016 addon development environment set-up in Windows 10, using tools available today (in 2020).
+Download Orbiter 2016 Download and install Orbiter following instructions at http://orbit.medphys.ucl.ac.uk/download.html. &amp;ldquo;TexFilms&amp;rdquo; on Youtube has a very good video detailing how to install Orbiter 2016 along with some essential add-ons.</description></item><item><title>Hello World!</title><link>https://www.thomasantony.com/2019/hello-world/</link><pubDate>Wed, 16 Oct 2019 20:47:55 -0500</pubDate><guid>https://www.thomasantony.com/2019/hello-world/</guid><description>Yes. I have started a blog &amp;hellip; again. This is probably my fourth attempt at creating a personal website. And as usual, I spent several hours looking at themes/templates before finally settling on this one.
+The intention of this blog is to share my thoughts and ideas on programming, engineering, spaceflight, and pretty much anything that catches my fancy. To whoever is reading this, welcome!</description></item></channel></rss>
