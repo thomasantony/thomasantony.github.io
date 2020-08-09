@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Thomas Antony&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 16 Oct 2019 20:47:55 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 08 Aug 2020 12:39:52 -0500</lastBuildDate>
     
 	<atom:link href="https://www.thomasantony.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Setting up the Orbiter 2016 SDK in Visual Studio 2019</title>
+      <link>https://www.thomasantony.com/2020/orbiter-sdk-vs-2019/</link>
+      <pubDate>Sat, 08 Aug 2020 12:39:52 -0500</pubDate>
+      
+      <guid>https://www.thomasantony.com/2020/orbiter-sdk-vs-2019/</guid>
+      <description>Orbiter is to space flight, what X-Plane is to aviation. Orbiter has been around since the early 2000s and it seems like some of the documentation for add-on development is a bit out-dated. This post is my attempt to document how to get an Orbiter 2016 addon development environment set-up in Windows 10, using tools available today (in 2020).
+Download Orbiter 2016 Download and install Orbiter following instructions at http://orbit.</description>
+    </item>
     
     <item>
       <title>Hello World!</title>
