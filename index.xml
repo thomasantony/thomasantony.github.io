@@ -1,1 +1,51 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Thomas Antony's Website on Thomas Antony's Website</title><link>https://www.thomasantony.com/</link><description>Recent content in Thomas Antony's Website on Thomas Antony's Website</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 08 Aug 2020 12:39:52 -0500</lastBuildDate><atom:link href="https://www.thomasantony.com/" rel="self" type="application/rss+xml"/><item><title>Posts</title><link>https://www.thomasantony.com/posts/</link><pubDate>Sat, 08 Aug 2020 12:39:52 -0500</pubDate><guid>https://www.thomasantony.com/posts/</guid><description/></item><item><title>About Me</title><link>https://www.thomasantony.com/about/</link><pubDate>Wed, 16 Oct 2019 20:45:02 -0500</pubDate><guid>https://www.thomasantony.com/about/</guid><description>&lt;p>I&amp;rsquo;ll write this later. Here&amp;rsquo;s my LinkedIn for now: &lt;a href="https://linkedin.com/in/thomasantony">https://linkedin.com/in/thomasantony&lt;/a>&lt;/p></description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Thomas Antony on Thomas Antony</title><link>https://www.thomasantony.com/</link><description>Recent content in Thomas Antony on Thomas Antony</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 08 Aug 2020 12:39:52 -0500</lastBuildDate><atom:link href="https://www.thomasantony.com/" rel="self" type="application/rss+xml"/><item><title>Publications</title><link>https://www.thomasantony.com/publications/</link><pubDate>Fri, 13 Nov 2020 20:10:00 -0500</pubDate><guid>https://www.thomasantony.com/publications/</guid><description>&lt;h3 id="journal-articles-and-conference-proceedings">Journal Articles and Conference Proceedings&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://www.thomasantony.com/pdf/tantony_rapid_2017.pdf">Rapid Indirect Trajectory Optimization on Highly Parallel Computing Architectures&lt;/a>&lt;br>
+Antony, T., and Grant, M. J.&lt;br>
+&lt;em>Journal of Spacecraft and Rockets&lt;/em>, Vol. 54, No. 5 (2017), pp. 1081-1091, &lt;a href="https://doi.org/10.2514/1.A33755">doi:10.2514/1.A33755&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.thomasantony.com/pdf/tantony_qcpi_2019.pdf">Quasilinear Chebyshev-Picard Iteration Method for Indirect Trajectory Optimization&lt;/a>&lt;br>
+Antony, T. and Grant, M. J.&lt;br>
+&lt;em>2018 AIAA Atmospheric Flight Mechanics Conference&lt;/em>, &lt;a href="https://doi.org/10.2514/6.2019-0260">doi:10.2514/6.2019-0260&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.thomasantony.com/pdf/tantony_satfcn_2018.pdf">Path Constraint Regularization in Optimal Control Problems using Saturation Functions&lt;/a>&lt;br>
+Antony, T. and Grant, M. J.&lt;br>
+&lt;em>2018 AIAA Atmospheric Flight Mechanics Conference&lt;/em>, &lt;a href="https://doi.org/10.2514/6.2018-0018">doi:10.2514/6.2018-0018&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.thomasantony.com/pdf/grant_longrange_2016.pdf">Rapid Indirect Trajectory Optimization of a Hypothetical Long Range Weapon System&lt;/a>&lt;br>
+Grant M. J. and Antony, T.&lt;br>
+&lt;em>2016 AIAA Atmospheric Flight Mechanics Conference&lt;/em>, &lt;a href="https://doi.org/10.2514/6.2019-0260">doi:10.2514/6.2019-0260&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.thomasantony.com/pdf/ipaddles_2016.pdf">Enabling Mars Exploration Using inflatable Purdue Aerodynamic Decelerator with Deployable EntrySystems (&amp;ldquo;iPADDLES&amp;rdquo;) Technology&lt;/a>&lt;br>
+Sparapany, M., Antony, T., Saranathan, H., Klug, L., Libben,B., Shibata, E., Williams, J., Grant, M. J. and Saikia, S. J.&lt;br>
+&lt;em>2016 Big Idea Challenge&lt;/em>, NASA Langley Research Center&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.thomasantony.com/pdf/tantony_ipcost_2015.pdf">Optimization of Interior Point Cost Functionals Using Indirect Methods&lt;/a>&lt;br>
+Antony, T., Grant, M. J. and Bolender, M. A.&lt;br>
+&lt;em>2015 AIAA Atmospheric Flight Mechanics Conference&lt;/em>, &lt;a href="https://doi.org/10.2514/6.2015-2399">doi:10.2514/6.2015-2399&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="http://ui.adsabs.harvard.edu/abs/2014acm..conf..461S/abstract">Voyage to Troy: A Mission Concept For The Exploration Of The Trojan Asteroids&lt;/a>&lt;br>
+Saikia, S., Das, A., Laipert, F., Dapkus, C., Kendall, J., Bowling, T., Steckloff, J., Holbert, S., Graves, K., Antony, T., Bobick, R., Huang, Y., Stuart, J., Longuski, J., Minton, D.&lt;br>
+&lt;em>Asteroids, Comets, Meteors (ACM) 2014&lt;/em>, Helsinki, FI&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;!-- raw HTML omitted -->
+&lt;h3 id="theses-and-dissertations">Theses and Dissertations&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://www.thomasantony.com/pdf/tantony_phdthesis.pdf">Large Scale Constrained Trajectory Optimization using Indirect Methods&lt;/a>&lt;br>
+&lt;em>PhD Aeronautics and Astronautics&lt;/em>, Purdue University, May 2018&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://www.thomasantony.com/pdf/tantony_msthesis.pdf">Rapid Indirect Trajectory Optimization on Highly Parallel Computing Architectures&lt;/a>&lt;br>
+&lt;em>Master of Science in Aeronautics and Astronautics&lt;/em>, Purdue University, December 2014&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Also on &lt;a href="https://scholar.google.com/citations?hl=en&amp;amp;user=UxT0v5MAAAAJ">Google Scholar&lt;/a>.&lt;/p></description></item><item><title>Posts</title><link>https://www.thomasantony.com/posts/</link><pubDate>Sat, 08 Aug 2020 12:39:52 -0500</pubDate><guid>https://www.thomasantony.com/posts/</guid><description/></item><item><title>About Me</title><link>https://www.thomasantony.com/about/</link><pubDate>Wed, 16 Oct 2019 20:45:02 -0500</pubDate><guid>https://www.thomasantony.com/about/</guid><description>&lt;p>I&amp;rsquo;ll write this later. Here&amp;rsquo;s my LinkedIn for now: &lt;a href="https://linkedin.com/in/thomasantony">https://linkedin.com/in/thomasantony&lt;/a>&lt;/p></description></item></channel></rss>
