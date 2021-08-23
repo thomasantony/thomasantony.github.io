@@ -52,11 +52,11 @@ $$<p>To find the stationary point of $J$ we apply the variation operator. We als
 &= \frac{\partial \Phi}{\partial \mathbf{x}}\delta \mathbf{x}\bigg|_{t=t_f} + \int_{t_0}^{t_f} \delta \big[ \mathbf{\lambda}^\intercal(t) \mathbf{f} \big] - \delta\big[\mathbf{\lambda}^\intercal(t)\dot{\mathbf{x}}\big] dt \nonumber\\
 &= \frac{\partial \Phi}{\partial \mathbf{x}}\delta \mathbf{x}\bigg|_{t=t_f} + \int_{t_0}^{t_f} \delta \big[ \mathbf{\lambda}^\intercal(t) \mathbf{f} \big] - \delta\big[\mathbf{\lambda}^\intercal\dot{\mathbf{x}}\big] dt
 \end{align}
-$$<p>Applying the chain rule to the variation operator</p><p>$$
+$$<p>Applying the chain rule to the variation operator</p>$$
 \begin{align}
-\delta J' &= \frac{\partial \Phi}{\partial \mathbf{x}}\delta \mathbf{x}\bigg|<em>{t=t_f} + \int</em>{t_0}^{t_f} \mathbf{\lambda}^\intercal \delta \mathbf{f} + \delta\mathbf{\lambda}^\intercal \mathbf{f} - \delta\mathbf{\lambda}^\intercal(t)\dot{\mathbf{x}} - \mathbf{\lambda}^\intercal\delta\dot{\mathbf{x}} \enspace\enspace dt \label{eqn:Jprime_1}
+\delta J' &= \frac{\partial \Phi}{\partial \mathbf{x}}\delta \mathbf{x}\bigg|_{t=t_f} + \int_{t_0}^{t_f} \mathbf{\lambda}^\intercal \delta \mathbf{f} + \delta\mathbf{\lambda}^\intercal \mathbf{f} - \delta\mathbf{\lambda}^\intercal(t)\dot{\mathbf{x}} - \mathbf{\lambda}^\intercal\delta\dot{\mathbf{x}} \enspace\enspace dt \label{eqn:Jprime_1}
 \end{align}
-$$</p><p>Applying <a href=https://en.wikipedia.org/wiki/Leibniz_integral_rule>Leibniz Rule</a> to the first term of the integral in ${\eqref{eqn:Jprime_1}}$,</p><p>$$
+$$<p>Applying <a href=https://en.wikipedia.org/wiki/Leibniz_integral_rule>Leibniz Rule</a> to the first term of the integral in ${\eqref{eqn:Jprime_1}}$,</p><p>$$
 \begin{align}
 \int_{t_0}^{t_f} \mathbf{\lambda}^\intercal \delta \mathbf{f}(\mathbf{x}, u, t)\enspace dt = \int_{t_0}^{t_f} \mathbf{\lambda^\intercal} \frac{\partial \mathbf{f}}{\partial \mathbf{x}} \delta\mathbf{x} + \mathbf{\lambda^\intercal} \frac{\partial \mathbf{f}}{\partial \mathbf{u}} \delta\mathbf{u}\enspace dt \label{eqn:Jprime_int_term1}
 \end{align}
