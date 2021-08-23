@@ -125,10 +125,9 @@ $$</p><p>One option we have is to compute this integral on board the vehicle in 
 \end{align}
 $$</p><p>The boundary condition for $\lambda_u$ can be obtained as :</p><p>$$
 \lambda_u(t_0=t_f) = \int_{t_f}^{t_f}-\frac{\partial \mathbf{f}}{\partial \mathbf{u}}^\intercal \mathbf{\lambda}\enspace dt = 0
-$$</p><h1 id=apollo-guidance-bank-angle-policy>Apollo Guidance Bank Angle Policy</h1><p>When we actually implement this guidance algorithm, $t_0$ and $\mathbf{\mathbf{x}_0}$ corresponds to the &ldquo;current&rdquo; time and state of the spacecraft. All the $\delta{\mathbf{x}}$ values are therefore computed by comparing the current trajectory to the reference trajectory. For example, $\delta h(v_0) = h^(v_0) - h^<em>(v_0)$ where $h(v_0)$ is the current altitude and $h^</em>(v_0)$ is the altitude on the reference trajectory corresponding to the current speed.</p><p>Putting it all together, $\eqref{eqn:delu_1}$ becomes
-$$
-\delta u = -\frac{\frac{-H\lambda_h^<em>(v_0)}{(D/m)^</em>(v_0)}\delta((D/m) (v_0)) + \lambda_s^*(v_0) \delta s(v_0) + \frac{\lambda_\gamma^*(v_0)}{v_0^* \cos{(\gamma(v_0)))}}\delta\dot{h}(v_0)}{\lambda_u^*(v_0)}
-$$</p><p>The terms containing $*$ can be pre-computed on the ground along with teh reference trajectory. These terms can therefore be substituted by:</p>$$
+$$</p><h1 id=apollo-guidance-bank-angle-policy>Apollo Guidance Bank Angle Policy</h1><p>When we actually implement this guidance algorithm, $t_0$ and $\mathbf{\mathbf{x}_0}$ corresponds to the &ldquo;current&rdquo; time and state of the spacecraft. All the $\delta{\mathbf{x}}$ values are therefore computed by comparing the current trajectory to the reference trajectory. For example,</p><p>$\delta h(v_0) = h(v_0) - h^{*}(v_0)$</p><p>where $h(v_0)$ is the current altitude and $h^*(v_0)$ is the altitude on the reference trajectory corresponding to the current speed.</p><p>Putting it all together, $\eqref{eqn:delu_1}$ becomes</p>$$
+\delta u = -\frac{\frac{-H\lambda_h^*(v_0)}{(D/m)^*(v_0)}\delta((D/m) (v_0)) + \lambda_s^*(v_0) \delta s(v_0) + \frac{\lambda_\gamma^*(v_0)}{v_0^* \cos{(\gamma(v_0)))}}\delta\dot{h}(v_0)}{\lambda_u^*(v_0)}
+$$<p>The terms containing $*$ can be pre-computed on the ground along with teh reference trajectory. These terms can therefore be substituted by:</p>$$
 \begin{align}
 F_1(v_0) &= \frac{H \lambda_h^*(v_0)}{\frac{D}{m}^*(v_0)}\\
 F_2(v_0) &= \frac{\lambda_\gamma^*(v_0)}{v_0^* \cos{\gamma^*(v_0)}} \\
