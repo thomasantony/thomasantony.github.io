@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Training a neural network in real-time to control a self-driving car - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section class="post">
+<p >
+  <h1>Training a neural network in real-time to control a self-driving car</h1>
+  <small>
+    <em>Posted on <time datetime="2016-12-11T05:02:01.849Z">11 December, 2016</time></em>
+  </small>
+  <article><p>I was lucky enough to be accepted into the first cohort of Udacity’s <a href="http://www.udacity.com/drive">Self Driving Car NanoDegree</a> program back in October. Though I have been thinking of blogging about my experience since the start, it didn’t really happen till now. I am currently wrapping up Project #3 — “Behavioral Cloning”. This one was considerably tougher than the first two. However, it has been very fulfilling to finally complete it and here I will describe the approach I used for training a neural network to drive a car (in a simulator).</p>
+<p><img src="/images/medium/1__0ahKkWS__pXY6ktIJMLptgg.png" alt="" /></p>
+<p>The project description makes it looks easy (relatively). In the first project, we detected lanes using some basic Computer Vision methods and in the second, we classified traffic signs from the <a href="http://benchmark.ini.rub.de/?section=gtsdb&amp;subsection=news">German Traffic Signs dataset</a>. The third one seemed like an extension of the second, where instead of classifying traffic signs, we had to predict steering angles based on a camera feed, using a neural network.</p>
+<h3 id="collecting-training-data">Collecting Training Data</h3>
+<p>Unlike Project#2, this time we had to collect our own training data. This was more challenging than expected. As it turned out, controlling Udacity’s SDC simulator with a keyboard is not a simple task. Feedback from other students on Slack seemed to indicate that it also gave bad, jittery steering angle data. Fortunately, I have a friend who is crazy about car racing games and owns a Logitech G27 Racing wheel.</p>
+<p><img src="/images/medium/1__HPYURL9VsoLEBJ68iYK__xg.png" alt="Udacity’s SDC Simulator" />
+Udacity’s SDC Simulator</p>
+<p>For training data, I recorded data (“camera” images + steering angle and other telemetry) where I drove through the two tracks a couple of times. I also recorded data while recovering from deliberate perturbations to the sides of the lane to make sure the neural net also learned how to recover from such situations.</p>
+<h3 id="picking-the-architecture-and-training-the-nn">Picking the Architecture and Training the NN</h3>
+<p>I spent a lot of time experimenting with different convolutional neural network architectures, with varying levels of success. I also tried taking existing trained models like VGG16 and Google’s Inception v3 and adapting them to this purpose. Eventually, I settled upon NVIDIA’s End-to-End Deep Learning architecture described in this <a href="http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf">paper</a>. It was relatively small in size and hence added very little latency when running it. I proceeded to use my gaming desktop with GTX 1070 GPU to train the model on ~32000 images.</p>
+<p>What I learned is that “mean square error” was not at all a predictor of the performance of the network in the actual simulator. Another big issue was the turnaround time between collecting data, training the network and then testing it. Also, the ‘remote driving’ script provided by Udacity set the car’s throttle to a constant value with no way to control the speed.</p>
+<p>That is when I came across <a href="https://medium.com/u/8a1f0a75e0b5">John Chen</a>’s post on our Slack channel about how he developed an “<a href="https://github.com/diyjac/AgileTrainer">Agile Trainer</a>” to reduce the turnaround time between data-collection and testing. His program uses PyGame and Joystick input to manually takeover control from the neural network whenever it deviated too much and also allowed to train the network at the same time.</p>
+<p>I wrote my own live trainer based on this idea, which instead used keyboard input. It turned out that my keyboard based “remote driver” was able to control the simulator more reliably than the simulator’s “Training mode”.</p>
+<p>Best of all, it allowed me to fine-tune the model from my bed with my Macbook Pro by “<a href="https://www.nomachine.com/">NoMachine</a>”-ing into my desktop (which would be difficult with a joystick/racing wheel).</p>
+<h3 id="how-it-works"><strong>How it works</strong></h3>
+<p>The live trainer has a <a href="https://docs.python.org/3/library/tk.html">Tkinter</a>-based UI and a few simple keyboard controls.</p>
+<p><img src="/images/medium/1__kW5kXDzFkn4DCDoIn4hZsg.png" alt="SDC Live Trainer interface" />
+SDC Live Trainer interface</p>
+<p><strong>Up/Down</strong>: Control cruise speed</p>
+<p><strong>Left/Right</strong>: Steering</p>
+<p><strong>x</strong>: Toggle between autonomous and manual override modes</p>
+<p><strong>c</strong>: Center steering (only in manual override mode)</p>
+<p><strong>z</strong>: Toggle real-time training (only in manual override mode)</p>
+<p>The speed of the car is controlled by a proportional-gain controller. It modulates the throttle based on speed feedback. This rudimentary “cruise control” gets the speed within +/- 1 mph of the target speed, which is good enough in this case.</p>
+<p>The arrow keys increase/decrease the steering angle. The steering also has some slow auto re-centering dynamics added by the trainer. So the steering angle will keep “decaying” towards zero if you don’t press any key. The “autonomous rating” measures what percentage of the current session was spent in fully autonomous mode.</p>
+<h3 id="real-time-training">Real-time training</h3>
+<p>The process of training itself is pretty simple. You can do one of two things:</p>
+<ol>
+<li>Deliberately perturb the car’s motion while in manual override and engage training mode once you have started the recovery process</li>
+<li>At any spots that the model has trouble with, engage training mode while driving through the spot manually to fine-tune the model.</li>
+</ol>
+<p>The GIF below shows an example of the first case. I purposely drive the car towards the right edge using manual override and then start training the model once I have it recovering and returning to the center of the lane.</p>
+<h3 id="evaluating-model-performance">Evaluating model performance</h3>
+<p>My initial model had some trouble navigating a couple of turns on track#1 in the simulator. I was able to successfully tune these spots using live training and finally get this result:</p>
+<p>Track 2 was a little more difficult, with more sharp gradients and curves. However, I found that decreasing the speed down to 20 mph helped it navigate that track as well!</p>
+<p>The live trainer code is on Github at: <a href="https://github.com/thomasantony/sdc-live-trainer"><strong>thomasantony/sdc-live-trainer</strong></a></p>
+<h3 id="possibilities">Possibilities</h3>
+<p>A live trainer can also probably be used to perform the initial training of the network, though that would involve a lot more baby-sitting during the training process. The good thing is that you can immediately start seeing results as the model converges toward the right weights.</p>
+<p>Is such an architecture extendable to real-world SDCs? It can definitely be done with scale models on scale tracks. On real cars it is probably a little more difficult (though there are probably ways to do it). NVIDIA’s <a href="http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf">paper</a> mentions using real-world data to make a simulator. A live training methodology like the one described here can possibly be incorporated into such a simulator as well!</p>
+<p>Let me know if you have any comments/suggestions!</p>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

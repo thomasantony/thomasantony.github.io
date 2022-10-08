@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Orbiter addon development in rust - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section class="post">
+<p >
+  <h1>Orbiter Addon Development in Rust</h1>
+  <small>
+    <em>Posted on <time datetime="2022-01-10T23:49:12-06:00">10 January, 2022</time></em>
+  </small>
+  <article><p>This short article will explore how to create a spacecraft addon for the <a href="http://orbit.medphys.ucl.ac.uk/">Orbiter</a> spaceflight simulator in the <a href="https://rust-lang.org/">Rust</a> programming language. I previously took a stab at this back in 2020 with <a href="https://github.com/thomasantony/RustMFD">limited success</a>. I was much less knowledgeable about Rust at the time and the tooling around C++ bindings were not as mature then. This post is a companion to <a href="https://github.com/thomasantony/orbiter-rs">this new repository</a> that contains a proof-of-concept for building a spacecraft addon for Orbiter in Rust.</p>
+<h2 id="why-rust">Why Rust?</h2>
+<p>Rust is a relatively new high level systems programming language with a focus on safety. Orbiter is written in C++ and therefore its addons are also typically written in C++. Rust development for Orbiter is facilitated using the <a href="https://cxx.rs">cxx</a> crate.</p>
+<h2 id="design">Design</h2>
+<p>The repository in its current form produces a DLL file as its build artifact that can be loaded into Orbiter as an addon module. <del>Anyone wanting to create a Rust addon will clone/fork the repository and build it along with the the Rust code for their addon.</del>(See update below). </p>
+<p>There are a limited number of Orbiter SDK functions currently available as Rust bindings in this prototype.
+This will expand in the future to hopefully encompass the majority of the API. The repository includes a demo addon that models NASA's <a href="https://en.wikipedia.org/wiki/Surveyor_program">Surveyor</a> probe. This follows from the C++ tutorial at <a href="https://www.orbiterwiki.org/wiki/Vessel_Tutorial_1">OrbiterWiki</a> and implements retro-thruster staging and differential thrust attitude control.</p>
+<h2 id="developing-custom-spacecraft-addons">Developing custom spacecraft addons</h2>
+<p><em><strong>Update 01/11/2022: This section has been changed to reflect changes to the crate</strong></em>
+<del>All the spacecraft-specific code in the repository lives in its own file (<code>src/shuttle_pb.rs</code> for example).</del>
+An addon crate implementing a spacecraft should import the <code>orbiter_rs</code> crate. It should then set its crate-type to <code>cdylib</code>. </p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[package]
+</span><span style="color:#bf616a;">name </span><span>= &quot;</span><span style="color:#a3be8c;">shuttlepb</span><span>&quot;
+</span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.1.0</span><span>&quot;
+</span><span style="color:#bf616a;">authors </span><span>= [&quot;</span><span style="color:#a3be8c;">Thomas Antony</span><span>&quot;]
+</span><span style="color:#bf616a;">edition </span><span>= &quot;</span><span style="color:#a3be8c;">2018</span><span>&quot;
+</span><span>
+</span><span>[lib]
+</span><span style="color:#bf616a;">crate-type </span><span>= [&quot;</span><span style="color:#a3be8c;">cdylib</span><span>&quot;]
+</span><span>
+</span><span>[dependencies]
+</span><span style="color:#bf616a;">orbiter_rs </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.1</span><span>&quot;, </span><span style="color:#bf616a;">path </span><span>= &quot;</span><span style="color:#a3be8c;">/path/to/orbiter-rs</span><span>&quot; }
+</span></code></pre>
+<p>The crate should then have a <code>lib.rs</code> containing a struct that implements the <code>OrbiterVessel</code> trait. It should then use the <code>init_vessel</code> macro as shown below. This macro generates a stub that is links the Rust code to the OrbiterSDK. For example, in <code>lib.rs</code>:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>orbiter_rs::{
+</span><span>    ODebug, OrbiterVessel, VesselContext, </span><span style="color:#d08770;">_V</span><span>, init_vessel, FileHandle
+</span><span>};
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Default, Debug)]
+</span><span style="color:#b48ead;">pub struct </span><span>ShuttlePB {
+</span><span>    </span><span style="color:#bf616a;">_some_param</span><span>: </span><span style="color:#b48ead;">i32
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>OrbiterVessel </span><span style="color:#b48ead;">for </span><span>ShuttlePB {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">set_class_caps</span><span>(&amp;</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">context</span><span>: &amp;VesselContext, </span><span style="color:#bf616a;">_cfg</span><span>: FileHandle) {
+</span><span>        context.SetSize(</span><span style="color:#d08770;">1.0</span><span>);
+</span><span>        context.SetPMI(</span><span style="color:#d08770;">_V</span><span>!(</span><span style="color:#d08770;">0.50</span><span>, </span><span style="color:#d08770;">0.50</span><span>, </span><span style="color:#d08770;">0.50</span><span>));
+</span><span>        context.AddMesh(&quot;</span><span style="color:#a3be8c;">ShuttlePB</span><span>&quot;.</span><span style="color:#96b5b4;">to_string</span><span>());
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span>init_vessel!(
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">init</span><span>(</span><span style="color:#bf616a;">_h_vessel</span><span>: OBJHANDLE, </span><span style="color:#bf616a;">_flight_model</span><span>: </span><span style="color:#b48ead;">i32</span><span>) -&gt; ShuttlePB
+</span><span>    {
+</span><span>        ShuttlePB::default()
+</span><span>    }
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">exit</span><span>() {}
+</span><span>);
+</span></code></pre>
+<p>The addon may use any of the wrapped functions currently available. Any other Orbiter SDK functions will require wrappers to be generated for them. An automated tool like <a href="https://github.com/google/autocxx">autocxx</a> may be worth investigating for this purpose.</p>
+<h2 id="building-and-installing">Building and Installing</h2>
+<p>The addon can be built using <code>cargo build</code> assuming that Visual Studio 2019 is available. Other C++ compilers may or may not work. Deploying the addon also requires a config file and any meshes and other dependencies. An example can be seen in <code>Config/Surveyor.cfg</code>. Once you build the addon, the DLL will be available in the <code>target/i686-pc-windows-msvc/debug</code> folder. This will need to be renamed to match whatever module name you haev in the configuration file.</p>
+<h2 id="summary">Summary</h2>
+<p>This proof-of-concept gives a basic framework for building Orbiter addons in Rust. It is not a complete system by any metric and will require significant amounts of work before it can be considered that.</p>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

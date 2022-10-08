@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Using virtualcan inside docker on macos - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section class="post">
+<p >
+  <h1>Using VirtualCAN inside docker on macOS</h1>
+  <small>
+    <em>Posted on <time datetime="2018-02-09T03:42:31.359Z">09 February, 2018</time></em>
+  </small>
+  <article><p>At <a href="http://www.smart-ag.com/">SmartAg</a>, we use Docker to manage the development and runtime environments for our embedded software. For performing full-system integrated tests, we have built comprehensive simulators that mimic the behavior of the hardware that we automate. Since most of the hardware communication happens over CAN, VirtualCAN is a great way of faking the hardware signals.</p>
+<p><img src="/images/medium/1__xk974__nijAtuCTMhs7B0__w.png" alt="" /></p>
+<p>Until now, any code that required a CAN interface could not run on my Macbook Pro. This was primarily because the linux kernel used by <a href="https://www.docker.com/docker-mac">Docker for Mac</a> lacks support for <a href="https://en.wikipedia.org/wiki/SocketCAN">SocketCAN</a> or VirtualCAN. After much <a href="https://github.com/docker/for-mac/issues/2580">head-bashing</a>, I realized that a better option would be <code>[docker-machine](https://docs.docker.com/machine/overview/)</code> , which is how docker was originally run on macOS before the official “Docker for Mac” release.</p>
+<h3 id="setting-up-a-can-enabled-docker-machine-vm">Setting up a CAN-enabled docker-machine VM</h3>
+<ol>
+<li>Install <a href="https://brew.sh/">Homebrew</a> if you don’t already have it.</li>
+<li>Install <code>docker</code>, <code>docker-machine</code> and some associated software</li>
+</ol>
+<p>brew install docker docker-compose docker-machine docker-credential-helper docker-machine-driver-xhyve</p>
+<p>3. Clone the repo from <a href="https://github.com/boot2docker/boot2docker">https://github.com/boot2docker/boot2docker</a></p>
+<p>4. Edit <code>kernel_config</code> in the <code>boot2docker</code> repo and add the following at the bottom:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>CONFIG\_CAN=y  
+</span><span>CONFIG\_CAN\_RAW=y  
+</span><span>CONFIG\_CAN\_VCAN=y  
+</span><span>CONFIG\_CAN\_DEV=y  
+</span><span>CAN\_SLCAN=y  
+</span><span>CAN\_BCM=y
+</span></code></pre>
+<p>5. Follow the instructions at <a href="https://github.com/boot2docker/boot2docker/blob/master/doc/BUILD.md">https://github.com/boot2docker/boot2docker/blob/master/doc/BUILD.md</a> to build your custom <code>boot2docker</code> image. This basically boils down to:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>docker build -t boot2docker .  
+</span><span>docker run --rm boot2docker &gt; boot2docker-can.iso
+</span></code></pre>
+<p>6. Fix some permissions required by the <code>xhyve</code> docker-machine driver.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>sudo chown root:wheel $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve  
+</span><span>sudo chmod u+s $(brew --prefix)/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+</span></code></pre>
+<p>7. Create your new <code>docker-machine</code> VM with the following command. Change the command appropriately to allocate the desired number of CPUs, amount of RAM and disk space to the VM.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>docker-machine create default --driver xhyve --xhyve-experimental-nfs-share --xhyve-cpu-count=4 --xhyve-memory-size=4096 --xhyve-disk-size=40000 --xhyve-boot2docker-url boot2docker-can.iso
+</span></code></pre>
+<p>8. Your <code>docker-machine</code> VM is now ready. It should already be running. If you restart your machine, you can start the VM by typing <code>docker-machine start default</code> or stop it with <code>docker-machine stop default</code> .</p>
+<p>9. Set the environment parameters to use docker with your new VM by running <code>eval $(docker-machine env default)</code> . This command has to be run every time you are in a new terminal. You can also add this to your <code>.bashrc</code> to make it automatic.</p>
+<p>10. Check that it all works:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>docker run -it --rm --privileged alpine /bin/sh
+</span></code></pre>
+<p>Inside the docker container, run:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>zcat /proc/config.gz | grep CAN
+</span></code></pre>
+<p>The command should display the CAN flags that you set while compiling the kernel. SocketCAN/VirtualCAN is now enabled in any docker container that you start on this VM.</p>
+<h3 id="caveats">Caveats</h3>
+<p>Running <code>docker</code> using <code>docker-machine</code> means that some things, such as port-forwarding does not work as you expect. A handy script for exposing any ports you want from your VM to <code>localhost</code> can be found here: <a href="https://github.com/johanhaleby/docker-machine-port-forwarder">https://github.com/johanhaleby/docker-machine-port-forwarder</a></p>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
