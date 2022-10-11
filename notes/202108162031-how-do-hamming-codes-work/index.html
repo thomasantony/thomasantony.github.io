@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>How do hamming codes work? - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>How Do Hamming Codes Work?</h1>
+  <article><blockquote>
+<p>Ironically, the ideas that most profoundly shape the way a future generation thinks will end up looking, to that future generation, simpler than they really are ~ Grant Sanderson (3Blue1Brown)</p>
+</blockquote>
+<p>Hamming code is an error correction system that can be used to correct a single error in a message or detect the presence of two errors. This is more advanced version of <a href="https://thomasantony.com/notes/202108162030-parity-check/">Parity Check</a> which can recover the original message if there was only a single error/bit-flip during transmission.</p>
+<p>Assume the following 16-bit message packet with the positions numbered as shown. </p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[ 0  1  2  3]
+</span><span>[ 4  5  6  7]
+</span><span>[ 8  9 10 11]
+</span><span>[12 13 14 15]
+</span></code></pre>
+<p>Hamming code effectively involves a series of parity checks that narrows down position of the error (if there is one). It can also detect the presence of two errors but not correct for it.</p>
+<p>In bit#1, store the parity bit for the even columns with bits [1, 5, 9, 13] and [3, 7, 11, 15]. Bit#2 holds parity information for the right two columns. These two combined, specify the column with the error.</p>
+<p>Bit#4 similarly holds parity information for the even rows and bit#8 holds parity information for the lower two rows. These two bits combined, specify the row containing the error, effectively locating the position of the error which can then be removed by flipping the bit.</p>
+<p>If all four parity checks pass, then either the message is error free or it has an error in bit#0. This is because the checks said there is no error in even columns, last two columns, even rows and last two rows, leaving just the first row and column. To account for this, we could just ignore bit#0, resulting in 11 bits of information and 4 bits of check bits -&gt; a <strong>(15, 11) Hamming Code</strong>.</p>
+<p>To add double error detection capability, bit#0 could also hold the parity bit for the whole message. If there is a single bit error, the parity of the whole block will fail which can then get corrected by the other bits. However if there are two errors, the whole-message parity check will pass while the error correction using the remaining bits will still indicate the presence of an error. This would indicate the presence of at least two errors in the message. This is called an <strong>Extended Hamming Code</strong>. </p>
+<p>So in summary, the message packet holds 11 bits of data and 5 bits of parity bits. </p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://thomasantony.com/notes/202108162030-parity-check/">Parity Check</a></li>
+<li><a href="https://thomasantony.com/notes/202108162211-elegance-of-hamming-codes/">Elegance of Hamming Codes</a></li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=X8jsijhllIA">https://www.youtube.com/watch?v=X8jsijhllIA</a></li>
+</ul>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;computer-science&#x2F;">Computer Science</a></li>
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;mathematics&#x2F;">Mathematics</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

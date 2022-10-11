@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>How to test pcbs using a bed-of-nails test fixture - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>How to test PCBs using a bed-of-nails test fixture</h1>
+  <article><p>Testing printed circuit boards manually can be a time consuming process. The almight algorithm recommended a video<a rel="noopener" target="_blank" title="These Are a Game Changer for PCB Production" href="https://www.youtube.com/watch?v=gicoRcQYhlA">1</a> that describes how to make a “bed of nails” tester for PCBs. The “bed-of-nails” consists of a circuit board with pogo-pins at each contact point for the candidate PCB to be tested. The candidate PCB will be loaded with firmware that listens for input on each GPIO pin, I2C/SPI/Serial port etc. and sends back a pre-determined response. The tester is a simple microcontroller that listens for a serial command, sends a probing signal via the pogo-pins and transmits the response back over serial. The whole system is controlled by a script running on a computer (Raspberry pi?) that programs the target board with the test firmware, sends the commands to the tester and verifies the responses.</p>
+<p>The production test procedure would involve pressing down the test article and clamping it down somehow on the pogo pins, and running the test script which returns a PASS/FAIL response.</p>
+<h2 id="references">References</h2>
+<p>[<a rel="noopener" target="_blank" title="These Are a Game Changer for PCB Production" href="https://www.youtube.com/watch?v=gicoRcQYhlA">1</a>] <a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=gicoRcQYhlA">https://www.youtube.com/watch?v=gicoRcQYhlA</a></p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;electronics-and-embedded-systems&#x2F;">Electronics and Embedded Systems</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

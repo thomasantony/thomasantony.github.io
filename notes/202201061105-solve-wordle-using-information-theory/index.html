@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Solve wordle using information theory - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>Solve Wordle Using Information Theory</h1>
+  <article><p>This is a note about how to use information theory to create an optimal strategy for solving “Wordle”.</p>
+<h2 id="initial-ideas">Initial ideas</h2>
+<p>For any given word, we can find a distribution for probabilities for each pattern of colors that could be revealed. Example, for “WEARY”, there is some number of words that do not contain any of the letters, some that contain W, some with W and E, some with E at the first position, etc.</p>
+<p>We can geenrate the list of all possible outcomes for a given word, and check how many words in the list match the patterns to come up with a probability.</p>
+<p><strong>Key</strong> A guess is “informative” if it is unlikely, i.e., the more unlikely the  pattern, the fewer possibilities remain to be checked. A highly unlikely guess, if correct, significantly cuts down the solution space.</p>
+<p>The expected amount of information from the distribution for a certain word is </p>
+<p>$$
+E[\text{Information}] = \sum_x {p(x) \cdot \text{Something}}
+$$</p>
+<p>This “something” should measure how informative that pattern is. We could try to lower the average number of matches. The fewer the number of matches for a pattern, the more informative that pattern is. Instead we can use a concept from information theory.</p>
+<h2 id="what-is-a-bit">What is a “bit”?</h2>
+<p>An observation that can cut the space of possibilities in half, that is called a bit of information.</p>
+<p>Therefore</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>p(1 bit) = 1/2
+</span><span>p(2 bits) = 1/4
+</span><span>p(3 bits) = 1/8 etc.
+</span></code></pre>
+<p>Or, for information $I$</p>
+<p>$$
+\left(\frac{1}{2}\right)^I = p \implies 2^I = \frac{1}{p}\
+I = \log_2{\left(\frac{1}{p}\right)}
+$$</p>
+<p>This is a better way of representing probability. You can say that you get 20 bits of information instead of saying that the probability of such a thing occuring is 0.00000095.</p>
+<p>Information (or bits) add together the same way probabilities multiply, thanks to the logarithm.</p>
+<h2 id="applying-information-theory-to-the-problem">Applying information theory to the problem</h2>
+<p>$$
+E[\text{Information}] = \sum_x {p(x) \cdot \log_2{\left(\frac{1}{p(x)}\right)}
+}
+$$</p>
+<p>This is the average number of bits you could get from a  certain word. The higher the probability of seeing a pattern, the lower the number of bits.</p>
+<p>This metric can be used to rank the guess in order of number of expected bits of information.</p>
+<p><strong>Note:</strong></p>
+<p>**This expected value of information is also called “entropy” ($H$). This was a suggestion by von Neumann to Claude Shannon. While this has some connection to the entropy from thermodynamics, Shannon was dealing purely with probability distribution when he used the term. **</p>
+<h2 id="strategy">Strategy</h2>
+<p>First give a guess based on the word that gives the highest expected number of bits of information. Then for the next guess use the more restricted list of words based on the result of the first guess, and so on.</p>
+<p>The solver can be run across every single word in the word-list to work out an average score.</p>
+<h2 id="a-better-strategy">A better strategy?</h2>
+<p>Assign a probability for each word for being in the final list based on frequency of use in the English language instead of a uniform distribution. Grant ranks them by frequency and uses a sigmoid function to assign probabilities. Use this to measure the “remaining uncertainty” of the possible word candidates left. So even if the number of possible words is higher, the uncertainty would be lower thanks to the weighted distribution. </p>
+<h2 id="expected-score">Expected Score</h2>
+<p>TBD.</p>
+<h2 id="references">References</h2>
+<p>[1] <a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=v68zYyaEmEA">The mathematically optimal Wordle strategy</a>, 3Blue1Brown</p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;computer-science&#x2F;">Computer Science</a></li>
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;mathematics&#x2F;">Mathematics</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

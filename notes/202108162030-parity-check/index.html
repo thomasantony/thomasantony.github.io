@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Parity check - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>Parity Check</h1>
+  <article><p>A parity check is a simple method for detecting a single or an odd number of bit flip errors in a binary message. It works by adding an extra bit to the message. The value of this bit is based on the number of ones in the message. If the number of ones in the message is odd, then the parity bit is set to one, making the overall number of ones even. </p>
+<p>The recipient of a message counts the number of ones in the message (including the parity bit). If the number is odd, then there was at least one bit flip in the message. However this method does not allow detection of two (or an even number) of bit flips. So if the parity in the received message is even, it could mean that there were either no transmission errors or that the message had an even number of errors.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>https://www.youtube.com/watch?v=X8jsijhllIA</li>
+</ul>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;computer-science&#x2F;">Computer Science</a></li>
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;mathematics&#x2F;">Mathematics</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

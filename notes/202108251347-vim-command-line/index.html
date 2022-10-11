@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Vim - command line - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>Vim - Command Line</h1>
+  <article><blockquote>
+<p>Ex commands strike far and wide</p>
+</blockquote>
+<p>Using the <code>:</code> key in vim activates command mode. This allows us to enter commands that were originally built for the “ex” editor. Most operations performed in Normal mode have an analaogue in the command line. </p>
+<p>Simple example:</p>
+<p><code>:print</code> or <code>:p</code> prints current line
+<code>:delete</code> or <code>:d</code> deletes current line
+<code>:substitute</code> or <code>:s</code> is used for find/replace. Skipping the “find” pattern applies it to selections made using a previous “find”, such as using “*”</p>
+<h2 id="specifying-ranges">Specifying ranges</h2>
+<p>Move to line using <code>:{number}</code>
+This can be combiend with commands as <code>:1p</code>. A range of lines is specified as <code>:{start}{end}</code>. <code>$</code> denotes the last line and <code>%</code> denotes <em>all</em> lines and is equivalent to <code>1,$</code>. </p>
+<p><code>:%p</code> prints all lines
+<code>:%s/find/replace</code> does a find/replace on the entire file</p>
+<h2 id="visual-selection-for-ranges">Visual selection for ranges</h2>
+<p><code>{number}G</code> goes to the numbered line. Visual mode can also be used for selections that apply to commands. When text is selected, the <code>:</code> key shows the range in command line as <code>:'&lt;,'&gt;</code>. This applies the command to the selection. <code>'&lt;</code> stands for the first line of visual selection and <code>'&gt;</code> stands for the last line of visual selection.</p>
+<h2 id="patterns-as-ranges">Patterns as ranges</h2>
+<p><code>/&lt;html&gt;/,/&lt;\/html&gt;/p</code> prints lines from <html> to </html></p>
+<h2 id="offsets">Offsets</h2>
+<p>Use <code>+{number}</code> or <code>-{number}</code> with any address (including patterns) to offset up or down.</p>
+<p><code>/&lt;html&gt;/+1,/&lt;\/html&gt;-1/p</code> prints lines from <html> to </html>, excluding the lines with the tags themselves.</p>
+<h2 id="copy-move">Copy/Move</h2>
+<p><code>:copy{address}</code> or <code>:co{address}</code> - works on current line by default. Can prefix address to copy from a different address. <code>:t</code> (copy TO) is another synonym. <code>:move</code> or <code>:m</code> works in the same way.</p>
+<h2 id="repeat-last-ex-command">Repeat last Ex command</h2>
+<p><code>@:</code> repeats the last Ex command.</p>
+<h2 id="normal-mode-commands-on-ranges">Normal mode commands on ranges</h2>
+<p><code>:normal {command}</code> can be used to apply a normal mode command to a range (visual or otherwise).</p>
+<p>Example:</p>
+<p><code>'&lt;,'&gt;normal .</code> applies the last change to each line in the selected visual range. 
+<code>:%normal A;</code> append a semi-colon to the end of each line in the file.</p>
+<p><code>:normal</code> moves the cursor to the beginning of each line before executing the command.</p>
+<h2 id="copy-word-to-command-line">Copy word to command line</h2>
+<p>When in command line mode (after pressing <code>:</code>), pressing <code>&lt;C-r&gt;&lt;C-w&gt;</code> copies the word under the cursor to the command line</p>
+<h2 id="command-line-window">Command Line Window</h2>
+<p><code>q:</code> opens up the command line window. This allows us to edit the command line history using all vim commands as if it is a buffer.</p>
+<h2 id="pass-buffer-contents-to-shell-and-back">Pass buffer contents to shell and back</h2>
+<p><code>:read !{cmd}</code> runs <code>{cmd}</code> and inserts the stdout into the buffer. Example <code>:read !ls</code> puts the file listing into the buffer</p>
+<p><code>:write !sh</code> runs each line in the buffer in the shell as a command, passing them to stdin.</p>
+<h2 id="pass-range-to-command-for-filtering">Pass range to command for filtering</h2>
+<p><code>:2,$!sort -t',' -k2</code> : Pass all lines starting at the second line to “stdin” of the sort command given and put the output back in the buffer in the same spot. This particular example sorts the given comma separated lines by the second field, while ignoring the first line inthe buffer (the header).</p>
+<p><code>!{motion command}</code> pre-fills the range in the command for ease of use. Example <code>!G</code> will pre-fill the range from current line to end of file and then we can type in the rest of the command to filter the data through.</p>
+<h2 id="batch-files">Batch files</h2>
+<p>Commands can be stored in text fils and then executed using the <code>:source {file}</code> command.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://thomasantony.com/notes/202108241644-vim-repeatable-actions-and-how-to-reverse-them/">Vim - Repeatable Actions and How to Reverse Them</a></li>
+</ul>
+<h2 id="references">References</h2>
+<p>[1] Drew Neil, “Practical Vim”</p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;vim&#x2F;">Vim</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

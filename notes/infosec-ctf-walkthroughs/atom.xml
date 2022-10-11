@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Thomas Antony - Infosec CTF Walkthroughs</title>
+	<subtitle>My personal website and notes</subtitle>
+	<link href="https://thomasantony.com/notes/infosec-ctf-walkthroughs/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://thomasantony.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2022-03-20T05:08:47.753+00:00</updated>
+	<id>https://thomasantony.com/notes/infosec-ctf-walkthroughs/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Solving VulnHub CTF - Mercury</title>
+		<published>2022-03-20T05:08:47.753+00:00</published>
+		<updated>2022-03-20T05:08:47.753+00:00</updated>
+		<link href="https://thomasantony.com/notes/202202192208-solving-vulnhub-ctf-mercury/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202202192208-solving-vulnhub-ctf-mercury/</id>
+		<content type="html">&lt;p&gt;Used a walkthrough for tips here. Here are the rough steps:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Run kali linux VM alongside the CTF vm with &lt;a href=&quot;https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;202202192208-running-virtualbox-vms-with-networking&#x2F;&quot;&gt;Running Virtualbox VMs with networking&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Run &lt;code&gt;sudo netdiscover&lt;&#x2F;code&gt; to find out the IP of target&lt;&#x2F;li&gt;
+&lt;li&gt;Run &lt;code&gt;nmap &amp;lt;ip&amp;gt;&lt;&#x2F;code&gt; to discover open ports and find that &lt;code&gt;8080&lt;&#x2F;code&gt; is open&lt;&#x2F;li&gt;
+&lt;li&gt;Port 8080 hosts a web app that can be accessed through the browser&lt;&#x2F;li&gt;
+&lt;li&gt;Visit &lt;code&gt;&#x2F;robots.txt&lt;&#x2F;code&gt; to find a new path &lt;code&gt;&#x2F;mercuryfacts&lt;&#x2F;code&gt;. (&lt;code&gt;dirb&lt;&#x2F;code&gt; command in kali can also be used to “discover” robots.txt if not known already)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;mercuryfacts&#x2F;&amp;lt;id&amp;gt;&lt;&#x2F;code&gt; is vulnerable to SQL injection as found by putting backtick in place of the ID&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;sqlmap&lt;&#x2F;code&gt; can be used to further exploit this to eventually show passwords in the table &lt;code&gt;users&lt;&#x2F;code&gt; in the database &lt;code&gt;mercury&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;The password for &lt;code&gt;webmaster&lt;&#x2F;code&gt; can be used to ssh into the machine. &lt;code&gt;cat user_flag.txt&lt;&#x2F;code&gt; for user flag.&lt;&#x2F;li&gt;
+&lt;li&gt;Check the &lt;code&gt;mercuryfacts&#x2F;notes.txt&lt;&#x2F;code&gt; file to see a base64 encoded password for &lt;code&gt;linuxmaster&lt;&#x2F;code&gt;. Login as &lt;code&gt;linuxmaster&lt;&#x2F;code&gt;. Run &lt;code&gt;sudo -l&lt;&#x2F;code&gt; to figure out what all commands are allowed. Discover the script at &lt;code&gt;&#x2F;usr&#x2F;bin&#x2F;check_syslog.sh&lt;&#x2F;code&gt; that uses the &lt;code&gt;tail&lt;&#x2F;code&gt; command&lt;&#x2F;li&gt;
+&lt;li&gt;Add current directory to PATH. Create a symlink to &lt;code&gt;vim&lt;&#x2F;code&gt; named &lt;code&gt;tail&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Run &lt;code&gt;sudo –preserve-env=PATH &#x2F;usr&#x2F;bin&#x2F;check_syslog.sh&lt;&#x2F;code&gt; to enter vim as superuser&lt;&#x2F;li&gt;
+&lt;li&gt;Run &lt;code&gt;:!&#x2F;bin&#x2F;sh&lt;&#x2F;code&gt; to enter root shell. &lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;cat &#x2F;root&#x2F;root_flag.txt&lt;&#x2F;code&gt; for root flag&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</content>
+	</entry>
+</feed>

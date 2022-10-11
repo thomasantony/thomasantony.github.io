@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Two&#x27;s complement notation for binary addition - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>Two&#x27;s Complement Notation for Binary Addition</h1>
+  <article><p>Two’s complement is a format for representing negative numbers in binary. A number <code>-X</code> is represented as an <code>N</code> bit value using the binary value of <code>2^N-X</code>. E.g. -5 in 4-bit integers would be <code>2^4 - 5</code> = <code>11</code> (or <code>0b1010</code>). The advantage of using this representation is that it makes addition of negative numbers possible with existing binary adder circuits (or logic gate implementation). The reason this works is that the output we get from an adder circuit is actually the “modulo 2^n” representation. </p>
+<p>Example: -2 + -3 using 4-bit integers</p>
+<p>-2 in 2’s complement is 2^4 - 2 = 16-2 = 14 or <code>0b1110</code>
+-3 in 2’s complement is 2^4 - 3 = 16-3 = 13 or <code>0b1101</code></p>
+<p>Performing binary addition of <code>0b1110</code> and <code>0b1101</code> we get, <code>0b1011</code> and a carry bit of 1 which is discarded. <code>0b1011</code> is <code>11</code> in decimal. This is equal to <code>-5</code> in 2’s complement representation which is the correct answer.</p>
+<p>In order to do subtractions using a digital adder circuit, it becomes necessary to compute “-x” given a value “x”. This is done as follows:</p>
+<p>Negative value of X in 2’s complement notation is given by </p>
+<p>2^n - x = 1 + 2^n - 1 - x = 1 + (2^n -1 ) - x
+= 1 + (0b111111… - x)
+= 1 + ~X where ~ is the bitwise inverse
+= ~(X + 0b11111…) (from ALU truth table)</p>
+<h2 id="other-properties">Other properties</h2>
+<p>(x + 1) = ~(~x + 0b1111….)
+(x - 1) = x + 0b1111….
+(x - y) = ~(~x + y)
+(y - x) = ~(x + y)</p>
+<h2 id="references">References</h2>
+<p>[1] Nand2Tetris Unit 2.3
+[2]: https://en.wikipedia.org/wiki/Two%27s_complement#Addition
+[[2]] <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Two%27s_complement#Addition">https://en.wikipedia.org/wiki/Two%27s_complement#Addition</a></p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;nand2tetris&#x2F;">NAND2Tetris</a></li>
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;computer-science&#x2F;">Computer Science</a></li>
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;mathematics&#x2F;">Mathematics</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

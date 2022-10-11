@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Thomas Antony - NAND2Tetris</title>
+	<subtitle>My personal website and notes</subtitle>
+	<link href="https://thomasantony.com/notes/nand2tetris/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://thomasantony.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2022-09-05T04:09:53.894+00:00</updated>
+	<id>https://thomasantony.com/notes/nand2tetris/atom.xml</id>
+	<entry xml:lang="en">
+		<title>NAND2Tetris Note 05 - Hack Assembly Language</title>
+		<published>2022-09-05T04:09:53.894+00:00</published>
+		<updated>2022-09-05T04:09:53.894+00:00</updated>
+		<link href="https://thomasantony.com/notes/202208042109-nand2tetris-note-05-hack-assembly-language/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202208042109-nand2tetris-note-05-hack-assembly-language/</id>
+		<content type="html">&lt;p&gt;The “Hack” computer built during this course has its own instruction set consisting of two instructions: the A-command and the C-command.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;registers&quot;&gt;Registers&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;A&lt;&#x2F;code&gt; -&amp;gt; address. Used to access memory
+&lt;code&gt;D&lt;&#x2F;code&gt; -&amp;gt; General purpose data register
+&lt;code&gt;M&lt;&#x2F;code&gt; -&amp;gt; Psuedo register that actually accesses &lt;code&gt;RAM[A]&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;a-instruction&quot;&gt;A-instruction&lt;&#x2F;h2&gt;
+&lt;p&gt;Denoted as &lt;code&gt;@&amp;lt;a&amp;gt;&lt;&#x2F;code&gt; where &lt;code&gt;a&lt;&#x2F;code&gt; is a positive number, this instruction loads the specified literal into the &lt;code&gt;A&lt;&#x2F;code&gt; (or address) register. This is encoded as:&lt;&#x2F;p&gt;
+&lt;p&gt;0 &amp;lt;value (15 bits)&amp;gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;c-instruction&quot;&gt;C-instruction&lt;&#x2F;h2&gt;
+&lt;p&gt;The c-command has the format: &lt;code&gt;dest = comp; jmp&lt;&#x2F;code&gt;, where &lt;code&gt;dest&lt;&#x2F;code&gt; is the destination (if any), &lt;code&gt;comp&lt;&#x2F;code&gt; is the computation to be performed and &lt;code&gt;jmp&lt;&#x2F;code&gt; is a jumpy instruction. This is encoded as the following in a 16-bit instruction:&lt;&#x2F;p&gt;
+&lt;p&gt;111 a c1 c2 c3 c4 c5 c6 d1 d2 d3 j1 j2 j3
+^
+denotes “C”&lt;&#x2F;p&gt;
+&lt;p&gt;a through c6 defines the computation to be performed as inputs to the ALU. There is a table describing every operation allowed here. d1 d2 d3 defines the destination of the computation (or 0 0 0 for null), j1 j2 j3 reperesents a jump instruction (conditional, uncondtional, null etc.)&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;i-o&quot;&gt;I&#x2F;O&lt;&#x2F;h2&gt;
+&lt;p&gt;I&#x2F;O is performed by writing&#x2F;reading from specific memory addresses. Display on the screen is accomplished by writing to 8K 16-bit registers starting at address &lt;code&gt;16384&lt;&#x2F;code&gt;. Each bit represents a pixel in a 256x512 matrix stored in row-major form. &lt;&#x2F;p&gt;
+&lt;p&gt;For pixel at (row, col):
+32*row + col&#x2F;16  -&amp;gt; word index 
+col % 16 -&amp;gt; bit index within word&lt;&#x2F;p&gt;
+&lt;p&gt;The keyboard value is represented by a single 16-bit value at the address &lt;code&gt;24576&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;assembly-language&quot;&gt;Assembly language&lt;&#x2F;h2&gt;
+&lt;p&gt;R1-R15 are built-in symbols for addresses from 1-15. This helps remove confusion between literals and addresses to some extent when using the A instruction. SCREEN and KBD and I&#x2F;O base addresses.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;labels&quot;&gt;Labels&lt;&#x2F;h3&gt;
+&lt;p&gt;Labels can be specified as (LABEL). This can be used as jump destinations. Example:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;&#x2F;&#x2F; Infinite loop
+&lt;&#x2F;span&gt;&lt;span&gt;(END)
+&lt;&#x2F;span&gt;&lt;span&gt;@END
+&lt;&#x2F;span&gt;&lt;span&gt;0;JMP
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;variables&quot;&gt;Variables&lt;&#x2F;h3&gt;
+&lt;p&gt;@&lt;name&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Automatically uses an available memory address as long as there is no corresponding label. Allocated from address 16 onward.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>NAND2Tetris Note 04 - Sequential Logic and Memory</title>
+		<published>2022-09-04T19:36:00.037+00:00</published>
+		<updated>2022-09-04T19:36:00.037+00:00</updated>
+		<link href="https://thomasantony.com/notes/202208041236-nand2tetris-note-04-sequential-logic-and-memory/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202208041236-nand2tetris-note-04-sequential-logic-and-memory/</id>
+		<content type="html">&lt;p&gt;All of the chips described in the previous course notes used what is called “combinational logic”, where the output is available instantenously and there is no time-component to their operation. Combinational chips compute functions that depend solely on combinations of their input values.&lt;&#x2F;p&gt;
+&lt;p&gt;Sequential logic incorporates the concept of time, or more specifically, discretized time in the form of a clock signal into determining their output. This is the core concept behind digital circuits with memory. Just like how NAND formed the basic building blocks of combinational logic, the “D-Flip-Flip” is the fundamental building block used to build sequential logic. A D-Flip-Flop can be built out of nand-gates using a loop-based design but that is beyond the scope of the course.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;clocked-data-flip-flop-d-flip-flop-or-dff&quot;&gt;Clocked Data Flip Flop (D Flip-Flop or DFF)&lt;&#x2F;h2&gt;
+&lt;p&gt;The D Flip-Flop has one input “in” and one output “out”. There’s also an implicit “clock” signal that cycles from high to low and back to high to make a single “clock cycle”. The output of the D flip-flip is simply the input of the last time step (with the output of the initial timestep being indeterminate).&lt;&#x2F;p&gt;
+&lt;p&gt;D-Flip-Flops are combined in various ways with combinational logic circuits to build up basic memory units like a 1-bit register, larger addressed registers (RAM) and counters that form the basis of computer memory.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;one-bit-register&quot;&gt;One-Bit Register&lt;&#x2F;h2&gt;
+&lt;p&gt;A bit regsiter has two inputs “in” and “load” and a single output “out”. The output is the same as the last output if “load” is zero. It is equal to “in” if “load” is set to one. The HDL imlementation uses a Mux to select between the lastOutput and the current input. This is then passed into a DFF and the output of the DFF is the output of the register.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Mux(a=lastOutput, b=in, sel=load, out=dffIn);
+&lt;&#x2F;span&gt;&lt;span&gt;DFF(in=dffIn, out=out, out=lastOutput);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The output of the DFF is fanned out to the input of the Mux as well. This is possible because HDL is &lt;em&gt;not&lt;&#x2F;em&gt; a programming language. It can be thought of as a description of electrical wiring. So the output line of the DFF is looped back to the input of the Mux here.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;16-bit-register&quot;&gt;16-bit register&lt;&#x2F;h2&gt;
+&lt;p&gt;A 16-bit register chip has a 16-bit input &lt;code&gt;in&lt;&#x2F;code&gt;, a single bit &lt;code&gt;load&lt;&#x2F;code&gt; input and a 16-bit output, &lt;code&gt;out&lt;&#x2F;code&gt;. This can be implemented by stacking 8 one-bit register and fanning out the load input to all of them. The inputs and outputs of each “bit” chip is wired to the individual bits of &lt;code&gt;in&lt;&#x2F;code&gt; and &lt;code&gt;out&lt;&#x2F;code&gt; respectively.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;ram8-chip&quot;&gt;RAM8 chip&lt;&#x2F;h2&gt;
+&lt;p&gt;This is a chip that can store 8 “words” (in this case 16-bit words). The chip has a 16-bit &lt;code&gt;in&lt;&#x2F;code&gt; input, 3-bit &lt;code&gt;address&lt;&#x2F;code&gt;  input and a 16-bit output, &lt;code&gt;out&lt;&#x2F;code&gt;. It uses a Demuxer to split out the &lt;code&gt;address&lt;&#x2F;code&gt; into 8 different &lt;code&gt;load&lt;&#x2F;code&gt; bits which are then fed into &lt;code&gt;Register&lt;&#x2F;code&gt; chips. &lt;code&gt;in&lt;&#x2F;code&gt; is fanned out to all the underlying &lt;code&gt;Register&lt;&#x2F;code&gt; chips. The outputs of the registers are then connected to the &lt;code&gt;out&lt;&#x2F;code&gt; pin through a Multiplexer with the &lt;code&gt;address&lt;&#x2F;code&gt; as its selector. &lt;&#x2F;p&gt;
+&lt;h2 id=&quot;ram64-ram512-ram4k-and-ram16k&quot;&gt;RAM64, RAM512, RAM4K and RAM16K&lt;&#x2F;h2&gt;
+&lt;p&gt;These are built in the same manner as &lt;code&gt;RAM8&lt;&#x2F;code&gt; but by composing &lt;code&gt;RAMx&lt;&#x2F;code&gt; chips using a Demuxer and Muxer. &lt;code&gt;RAM64&lt;&#x2F;code&gt; has a 6-bit &lt;code&gt;address&lt;&#x2F;code&gt; input, where the 3 most-significant bits select the underlying &lt;code&gt;RAM8&lt;&#x2F;code&gt; chip and the 3 LSBs signify the address in the underlying &lt;code&gt;RAM8&lt;&#x2F;code&gt;. Therefore the &lt;code&gt;load&lt;&#x2F;code&gt; bit is wired to the &lt;code&gt;RAM8&lt;&#x2F;code&gt; chips through a Demuxer with &lt;code&gt;address[3..5]&lt;&#x2F;code&gt; as the &lt;code&gt;sel&lt;&#x2F;code&gt; input and &lt;code&gt;address[0..2]&lt;&#x2F;code&gt; is passed through directly to the underlying chips. The output is similarly muxed using &lt;code&gt;address[3..5]&lt;&#x2F;code&gt; as the selector. The higher capacity chips are built in the same way by stacking 4 or 8 lower capacity chips and an appropriately sized Demuxer and Muxer.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>NAND2Tetris Note 03 - The Hack ALU</title>
+		<published>2022-09-04T19:35:45.742+00:00</published>
+		<updated>2022-09-04T19:35:45.742+00:00</updated>
+		<link href="https://thomasantony.com/notes/202208041235-nand2tetris-note-03-the-hack-alu/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202208041235-nand2tetris-note-03-the-hack-alu/</id>
+		<content type="html">&lt;p&gt;The Airthmetic and Logic Unit is a core part of a computer based on the Von Neumann architecture. It consists of digital circuitry that can perform a variety of arthmetic or logic operations as the name suggests. The Nand2Tetris has a relative simple design for an ALU that can perform a few different functions defined below:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The ALU Computes one of the following functions:
+&lt;ul&gt;
+&lt;li&gt;x+y, x-y, y-x, 0, 1, -1, x, y, -x, -y, !x, !y,&lt;&#x2F;li&gt;
+&lt;li&gt;x+1, y+1, x-1, y-1, x&amp;amp;y, x|y on two 16-bit inputs,&lt;&#x2F;li&gt;
+&lt;li&gt;according to 6 input bits denoted zx,nx,zy,ny,f,no.&lt;&#x2F;li&gt;
+&lt;li&gt;In addition, the ALU computes two 1-bit outputs:&lt;&#x2F;li&gt;
+&lt;li&gt;if the ALU output == 0, zr is set to 1; otherwise zr is set to 0;&lt;&#x2F;li&gt;
+&lt;li&gt;if the ALU output &amp;lt; 0, ng is set to 1; otherwise ng is set to 0.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The input bits &lt;code&gt;zx&lt;&#x2F;code&gt;, &lt;code&gt;nx&lt;&#x2F;code&gt;, &lt;code&gt;zy&lt;&#x2F;code&gt; and &lt;code&gt;ny&lt;&#x2F;code&gt; define the “pre-processing” tasks to be performed on the inputs &lt;code&gt;x&lt;&#x2F;code&gt; and &lt;code&gt;y&lt;&#x2F;code&gt; prior to computation. &lt;code&gt;zx&lt;&#x2F;code&gt; zeros out the whole &lt;code&gt;x&lt;&#x2F;code&gt; input if set to one and nx inverts the input (after the effect of &lt;code&gt;zx&lt;&#x2F;code&gt; if any) if it is set to true. &lt;code&gt;zy&lt;&#x2F;code&gt; and &lt;code&gt;ny&lt;&#x2F;code&gt; performs similar actions on the y input. &lt;code&gt;f&lt;&#x2F;code&gt; selects between the operations &lt;code&gt;x &amp;amp; y&lt;&#x2F;code&gt; (if f == 0) and &lt;code&gt;x + y&lt;&#x2F;code&gt; (if f == 1). &lt;code&gt;no&lt;&#x2F;code&gt; performs a bitwise inverse on the output of the operation due to &lt;code&gt;f&lt;&#x2F;code&gt; if it is set to true. Different combinations of input flags results in one of the 18 operations described above.&lt;&#x2F;p&gt;
+&lt;p&gt;The two extra outputs &lt;code&gt;zr&lt;&#x2F;code&gt; and &lt;code&gt;ng&lt;&#x2F;code&gt; are set based on the characteristics of the final output. This ALU design is specific to the “Hack” computer being developed as part of this course. Other computers may have more options implemented in the ALU. This is a design trade-off as to how many operations need to be implemented in hardware as opposed to software. In case of “Hack”, operations like multiplication and division will be implemented in software later.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Two&#x27;s Complement Notation for Binary Addition</title>
+		<published>2022-09-04T03:41:18.681+00:00</published>
+		<updated>2022-09-04T03:41:18.681+00:00</updated>
+		<link href="https://thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/</id>
+		<content type="html">&lt;p&gt;Two’s complement is a format for representing negative numbers in binary. A number &lt;code&gt;-X&lt;&#x2F;code&gt; is represented as an &lt;code&gt;N&lt;&#x2F;code&gt; bit value using the binary value of &lt;code&gt;2^N-X&lt;&#x2F;code&gt;. E.g. -5 in 4-bit integers would be &lt;code&gt;2^4 - 5&lt;&#x2F;code&gt; = &lt;code&gt;11&lt;&#x2F;code&gt; (or &lt;code&gt;0b1010&lt;&#x2F;code&gt;). The advantage of using this representation is that it makes addition of negative numbers possible with existing binary adder circuits (or logic gate implementation). The reason this works is that the output we get from an adder circuit is actually the “modulo 2^n” representation. &lt;&#x2F;p&gt;
+&lt;p&gt;Example: -2 + -3 using 4-bit integers&lt;&#x2F;p&gt;
+&lt;p&gt;-2 in 2’s complement is 2^4 - 2 = 16-2 = 14 or &lt;code&gt;0b1110&lt;&#x2F;code&gt;
+-3 in 2’s complement is 2^4 - 3 = 16-3 = 13 or &lt;code&gt;0b1101&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Performing binary addition of &lt;code&gt;0b1110&lt;&#x2F;code&gt; and &lt;code&gt;0b1101&lt;&#x2F;code&gt; we get, &lt;code&gt;0b1011&lt;&#x2F;code&gt; and a carry bit of 1 which is discarded. &lt;code&gt;0b1011&lt;&#x2F;code&gt; is &lt;code&gt;11&lt;&#x2F;code&gt; in decimal. This is equal to &lt;code&gt;-5&lt;&#x2F;code&gt; in 2’s complement representation which is the correct answer.&lt;&#x2F;p&gt;
+&lt;p&gt;In order to do subtractions using a digital adder circuit, it becomes necessary to compute “-x” given a value “x”. This is done as follows:&lt;&#x2F;p&gt;
+&lt;p&gt;Negative value of X in 2’s complement notation is given by &lt;&#x2F;p&gt;
+&lt;p&gt;2^n - x = 1 + 2^n - 1 - x = 1 + (2^n -1 ) - x
+= 1 + (0b111111… - x)
+= 1 + ~X where ~ is the bitwise inverse
+= ~(X + 0b11111…) (from ALU truth table)&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;other-properties&quot;&gt;Other properties&lt;&#x2F;h2&gt;
+&lt;p&gt;(x + 1) = ~(~x + 0b1111….)
+(x - 1) = x + 0b1111….
+(x - y) = ~(~x + y)
+(y - x) = ~(x + y)&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
+&lt;p&gt;[1] Nand2Tetris Unit 2.3
+[2]: https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Two%27s_complement#Addition
+[[2]] &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Two%27s_complement#Addition&quot;&gt;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Two%27s_complement#Addition&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>NAND2Tetris Note 02 - Elementary Logic Gates</title>
+		<published>2022-09-01T04:35:04.243+00:00</published>
+		<updated>2022-09-01T04:35:04.243+00:00</updated>
+		<link href="https://thomasantony.com/notes/202207312135-nand2tetris-note-02-elementary-logic-gates/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202207312135-nand2tetris-note-02-elementary-logic-gates/</id>
+		<content type="html">&lt;h2 id=&quot;elementary-logic-gates&quot;&gt;Elementary Logic Gates&lt;&#x2F;h2&gt;
+&lt;p&gt;NOT
+AND
+OR
+XOR =&amp;gt; output 1 if inputs different
+MUX: =&amp;gt; a, b, sel; if sel == 0: out = a, else: out = b
+DMUX: =&amp;gt; in, sel (outputs a and b): if sel == 0: a = in else b = in&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;16-bit-variants&quot;&gt;16-bit variants&lt;&#x2F;h2&gt;
+&lt;p&gt;NOT16 : 16 bits in and out
+AND16 : Two 16-bit inputs, One 16-it output
+OR16 : Two 16-bit inputs, One 16-it output&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;multi-way-variants&quot;&gt;Multi-way variants&lt;&#x2F;h2&gt;
+&lt;p&gt;Or8Way : Single 16-bit input, 1 bit output
+Mux4Way16 : Four 16-bit inputs, One 2-bit “sel” input, One 8-bit output
+Mux8Way16 : Eight 16-bit inputs, One 3-bit “sel” input, One 8-bit ouput
+DMux4Way : Single 1-bit input, 2-bit selector, Four 1-bit outputs
+DMux8Way : Single 1-bit input, 3-bit selector, Eight 1-bit outputs&lt;&#x2F;p&gt;
+&lt;p&gt;The multi-way mux and dmux can be implemented by composing the other mux&#x2F;dmux components.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>NAND2Tetris Note 01</title>
+		<published>2022-09-01T01:49:00.451+00:00</published>
+		<updated>2022-09-01T01:49:00.451+00:00</updated>
+		<link href="https://thomasantony.com/notes/202207311849-nand2tetris-note-01/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202207311849-nand2tetris-note-01/</id>
+		<content type="html">&lt;p&gt;Nand2tetris is a course where we build a full general purpose computer up from basic logic gates - in fact, just NAND gates. This is because a NAND gate can be used to form all the other basic logic gates - AND, OR and NOT. The “hardware” will be built in a simplified Hardware Description Language (or HDL). This HDL is similar to the “actual” HDLs like Verilog and VHDL. The course also introduces a “testing” language which provides a way to define a bunch of test cases with inputs and outputs for a given “chip” spec. The supplied “Hardware Simulation” program is able to load HDL files as well as testing scripts and verify designs.&lt;&#x2F;p&gt;
+&lt;p&gt;The goal is to build up the next building blocks - CPU, RAM and “chipset” from the basic logic gates, and tehn build it into a computer platform with its own assembly language. Later the second part of the course involves building a language called “Hack” which can presumably be used to build Tetris.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Nand2tetris note 05 - hack assembly language - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>NAND2Tetris Note 05 - Hack Assembly Language</h1>
+  <article><p>The “Hack” computer built during this course has its own instruction set consisting of two instructions: the A-command and the C-command.</p>
+<h2 id="registers">Registers</h2>
+<p><code>A</code> -&gt; address. Used to access memory
+<code>D</code> -&gt; General purpose data register
+<code>M</code> -&gt; Psuedo register that actually accesses <code>RAM[A]</code></p>
+<h2 id="a-instruction">A-instruction</h2>
+<p>Denoted as <code>@&lt;a&gt;</code> where <code>a</code> is a positive number, this instruction loads the specified literal into the <code>A</code> (or address) register. This is encoded as:</p>
+<p>0 &lt;value (15 bits)&gt;</p>
+<h2 id="c-instruction">C-instruction</h2>
+<p>The c-command has the format: <code>dest = comp; jmp</code>, where <code>dest</code> is the destination (if any), <code>comp</code> is the computation to be performed and <code>jmp</code> is a jumpy instruction. This is encoded as the following in a 16-bit instruction:</p>
+<p>111 a c1 c2 c3 c4 c5 c6 d1 d2 d3 j1 j2 j3
+^
+denotes “C”</p>
+<p>a through c6 defines the computation to be performed as inputs to the ALU. There is a table describing every operation allowed here. d1 d2 d3 defines the destination of the computation (or 0 0 0 for null), j1 j2 j3 reperesents a jump instruction (conditional, uncondtional, null etc.)</p>
+<h2 id="i-o">I/O</h2>
+<p>I/O is performed by writing/reading from specific memory addresses. Display on the screen is accomplished by writing to 8K 16-bit registers starting at address <code>16384</code>. Each bit represents a pixel in a 256x512 matrix stored in row-major form. </p>
+<p>For pixel at (row, col):
+32*row + col/16  -&gt; word index 
+col % 16 -&gt; bit index within word</p>
+<p>The keyboard value is represented by a single 16-bit value at the address <code>24576</code>.</p>
+<h2 id="assembly-language">Assembly language</h2>
+<p>R1-R15 are built-in symbols for addresses from 1-15. This helps remove confusion between literals and addresses to some extent when using the A instruction. SCREEN and KBD and I/O base addresses.</p>
+<h3 id="labels">Labels</h3>
+<p>Labels can be specified as (LABEL). This can be used as jump destinations. Example:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>// Infinite loop
+</span><span>(END)
+</span><span>@END
+</span><span>0;JMP
+</span></code></pre>
+<h3 id="variables">Variables</h3>
+<p>@<name></p>
+<p>Automatically uses an available memory address as long as there is no corresponding label. Allocated from address 16 onward.</p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;nand2tetris&#x2F;">NAND2Tetris</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

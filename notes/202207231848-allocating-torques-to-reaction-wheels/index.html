@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Allocating torques to reaction wheels - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>Allocating Torques to Reaction Wheels</h1>
+  <article><p>Allocating torques to RWAs are accomplished by first defining a “distribution matrix” which contains the spin axes of the individual wheels, and then using this matrix to allocate torques.Each column of the distribution matrix consists of the unit vector for the spin axis of one wheel, resulting in a 3xN matrix for an RWA with N wheels.</p>
+<p>In general:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>tau_RWA = rwaMatrixInv * tau_b + alpha * rwaNullSpace
+</span></code></pre>
+<p>where <code>tau_b</code> is the required torque in the body frame, <code>rwaMatrixInv</code> is the inverse of the distribution matrix, <code>alpha</code> is a row vector of size <code>m</code> where <code>m</code> is the nullity of <code>rwaMatrix</code> .</p>
+<p>For a three wheel system, the null space is empty and therefore the second term of the above expression does not apply.There is a unique solution to allocate any torques for a properly oriented RWA.The solution is the one that minimizes the L2 norm of the allocated torques and is a unique solution.</p>
+<p>For RWAs with  more than three wheels, the null-space presents flexibility in allocating torques to satisfy various conditions.If <code>alpha</code> is selected as a zero vector, the solution minimizes the L2-norm of the allocated torques.<code>alpha</code> can be selected to further optimize the allocation to satisfy other conditions.Minimizing the L-infinity norm of hte torque better uses the capacity of the RWA.However, computing alpha in the general case is non-trivial.Ref [1] describes a method for minimizing the L-infinity norm for four-wheel RWAs.</p>
+<h2 id="four-wheel-reaction-wheel-allocator-for-pyramid-configurations">Four wheel reaction wheel allocator for pyramid configurations</h2>
+<p>For a four wheel system, the nullity of <code>rwaMatrix</code> is equal to one and hence <code>alpha</code> is a scalar.i.e.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>tau_L2 = rwaMatrixInv * tau_b
+</span><span>tau_Linf = tau_L2 + alpha * tau_null
+</span></code></pre>
+<p>where <code>tau_null</code> is the null space of <code>rwaMatrix</code>.</p>
+<p>For symmetric 4 wheel configurations, <code>tau_null</code> is equal to <code>[1, 1, 1, 1]</code> and the value of alpha can be computed as:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>alpha = - (min(tau_L2) + max(tau_L2))/2
+</span></code></pre>
+<p>For non-symmetric pyramid configurations, a different method is used where six separate values are computed as follows:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>alpha_1 = - (tau_L2(1) + tau_L2(2)) / ( tau_null(1) + tau_null(2) )
+</span><span>alpha_2 = - (tau_L2(1) + tau_L2(3)) / ( tau_null(1) + tau_null(3) )
+</span><span>alpha_3 = - (tau_L2(1) + tau_L2(4)) / ( tau_null(1) + tau_null(4) )
+</span><span>alpha_4 = - (tau_L2(2) + tau_L2(3)) / ( tau_null(2) + tau_null(3) )
+</span><span>alpha_5 = - (tau_L2(2) + tau_L2(4)) / ( tau_null(2) + tau_null(4) )
+</span><span>alpha_6 = - (tau_L2(3) + tau_L2(4)) / ( tau_null(3) + tau_null(4) )
+</span></code></pre>
+<p>The value of alpha that gives the smallest maximum absolute value of <code>tau_rwa</code> is selected.</p>
+<p><em>Note</em></p>
+<p>The above algorthms assume that the null space of <code>rwaMatrix</code> is entirely positive (or equal to <code>[1, 1, 1, 1]</code> in case of symmetric RWAs).However, it is possible that some of these may be negative based on how the axes are oriented.In this case, the sign of the corresponding column in <code>rwaMatrix</code> is the be negated and the direction of the torque allocated for that particular wheel has to be reversed.</p>
+<h2 id="references">References</h2>
+<p>[1] “Optimal uses of reaction wheels in the pyramid configuration using a new minimum infinity-norm solution”, <a rel="noopener" target="_blank" href="https://www.researchgate.net/publication/265687712_Optimal_uses_of_reaction_wheels_in_the_pyramid_configuration_using_a_new_minimum_infinity-norm_solution">Link</a></p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;aerospace-engineering&#x2F;">Aerospace Engineering</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

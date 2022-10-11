@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Vim - working with files and buffers - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>Vim - Working with files and buffers</h1>
+  <article><h2 id="buffers">Buffers</h2>
+<p><code>:ls</code> to show list of buffers. These are just the in-memory representations of the files.
+<code>:bnext</code>, <code>:bprevious</code>, <code>:bfirst</code>, <code>:blast</code> can be used to go between buffers
+<code>:bdelete</code> can be used to delete buffers. Ranges can be passed in to delete multiple buffers at once.</p>
+<h2 id="the-argument-list">The argument list</h2>
+<p><code>:args</code> lists out the files passed as command line arguments on startup. However this can also be changed at runtime by passing in some values</p>
+<p><code>:args &lt;file1&gt; &lt;file2&gt;</code> adds the files to the argument list and also opens them up (closing any existing open files).</p>
+<p><code>:args `{cmd}` </code> runs <code>{cmd}</code> in the shell and uses the result to fill in the argument list. This could for example be <code>cat</code>ing a file to get the list of files to open.</p>
+<p><code>:argdo {cmd}</code> executes an Ex command on all the files in the list.</p>
+<p><code>:next</code> and <code>:prev</code> traverses the files in the arg list</p>
+<h2 id="changes-to-the-files-buffers">Changes to the files/buffers</h2>
+<p>Suffix <code>!</code> to ignore changes when switchign buffers or exiting</p>
+<p><code>:edit!</code> discards changes by re-reading file from disk</p>
+<p><code>:qall!</code> quits vim discarding all changes in all buffers</p>
+<p><code>:wall</code> writes all modified buffers to disk</p>
+<h2 id="hidden-setting">Hidden setting</h2>
+<p>This is used when we want to disable the “nags” from vim when we try to switch from a modified buffer. This is useful when applying batches of commands to the arg list or buffers using <code>:argdo</code> or <code>:bufdo</code>. </p>
+<p>Use <code>:set hidden</code> or <code>:set hid</code> to enable this.
+Use <code>:set nohidden</code> or <code>:set nohid</code> to disable this.</p>
+<h2 id="relative-paths-in-commandline">Relative paths in commandline</h2>
+<p><code>%</code> represents the full path to the current file. 
+<code>%:h</code> gets expanded to the  path of the  directory of the current file when used in the vim command line. For example: <code>mkdir -p %:h</code>  creates the directory for the current file’s path in cases where it does not exist.</p>
+<p>Pressing <code>&lt;Tab&gt;</code> after typing %:h also auto-completes the text with the directory of the current file.</p>
+<h2 id="save-file-as-super-user">Save file as super-user</h2>
+<p>When we forget to start vim as super-user:</p>
+<p><code>:w !sudo tee % &gt; /dev/null</code></p>
+<p>This apparently <a rel="noopener" target="_blank" href="https://github.com/neovim/neovim/issues/12103">fails</a> in NeoVim as of now. There is a “suda” plugin or there is the sudo_exec function: <a rel="noopener" target="_blank" href="https://github.com/ibhagwan/nvim-lua/blob/fdcac2286ec2ce4d912ed53a52b59c7dac970b86/lua/utils.lua#L294">here</a></p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://thomasantony.com/notes/202108241644-vim-repeatable-actions-and-how-to-reverse-them/">Vim - Repeatable Actions and How to Reverse Them</a></li>
+<li><a href="https://thomasantony.com/notes/202108251347-vim-command-line/">Vim - Command Line</a></li>
+</ul>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;vim&#x2F;">Vim</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

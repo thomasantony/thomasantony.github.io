@@ -21,6 +21,7 @@
         
         <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
         <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
         <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
       ]
       
@@ -34,14 +35,14 @@
   <small>
     <em>Posted on <time datetime="2016-09-04T05:26:46.557Z">04 September, 2016</time></em>
   </small>
-  <article><p><img src="/images/medium/1__Ql7p4__Wua5eSiZB41oAAlg.png" alt="Source: xkcd#970 by Randall Monroe" />
-Source: <a href="http://xkcd.com/970/">xkcd#970</a> by Randall Monroe</p>
+  <article><p><img src="/images/medium/1__Ql7p4__Wua5eSiZB41oAAlg.png" alt="Source: &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;http://xkcd.com/970/&quot;&gt;xkcd#970" /> by Randall Monroe
+Source: <a rel="noopener" target="_blank" href="http://xkcd.com/970/">xkcd#970</a> by Randall Monroe</p>
 <p>Python is amazing. I love the flexibility, the clean and readable syntax and its huge ecosystem of libraries. However, when it comes to making modern GUIs, it comes up sort in many ways.</p>
-<p>There are libraries like <em>PyQT</em> and <em>Kivy</em> to create GUIs for your Python application. However, each of them come with their <a href="https://medium.com/@tryexceptpass/a-python-ate-my-gui-971f2326ce59#.lpb3pnf2d">own problems</a>. Many modern UI solutions like Electron and React-Native looks to the web to avoid the problems of dealing with multiple platforms. After all, the web is one platform that DOES have it’s share of great (and at times awful) UIs.</p>
-<p><a href="https://github.com/thomasantony/flybywire"><em>flybywire</em></a> is my ongoing experiment to develop a declarative UI library, based off some great work by <a href="https://medium.com/u/138c0eb26be5">Cristian Medina</a>. So, what is <em>flybywire</em> all about? Well, you need a bit of background before I can go into that.</p>
+<p>There are libraries like <em>PyQT</em> and <em>Kivy</em> to create GUIs for your Python application. However, each of them come with their <a rel="noopener" target="_blank" href="https://medium.com/@tryexceptpass/a-python-ate-my-gui-971f2326ce59#.lpb3pnf2d">own problems</a>. Many modern UI solutions like Electron and React-Native looks to the web to avoid the problems of dealing with multiple platforms. After all, the web is one platform that DOES have it’s share of great (and at times awful) UIs.</p>
+<p><a rel="noopener" target="_blank" href="https://github.com/thomasantony/flybywire"><em>flybywire</em></a> is my ongoing experiment to develop a declarative UI library, based off some great work by <a rel="noopener" target="_blank" href="https://medium.com/u/138c0eb26be5">Cristian Medina</a>. So, what is <em>flybywire</em> all about? Well, you need a bit of background before I can go into that.</p>
 <h4 id="react-es6-and-the-endless-abyss">React, ES6 and the Endless Abyss</h4>
-<p><a href="http://facebook.github.io/react">React</a> caught my interest sometime late last year when I was trying to build a desktop frontend for a Python project using <a href="http://electron.atom.io">Electron</a>. I was coming back to web development after a gap of nearly six years and my last experience in the field was with jQuery and PHP.</p>
-<p>After finishing a basic <a href="http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/">tutorial</a>, I was really excited about the possibilities of React. However, that excitement was a little dulled once I discovered the wonderful world of node-based tools that seemed almost mandatory if you wanted to create anything serious. I found that javascript is no longer the innocent, interpreted language I knew it as. ES6, CoffeeScript, TypeScript, transpilers, <em>webpack</em>, the endless abyss that is <strong>node-packages</strong> … it is easy to get lost just trying to get a hang of all these tools and frameworks.</p>
+<p><a rel="noopener" target="_blank" href="http://facebook.github.io/react">React</a> caught my interest sometime late last year when I was trying to build a desktop frontend for a Python project using <a rel="noopener" target="_blank" href="http://electron.atom.io">Electron</a>. I was coming back to web development after a gap of nearly six years and my last experience in the field was with jQuery and PHP.</p>
+<p>After finishing a basic <a rel="noopener" target="_blank" href="http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/">tutorial</a>, I was really excited about the possibilities of React. However, that excitement was a little dulled once I discovered the wonderful world of node-based tools that seemed almost mandatory if you wanted to create anything serious. I found that javascript is no longer the innocent, interpreted language I knew it as. ES6, CoffeeScript, TypeScript, transpilers, <em>webpack</em>, the endless abyss that is <strong>node-packages</strong> … it is easy to get lost just trying to get a hang of all these tools and frameworks.</p>
 <p>So where am I going with all this? Well, my (mis?)adventures with React, Redux etc. can be summarized as:</p>
 <ol>
 <li>React seems to have zeroed in on a really good way of defining UIs without much clutter. I especially loved the concept of one-way binding and views defined as pure functions of state which redraws the whole page when updated.</li>
@@ -51,7 +52,7 @@ Source: <a href="http://xkcd.com/970/">xkcd#970</a> by Randall Monroe</p>
 </ol>
 <p>There has to be a way to do all this in Python!</p>
 <h4 id="the-magic-of-websockets">The Magic of Websockets</h4>
-<p>Last week, I came across this <a href="https://medium.com/@tryexceptpass/a-python-ate-my-gui-971f2326ce59#.lpb3pnf2d">article</a> which seemed to reflect many of the problems that I had faced when it came to Python GUIs. The article is part of a 3-part (so far) series that ends with the creation of <a href="http://github.com/tryexceptpass/sofi">Sofi</a> (Cheers <a href="https://medium.com/u/138c0eb26be5">Cristian</a>!). As described in the article, Sofi is:</p>
+<p>Last week, I came across this <a rel="noopener" target="_blank" href="https://medium.com/@tryexceptpass/a-python-ate-my-gui-971f2326ce59#.lpb3pnf2d">article</a> which seemed to reflect many of the problems that I had faced when it came to Python GUIs. The article is part of a 3-part (so far) series that ends with the creation of <a rel="noopener" target="_blank" href="http://github.com/tryexceptpass/sofi">Sofi</a> (Cheers <a rel="noopener" target="_blank" href="https://medium.com/u/138c0eb26be5">Cristian</a>!). As described in the article, Sofi is:</p>
 <blockquote>
 <p>a system that will generate the necessary HTML and JavaScript code typically needed to produce a single-page application and serve it up through WebSockets</p>
 </blockquote>
@@ -96,7 +97,7 @@ Source: <a href="http://xkcd.com/970/">xkcd#970</a> by Randall Monroe</p>
 </span><span>app.</span><span style="color:#bf616a;">start</span><span>()
 </span></code></pre>
 <h4 id="how-it-works">How it Works</h4>
-<p>The structure of the code above should be very familiar to anyone who has worked with React before. <em>flybywire</em> provides a helper function for building DOM structures. It is also possible to compose the UI out of stateless, functional components (like <strong>CounterView</strong> in the above example). This DOM structure is then converted into JSON format and sent to the browser over websockets using the <a href="http://www.autobahn.ws/python/">autobahn</a> library. The javascript part of the library parses the virtual-DOM structure out of the JSON data and patches the existing DOM wherever it has changed. Any DOM event callbacks are also setup to be passed back to the Python app over websockets.</p>
+<p>The structure of the code above should be very familiar to anyone who has worked with React before. <em>flybywire</em> provides a helper function for building DOM structures. It is also possible to compose the UI out of stateless, functional components (like <strong>CounterView</strong> in the above example). This DOM structure is then converted into JSON format and sent to the browser over websockets using the <a rel="noopener" target="_blank" href="http://www.autobahn.ws/python/">autobahn</a> library. The javascript part of the library parses the virtual-DOM structure out of the JSON data and patches the existing DOM wherever it has changed. Any DOM event callbacks are also setup to be passed back to the Python app over websockets.</p>
 <p>Some of the core parts of this library such as the event server and event processor were directly taken from Sofi with a few modifications. Instead of Bootstrap-based widgets, <em>flybywire</em> allows you to define your own components that can be composed to form whatever widget you need.</p>
 <p>It is now possible to make some really simple apps using <em>flybywire</em>. However, the library is at a very early stage, given that the First Commit in the repository was only three days ago!</p>
 <h4 id="what-doesn-t-work">What doesn’t work</h4>

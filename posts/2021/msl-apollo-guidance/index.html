@@ -24,6 +24,7 @@
         
         <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
         <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
         <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
       ]
       
@@ -42,10 +43,10 @@
 		<img alt="YouTube Thumbnail" src="https://img.youtube.com/vi/3hf2--gw4Xk/0.jpg" />
 	</a>
 </div>
-<p>This post is a companion to the <a href="https://youtu.be/3hf2--gw4Xk">video</a> linked above and includes a full derivation of the Apollo entry guidance longitudinal control algorithm. Please watch the video for more context. Full source code of Jupyter notebooks implementing the algorithm can be found at <a href="https://github.com/thomasantony/msl-apollo-entry-guidance"><strong>thomasantony/msl-apollo-entry-guidance</strong></a>.</p>
-<p>NASA's <a href="https://mars.nasa.gov/mars-exploration/missions/mars-science-laboratory/">Mars Science Laboratory</a> mission showcased an advancement in entry technology that allowed it to land much closer to its designated landing site than previous missions. It used with great success, the same guidance algorithm originally used by the Apollo Command Module when returning from the moon. By modulating its lift vector, MSL was able to counteract errors in its trajectory during hypersonic flight and combined with the famous <a href="https://www.nasa.gov/mission_pages/msl/multimedia/gallery/pia14839.html">&quot;sky-crane&quot; maneuver</a>, deliver the Curiosity rover to within 2.5 km of its targeted landing site next to Gale Crater. Last year's <a href="https://mars.nasa.gov/mars-exploration/missions/mars2020/">Mars 2020</a> mission used the same guidance system to successfully land the Perseverance rover within Jezero crater.</p>
+<p>This post is a companion to the <a rel="noopener" target="_blank" href="https://youtu.be/3hf2--gw4Xk">video</a> linked above and includes a full derivation of the Apollo entry guidance longitudinal control algorithm. Please watch the video for more context. Full source code of Jupyter notebooks implementing the algorithm can be found at <a rel="noopener" target="_blank" href="https://github.com/thomasantony/msl-apollo-entry-guidance"><strong>thomasantony/msl-apollo-entry-guidance</strong></a>.</p>
+<p>NASA’s <a rel="noopener" target="_blank" href="https://mars.nasa.gov/mars-exploration/missions/mars-science-laboratory/">Mars Science Laboratory</a> mission showcased an advancement in entry technology that allowed it to land much closer to its designated landing site than previous missions. It used with great success, the same guidance algorithm originally used by the Apollo Command Module when returning from the moon. By modulating its lift vector, MSL was able to counteract errors in its trajectory during hypersonic flight and combined with the famous <a rel="noopener" target="_blank" href="https://www.nasa.gov/mission_pages/msl/multimedia/gallery/pia14839.html">“sky-crane” maneuver</a>, deliver the Curiosity rover to within 2.5 km of its targeted landing site next to Gale Crater. Last year’s <a rel="noopener" target="_blank" href="https://mars.nasa.gov/mars-exploration/missions/mars2020/">Mars 2020</a> mission used the same guidance system to successfully land the Perseverance rover within Jezero crater.</p>
 <h2 id="apollo-guidance-algorithm-overview">Apollo Guidance Algorithm Overview</h2>
-<p>The goal of the Apollo guidance algorithm is to minimize the error in &quot;range&quot; along the ground when compared to that of a pre-computed reference trajectory. It does not try to exactly match the reference trajectory, but instead computes a constant bank angle that is supposed to minimize the downrange distance error at the point where the vehicle reaches terminal altitude. This computation is repeated several times a second in the same manner as a closed-loop control system to correct for deviations in the trajectory due to external or internal factors.</p>
+<p>The goal of the Apollo guidance algorithm is to minimize the error in “range” along the ground when compared to that of a pre-computed reference trajectory. It does not try to exactly match the reference trajectory, but instead computes a constant bank angle that is supposed to minimize the downrange distance error at the point where the vehicle reaches terminal altitude. This computation is repeated several times a second in the same manner as a closed-loop control system to correct for deviations in the trajectory due to external or internal factors.</p>
 <p>The guidance algorithm uses bank angle to control the amount of vertical lift. This has the side-effect of causing lateral motion that takes the spacecraft away from the desired path. In order to account for this, the bank angle commanded is reversed when the predicted cross-range error exceeds a certain amount, effectively creating a series of S-turns. This is similar to the S-turns performed by the Space Shuttle during its re-entry.</p>
 <p>This article focuses on the downrange error control.</p>
 <h2 id="2dof-dynamic-model">2DOF Dynamic Model</h2>
@@ -78,14 +79,14 @@ $$
 <p>Surface atmospheric density, $\rho_0$ and scale height, $H$ define the exponential atmospheric model. $g$ is a constant value for acceleration due to gravity. $u$ is the bank angle of the vehicle. The states are collectively referred to as $\mathbf{x}$. The equations of motions may be collectively referred to as $\mathbf{f}(\mathbf{x}, u, t)$.</p>
 <h2 id="deriving-the-apollo-entry-guidance-algorithm">Deriving the Apollo Entry Guidance Algorithm</h2>
 <h3 id="note-on-the-variation-operator">Note on the Variation Operator</h3>
-<p>This derivation requires the use of the &quot;variation operator&quot;, denoted by $\delta$, sometimes called a <a href="https://en.wikipedia.org/wiki/Functional_derivative">functional derivative</a> or variational derivative. A functional is a function that acts on functions. For example, $J(y(t))$ is a functional because $y$ is itself a function of time. Here $J$ is a scalar quantity derived from a function $y(t)$, that essentially consists of an infinite number of points. </p>
+<p>This derivation requires the use of the “variation operator”, denoted by $\delta$, sometimes called a <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Functional_derivative">functional derivative</a> or variational derivative. A functional is a function that acts on functions. For example, $J(y(t))$ is a functional because $y$ is itself a function of time. Here $J$ is a scalar quantity derived from a function $y(t)$, that essentially consists of an infinite number of points. </p>
 <p>The variational operator is to functionals, what derivatives are to functions. Similar to how a stationary point of a function can be found by setting its derivative to zero, the stationary point of a functional can be found by setting its variation to zero. </p>
 <p>Please check the following links if you want to learn more:</p>
-<p><a href="https://www.youtube.com/watch?v=vqDHO2eKXcs">https://www.youtube.com/watch?v=vqDHO2eKXcs</a></p>
-<p><a href="https://canvas.vt.edu/files/1315932/download?download_frd=1">https://canvas.vt.edu/files/1315932/download?download_frd=1</a></p>
+<p><a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=vqDHO2eKXcs">https://www.youtube.com/watch?v=vqDHO2eKXcs</a></p>
+<p><a rel="noopener" target="_blank" href="https://canvas.vt.edu/files/1315932/download?download_frd=1">https://canvas.vt.edu/files/1315932/download?download_frd=1</a></p>
 <h3 id="deriving-bank-angle-policy">Deriving bank angle policy</h3>
 <p><img src="/images/msl-apollo-guidance/Rf_derivation_plot.png" alt="Reference Trajectory and Perturbed Trajectory" /></p>
-<p>The goal is to find the constant bank angle $u$ that will guide the spacecraft from the perturbed starting state $\mathbf{x_0}$ to the same range as the reference trajectory. Let's call this function $J$. Any variable with an &quot;f&quot; in the suffix denotes that it is evaluated at the terminal point of the trajectory and the '*' denotes that it is part of the reference trajectory.</p>
+<p>The goal is to find the constant bank angle $u$ that will guide the spacecraft from the perturbed starting state $\mathbf{x_0}$ to the same range as the reference trajectory. Let’s call this function $J$. Any variable with an “f” in the suffix denotes that it is evaluated at the terminal point of the trajectory and the ‘*’ denotes that it is part of the reference trajectory.</p>
 <div>
     $$
 \begin{align}
@@ -116,7 +117,7 @@ $$
 \implies J = s_f - cot(\gamma_f) h_f = \Phi(\mathbf{x}_f)
 $$
 </div>
-<p>We want to now find a constant value of $u$ that will keep J constant at $J = R_f = R_f^*$ even with perturbations. We are able to control the trajectory by influencing $u$ and are constrained by physics i.e. equations of motion, $\dot{\mathbf{x}} = \mathbf{f}(\mathbf{x},u,t)$. These constraints can be adjoined to $J$ using <a href="https://en.wikipedia.org/wiki/Costate_equation">co-states</a> $\mathbf{\lambda}^\intercal = \left[\lambda_h\enspace\lambda_s\enspace\lambda_v\enspace\lambda_\gamma\right]$, one for each state. This is very similar to Lagrange multipliers used in function optimization. In this case, each costate is a function that has its own equation of motion which will be derived here.</p>
+<p>We want to now find a constant value of $u$ that will keep J constant at $J = R_f = R_f^*$ even with perturbations. We are able to control the trajectory by influencing $u$ and are constrained by physics i.e. equations of motion, $\dot{\mathbf{x}} = \mathbf{f}(\mathbf{x},u,t)$. These constraints can be adjoined to $J$ using <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Costate_equation">co-states</a> $\mathbf{\lambda}^\intercal = \left[\lambda_h\enspace\lambda_s\enspace\lambda_v\enspace\lambda_\gamma\right]$, one for each state. This is very similar to Lagrange multipliers used in function optimization. In this case, each costate is a function that has its own equation of motion which will be derived here.</p>
 <div>
     $$
 J&#x27; =  \Phi(\mathbf{x}_f) + \int_{t_0}^{t_f} \mathbf{\lambda}^\intercal(t) \left\{ \mathbf{f}(\mathbf{x},u, t) - \dot{\mathbf{x}}\right\} dt
@@ -142,7 +143,7 @@ $$
 \end{align}
 $$
 </div>
-<p>Applying <a href="https://en.wikipedia.org/wiki/Leibniz_integral_rule">Leibniz Rule</a> to the first term of the integral in ${\eqref{eqn:Jprime_1}}$,</p>
+<p>Applying <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Leibniz_integral_rule">Leibniz Rule</a> to the first term of the integral in ${\eqref{eqn:Jprime_1}}$,</p>
 <div>
     $$
 \begin{align}
@@ -150,7 +151,7 @@ $$
 \end{align}
 $$
 </div>
-<p><a href="https://en.wikipedia.org/wiki/Integration_by_parts">Integrating by parts</a>, the fourth term of the integral in ${\eqref{eqn:Jprime_1}}$,</p>
+<p><a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Integration_by_parts">Integrating by parts</a>, the fourth term of the integral in ${\eqref{eqn:Jprime_1}}$,</p>
 <div>
     $$
 \begin{align}
@@ -169,7 +170,7 @@ $$
 \end{align}
 $$
 </div>
-<p>Set $\delta J' = 0$ to find the stationary point of $J'$. We choose co-states to have the following equations of motion so that they cancel out the third term in $\eqref{eqn:Jprime_2}$:</p>
+<p>Set $\delta J’ = 0$ to find the stationary point of $J’$. We choose co-states to have the following equations of motion so that they cancel out the third term in $\eqref{eqn:Jprime_2}$:</p>
 <div>
     $$
 \begin{align}
@@ -197,7 +198,7 @@ $$
 \end{align}
 $$
 </div>
-<p>Therefore, assuming the conditions in $\eqref{eqn:costate_eom}$ and $\eqref{eqn:costate_bc_vec}$ hold for the costates, the condition for the stationary point of $J'$ is given by:</p>
+<p>Therefore, assuming the conditions in $\eqref{eqn:costate_eom}$ and $\eqref{eqn:costate_bc_vec}$ hold for the costates, the condition for the stationary point of $J’$ is given by:</p>
 <div>
     $$
 \delta J&#x27; = \mathbf{\lambda}^\intercal(t_0) \delta \mathbf{x}(t_0) + \int_{t_0}^{t_f} \mathbf{\lambda^\intercal}\frac{\partial \mathbf{f}}{\partial \mathbf{u}} \delta u\enspace dt = 0\\
@@ -212,14 +213,14 @@ $$
 \end{align}
 $$
 </div>
-<p>Eq. $\eqref{eqn:delu_1}$ is giving us a &quot;correction factor&quot; for the bank angle $u$ that should minimize the range error at the terminal point if applied over the entire trajectory. This needs to be simplified into something that can be computed on-board the flight computers.</p>
+<p>Eq. $\eqref{eqn:delu_1}$ is giving us a “correction factor” for the bank angle $u$ that should minimize the range error at the terminal point if applied over the entire trajectory. This needs to be simplified into something that can be computed on-board the flight computers.</p>
 <p>Looking at just the numerator of $\eqref{eqn:delu_1}$.</p>
 <div>
     $$
 \mathbf{\lambda}^\intercal(t_0) \delta\mathbf{x}(t_0) = \lambda_h(t_0) \delta h(t_0) + \lambda_s(t_0) \delta s(t_0) + \lambda_v(t_0) \delta v(t_0) + \lambda_\gamma(t_0) \delta \gamma(t_0)
 $$
 </div>
-<p>Since we are trying to keep $J$ stationary about the reference trajectory, all of the terms here must be evaluated w.r.t the reference trajectory (denoted by the $^*$). We also change the independent variable to the velocity, $v$ as that is a better value for matching up the current state of the vehicle to the reference state (for computing the $\delta$'s). </p>
+<p>Since we are trying to keep $J$ stationary about the reference trajectory, all of the terms here must be evaluated w.r.t the reference trajectory (denoted by the $^*$). We also change the independent variable to the velocity, $v$ as that is a better value for matching up the current state of the vehicle to the reference state (for computing the $\delta$’s). </p>
 <div>
     $$
 \begin{align}
@@ -278,7 +279,7 @@ $$
 $$
 </div>
 <h2 id="apollo-guidance-bank-angle-policy">Apollo Guidance Bank Angle Policy</h2>
-<p>When we actually implement this guidance algorithm, $t_0$ and $\mathbf{\mathbf{x}_0}$ corresponds to the &quot;current&quot; time and state of the spacecraft. All the $\delta{\mathbf{x}}$ values are therefore computed by comparing the current trajectory to the reference trajectory. For example, </p>
+<p>When we actually implement this guidance algorithm, $t_0$ and $\mathbf{\mathbf{x}_0}$ corresponds to the “current” time and state of the spacecraft. All the $\delta{\mathbf{x}}$ values are therefore computed by comparing the current trajectory to the reference trajectory. For example, </p>
 <p>$\delta h(v_0) = h(v_0) - h^{*}(v_0)$ </p>
 <p>where $h(v_0)$ is the current altitude and $h^*(v_0)$ is the altitude on the reference trajectory corresponding to the current speed. </p>
 <p>Putting it all together, $\eqref{eqn:delu_1}$ becomes</p>
@@ -308,19 +309,19 @@ $$
 </div>
 <p>$\delta u$ is added to the reference bank angle $u$ to obtain the bank angle to be commanded in each guidance cycle.</p>
 <h2 id="some-notes-on-implementation">Some Notes on Implementation</h2>
-<p>One key bottleneck that I found during implementation was the data-lookup within the reference trajectory data. Right now, the reference trajectory data is stored in a 2D numpy array. In every guidance cycle, we do a lookup within this array to find the data row with the closest value of velocity to the vehicle's current velocity. This <em>could</em> be made much more efficient with a better data structure.</p>
+<p>One key bottleneck that I found during implementation was the data-lookup within the reference trajectory data. Right now, the reference trajectory data is stored in a 2D numpy array. In every guidance cycle, we do a lookup within this array to find the data row with the closest value of velocity to the vehicle’s current velocity. This <em>could</em> be made much more efficient with a better data structure.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>The <a href="https://github.com/thomasantony/msl-apollo-entry-guidance/tree/master/notebooks">Jupyter notebooks</a> implement the algorithm as well as a Monte Carlo simulation system for testing it. I will be updating them to add more notes and details on the implementation to clarify things further.</p>
+<p>The <a rel="noopener" target="_blank" href="https://github.com/thomasantony/msl-apollo-entry-guidance/tree/master/notebooks">Jupyter notebooks</a> implement the algorithm as well as a Monte Carlo simulation system for testing it. I will be updating them to add more notes and details on the implementation to clarify things further.</p>
 <h2 id="references">References</h2>
-<p>[1] R.D.Braun and R.M. Manning, <a href="https://smartech.gatech.edu/bitstream/handle/1853/8390/IEEEPaper06ID0076FINAL.pdf">Mars Exploration Entry, Descent and Landing Challenges</a></p>
-<p>[2] M. Pajola, et. al., <a href="https://www.researchgate.net/publication/331289183_Planetary_Mapping_for_Landing_Sites_Selection_The_Mars_Case_Study">Planetary Mapping for Landing Sites Selection: The Mars Case Study</a></p>
-<p>[3] L. Blackmore, <a href="http://larsblackmore.com/nae_bridge_2016.pdf">Autonomous Precision Landing of Space Rockets</a>, Page 15</p>
-<p>[4] C.R. Heidrich, E. Roelke, S.W. Albert and R.D. Braun, <a href="https://www.researchgate.net/publication/344238595_Comparative_Study_Of_Lift-And_Drag-Modulation_Control_Strategies_For_Aerocapture">Comparative Study Of Lift And Drag Modulation Control Strategies For Aerocapture</a></p>
-<p>[5] <a href="https://ntrs.nasa.gov/api/citations/20010038142/downloads/20010038142.pdf">Entry System Design Considerations for Mars Landers</a>&quot; - includes more details about the Apollo Guidance Algorithm on Page 12</p>
-<p>[6] P.D. Burkhart et. al., <a href="https://www.researchgate.net/publication/4333698_Mars_Science_Laboratory_Entry_Descent_and_Landing_System_Overview">Mars Science Laboratory Entry, Descent, and Landing System Overview</a></p>
-<p>[7] G.F. Mendeck, <a href="https://ntrs.nasa.gov/api/citations/20110003649/downloads/20110003649.pdf">Mars Science Laboratory Entry Guidance</a></p>
-<p>[8] D.G. Ives, D.K. Geller and G.L. Carman, <a href="https://arc.aiaa.org/doi/10.2514/6.1998-4570">Apollo-derived Mars precision lander guidance</a></p>
-<p>[9] G.F. Mendeck and G.L. Carman, <a href="https://arc.aiaa.org/doi/10.2514/6.2002-4502">Guidance Design for Mars Smart Landers Using the Entry Terminal Point Controller</a></p>
+<p>[1] R.D.Braun and R.M. Manning, <a rel="noopener" target="_blank" href="https://smartech.gatech.edu/bitstream/handle/1853/8390/IEEEPaper06ID0076FINAL.pdf">Mars Exploration Entry, Descent and Landing Challenges</a></p>
+<p>[2] M. Pajola, et. al., <a rel="noopener" target="_blank" href="https://www.researchgate.net/publication/331289183_Planetary_Mapping_for_Landing_Sites_Selection_The_Mars_Case_Study">Planetary Mapping for Landing Sites Selection: The Mars Case Study</a></p>
+<p>[3] L. Blackmore, <a rel="noopener" target="_blank" href="http://larsblackmore.com/nae_bridge_2016.pdf">Autonomous Precision Landing of Space Rockets</a>, Page 15</p>
+<p>[4] C.R. Heidrich, E. Roelke, S.W. Albert and R.D. Braun, <a rel="noopener" target="_blank" href="https://www.researchgate.net/publication/344238595_Comparative_Study_Of_Lift-And_Drag-Modulation_Control_Strategies_For_Aerocapture">Comparative Study Of Lift And Drag Modulation Control Strategies For Aerocapture</a></p>
+<p>[5] <a rel="noopener" target="_blank" href="https://ntrs.nasa.gov/api/citations/20010038142/downloads/20010038142.pdf">Entry System Design Considerations for Mars Landers</a>“ - includes more details about the Apollo Guidance Algorithm on Page 12</p>
+<p>[6] P.D. Burkhart et. al., <a rel="noopener" target="_blank" href="https://www.researchgate.net/publication/4333698_Mars_Science_Laboratory_Entry_Descent_and_Landing_System_Overview">Mars Science Laboratory Entry, Descent, and Landing System Overview</a></p>
+<p>[7] G.F. Mendeck, <a rel="noopener" target="_blank" href="https://ntrs.nasa.gov/api/citations/20110003649/downloads/20110003649.pdf">Mars Science Laboratory Entry Guidance</a></p>
+<p>[8] D.G. Ives, D.K. Geller and G.L. Carman, <a rel="noopener" target="_blank" href="https://arc.aiaa.org/doi/10.2514/6.1998-4570">Apollo-derived Mars precision lander guidance</a></p>
+<p>[9] G.F. Mendeck and G.L. Carman, <a rel="noopener" target="_blank" href="https://arc.aiaa.org/doi/10.2514/6.2002-4502">Guidance Design for Mars Smart Landers Using the Entry Terminal Point Controller</a></p>
 </article>
 </p>
 </section>

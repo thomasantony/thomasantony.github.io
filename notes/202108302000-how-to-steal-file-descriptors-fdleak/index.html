@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>How to steal file descriptors aka fdleak - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>How to steal file descriptors aka fdleak</h1>
+  <article><p>This is a strategy for taking over a network socket or other file descriptor opened by a privileged process. I was directed to this <a rel="noopener" target="_blank" href="http://www.phearless.org/istorija/razno/fdleak.txt">reference</a> by a user on the SmashTheStack Discord server after I was stuck on level 2 of the “amateria” CTF challenge.</p>
+<h2 id="premise">Premise</h2>
+<p>The challenge involved a constantly running privileged server that would accept connections and spawn a child process, which would in turn prompt for a username and password. If they username matched “level3” it would spawn a “level3” privileged shell while the level2 username/password would spawn a level2 shell. There was also a hint in the README saying there was a script that mimiced a user with valid credentials using the service. The wording of this hint led me to believe that there was an existing privileged session that I was supposed to take over. But in fact, it was much simpler than that. The script in question would hit the service at a certain (frequent) interval and send the correct username and password for level 3. If we could take over the listening socket, we could intervene and capture this information when the script connects.</p>
+<h2 id="procedure">Procedure</h2>
+<p>The idea is that child processes inherit any file descriptors opened by the parent process <em>unless</em> a special flag is set. So we open a session as “level2” (whose credentials are available). Then we run  a python script that opens up the original listen socket using the file descriptor number, 3. This is 3 because 0, 1 and 2 correspond to stdin, stdout and stderr. We can use <code>socket.socket(fileno=3)</code> to accomplish this (only in Python3). Afterwards, we can use it as if it is any other listen socket, accept connections, read incoming data and respond as if we are the original service.</p>
+<h2 id="remedy">Remedy</h2>
+<p>The parent process must set the <code>FD_CLOEXEC</code> flag on the privileged file descriptor to prevent the child processes from accessing them.</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">fcntl.h</span><span>&gt;
+</span><span>
+</span><span style="color:#bf616a;">fcntl</span><span>(fd,FD_CLOEXEC);
+</span></code></pre>
+<h2 id="references">References</h2>
+<p>[<a rel="noopener" target="_blank" href="http://www.phearless.org/istorija/razno/fdleak.txt">1</a>] <a rel="noopener" target="_blank" href="http://www.phearless.org/istorija/razno/fdleak.txt">http://www.phearless.org/istorija/razno/fdleak.txt</a></p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;information-security&#x2F;">Information Security</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Transparent rust bindings for c++ structs - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>Transparent Rust bindings for C++ structs</h1>
+  <article><p>This is a short note about the things I discovered about creating transparent bindings for C++ structs into Rust using <a rel="noopener" target="_blank" href="https://cxx.rs">cxx</a>. </p>
+<h2 id="c-types">C types</h2>
+<p>For scalar types like DWORD, and pointer types that reslve down to void*, a ctype wrapper macro can be used to generate a “new-type” that transparently resolves to the underlying type on the C++ side without having to use <code>Box</code> or <code>unique_ptr</code>.</p>
+<p>This is can be further simplified using a macro adapted from the one at <a rel="noopener" target="_blank" href="https://github.com/dtolnay/cxx/issues/254#issuecomment-747860504">https://github.com/dtolnay/cxx/issues/254#issuecomment-747860504</a>. The macro looks something like this:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">macro_export</span><span>]
+</span><span style="color:#96b5b4;">macro_rules! </span><span>ctype_wrapper {
+</span><span>    (</span><span style="color:#bf616a;">$r</span><span>:</span><span style="color:#b48ead;">ident</span><span>, </span><span style="color:#bf616a;">$c</span><span>:</span><span style="color:#b48ead;">ty</span><span>) =&gt; {
+</span><span>        </span><span style="color:#65737e;">/// Newtype wrapper for a `</span><span style="color:#bf616a;">$c</span><span style="color:#65737e;">` 
+</span><span>        #[</span><span style="color:#bf616a;">derive</span><span>(Debug, Eq, Clone, PartialEq, Hash, Default, Copy)]
+</span><span>        #[</span><span style="color:#bf616a;">allow</span><span>(non_camel_case_types)]
+</span><span>        #[</span><span style="color:#bf616a;">repr</span><span>(transparent)]
+</span><span>        </span><span style="color:#b48ead;">pub struct </span><span style="color:#bf616a;">$r</span><span>(pub </span><span style="color:#bf616a;">$c</span><span>);
+</span><span>        </span><span style="color:#b48ead;">unsafe impl </span><span>cxx::ExternType </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">$r </span><span>{
+</span><span>            </span><span style="color:#b48ead;">type </span><span>Id = cxx::type_id!(</span><span style="color:#bf616a;">$r</span><span>);
+</span><span>            </span><span style="color:#b48ead;">type </span><span>Kind = cxx::kind::Trivial;
+</span><span>        }
+</span><span>    };
+</span><span>    (</span><span style="color:#bf616a;">$r</span><span>:</span><span style="color:#b48ead;">ident</span><span>, </span><span style="color:#bf616a;">$c</span><span>:</span><span style="color:#b48ead;">ty</span><span>, </span><span style="color:#bf616a;">$nice_name</span><span>:</span><span style="color:#b48ead;">ident</span><span>) =&gt; {
+</span><span>        </span><span style="color:#65737e;">/// Newtype wrapper for a `</span><span style="color:#bf616a;">$c</span><span style="color:#65737e;">`
+</span><span>        #[</span><span style="color:#bf616a;">derive</span><span>(Debug, Eq, Clone, PartialEq, Hash, Default, Copy)]
+</span><span>        #[</span><span style="color:#bf616a;">allow</span><span>(non_camel_case_types)]
+</span><span>        #[</span><span style="color:#bf616a;">repr</span><span>(transparent)]
+</span><span>        </span><span style="color:#b48ead;">pub struct </span><span style="color:#bf616a;">$r</span><span>(pub </span><span style="color:#bf616a;">$c</span><span>);
+</span><span>        </span><span style="color:#b48ead;">unsafe impl </span><span>cxx::ExternType </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">$r </span><span>{
+</span><span>            </span><span style="color:#b48ead;">type </span><span>Id = cxx::type_id!(</span><span style="color:#bf616a;">$r</span><span>);
+</span><span>            </span><span style="color:#b48ead;">type </span><span>Kind = cxx::kind::Trivial;
+</span><span>        }
+</span><span>        </span><span style="color:#b48ead;">type </span><span style="color:#bf616a;">$nice_name </span><span>= </span><span style="color:#bf616a;">$r</span><span>;
+</span><span>    };
+</span><span>}
+</span></code></pre>
+<p>The macro has two variants that are almost the same. They generate a newtype wrapping the given underling type and also implements the <code>cxx::ExternType</code> trait for it allowing to pass it by value to/from C++ code. The variant with 3 arguments can be used to create a type alias for at the same time. For example:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>ctype_wrapper!(</span><span style="color:#d08770;">THRUSTER_HANDLE</span><span>, </span><span style="color:#b48ead;">usize</span><span>, ThrusterHandle);
+</span></code></pre>
+<p>will generate a new-type called <code>THRUSTER_HANDLE</code> wrapping <code>usize</code> as well as an alias called <code>ThrusterHandle</code>. Eithe the type or its alias now be used within an <code>extern &quot;C++&quot;</code> section as:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>...
+</span><span style="color:#b48ead;">extern </span><span>&quot;</span><span style="color:#a3be8c;">C++</span><span>&quot; {
+</span><span>    </span><span style="color:#b48ead;">type </span><span>THRUSTER_HANDLE = </span><span style="color:#b48ead;">crate</span><span>::ThrusterHandle;
+</span><span>}
+</span></code></pre>
+<h3 id="structs">Structs</h3>
+<p>It is possible to define a struct in Rust (outside of the FFI module), with all of the fields (assuming they are all compatible with CXX’s restrictions). A simple example is shown below for a 3-element vector type.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug, Default)]
+</span><span style="color:#b48ead;">pub struct </span><span>VECTOR3([</span><span style="color:#b48ead;">f64</span><span>; 3]);
+</span><span style="color:#b48ead;">impl </span><span>VECTOR3 {
+</span><span>    </span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">new</span><span>(</span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">y</span><span>: </span><span style="color:#b48ead;">f64</span><span>, </span><span style="color:#bf616a;">z</span><span>: </span><span style="color:#b48ead;">f64</span><span>) -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        </span><span style="color:#b48ead;">Self</span><span>([x, y, z])
+</span><span>    }
+</span><span>}
+</span><span style="color:#b48ead;">unsafe impl </span><span>cxx::ExternType </span><span style="color:#b48ead;">for </span><span>VECTOR3 {
+</span><span>    </span><span style="color:#b48ead;">type </span><span>Id = cxx::type_id!(&quot;</span><span style="color:#a3be8c;">VECTOR3</span><span>&quot;);
+</span><span>    </span><span style="color:#b48ead;">type </span><span>Kind = cxx::kind::Trivial;
+</span><span>}
+</span><span style="color:#b48ead;">type </span><span>Vector3 = </span><span style="color:#d08770;">VECTOR3</span><span>; </span><span style="color:#65737e;">// Alias
+</span></code></pre>
+<p>This wraps an underlying <code>VECTOR3</code> struct on the C++ side as</p>
+<pre data-lang="c++" style="background-color:#2b303b;color:#c0c5ce;" class="language-c++ "><code class="language-c++" data-lang="c++"><span style="color:#b48ead;">typedef union </span><span>{
+</span><span>    </span><span style="color:#b48ead;">double</span><span> data[</span><span style="color:#d08770;">3</span><span>];
+</span><span>    </span><span style="color:#b48ead;">struct </span><span>{</span><span style="color:#b48ead;">double</span><span> x, y, z;};
+</span><span>} VECTOR3;
+</span></code></pre>
+<p>This type can also now be passed by value to/from C++ code without requiring any other wrapper around it.</p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;software-development&#x2F;">Software Development</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

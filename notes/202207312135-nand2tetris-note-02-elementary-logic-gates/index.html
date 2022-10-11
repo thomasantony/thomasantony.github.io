@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Nand2tetris note 02 - elementary logic gates - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>NAND2Tetris Note 02 - Elementary Logic Gates</h1>
+  <article><h2 id="elementary-logic-gates">Elementary Logic Gates</h2>
+<p>NOT
+AND
+OR
+XOR =&gt; output 1 if inputs different
+MUX: =&gt; a, b, sel; if sel == 0: out = a, else: out = b
+DMUX: =&gt; in, sel (outputs a and b): if sel == 0: a = in else b = in</p>
+<h2 id="16-bit-variants">16-bit variants</h2>
+<p>NOT16 : 16 bits in and out
+AND16 : Two 16-bit inputs, One 16-it output
+OR16 : Two 16-bit inputs, One 16-it output</p>
+<h2 id="multi-way-variants">Multi-way variants</h2>
+<p>Or8Way : Single 16-bit input, 1 bit output
+Mux4Way16 : Four 16-bit inputs, One 2-bit “sel” input, One 8-bit output
+Mux8Way16 : Eight 16-bit inputs, One 3-bit “sel” input, One 8-bit ouput
+DMux4Way : Single 1-bit input, 2-bit selector, Four 1-bit outputs
+DMux8Way : Single 1-bit input, 3-bit selector, Eight 1-bit outputs</p>
+<p>The multi-way mux and dmux can be implemented by composing the other mux/dmux components.</p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;nand2tetris&#x2F;">NAND2Tetris</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

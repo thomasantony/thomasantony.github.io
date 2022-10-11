@@ -21,6 +21,7 @@
         
         <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
         <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
         <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
       ]
       
@@ -34,13 +35,13 @@
   <small>
     <em>Posted on <time datetime="2022-01-10T23:49:12-06:00">10 January, 2022</time></em>
   </small>
-  <article><p>This short article will explore how to create a spacecraft addon for the <a href="http://orbit.medphys.ucl.ac.uk/">Orbiter</a> spaceflight simulator in the <a href="https://rust-lang.org/">Rust</a> programming language. I previously took a stab at this back in 2020 with <a href="https://github.com/thomasantony/RustMFD">limited success</a>. I was much less knowledgeable about Rust at the time and the tooling around C++ bindings were not as mature then. This post is a companion to <a href="https://github.com/thomasantony/orbiter-rs">this new repository</a> that contains a proof-of-concept for building a spacecraft addon for Orbiter in Rust.</p>
+  <article><p>This short article will explore how to create a spacecraft addon for the <a rel="noopener" target="_blank" href="http://orbit.medphys.ucl.ac.uk/">Orbiter</a> spaceflight simulator in the <a rel="noopener" target="_blank" href="https://rust-lang.org/">Rust</a> programming language. I previously took a stab at this back in 2020 with <a rel="noopener" target="_blank" href="https://github.com/thomasantony/RustMFD">limited success</a>. I was much less knowledgeable about Rust at the time and the tooling around C++ bindings were not as mature then. This post is a companion to <a rel="noopener" target="_blank" href="https://github.com/thomasantony/orbiter-rs">this new repository</a> that contains a proof-of-concept for building a spacecraft addon for Orbiter in Rust.</p>
 <h2 id="why-rust">Why Rust?</h2>
-<p>Rust is a relatively new high level systems programming language with a focus on safety. Orbiter is written in C++ and therefore its addons are also typically written in C++. Rust development for Orbiter is facilitated using the <a href="https://cxx.rs">cxx</a> crate.</p>
+<p>Rust is a relatively new high level systems programming language with a focus on safety. Orbiter is written in C++ and therefore its addons are also typically written in C++. Rust development for Orbiter is facilitated using the <a rel="noopener" target="_blank" href="https://cxx.rs">cxx</a> crate.</p>
 <h2 id="design">Design</h2>
 <p>The repository in its current form produces a DLL file as its build artifact that can be loaded into Orbiter as an addon module. <del>Anyone wanting to create a Rust addon will clone/fork the repository and build it along with the the Rust code for their addon.</del>(See update below). </p>
 <p>There are a limited number of Orbiter SDK functions currently available as Rust bindings in this prototype.
-This will expand in the future to hopefully encompass the majority of the API. The repository includes a demo addon that models NASA's <a href="https://en.wikipedia.org/wiki/Surveyor_program">Surveyor</a> probe. This follows from the C++ tutorial at <a href="https://www.orbiterwiki.org/wiki/Vessel_Tutorial_1">OrbiterWiki</a> and implements retro-thruster staging and differential thrust attitude control.</p>
+This will expand in the future to hopefully encompass the majority of the API. The repository includes a demo addon that models NASA’s <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Surveyor_program">Surveyor</a> probe. This follows from the C++ tutorial at <a rel="noopener" target="_blank" href="https://www.orbiterwiki.org/wiki/Vessel_Tutorial_1">OrbiterWiki</a> and implements retro-thruster staging and differential thrust attitude control.</p>
 <h2 id="developing-custom-spacecraft-addons">Developing custom spacecraft addons</h2>
 <p><em><strong>Update 01/11/2022: This section has been changed to reflect changes to the crate</strong></em>
 <del>All the spacecraft-specific code in the repository lives in its own file (<code>src/shuttle_pb.rs</code> for example).</del>
@@ -83,7 +84,7 @@ An addon crate implementing a spacecraft should import the <code>orbiter_rs</cod
 </span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">exit</span><span>() {}
 </span><span>);
 </span></code></pre>
-<p>The addon may use any of the wrapped functions currently available. Any other Orbiter SDK functions will require wrappers to be generated for them. An automated tool like <a href="https://github.com/google/autocxx">autocxx</a> may be worth investigating for this purpose.</p>
+<p>The addon may use any of the wrapped functions currently available. Any other Orbiter SDK functions will require wrappers to be generated for them. An automated tool like <a rel="noopener" target="_blank" href="https://github.com/google/autocxx">autocxx</a> may be worth investigating for this purpose.</p>
 <h2 id="building-and-installing">Building and Installing</h2>
 <p>The addon can be built using <code>cargo build</code> assuming that Visual Studio 2019 is available. Other C++ compilers may or may not work. Deploying the addon also requires a config file and any meshes and other dependencies. An example can be seen in <code>Config/Surveyor.cfg</code>. Once you build the addon, the DLL will be available in the <code>target/i686-pc-windows-msvc/debug</code> folder. This will need to be renamed to match whatever module name you haev in the configuration file.</p>
 <h2 id="summary">Summary</h2>

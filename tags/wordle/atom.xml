@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Thomas Antony - wordle</title>
+	<subtitle>My personal website and notes</subtitle>
+	<link href="https://thomasantony.com/tags/wordle/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://thomasantony.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2022-02-06T17:05:33.089+00:00</updated>
+	<id>https://thomasantony.com/tags/wordle/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Solve Wordle Using Information Theory</title>
+		<published>2022-02-06T17:05:33.089+00:00</published>
+		<updated>2022-02-06T17:05:33.089+00:00</updated>
+		<link href="https://thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/</id>
+		<content type="html">&lt;p&gt;This is a note about how to use information theory to create an optimal strategy for solving “Wordle”.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;initial-ideas&quot;&gt;Initial ideas&lt;&#x2F;h2&gt;
+&lt;p&gt;For any given word, we can find a distribution for probabilities for each pattern of colors that could be revealed. Example, for “WEARY”, there is some number of words that do not contain any of the letters, some that contain W, some with W and E, some with E at the first position, etc.&lt;&#x2F;p&gt;
+&lt;p&gt;We can geenrate the list of all possible outcomes for a given word, and check how many words in the list match the patterns to come up with a probability.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Key&lt;&#x2F;strong&gt; A guess is “informative” if it is unlikely, i.e., the more unlikely the  pattern, the fewer possibilities remain to be checked. A highly unlikely guess, if correct, significantly cuts down the solution space.&lt;&#x2F;p&gt;
+&lt;p&gt;The expected amount of information from the distribution for a certain word is &lt;&#x2F;p&gt;
+&lt;p&gt;$$
+E[\text{Information}] = \sum_x {p(x) \cdot \text{Something}}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;This “something” should measure how informative that pattern is. We could try to lower the average number of matches. The fewer the number of matches for a pattern, the more informative that pattern is. Instead we can use a concept from information theory.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;what-is-a-bit&quot;&gt;What is a “bit”?&lt;&#x2F;h2&gt;
+&lt;p&gt;An observation that can cut the space of possibilities in half, that is called a bit of information.&lt;&#x2F;p&gt;
+&lt;p&gt;Therefore&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;p(1 bit) = 1&#x2F;2
+&lt;&#x2F;span&gt;&lt;span&gt;p(2 bits) = 1&#x2F;4
+&lt;&#x2F;span&gt;&lt;span&gt;p(3 bits) = 1&#x2F;8 etc.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Or, for information $I$&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\left(\frac{1}{2}\right)^I = p \implies 2^I = \frac{1}{p}\
+I = \log_2{\left(\frac{1}{p}\right)}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;This is a better way of representing probability. You can say that you get 20 bits of information instead of saying that the probability of such a thing occuring is 0.00000095.&lt;&#x2F;p&gt;
+&lt;p&gt;Information (or bits) add together the same way probabilities multiply, thanks to the logarithm.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;applying-information-theory-to-the-problem&quot;&gt;Applying information theory to the problem&lt;&#x2F;h2&gt;
+&lt;p&gt;$$
+E[\text{Information}] = \sum_x {p(x) \cdot \log_2{\left(\frac{1}{p(x)}\right)}
+}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;This is the average number of bits you could get from a  certain word. The higher the probability of seeing a pattern, the lower the number of bits.&lt;&#x2F;p&gt;
+&lt;p&gt;This metric can be used to rank the guess in order of number of expected bits of information.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;**This expected value of information is also called “entropy” ($H$). This was a suggestion by von Neumann to Claude Shannon. While this has some connection to the entropy from thermodynamics, Shannon was dealing purely with probability distribution when he used the term. **&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;strategy&quot;&gt;Strategy&lt;&#x2F;h2&gt;
+&lt;p&gt;First give a guess based on the word that gives the highest expected number of bits of information. Then for the next guess use the more restricted list of words based on the result of the first guess, and so on.&lt;&#x2F;p&gt;
+&lt;p&gt;The solver can be run across every single word in the word-list to work out an average score.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;a-better-strategy&quot;&gt;A better strategy?&lt;&#x2F;h2&gt;
+&lt;p&gt;Assign a probability for each word for being in the final list based on frequency of use in the English language instead of a uniform distribution. Grant ranks them by frequency and uses a sigmoid function to assign probabilities. Use this to measure the “remaining uncertainty” of the possible word candidates left. So even if the number of possible words is higher, the uncertainty would be lower thanks to the weighted distribution. &lt;&#x2F;p&gt;
+&lt;h2 id=&quot;expected-score&quot;&gt;Expected Score&lt;&#x2F;h2&gt;
+&lt;p&gt;TBD.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
+&lt;p&gt;[1] &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=v68zYyaEmEA&quot;&gt;The mathematically optimal Wordle strategy&lt;&#x2F;a&gt;, 3Blue1Brown&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

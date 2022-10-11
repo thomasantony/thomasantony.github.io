@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Thomas Antony - Software Development</title>
+	<subtitle>My personal website and notes</subtitle>
+	<link href="https://thomasantony.com/notes/software-development/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://thomasantony.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2022-01-11T03:28:20.283+00:00</updated>
+	<id>https://thomasantony.com/notes/software-development/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Transparent Rust bindings for C++ structs</title>
+		<published>2022-01-11T03:28:20.283+00:00</published>
+		<updated>2022-01-11T03:28:20.283+00:00</updated>
+		<link href="https://thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/</id>
+		<content type="html">&lt;p&gt;This is a short note about the things I discovered about creating transparent bindings for C++ structs into Rust using &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;cxx.rs&quot;&gt;cxx&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
+&lt;h2 id=&quot;c-types&quot;&gt;C types&lt;&#x2F;h2&gt;
+&lt;p&gt;For scalar types like DWORD, and pointer types that reslve down to void*, a ctype wrapper macro can be used to generate a “new-type” that transparently resolves to the underlying type on the C++ side without having to use &lt;code&gt;Box&lt;&#x2F;code&gt; or &lt;code&gt;unique_ptr&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This is can be further simplified using a macro adapted from the one at &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;dtolnay&#x2F;cxx&#x2F;issues&#x2F;254#issuecomment-747860504&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;dtolnay&#x2F;cxx&#x2F;issues&#x2F;254#issuecomment-747860504&lt;&#x2F;a&gt;. The macro looks something like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;macro_export&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;macro_rules! &lt;&#x2F;span&gt;&lt;span&gt;ctype_wrapper {
+&lt;&#x2F;span&gt;&lt;span&gt;    (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$r&lt;&#x2F;span&gt;&lt;span&gt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;ident&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$c&lt;&#x2F;span&gt;&lt;span&gt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;ty&lt;&#x2F;span&gt;&lt;span&gt;) =&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; Newtype wrapper for a `&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$c&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;` 
+&lt;&#x2F;span&gt;&lt;span&gt;        #[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;(Debug, Eq, Clone, PartialEq, Hash, Default, Copy)]
+&lt;&#x2F;span&gt;&lt;span&gt;        #[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;allow&lt;&#x2F;span&gt;&lt;span&gt;(non_camel_case_types)]
+&lt;&#x2F;span&gt;&lt;span&gt;        #[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;repr&lt;&#x2F;span&gt;&lt;span&gt;(transparent)]
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;pub struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$r&lt;&#x2F;span&gt;&lt;span&gt;(pub &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$c&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsafe impl &lt;&#x2F;span&gt;&lt;span&gt;cxx::ExternType &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$r &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span&gt;Id = cxx::type_id!(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$r&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span&gt;Kind = cxx::kind::Trivial;
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    };
+&lt;&#x2F;span&gt;&lt;span&gt;    (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$r&lt;&#x2F;span&gt;&lt;span&gt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;ident&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$c&lt;&#x2F;span&gt;&lt;span&gt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;ty&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$nice_name&lt;&#x2F;span&gt;&lt;span&gt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;ident&lt;&#x2F;span&gt;&lt;span&gt;) =&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;&#x2F; Newtype wrapper for a `&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$c&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;`
+&lt;&#x2F;span&gt;&lt;span&gt;        #[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;(Debug, Eq, Clone, PartialEq, Hash, Default, Copy)]
+&lt;&#x2F;span&gt;&lt;span&gt;        #[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;allow&lt;&#x2F;span&gt;&lt;span&gt;(non_camel_case_types)]
+&lt;&#x2F;span&gt;&lt;span&gt;        #[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;repr&lt;&#x2F;span&gt;&lt;span&gt;(transparent)]
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;pub struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$r&lt;&#x2F;span&gt;&lt;span&gt;(pub &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$c&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsafe impl &lt;&#x2F;span&gt;&lt;span&gt;cxx::ExternType &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$r &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span&gt;Id = cxx::type_id!(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$r&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span&gt;Kind = cxx::kind::Trivial;
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$nice_name &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$r&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    };
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The macro has two variants that are almost the same. They generate a newtype wrapping the given underling type and also implements the &lt;code&gt;cxx::ExternType&lt;&#x2F;code&gt; trait for it allowing to pass it by value to&#x2F;from C++ code. The variant with 3 arguments can be used to create a type alias for at the same time. For example:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;ctype_wrapper!(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;THRUSTER_HANDLE&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;usize&lt;&#x2F;span&gt;&lt;span&gt;, ThrusterHandle);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;will generate a new-type called &lt;code&gt;THRUSTER_HANDLE&lt;&#x2F;code&gt; wrapping &lt;code&gt;usize&lt;&#x2F;code&gt; as well as an alias called &lt;code&gt;ThrusterHandle&lt;&#x2F;code&gt;. Eithe the type or its alias now be used within an &lt;code&gt;extern &amp;quot;C++&amp;quot;&lt;&#x2F;code&gt; section as:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;...
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;extern &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;C++&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span&gt;THRUSTER_HANDLE = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;crate&lt;&#x2F;span&gt;&lt;span&gt;::ThrusterHandle;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;structs&quot;&gt;Structs&lt;&#x2F;h3&gt;
+&lt;p&gt;It is possible to define a struct in Rust (outside of the FFI module), with all of the fields (assuming they are all compatible with CXX’s restrictions). A simple example is shown below for a 3-element vector type.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;(Debug, Default)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;pub struct &lt;&#x2F;span&gt;&lt;span&gt;VECTOR3([&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;f64&lt;&#x2F;span&gt;&lt;span&gt;; 3]);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;impl &lt;&#x2F;span&gt;&lt;span&gt;VECTOR3 {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;pub fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;new&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;f64&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;y&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;f64&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;z&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;f64&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;Self &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;Self&lt;&#x2F;span&gt;&lt;span&gt;([x, y, z])
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsafe impl &lt;&#x2F;span&gt;&lt;span&gt;cxx::ExternType &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;VECTOR3 {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span&gt;Id = cxx::type_id!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;VECTOR3&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span&gt;Kind = cxx::kind::Trivial;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span&gt;Vector3 = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;VECTOR3&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Alias
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This wraps an underlying &lt;code&gt;VECTOR3&lt;&#x2F;code&gt; struct on the C++ side as&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;typedef union &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;double&lt;&#x2F;span&gt;&lt;span&gt; data[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;];
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;double&lt;&#x2F;span&gt;&lt;span&gt; x, y, z;};
+&lt;&#x2F;span&gt;&lt;span&gt;} VECTOR3;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This type can also now be passed by value to&#x2F;from C++ code without requiring any other wrapper around it.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Elegance of hamming codes - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>Elegance of Hamming Codes</h1>
+  <article><p>In <a href="https://thomasantony.com/notes/202108162031-how-do-hamming-codes-work/">202108162031_how-do-hamming-codes-work</a>, we went over how hamming codes can be used to detect and correct single error messages or detect (but not correct) the presences of two or more errors in  a message. However, while the implementation may have seemed complicated, it is actually very elegant and simple.</p>
+<p>If the parity checks passing/failing is denoted as zero or one, it literally spells out the position of the error in binary. For example if the parity check failed (a.k.a is odd) for all but the last one, then the position is 0111b, or bit#7. The following description explains why this happens.</p>
+<p>Assume the same 16-bit message as the last article, except with each index represented in binary instead:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[ 0000  **0001**  **0010**  0011]
+</span><span>[ **0100**  0101  0110  0111]
+</span><span>[ **1000**  1001  1010  1011]
+</span><span>[ 1100  1101  1110  1111]
+</span></code></pre>
+<p>When checking if the even columns pass parity, what we are really checking is this question:</p>
+<p>“If there is an error, is the last bit of its position index a 1?”. This is because the positions in these two columns all have the last bit equal to one. Similarly the other parity checks follow through for the other bits of the error position. This is the reason for the parity bits being places where they are. At those position indices, the only a single bit is “on”. </p>
+<h2 id="a-note-on-xor">A note on XOR</h2>
+<p>The XOR operation in binary is essentially “add mod 2”. This is also equivalent to a parity check as XOR returns one for an odd number of ones and zero for an even number of ones.</p>
+<h2 id="hamming-code-using-xor">Hamming code using XOR</h2>
+<p>Each column/row being checked can be XORed with each other to get the parity check. So the way to do all four parity checks at once, is to take the <strong>positions of all the ones</strong> in the message and XOR them together to get the position of the error. Each bit in a position index is denoting what parity group it is part of. </p>
+<p>For example, if bit#3 and bit#15, part of the last column are ones, then we XOR 0011 and 1111 resulting in 1100. This means if these were the only ones in the message, parity group “1” and “2”, or even columns and the last two columns have parity of zero, the rows checks have odd parity.</p>
+<h2 id="python-implementation">Python Implementation</h2>
+<p>If <code>bits</code> is a numpy array of zeros and ones.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">from </span><span>functools </span><span style="color:#b48ead;">import </span><span style="color:#96b5b4;">reduce
+</span><span style="color:#b48ead;">import </span><span>numpy </span><span style="color:#b48ead;">as </span><span>np
+</span><span style="color:#b48ead;">import </span><span>operator
+</span><span>
+</span><span>bits = np.random.</span><span style="color:#bf616a;">randint</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">16</span><span>)
+</span><span>parity = </span><span style="color:#96b5b4;">reduce</span><span>(operator.xor, [i </span><span style="color:#b48ead;">for </span><span>i, bit </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">enumerate</span><span>(bits) </span><span style="color:#b48ead;">if </span><span>bit]) 
+</span><span>
+</span><span style="color:#65737e;"># Set parity bits
+</span><span style="color:#b48ead;">if </span><span>(parity &amp; </span><span style="color:#d08770;">0b1000</span><span>):
+</span><span>    bits[parity &amp; </span><span style="color:#d08770;">0b1000</span><span>] = not bits[parity &amp; </span><span style="color:#d08770;">0b1000</span><span>]
+</span><span style="color:#b48ead;">if </span><span>(parity &amp; </span><span style="color:#d08770;">0b0100</span><span>):
+</span><span>    bits[parity &amp; </span><span style="color:#d08770;">0b0100</span><span>] = not bits[parity &amp; </span><span style="color:#d08770;">0b0100</span><span>]
+</span><span style="color:#b48ead;">if </span><span>(parity &amp; </span><span style="color:#d08770;">0b0010</span><span>):
+</span><span>    bits[parity &amp; </span><span style="color:#d08770;">0b0010</span><span>] = not bits[parity &amp; </span><span style="color:#d08770;">0b0010</span><span>]
+</span><span style="color:#b48ead;">if </span><span>(parity &amp; </span><span style="color:#d08770;">0b0001</span><span>):
+</span><span>    bits[parity &amp; </span><span style="color:#d08770;">0b0001</span><span>] = not bits[parity &amp; </span><span style="color:#d08770;">0b0001</span><span>]
+</span><span>
+</span><span style="color:#65737e;"># Parity will now be zero
+</span><span style="color:#b48ead;">assert</span><span>(</span><span style="color:#96b5b4;">reduce</span><span>(operator.xor, [i </span><span style="color:#b48ead;">for </span><span>i, bit </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">enumerate</span><span>(bits) </span><span style="color:#b48ead;">if </span><span>bit])==</span><span style="color:#d08770;">0</span><span>)
+</span><span>
+</span><span style="color:#65737e;"># Add error
+</span><span>bits[</span><span style="color:#d08770;">10</span><span>] = not bits[</span><span style="color:#d08770;">10</span><span>]
+</span><span>
+</span><span style="color:#b48ead;">assert</span><span>(</span><span style="color:#96b5b4;">reduce</span><span>(operator.xor, [i </span><span style="color:#b48ead;">for </span><span>i, bit </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">enumerate</span><span>(bits) </span><span style="color:#b48ead;">if </span><span>bit])==</span><span style="color:#d08770;">10</span><span>)
+</span></code></pre>
+<h2 id="practical-usage">Practical Usage</h2>
+<p>Hamming codes offer single error correction with only log(N) bits for an N-bit message block. Message blocks may be overlapping to make this more robust against burst errors. Block size selected by balancing efficiency vs risk of errors.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=b3NxrZOu_CE">https://www.youtube.com/watch?v=b3NxrZOu_CE</a></li>
+</ul>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;computer-science&#x2F;">Computer Science</a></li>
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;mathematics&#x2F;">Mathematics</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Bdot attitude controller - Thomas Antony</title>
+
+    <script src="https://thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script  async defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>Bdot attitude controller</h1>
+  <article><p>A “bdot” (or $\mathbf{\dot{B}}$) attitude controller is used to detumble a spacecraft using just a magnetometer and torque rods. It does not require any other rate-sensing instruments like gyros. The controller is usually implemented as a derivative controller acting on the sensed magnetic field $\mathbf{B}$. The control torque in the body frame is defined as:</p>
+<div>
+    $$
+\tau_x = - \frac{k_x \mathbf{\dot{B}}_x}{|\mathbf{B}|}, \quad
+\tau_y = - \frac{k_y \mathbf{\dot{B}}_y}{|\mathbf{B}|}, \quad
+\tau_z = - \frac{k_z \mathbf{\dot{B}}_y}{|\mathbf{B}|}
+$$
+</div>
+<p>where $\mathbf{\dot{B}}_i$ is the component of the derivative of $\mathbf{B}$ about the $i$ axis. $\mathbf{\dot{B}}$ is computed using a <a rel="noopener" target="_blank" title="Smooth Low Noise Differentiators" href="http://www.holoborodko.com/pavel/numerical-methods/numerical-derivative/smooth-low-noise-differentiators/">digital differentiator filter</a> from discrete samples of $\mathbf{B}$.</p>
+<h2 id="caveats">Caveats</h2>
+<ul>
+<li>
+<p>This method will obviously only work when the spacecraft is operating within a magnetic field (e.g. in near-Earth space)</p>
+</li>
+<li>
+<p>The sampling cadence should be set up such that the use of the torque rods do not cause errors in magnetometer measurements. This can be ensured by sampling the data when the torque rods are not energized. That should also be sufficient delay after the rods are turned off in order to avoid residual effects from the rods’ magnetic fields.</p>
+</li>
+</ul>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;aerospace-engineering&#x2F;">Aerospace Engineering</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Nand2tetris note 04 - sequential logic and memory - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>NAND2Tetris Note 04 - Sequential Logic and Memory</h1>
+  <article><p>All of the chips described in the previous course notes used what is called “combinational logic”, where the output is available instantenously and there is no time-component to their operation. Combinational chips compute functions that depend solely on combinations of their input values.</p>
+<p>Sequential logic incorporates the concept of time, or more specifically, discretized time in the form of a clock signal into determining their output. This is the core concept behind digital circuits with memory. Just like how NAND formed the basic building blocks of combinational logic, the “D-Flip-Flip” is the fundamental building block used to build sequential logic. A D-Flip-Flop can be built out of nand-gates using a loop-based design but that is beyond the scope of the course.</p>
+<h2 id="clocked-data-flip-flop-d-flip-flop-or-dff">Clocked Data Flip Flop (D Flip-Flop or DFF)</h2>
+<p>The D Flip-Flop has one input “in” and one output “out”. There’s also an implicit “clock” signal that cycles from high to low and back to high to make a single “clock cycle”. The output of the D flip-flip is simply the input of the last time step (with the output of the initial timestep being indeterminate).</p>
+<p>D-Flip-Flops are combined in various ways with combinational logic circuits to build up basic memory units like a 1-bit register, larger addressed registers (RAM) and counters that form the basis of computer memory.</p>
+<h2 id="one-bit-register">One-Bit Register</h2>
+<p>A bit regsiter has two inputs “in” and “load” and a single output “out”. The output is the same as the last output if “load” is zero. It is equal to “in” if “load” is set to one. The HDL imlementation uses a Mux to select between the lastOutput and the current input. This is then passed into a DFF and the output of the DFF is the output of the register.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Mux(a=lastOutput, b=in, sel=load, out=dffIn);
+</span><span>DFF(in=dffIn, out=out, out=lastOutput);
+</span></code></pre>
+<p>The output of the DFF is fanned out to the input of the Mux as well. This is possible because HDL is <em>not</em> a programming language. It can be thought of as a description of electrical wiring. So the output line of the DFF is looped back to the input of the Mux here.</p>
+<h2 id="16-bit-register">16-bit register</h2>
+<p>A 16-bit register chip has a 16-bit input <code>in</code>, a single bit <code>load</code> input and a 16-bit output, <code>out</code>. This can be implemented by stacking 8 one-bit register and fanning out the load input to all of them. The inputs and outputs of each “bit” chip is wired to the individual bits of <code>in</code> and <code>out</code> respectively.</p>
+<h2 id="ram8-chip">RAM8 chip</h2>
+<p>This is a chip that can store 8 “words” (in this case 16-bit words). The chip has a 16-bit <code>in</code> input, 3-bit <code>address</code>  input and a 16-bit output, <code>out</code>. It uses a Demuxer to split out the <code>address</code> into 8 different <code>load</code> bits which are then fed into <code>Register</code> chips. <code>in</code> is fanned out to all the underlying <code>Register</code> chips. The outputs of the registers are then connected to the <code>out</code> pin through a Multiplexer with the <code>address</code> as its selector. </p>
+<h2 id="ram64-ram512-ram4k-and-ram16k">RAM64, RAM512, RAM4K and RAM16K</h2>
+<p>These are built in the same manner as <code>RAM8</code> but by composing <code>RAMx</code> chips using a Demuxer and Muxer. <code>RAM64</code> has a 6-bit <code>address</code> input, where the 3 most-significant bits select the underlying <code>RAM8</code> chip and the 3 LSBs signify the address in the underlying <code>RAM8</code>. Therefore the <code>load</code> bit is wired to the <code>RAM8</code> chips through a Demuxer with <code>address[3..5]</code> as the <code>sel</code> input and <code>address[0..2]</code> is passed through directly to the underlying chips. The output is similarly muxed using <code>address[3..5]</code> as the selector. The higher capacity chips are built in the same way by stacking 4 or 8 lower capacity chips and an appropriately sized Demuxer and Muxer.</p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;nand2tetris&#x2F;">NAND2Tetris</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
