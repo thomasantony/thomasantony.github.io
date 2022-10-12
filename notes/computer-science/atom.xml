@@ -11,7 +11,7 @@
 		<title>Two&#x27;s Complement Notation for Binary Addition</title>
 		<published>2022-09-04T03:41:18.681+00:00</published>
 		<updated>2022-09-04T03:41:18.681+00:00</updated>
-		<link href="https://thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/" type="text/html"/>
+		<link rel="alternate" href="https://thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/</id>
 		<content type="html">&lt;p&gt;Two’s complement is a format for representing negative numbers in binary. A number &lt;code&gt;-X&lt;&#x2F;code&gt; is represented as an &lt;code&gt;N&lt;&#x2F;code&gt; bit value using the binary value of &lt;code&gt;2^N-X&lt;&#x2F;code&gt;. E.g. -5 in 4-bit integers would be &lt;code&gt;2^4 - 5&lt;&#x2F;code&gt; = &lt;code&gt;11&lt;&#x2F;code&gt; (or &lt;code&gt;0b1010&lt;&#x2F;code&gt;). The advantage of using this representation is that it makes addition of negative numbers possible with existing binary adder circuits (or logic gate implementation). The reason this works is that the output we get from an adder circuit is actually the “modulo 2^n” representation. &lt;&#x2F;p&gt;
 &lt;p&gt;Example: -2 + -3 using 4-bit integers&lt;&#x2F;p&gt;
@@ -39,7 +39,7 @@
 		<title>What is TLA+?</title>
 		<published>2022-06-10T03:31:49.999+00:00</published>
 		<updated>2022-06-10T03:31:49.999+00:00</updated>
-		<link href="https://thomasantony.com/notes/202205092031-what-is-tla/" type="text/html"/>
+		<link rel="alternate" href="https://thomasantony.com/notes/202205092031-what-is-tla/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202205092031-what-is-tla/</id>
 		<content type="html">&lt;p&gt;TLA+ is a language for creating “specifications” for computer programs&#x2F;algorithms and then verify all the possible execution paths and mathematically prove assertions. The program is represented as a state machine where everything from variables to the program counter “pc” is part of the state. The spec contains an initial state and rule specifying “next state” as a bunch of logical statements linked by “and” (&#x2F;) or “or” aka &#x2F; clauses. &lt;&#x2F;p&gt;
 &lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
@@ -51,7 +51,7 @@
 		<title>Solve Wordle Using Information Theory</title>
 		<published>2022-02-06T17:05:33.089+00:00</published>
 		<updated>2022-02-06T17:05:33.089+00:00</updated>
-		<link href="https://thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/" type="text/html"/>
+		<link rel="alternate" href="https://thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/</id>
 		<content type="html">&lt;p&gt;This is a note about how to use information theory to create an optimal strategy for solving “Wordle”.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;initial-ideas&quot;&gt;Initial ideas&lt;&#x2F;h2&gt;

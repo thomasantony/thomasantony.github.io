@@ -11,7 +11,7 @@
 		<title>Transparent Rust bindings for C++ structs</title>
 		<published>2022-01-11T03:28:20.283+00:00</published>
 		<updated>2022-01-11T03:28:20.283+00:00</updated>
-		<link href="https://thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/" type="text/html"/>
+		<link rel="alternate" href="https://thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/</id>
 		<content type="html">&lt;p&gt;This is a short note about the things I discovered about creating transparent bindings for C++ structs into Rust using &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;cxx.rs&quot;&gt;cxx&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
 &lt;h2 id=&quot;c-types&quot;&gt;C types&lt;&#x2F;h2&gt;

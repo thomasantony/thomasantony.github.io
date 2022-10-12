@@ -11,7 +11,7 @@
 		<title>Solve Wordle Using Information Theory</title>
 		<published>2022-02-06T17:05:33.089+00:00</published>
 		<updated>2022-02-06T17:05:33.089+00:00</updated>
-		<link href="https://thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/" type="text/html"/>
+		<link rel="alternate" href="https://thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/</id>
 		<content type="html">&lt;p&gt;This is a note about how to use information theory to create an optimal strategy for solving “Wordle”.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;initial-ideas&quot;&gt;Initial ideas&lt;&#x2F;h2&gt;

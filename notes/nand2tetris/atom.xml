@@ -11,7 +11,7 @@
 		<title>NAND2Tetris Note 05 - Hack Assembly Language</title>
 		<published>2022-09-05T04:09:53.894+00:00</published>
 		<updated>2022-09-05T04:09:53.894+00:00</updated>
-		<link href="https://thomasantony.com/notes/202208042109-nand2tetris-note-05-hack-assembly-language/" type="text/html"/>
+		<link rel="alternate" href="https://thomasantony.com/notes/202208042109-nand2tetris-note-05-hack-assembly-language/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202208042109-nand2tetris-note-05-hack-assembly-language/</id>
 		<content type="html">&lt;p&gt;The “Hack” computer built during this course has its own instruction set consisting of two instructions: the A-command and the C-command.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;registers&quot;&gt;Registers&lt;&#x2F;h2&gt;
@@ -51,7 +51,7 @@ col % 16 -&amp;gt; bit index within word&lt;&#x2F;p&gt;
 		<title>NAND2Tetris Note 04 - Sequential Logic and Memory</title>
 		<published>2022-09-04T19:36:00.037+00:00</published>
 		<updated>2022-09-04T19:36:00.037+00:00</updated>
-		<link href="https://thomasantony.com/notes/202208041236-nand2tetris-note-04-sequential-logic-and-memory/" type="text/html"/>
+		<link rel="alternate" href="https://thomasantony.com/notes/202208041236-nand2tetris-note-04-sequential-logic-and-memory/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202208041236-nand2tetris-note-04-sequential-logic-and-memory/</id>
 		<content type="html">&lt;p&gt;All of the chips described in the previous course notes used what is called “combinational logic”, where the output is available instantenously and there is no time-component to their operation. Combinational chips compute functions that depend solely on combinations of their input values.&lt;&#x2F;p&gt;
 &lt;p&gt;Sequential logic incorporates the concept of time, or more specifically, discretized time in the form of a clock signal into determining their output. This is the core concept behind digital circuits with memory. Just like how NAND formed the basic building blocks of combinational logic, the “D-Flip-Flip” is the fundamental building block used to build sequential logic. A D-Flip-Flop can be built out of nand-gates using a loop-based design but that is beyond the scope of the course.&lt;&#x2F;p&gt;
@@ -76,7 +76,7 @@ col % 16 -&amp;gt; bit index within word&lt;&#x2F;p&gt;
 		<title>NAND2Tetris Note 03 - The Hack ALU</title>
 		<published>2022-09-04T19:35:45.742+00:00</published>
 		<updated>2022-09-04T19:35:45.742+00:00</updated>
-		<link href="https://thomasantony.com/notes/202208041235-nand2tetris-note-03-the-hack-alu/" type="text/html"/>
+		<link rel="alternate" href="https://thomasantony.com/notes/202208041235-nand2tetris-note-03-the-hack-alu/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202208041235-nand2tetris-note-03-the-hack-alu/</id>
 		<content type="html">&lt;p&gt;The Airthmetic and Logic Unit is a core part of a computer based on the Von Neumann architecture. It consists of digital circuitry that can perform a variety of arthmetic or logic operations as the name suggests. The Nand2Tetris has a relative simple design for an ALU that can perform a few different functions defined below:&lt;&#x2F;p&gt;
 &lt;ul&gt;
@@ -99,7 +99,7 @@ col % 16 -&amp;gt; bit index within word&lt;&#x2F;p&gt;
 		<title>Two&#x27;s Complement Notation for Binary Addition</title>
 		<published>2022-09-04T03:41:18.681+00:00</published>
 		<updated>2022-09-04T03:41:18.681+00:00</updated>
-		<link href="https://thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/" type="text/html"/>
+		<link rel="alternate" href="https://thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/</id>
 		<content type="html">&lt;p&gt;Two’s complement is a format for representing negative numbers in binary. A number &lt;code&gt;-X&lt;&#x2F;code&gt; is represented as an &lt;code&gt;N&lt;&#x2F;code&gt; bit value using the binary value of &lt;code&gt;2^N-X&lt;&#x2F;code&gt;. E.g. -5 in 4-bit integers would be &lt;code&gt;2^4 - 5&lt;&#x2F;code&gt; = &lt;code&gt;11&lt;&#x2F;code&gt; (or &lt;code&gt;0b1010&lt;&#x2F;code&gt;). The advantage of using this representation is that it makes addition of negative numbers possible with existing binary adder circuits (or logic gate implementation). The reason this works is that the output we get from an adder circuit is actually the “modulo 2^n” representation. &lt;&#x2F;p&gt;
 &lt;p&gt;Example: -2 + -3 using 4-bit integers&lt;&#x2F;p&gt;
@@ -127,7 +127,7 @@ col % 16 -&amp;gt; bit index within word&lt;&#x2F;p&gt;
 		<title>NAND2Tetris Note 02 - Elementary Logic Gates</title>
 		<published>2022-09-01T04:35:04.243+00:00</published>
 		<updated>2022-09-01T04:35:04.243+00:00</updated>
-		<link href="https://thomasantony.com/notes/202207312135-nand2tetris-note-02-elementary-logic-gates/" type="text/html"/>
+		<link rel="alternate" href="https://thomasantony.com/notes/202207312135-nand2tetris-note-02-elementary-logic-gates/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202207312135-nand2tetris-note-02-elementary-logic-gates/</id>
 		<content type="html">&lt;h2 id=&quot;elementary-logic-gates&quot;&gt;Elementary Logic Gates&lt;&#x2F;h2&gt;
 &lt;p&gt;NOT
@@ -153,7 +153,7 @@ DMux8Way : Single 1-bit input, 3-bit selector, Eight 1-bit outputs&lt;&#x2F;p&gt
 		<title>NAND2Tetris Note 01</title>
 		<published>2022-09-01T01:49:00.451+00:00</published>
 		<updated>2022-09-01T01:49:00.451+00:00</updated>
-		<link href="https://thomasantony.com/notes/202207311849-nand2tetris-note-01/" type="text/html"/>
+		<link rel="alternate" href="https://thomasantony.com/notes/202207311849-nand2tetris-note-01/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202207311849-nand2tetris-note-01/</id>
 		<content type="html">&lt;p&gt;Nand2tetris is a course where we build a full general purpose computer up from basic logic gates - in fact, just NAND gates. This is because a NAND gate can be used to form all the other basic logic gates - AND, OR and NOT. The “hardware” will be built in a simplified Hardware Description Language (or HDL). This HDL is similar to the “actual” HDLs like Verilog and VHDL. The course also introduces a “testing” language which provides a way to define a bunch of test cases with inputs and outputs for a given “chip” spec. The supplied “Hardware Simulation” program is able to load HDL files as well as testing scripts and verify designs.&lt;&#x2F;p&gt;
 &lt;p&gt;The goal is to build up the next building blocks - CPU, RAM and “chipset” from the basic logic gates, and tehn build it into a computer platform with its own assembly language. Later the second part of the course involves building a language called “Hack” which can presumably be used to build Tetris.&lt;&#x2F;p&gt;

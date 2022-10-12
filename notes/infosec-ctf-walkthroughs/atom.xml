@@ -11,7 +11,7 @@
 		<title>Solving VulnHub CTF - Mercury</title>
 		<published>2022-03-20T05:08:47.753+00:00</published>
 		<updated>2022-03-20T05:08:47.753+00:00</updated>
-		<link href="https://thomasantony.com/notes/202202192208-solving-vulnhub-ctf-mercury/" type="text/html"/>
+		<link rel="alternate" href="https://thomasantony.com/notes/202202192208-solving-vulnhub-ctf-mercury/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202202192208-solving-vulnhub-ctf-mercury/</id>
 		<content type="html">&lt;p&gt;Used a walkthrough for tips here. Here are the rough steps:&lt;&#x2F;p&gt;
 &lt;ol&gt;

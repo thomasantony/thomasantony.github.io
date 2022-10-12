@@ -38,12 +38,13 @@
   <small>
     <em>Posted on <time datetime="2021-08-19T15:05:51-05:00">19 August, 2021</time></em>
   </small>
-  <article><div class="video-wrapper" data-streaming="youtube" data-videoid=3hf2--gw4Xk" style="display: flex; justify-content: center;">
+  <article><p><div class="video-wrapper" data-streaming="youtube" data-videoid=3hf2--gw4Xk" style="display: flex; justify-content: center;">
 	<a href="https://youtu.be/3hf2--gw4Xk">
 		<img alt="YouTube Thumbnail" src="https://img.youtube.com/vi/3hf2--gw4Xk/0.jpg" />
 	</a>
 </div>
-<p>This post is a companion to the <a rel="noopener" target="_blank" href="https://youtu.be/3hf2--gw4Xk">video</a> linked above and includes a full derivation of the Apollo entry guidance longitudinal control algorithm. Please watch the video for more context. Full source code of Jupyter notebooks implementing the algorithm can be found at <a rel="noopener" target="_blank" href="https://github.com/thomasantony/msl-apollo-entry-guidance"><strong>thomasantony/msl-apollo-entry-guidance</strong></a>.</p>
+
+This post is a companion to the <a rel="noopener" target="_blank" href="https://youtu.be/3hf2--gw4Xk">video</a> linked above and includes a full derivation of the Apollo entry guidance longitudinal control algorithm. Please watch the video for more context. Full source code of Jupyter notebooks implementing the algorithm can be found at <a rel="noopener" target="_blank" href="https://github.com/thomasantony/msl-apollo-entry-guidance"><strong>thomasantony/msl-apollo-entry-guidance</strong></a>.</p>
 <p>NASA’s <a rel="noopener" target="_blank" href="https://mars.nasa.gov/mars-exploration/missions/mars-science-laboratory/">Mars Science Laboratory</a> mission showcased an advancement in entry technology that allowed it to land much closer to its designated landing site than previous missions. It used with great success, the same guidance algorithm originally used by the Apollo Command Module when returning from the moon. By modulating its lift vector, MSL was able to counteract errors in its trajectory during hypersonic flight and combined with the famous <a rel="noopener" target="_blank" href="https://www.nasa.gov/mission_pages/msl/multimedia/gallery/pia14839.html">“sky-crane” maneuver</a>, deliver the Curiosity rover to within 2.5 km of its targeted landing site next to Gale Crater. Last year’s <a rel="noopener" target="_blank" href="https://mars.nasa.gov/mars-exploration/missions/mars2020/">Mars 2020</a> mission used the same guidance system to successfully land the Perseverance rover within Jezero crater.</p>
 <h2 id="apollo-guidance-algorithm-overview">Apollo Guidance Algorithm Overview</h2>
 <p>The goal of the Apollo guidance algorithm is to minimize the error in “range” along the ground when compared to that of a pre-computed reference trajectory. It does not try to exactly match the reference trajectory, but instead computes a constant bank angle that is supposed to minimize the downrange distance error at the point where the vehicle reaches terminal altitude. This computation is repeated several times a second in the same manner as a closed-loop control system to correct for deviations in the trajectory due to external or internal factors.</p>
@@ -103,7 +104,7 @@ $$
 $$
 </div>
 <p>Substituting $\eqref{eqn:h_f_expr}$ in $\eqref{eqn:J_1}$,</p>
-<div>
+<p><div>
     $$
 \begin{align}
 J &amp;= s_f + \frac{v_f \cos(\gamma_f) }{\dot{h_f}} dh_f \\ 
@@ -111,7 +112,8 @@ J &amp;= s_f + \frac{v_f \cos(\gamma_f) }{\dot{h_f}} dh_f \\
 \end{align}
 $$
 </div>
-<p>Assuming that the reference trajectory terminates at the ground, we get $dh_f = 0 - h_f = -h_f$</p>
+
+Assuming that the reference trajectory terminates at the ground, we get $dh_f = 0 - h_f = -h_f$</p>
 <div>
     $$
 \implies J = s_f - cot(\gamma_f) h_f = \Phi(\mathbf{x}_f)
@@ -238,7 +240,7 @@ $$
 \end{align}
 $$
 </div>
-<p>Assuming exponential atmospheric model with scale height $H$,</p>
+<p>Assuming exponential atmospheric model with scale height $H$,
 <div>
     $$
 \begin{align}
@@ -248,6 +250,7 @@ $$
 \end{align}
 $$
 </div>
+</p>
 <p>Substituting $\eqref{eqn:delgam_to_delhdot}$ and $\eqref{eqn:delh_to_deldm}$ into $\eqref{eqn:delu_numerator}$</p>
 <div>
     $$
