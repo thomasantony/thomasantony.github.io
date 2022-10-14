@@ -49,14 +49,17 @@ $$
 <p>where $u_1$, $u_2$ and $u_3$ are the components of $\mathbf{u}$. Since $\mathbf{u}$ is a non-null unit vector, either the first or the second column of $U_\times$ will be a non-null vector. This vector will also be perpendicular to $\mathbf{u}$. This can be verified by the dot product: </p>
 <div>
     $$
-(\text{Column 1}) \cdot \mathbf{u} = u_3 u_2 - u_2 * u_3 = 0 \\
-(\text{Column 2}) \cdot \mathbf{u} = -u_3 u_1 + u_1 * u_3 = 0 \\
+\begin{align*}
+(\text{Column 1}) \cdot \mathbf{u} &amp;= u_3 u_2 - u_2 u_3 = 0 \\
+(\text{Column 2}) \cdot \mathbf{u} &amp;= -u_3 u_1 + u_1 u_3 = 0 \\
+\end{align*}
 $$
 </div>
-<p>We pick the first of the orthogonal vectors, $\mathbf{v}$ as either the first or second column of $U_\times$, depending on whichever one is non-null. The second orthogonal vector is computed as:</p>
+<p>We pick the first of the orthogonal unit vectors, $\mathbf{v}$ as either the first or second column of $U_\times$ converted to a unit vector, depending on whichever one is non-null.</p>
+<p>The second orthogonal unit vector is computed as:</p>
 <div>
     $$
-\mathbf{w} = \mathbf{u} \times \mathbf{v}
+\mathbf{w} = \frac{\mathbf{u} \times \mathbf{v}}{|\mathbf{u} \times \mathbf{v}|}
 $$
 </div>
 <p>Linear combinations of $\mathbf{v}$ and $\mathbf{w}$ can be used to generate vectors in the plane normal to $\mathbf{u}$.</p>
