@@ -14,23 +14,29 @@
 		<link rel="alternate" href="https://thomasantony.com/notes/202209132014-generating-perpendicular-basis-vectors-in-a-plane/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202209132014-generating-perpendicular-basis-vectors-in-a-plane/</id>
 		<content type="html">&lt;p&gt;This is an easier&#x2F;less computationally expensive method compared &lt;a href=&quot;@notes&#x2F;202207231849_points-in-a-plane-using-null-space.md&quot;&gt;Points in a plane using null space&lt;&#x2F;a&gt; to generate a pair of orthogonal vector for a given unit vector. This is based on the the &lt;a href=&quot;@notes&#x2F;202209132012_cross-product-by-matrix-multiplication.md&quot;&gt;Cross Product By Matrix Multiplication&lt;&#x2F;a&gt; method.&lt;&#x2F;p&gt;
-&lt;p&gt;We start with the unit vector $\mathbf{u}$, normal to the plane of interest. We compute the cross product matrix $U_\times$ a:&lt;&#x2F;p&gt;
-&lt;p&gt;$$
+&lt;p&gt;We start with the unit vector $\mathbf{u}$, normal to the plane of interest. We compute the cross product matrix $U_\times$ as:&lt;&#x2F;p&gt;
+&lt;p&gt;{% mathjax() -%}
+$$
 U_\times = \begin{bmatrix}
 0    &amp;amp; -u_3 &amp;amp; u_2\
 u_3  &amp;amp; 0  &amp;amp; -u_1\
 -u_2 &amp;amp; u_1 &amp;amp; 0
 \end{bmatrix}
-$$&lt;&#x2F;p&gt;
+$$
+{% end %}&lt;&#x2F;p&gt;
 &lt;p&gt;where $u_1$, $u_2$ and $u_3$ are the components of $\mathbf{u}$. Since $\mathbf{u}$ is a non-null unit vector, either the first or the second column of $U_\times$ will be a non-null vector. This vector will also be perpendicular to $\mathbf{u}$. This can be verified by the dot product: &lt;&#x2F;p&gt;
-&lt;p&gt;$$
+&lt;p&gt;{% mathjax() -%}
+$$
 (\text{Column 1}) \cdot \mathbf{u} = u_3 u_2 - u_2 * u_3 = 0 \
 (\text{Column 2}) \cdot \mathbf{u} = -u_3 u_1 + u_1 * u_3 = 0 \
-$$&lt;&#x2F;p&gt;
+$$
+{% end %}&lt;&#x2F;p&gt;
 &lt;p&gt;We pick the first of the orthogonal vectors, $\mathbf{v}$ as either the first or second column of $U_\times$, depending on whichever one is non-null. The second orthogonal vector is computed as:&lt;&#x2F;p&gt;
-&lt;p&gt;$$
+&lt;p&gt;{% mathjax() -%}
+$$
 \mathbf{w} = \mathbf{u} \times \mathbf{v}
-$$&lt;&#x2F;p&gt;
+$$
+{% end %}&lt;&#x2F;p&gt;
 &lt;p&gt;Linear combinations of $\mathbf{v}$ and $\mathbf{w}$ can be used to generate vectors in the plane normal to $\mathbf{u}$.&lt;&#x2F;p&gt;
 </content>
 	</entry>
