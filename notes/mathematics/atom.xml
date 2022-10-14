@@ -5,8 +5,57 @@
 	<link href="https://thomasantony.com/notes/mathematics/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://thomasantony.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2022-09-04T03:41:18.681+00:00</updated>
+	<updated>2022-10-14T03:14:56.441+00:00</updated>
 	<id>https://thomasantony.com/notes/mathematics/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Generating Perpendicular Basis Vectors in a Plane</title>
+		<published>2022-10-14T03:14:56.441+00:00</published>
+		<updated>2022-10-14T03:14:56.441+00:00</updated>
+		<link rel="alternate" href="https://thomasantony.com/notes/202209132014-generating-perpendicular-basis-vectors-in-a-plane/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202209132014-generating-perpendicular-basis-vectors-in-a-plane/</id>
+		<content type="html">&lt;p&gt;This is an easier&#x2F;less computationally expensive method compared &lt;a href=&quot;@notes&#x2F;202207231849_points-in-a-plane-using-null-space.md&quot;&gt;Points in a plane using null space&lt;&#x2F;a&gt; to generate a pair of orthogonal vector for a given unit vector. This is based on the the &lt;a href=&quot;@notes&#x2F;202209132012_cross-product-by-matrix-multiplication.md&quot;&gt;Cross Product By Matrix Multiplication&lt;&#x2F;a&gt; method.&lt;&#x2F;p&gt;
+&lt;p&gt;We start with the unit vector $\mathbf{u}$, normal to the plane of interest. We compute the cross product matrix $U_\times$ a:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+U_\times = \begin{bmatrix}
+0    &amp;amp; -u_3 &amp;amp; u_2\
+u_3  &amp;amp; 0  &amp;amp; -u_1\
+-u_2 &amp;amp; u_1 &amp;amp; 0
+\end{bmatrix}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;where $u_1$, $u_2$ and $u_3$ are the components of $\mathbf{u}$. Since $\mathbf{u}$ is a non-null unit vector, either the first or the second column of $U_\times$ will be a non-null vector. This vector will also be perpendicular to $\mathbf{u}$. This can be verified by the dot product: &lt;&#x2F;p&gt;
+&lt;p&gt;$$
+(\text{Column 1}) \cdot \mathbf{u} = u_3 u_2 - u_2 * u_3 = 0 \
+(\text{Column 2}) \cdot \mathbf{u} = -u_3 u_1 + u_1 * u_3 = 0 \
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;We pick the first of the orthogonal vectors, $\mathbf{v}$ as either the first or second column of $U_\times$, depending on whichever one is non-null. The second orthogonal vector is computed as:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\mathbf{w} = \mathbf{u} \times \mathbf{v}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Linear combinations of $\mathbf{v}$ and $\mathbf{w}$ can be used to generate vectors in the plane normal to $\mathbf{u}$.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Cross Product by Matrix Multiplication</title>
+		<published>2022-10-14T03:12:52.909+00:00</published>
+		<updated>2022-10-14T03:12:52.909+00:00</updated>
+		<link rel="alternate" href="https://thomasantony.com/notes/202209132012-cross-product-by-matrix-multiplication/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202209132012-cross-product-by-matrix-multiplication/</id>
+		<content type="html">&lt;p&gt;For two vectors $\vec{a}$ and $\vec{b}$, the cross product $\vec{a} \times \vec{b}$ can be computed using matrix multiplcation[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Cross Product: Conversion to Matrix Multiplication&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cross_product#Conversion_to_matrix_multiplication&quot;&gt;1&lt;&#x2F;a&gt;] as:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\vec{a} \times \vec{b} = A_\times \vec{b}
+$$
+where $A_\times$ is defined as:&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+A_\times = \begin{bmatrix}
+0    &amp;amp; -a_3 &amp;amp; a_2\
+a_3  &amp;amp; 0  &amp;amp; -a_1\
+-a_2 &amp;amp; a_1 &amp;amp; 0
+\end{bmatrix}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;where $a_1$, $a_2$ and $a_3$ are the components of $\vec{a}$.&lt;&#x2F;p&gt;
+&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Cross Product: Conversion to Matrix Multiplication&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cross_product#Conversion_to_matrix_multiplication&quot;&gt;1&lt;&#x2F;a&gt;] https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cross_product#Conversion_to_matrix_multiplication “Cross Product: Conversion to Matrix Multiplication”&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Two&#x27;s Complement Notation for Binary Addition</title>
 		<published>2022-09-04T03:41:18.681+00:00</published>
@@ -57,6 +106,7 @@
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# points is a 3xnumPoints matrix where each column is a point
 &lt;&#x2F;span&gt;&lt;span&gt;points = plane_basis @ np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;array&lt;&#x2F;span&gt;&lt;span&gt;([x, y])
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;An easier&#x2F;less expensive method can be found at [[202209132014_generating-perpendicular-basis-vectors-in-a-plane]]&lt;&#x2F;p&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
