@@ -14,21 +14,21 @@
 		<link rel="alternate" href="https://thomasantony.com/notes/202209132012-cross-product-by-matrix-multiplication/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202209132012-cross-product-by-matrix-multiplication/</id>
 		<content type="html">&lt;p&gt;For two vectors $\vec{a}$ and $\vec{b}$, the cross product $\vec{a} \times \vec{b}$ can be computed using matrix multiplcation[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Cross Product: Conversion to Matrix Multiplication&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cross_product#Conversion_to_matrix_multiplication&quot;&gt;1&lt;&#x2F;a&gt;] as:&lt;&#x2F;p&gt;
-&lt;p&gt;{% mathjax() -%}
-$$
+&lt;div&gt;
+    $$
 \vec{a} \times \vec{b} = A_\times \vec{b}
 $$
-{% end %}&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
 &lt;p&gt;where $A_\times$ is defined as:&lt;&#x2F;p&gt;
-&lt;p&gt;{% mathjax() -%}
-$$
+&lt;div&gt;
+    $$
 A_\times = \begin{bmatrix}
-0    &amp;amp; -a_3 &amp;amp; a_2\
-a_3  &amp;amp; 0  &amp;amp; -a_1\
+0    &amp;amp; -a_3 &amp;amp; a_2\\
+a_3  &amp;amp; 0  &amp;amp; -a_1\\
 -a_2 &amp;amp; a_1 &amp;amp; 0
 \end{bmatrix}
 $$
-{% end %}&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
 &lt;p&gt;where $a_1$, $a_2$ and $a_3$ are the components of $\vec{a}$.&lt;&#x2F;p&gt;
 &lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Cross Product: Conversion to Matrix Multiplication&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cross_product#Conversion_to_matrix_multiplication&quot;&gt;1&lt;&#x2F;a&gt;] https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cross_product#Conversion_to_matrix_multiplication “Cross Product: Conversion to Matrix Multiplication”&lt;&#x2F;p&gt;
 </content>

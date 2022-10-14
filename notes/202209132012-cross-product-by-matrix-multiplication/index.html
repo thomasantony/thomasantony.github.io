@@ -36,21 +36,21 @@
 <p id="post">
   <h1>Cross Product by Matrix Multiplication</h1>
   <article><p>For two vectors $\vec{a}$ and $\vec{b}$, the cross product $\vec{a} \times \vec{b}$ can be computed using matrix multiplcation[<a rel="noopener" target="_blank" title="Cross Product: Conversion to Matrix Multiplication" href="https://en.wikipedia.org/wiki/Cross_product#Conversion_to_matrix_multiplication">1</a>] as:</p>
-<p>{% mathjax() -%}
-$$
+<div>
+    $$
 \vec{a} \times \vec{b} = A_\times \vec{b}
 $$
-{% end %}</p>
+</div>
 <p>where $A_\times$ is defined as:</p>
-<p>{% mathjax() -%}
-$$
+<div>
+    $$
 A_\times = \begin{bmatrix}
-0    &amp; -a_3 &amp; a_2\
-a_3  &amp; 0  &amp; -a_1\
+0    &amp; -a_3 &amp; a_2\\
+a_3  &amp; 0  &amp; -a_1\\
 -a_2 &amp; a_1 &amp; 0
 \end{bmatrix}
 $$
-{% end %}</p>
+</div>
 <p>where $a_1$, $a_2$ and $a_3$ are the components of $\vec{a}$.</p>
 <p>[<a rel="noopener" target="_blank" title="Cross Product: Conversion to Matrix Multiplication" href="https://en.wikipedia.org/wiki/Cross_product#Conversion_to_matrix_multiplication">1</a>] https://en.wikipedia.org/wiki/Cross_product#Conversion_to_matrix_multiplication “Cross Product: Conversion to Matrix Multiplication”</p>
 </article>

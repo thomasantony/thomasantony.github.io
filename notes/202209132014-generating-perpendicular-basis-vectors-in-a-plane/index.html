@@ -37,28 +37,28 @@
   <h1>Generating Perpendicular Basis Vectors in a Plane</h1>
   <article><p>This is an easier/less computationally expensive method compared <a href="@notes/202207231849_points-in-a-plane-using-null-space.md">Points in a plane using null space</a> to generate a pair of orthogonal vector for a given unit vector. This is based on the the <a href="@notes/202209132012_cross-product-by-matrix-multiplication.md">Cross Product By Matrix Multiplication</a> method.</p>
 <p>We start with the unit vector $\mathbf{u}$, normal to the plane of interest. We compute the cross product matrix $U_\times$ as:</p>
-<p>{% mathjax() -%}
-$$
+<div>
+    $$
 U_\times = \begin{bmatrix}
-0    &amp; -u_3 &amp; u_2\
-u_3  &amp; 0  &amp; -u_1\
+0    &amp; -u_3 &amp; u_2\\
+u_3  &amp; 0  &amp; -u_1\\
 -u_2 &amp; u_1 &amp; 0
 \end{bmatrix}
 $$
-{% end %}</p>
+</div>
 <p>where $u_1$, $u_2$ and $u_3$ are the components of $\mathbf{u}$. Since $\mathbf{u}$ is a non-null unit vector, either the first or the second column of $U_\times$ will be a non-null vector. This vector will also be perpendicular to $\mathbf{u}$. This can be verified by the dot product: </p>
-<p>{% mathjax() -%}
+<div>
+    $$
+(\text{Column 1}) \cdot \mathbf{u} = u_3 u_2 - u_2 * u_3 = 0 \\
+(\text{Column 2}) \cdot \mathbf{u} = -u_3 u_1 + u_1 * u_3 = 0 \\
 $$
-(\text{Column 1}) \cdot \mathbf{u} = u_3 u_2 - u_2 * u_3 = 0 \
-(\text{Column 2}) \cdot \mathbf{u} = -u_3 u_1 + u_1 * u_3 = 0 \
-$$
-{% end %}</p>
+</div>
 <p>We pick the first of the orthogonal vectors, $\mathbf{v}$ as either the first or second column of $U_\times$, depending on whichever one is non-null. The second orthogonal vector is computed as:</p>
-<p>{% mathjax() -%}
-$$
+<div>
+    $$
 \mathbf{w} = \mathbf{u} \times \mathbf{v}
 $$
-{% end %}</p>
+</div>
 <p>Linear combinations of $\mathbf{v}$ and $\mathbf{w}$ can be used to generate vectors in the plane normal to $\mathbf{u}$.</p>
 </article>
 </p>
