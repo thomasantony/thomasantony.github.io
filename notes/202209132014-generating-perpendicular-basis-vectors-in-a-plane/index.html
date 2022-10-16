@@ -35,7 +35,7 @@
 <section>
 <p id="post">
   <h1>Generating Perpendicular Basis Vectors in a Plane</h1>
-  <article><p>This is an easier/less computationally expensive method compared <a href="@notes/202207231849_points-in-a-plane-using-null-space.md">Points in a plane using null space</a> to generate a pair of orthogonal vector for a given unit vector. This is based on the the <a href="@notes/202209132012_cross-product-by-matrix-multiplication.md">Cross Product By Matrix Multiplication</a> method.</p>
+  <article><p>This is an easier/less computationally expensive method compared to the one described in <a href="https://thomasantony.com/notes/202207231849-points-in-a-plane-using-null-space/">Points in a plane using null space</a>. This is based on <a href="https://thomasantony.com/notes/202209132012-cross-product-by-matrix-multiplication/">Cross Product By Matrix Multiplication</a>.</p>
 <p>We start with the unit vector $\mathbf{u}$, normal to the plane of interest. We compute the cross product matrix $U_\times$ as:</p>
 <div>
     $$
@@ -55,8 +55,7 @@ $$
 \end{align*}
 $$
 </div>
-<p>We pick the first of the orthogonal unit vectors, $\mathbf{v}$ as either the first or second column of $U_\times$ converted to a unit vector, depending on whichever one is non-null.</p>
-<p>The second orthogonal unit vector is computed as:</p>
+<p>We pick either the first or second column of $U_\times$ and convert it into a unit vector, depending on whichever one is non-null. This will be the first of the orthogonal unit vectors, $\mathbf{v}$. The second orthogonal unit vector is computed as:</p>
 <div>
     $$
 \mathbf{w} = \frac{\mathbf{u} \times \mathbf{v}}{|\mathbf{u} \times \mathbf{v}|}

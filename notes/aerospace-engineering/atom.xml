@@ -13,7 +13,7 @@
 		<updated>2022-10-14T03:14:56.441+00:00</updated>
 		<link rel="alternate" href="https://thomasantony.com/notes/202209132014-generating-perpendicular-basis-vectors-in-a-plane/" type="text/html"/>
 		<id>https://thomasantony.com/notes/202209132014-generating-perpendicular-basis-vectors-in-a-plane/</id>
-		<content type="html">&lt;p&gt;This is an easier&#x2F;less computationally expensive method compared &lt;a href=&quot;@notes&#x2F;202207231849_points-in-a-plane-using-null-space.md&quot;&gt;Points in a plane using null space&lt;&#x2F;a&gt; to generate a pair of orthogonal vector for a given unit vector. This is based on the the &lt;a href=&quot;@notes&#x2F;202209132012_cross-product-by-matrix-multiplication.md&quot;&gt;Cross Product By Matrix Multiplication&lt;&#x2F;a&gt; method.&lt;&#x2F;p&gt;
+		<content type="html">&lt;p&gt;This is an easier&#x2F;less computationally expensive method compared to the one described in &lt;a href=&quot;https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;202207231849-points-in-a-plane-using-null-space&#x2F;&quot;&gt;Points in a plane using null space&lt;&#x2F;a&gt;. This is based on &lt;a href=&quot;https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;202209132012-cross-product-by-matrix-multiplication&#x2F;&quot;&gt;Cross Product By Matrix Multiplication&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;We start with the unit vector $\mathbf{u}$, normal to the plane of interest. We compute the cross product matrix $U_\times$ as:&lt;&#x2F;p&gt;
 &lt;div&gt;
     $$
@@ -33,8 +33,7 @@ $$
 \end{align*}
 $$
 &lt;&#x2F;div&gt;
-&lt;p&gt;We pick the first of the orthogonal unit vectors, $\mathbf{v}$ as either the first or second column of $U_\times$ converted to a unit vector, depending on whichever one is non-null.&lt;&#x2F;p&gt;
-&lt;p&gt;The second orthogonal unit vector is computed as:&lt;&#x2F;p&gt;
+&lt;p&gt;We pick either the first or second column of $U_\times$ and convert it into a unit vector, depending on whichever one is non-null. This will be the first of the orthogonal unit vectors, $\mathbf{v}$. The second orthogonal unit vector is computed as:&lt;&#x2F;p&gt;
 &lt;div&gt;
     $$
 \mathbf{w} = \frac{\mathbf{u} \times \mathbf{v}}{|\mathbf{u} \times \mathbf{v}|}

@@ -8,7 +8,7 @@ for filename in glob.glob('./**/*.md', recursive=True):
     with open(filename, 'r+') as fp:
         mdFile = fp.read()
         
-        output = wikilink_regex.sub(r'[\2](@notes/\1.md)', mdFile)
+        output = wikilink_regex.sub(r'[\2](@/notes/\1.md)', mdFile)
         if output == mdFile:
             continue
         with open(filename+'.bak', 'w') as fpbak:
