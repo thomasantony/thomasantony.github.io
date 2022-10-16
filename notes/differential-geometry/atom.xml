@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Thomas Antony - Differential Geometry</title>
+	<subtitle>My personal website and notes</subtitle>
+	<link href="https://thomasantony.com/notes/differential-geometry/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://thomasantony.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2022-10-16T06:26:58.868+00:00</updated>
+	<id>https://thomasantony.com/notes/differential-geometry/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Differential Geometry: Coordinate Functions or Charts</title>
+		<published>2022-10-16T06:26:58.868+00:00</published>
+		<updated>2022-10-16T06:26:58.868+00:00</updated>
+		<link rel="alternate" href="https://thomasantony.com/notes/202209152326-differential-geometry-coordinate-functions-or-charts/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202209152326-differential-geometry-coordinate-functions-or-charts/</id>
+		<content type="html">&lt;p&gt;A coordinate function $\chi$ maps a point in a coordinate patch of a &lt;a href=&quot;https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;202209152300-differential-geometry-manifolds&#x2F;&quot;&gt;manifold&lt;&#x2F;a&gt; to a coordinate tuple of real numbers:&lt;&#x2F;p&gt;
+&lt;div&gt;
+    $$
+x = \chi(m)
+$$
+&lt;&#x2F;div&gt;
+&lt;p&gt;where $x$ represents a convenient tuple structure. $x$ is usually represented as an “up vector” indexed by superscripts. The number of components of $x$ is equal to the number of dimensions of the manifold.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;coordinate-transformations&quot;&gt;Coordinate transformations&lt;&#x2F;h2&gt;
+&lt;p&gt;Assume we have two coordinate functions $\chi$ and $\chi’$. The coordinate transformation from $\chi’$ coordinates to $\chi’$ coordinates is just the composition $\chi \circ \chi’^{-1}$, where $\chi’^{-1}
+$ is the functional inverse of $\chi’$&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Differential Geometry - Point On A Manifold</title>
+		<published>2022-10-16T06:20:21.404+00:00</published>
+		<updated>2022-10-16T06:20:21.404+00:00</updated>
+		<link rel="alternate" href="https://thomasantony.com/notes/202209152320-differential-geometry-point/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202209152320-differential-geometry-point/</id>
+		<content type="html">&lt;p&gt;&lt;strong&gt;Note:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;This is just my current understanding while studying *Functional Differential Geometry*. This may be completely wrong and may change in the future.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A point on a manifold is an abstract entity representing a location&#x2F;place on the manifold. When we actually do anything with a point, we use coordinates to represent it. Coordinate functions or &lt;em&gt;charts&lt;&#x2F;em&gt; are used to convert a point into a coordinate tuple. These charts may also have an “inverse”. However the inverse is always used along with another chart in order to get a different coordinate tuple. &lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Differential Geometry - Manifolds</title>
+		<published>2022-10-16T06:00:54.961+00:00</published>
+		<updated>2022-10-16T06:00:54.961+00:00</updated>
+		<link rel="alternate" href="https://thomasantony.com/notes/202209152300-differential-geometry-manifolds/" type="text/html"/>
+		<id>https://thomasantony.com/notes/202209152300-differential-geometry-manifolds/</id>
+		<content type="html">&lt;p&gt;A &lt;em&gt;manifold&lt;&#x2F;em&gt; is a generalization of the idea of a smooth surface embedded in Euclidean space. The critical feature of an n-dimensional manifold is that locally (near any point), it looks like n-dimensional Euclidean space.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;parts-of-a-manifold&quot;&gt;Parts of a Manifold&lt;&#x2F;h2&gt;
+&lt;p&gt;Around every &lt;a href=&quot;https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;202209152320-differential-geometry-point&#x2F;&quot;&gt;point&lt;&#x2F;a&gt; on the manifold, is a “simply-connected open set” (todo make note) called the &lt;em&gt;coordinate patch&lt;&#x2F;em&gt;, that maps every point to a tuple of n real numbers, and a one-to-one continuous function, the &lt;em&gt;&lt;a href=&quot;https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;202209152326-differential-geometry-coordinate-functions-or-charts&#x2F;&quot;&gt;coordinate function&lt;&#x2F;a&gt;&lt;&#x2F;em&gt; or &lt;em&gt;chart&lt;&#x2F;em&gt;, mapping every point in that open set to a tuple of n real numbers, the &lt;em&gt;coordinates&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;A consistent system of coordinate patches and coordinate functions that covers the entire manifold is called an &lt;em&gt;atlas&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;examples&quot;&gt;Examples&lt;&#x2F;h2&gt;
+&lt;p&gt;An example of a two-dimensional manifold is the surface of a sphere or of a coffee cup. The space of all configurations of a double pendulum is a more abstract example (and has the shape of a torus).&lt;&#x2F;p&gt;
+&lt;p&gt;An example of a coordinate function is mapping of points on a sphere to the tuple of latitude and longitude. It is to be noted that the “simply connected open set” or “patch” here does not include either poles (as longitude is undefined at the poles ) or the 180 deg meridian (due to discontinuity in longitude). These places will have to be covered by other coordinate systems.&lt;&#x2F;p&gt;
+&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Functional Differential Geometry&quot; href=&quot;http:&#x2F;&#x2F;xahlee.info&#x2F;math&#x2F;i&#x2F;functional_geometry_2013_sussman_14322.pdf&quot;&gt;1&lt;&#x2F;a&gt;]: &lt;em&gt;Functional Differential Geometry&lt;&#x2F;em&gt;, Sussman and Wisdom&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>
