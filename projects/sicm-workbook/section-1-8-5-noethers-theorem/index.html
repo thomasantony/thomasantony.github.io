@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 1.8.5: Noether&#x27;S Theorem - Thomas Antony</title>
+
+    <script src="https://thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script  async defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>Section 1.8.5: Noether&#x27;s Theorem</h1>
+  <article><p><strong>Note</strong>:
+<em><strong>I will be cleaning up this section further and adding an example (or two) later</strong></em></p>
+<p>If a dynamical system has a symmetry, a coordinate system can be chosen so that the Lagrangian does not depend on a coordinate associated with the symmetry. There is also a conserved quantity associated with the symmetry (<a rel="noopener" target="_blank" href="https://tgvaughan.github.io/sicm/chapter001.html#h1-6c">Section 1.8</a>). However, there are general symmetries that no coordinate systems can fully express. For examplem, motion around a central potential is spherically symmetric, i.e., the dynamical system is invariant under rotation about any axis. However, the Lagrangian for this system only demonstrates symmetry about a single axis. </p>
+<p>In general, <strong>a Lagrangian is said to have a symmetry if there exists a coordinate transformation that leaves the Lagrangian unchanged</strong>.
+In this section we consider the more general case of <strong>continous symmetries</strong>. A <strong>continuous symmetry</strong> is defined as a parametric family of symmetries. <strong>Emmy Noether proved that for any continuous symmetry, there is a conserved quantity</strong>.</p>
+<p>Consider a parametric coordinate transformation, $\widetilde{F}$ with parameter $s$. This means that $\widetilde{F}$ represents an infinite number of coordinate transformations, one for each value of $s$. </p>
+<p>An example would be a function that takes an angle, $s$, as the input and spits out a coordinate transformation that rotates the primed coordinate frame, $x’$ about some axis by that angle.</p>
+<div>
+    $$
+x = \widetilde{F}(s) (t, x&#x27;)
+$$
+</div>
+<p>There is a corresponding parametreic state transformation $\widetilde{C}$ associated with $\widetilde{F}$ that transforms the velocity $v’$ as well the time (i.e. the local tuple that forms the input to the Lagrangian).</p>
+<div>
+    $$
+\begin{align*}
+(t, x, v) &amp;= \widetilde{C}(s) (t, x&#x27;, v&#x27;) \\
+          &amp;= (t, \widetilde{F}(t,x&#x27;),  \partial_0 \widetilde{F} + \partial_1 \widetilde{F} v&#x27;, ...)
+\end{align*}
+$$
+</div>
+<p>We require that $\widetilde{F}(0)$ represent the identity transformation $x’ = \widetilde{F}(0)(t, x’)$, with $\widetilde{C}$ as the corresponding identity state transformation. If the Lagrangian $L$ has a continous symmetry corresponding to $\widetilde{F}$, then the Lagrangian should be unchanged when the coordinates are transformed using $\widetilde{F}$. Therefore:</p>
+<div>
+    $$
+\widetilde{L}(s) = L\cdot \widetilde{C}(s) = L\quad\text{for any }s
+$$
+</div>
+<p>Expanding $\widetilde{C}$ in the above expression, we get:</p>
+<div>
+    $$
+\widetilde{L}(s) = L\left(t,\quad\widetilde{F}(s)(t, x&#x27;),\quad\partial_1\widetilde{F}(s)(t, x&#x27;)v&#x27; \right)\\
+$$
+</div>
+<p>Undoing the “chainrule” in the second term and writing it in terms of the total time derivative,
+<div>
+    $$
+\widetilde{L}(s) = L\left(t,\quad\widetilde{F}(s)(t, x&#x27;),\quad D_t\widetilde{F}(s)(t, x&#x27;, v&#x27;) \right) 
+$$
+</div>
+</p>
+<p><strong>Note: One of the assumptions in the following derivation is that $\partial_0 L = \frac{\partial L}{\partial t} = 0$</strong></p>
+<p>That $\widetilde{L}(s) = L$ for any $s$ implies that $D\widetilde{L}(s) = 0$ (where the $D$ operator represents derivative w.r.t $s$). Therefore, applying the chain rule for each of the components of $\widetilde{L}$, the derivative of $\widetilde{L}$ w.r.t $s$ is:</p>
+<div>
+    $$
+\begin{align*}
+0 &amp;= D\widetilde({L}(s)(t, x&#x27;, v&#x27;))\\
+  &amp;= \underbrace{\partial_0 L}_{=\frac{\partial L}{\partial t} = 0} + \partial_1 L(t, x, v) (D\widetilde{F})(s)(t, x&#x27;) + \underbrace{\partial_2 L(t,x,v) D(D_t\widetilde{F}(s)(t, x&#x27;)}_{\text{can swap }D_t\text{ and }D\text{, as }D\text{ w.r.t }s\text{ is unstructured}} \\
+  &amp;= \partial_1 L(t, x, v) (D\widetilde{F})(s)(t, x&#x27;) + \partial_2 L(t,x,v) D_t(D\widetilde{F}(s))(t, x&#x27;) \\ 
+  &amp;= (\partial_1 L \circ \Gamma[q]) \left( (D\widetilde{F})(s) \circ \Gamma[q&#x27;]\right) + (\partial_2 L \circ \Gamma[q])\left( D_t(D\widetilde{F}(s)) \circ \Gamma[q&#x27;]\right) \tag{1.157}
+\end{align*}
+$$
+</div>
+<p>According to Lagrange equations, the first term of Eq. 1.157 is: $(\partial_1 L \circ \Gamma[q]) \left( (D\widetilde{F})(s) \circ \Gamma[q’]\right) = (D_t\partial_2 L \circ \Gamma[q]) \left(D\widetilde{F})(s) \circ \Gamma[q’]\right)$. Substituting this in Eq. 1.157,</p>
+<div>
+    $$
+0 = (D_t \partial_2 L \circ \Gamma[q])\left( (D\widetilde{F}(s)) \circ \Gamma[q&#x27;]\right) +  (\partial_2 L \circ \Gamma[q])\left( D_t(D\widetilde{F}(s)) \circ \Gamma[q&#x27;]\right) \tag{1.159}
+$$
+</div>
+<p>When $s = 0$, since $\widetilde{F}(0)$ is the identity transformation, the paths $q$ and $q’$ are the same. Therefore, $\Gamma[q] = \Gamma[q’]$ and Eq. 1.158 becomes</p>
+<div>
+    $$
+\begin{align}
+0 &amp;= \left ((D_t \partial_2 L)(D\widetilde{F}(0)) +  (\partial_2 L)(D_t(D\widetilde{F}(0)))\right) \circ \Gamma[q] \\
+  &amp;= D_t ((\partial_2 L) (D\widetilde{F}(0))) \circ \Gamma[q] \tag{1.160}
+\end{align}
+$$
+</div>
+<p>Therefore the state function $\mathscr{I}$:</p>
+<div>
+    $$
+\mathscr{I} = (\partial_2 L) (D\widetilde{F}(0))
+$$
+</div>
+<p>is conserved along all solution trajectories. This quantity is called the <em><strong>Noether integral</strong></em>. It is the product of the momentum $\partial_2 L$ and a vector associated with the symmetry.</p>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
