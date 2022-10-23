@@ -82,13 +82,13 @@ $$
     $$
 \begin{align*}
 0 &amp;= D\widetilde({L}(s)(t, x&#x27;, v&#x27;))\\
-  &amp;= \underbrace{\partial_0 L}_{=\frac{\partial L}{\partial t} = 0} + \partial_1 L(t, x, v) (D\widetilde{F})(s)(t, x&#x27;) + \underbrace{\partial_2 L(t,x,v) D(D_t\widetilde{F}(s)(t, x&#x27;)}_{\text{can swap }D_t\text{ and }D\text{, as }D\text{ w.r.t }s\text{ is unstructured}} \\
+  &amp;= \left(\underbrace{\partial_0 L}_{=\frac{\partial L}{\partial t} = 0} + \partial_1 L(t, x, v)\right) (D\widetilde{F})(s)(t, x&#x27;) + \underbrace{\partial_2 L(t,x,v) D(D_t\widetilde{F}(s)(t, x&#x27;)}_{\text{can swap }D_t\text{ and }D\text{, as }D\text{ w.r.t }s\text{ is unstructured}} \\
   &amp;= \partial_1 L(t, x, v) (D\widetilde{F})(s)(t, x&#x27;) + \partial_2 L(t,x,v) D_t(D\widetilde{F}(s))(t, x&#x27;) \\ 
   &amp;= (\partial_1 L \circ \Gamma[q]) \left( (D\widetilde{F})(s) \circ \Gamma[q&#x27;]\right) + (\partial_2 L \circ \Gamma[q])\left( D_t(D\widetilde{F}(s)) \circ \Gamma[q&#x27;]\right) \tag{1.157}
 \end{align*}
 $$
 </div>
-<p>According to Lagrange equations, the first term of Eq. 1.157 is: $(\partial_1 L \circ \Gamma[q]) \left( (D\widetilde{F})(s) \circ \Gamma[q’]\right) = (D_t\partial_2 L \circ \Gamma[q]) \left(D\widetilde{F})(s) \circ \Gamma[q’]\right)$. Substituting this in Eq. 1.157,</p>
+<p>According to Lagrange equations, the first term of Eq. 1.157 is: $(\partial_1 L \circ \Gamma[q]) \left( (D\widetilde{F})(s) \circ \Gamma[q’]\right) = (D_t\partial_2 L \circ \Gamma[q]) \left((D\widetilde{F})(s) \circ \Gamma[q’]\right)$. Substituting this in Eq. 1.157,</p>
 <div>
     $$
 0 = (D_t \partial_2 L \circ \Gamma[q])\left( (D\widetilde{F}(s)) \circ \Gamma[q&#x27;]\right) +  (\partial_2 L \circ \Gamma[q])\left( D_t(D\widetilde{F}(s)) \circ \Gamma[q&#x27;]\right) \tag{1.159}
