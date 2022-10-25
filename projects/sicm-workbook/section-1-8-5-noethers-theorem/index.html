@@ -188,9 +188,9 @@ $$
 </span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[x</span><span style="color:#65737e;">,</span><span> y</span><span style="color:#65737e;">,</span><span> z]]
 </span><span>      (</span><span style="color:#bf616a;">let </span><span>[ca (</span><span style="color:#bf616a;">cos</span><span> angle)
 </span><span>            sa (</span><span style="color:#bf616a;">sin</span><span> angle)]
-</span><span>          (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">*</span><span> ca z) (</span><span style="color:#bf616a;">*</span><span> sa x))
+</span><span>          (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">*</span><span> ca x) (</span><span style="color:#bf616a;">*</span><span> sa z))
 </span><span>              y
-</span><span>              (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">*</span><span> sa z) (</span><span style="color:#bf616a;">*</span><span> ca x))))))
+</span><span>              (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">*</span><span> sa x)) (</span><span style="color:#bf616a;">*</span><span> ca z))))))
 </span><span>
 </span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">RotZ </span><span>[angle]
 </span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[x</span><span style="color:#65737e;">,</span><span> y</span><span style="color:#65737e;">,</span><span> z]]
@@ -225,7 +225,7 @@ $$
 </span></code></pre>
 <div>
     $$
-\begin{bmatrix}\displaystyle{- m\,v_y\,x + m\,v_z\,y}&amp;\displaystyle{- m\,v_x\,x + m\,v_z\,z}&amp;\displaystyle{m\,v_y\,x - m\,v_z\,y}\end{bmatrix}
+\begin{bmatrix}\displaystyle{- m\,v_y\,z + m\,v_z\,y}&amp;\displaystyle{m\,v_x\,z - m\,v_z\,x}&amp;\displaystyle{- m\,v_x\,y + m\,v_y\,x}\end{bmatrix}
 $$
 </div>
 <p>These are all three components of the angular momentum. therefore angular momentum is conserved for a particle in motion in a central potential</p>
