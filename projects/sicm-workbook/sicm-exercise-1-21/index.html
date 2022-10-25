@@ -41,22 +41,6 @@
 <p>We can uniquely specify the configuration with the redundant coordinates of the particles, say $x_0(t)$, $y_0(t)$ and $x_1(t)$, $y_1(t)$. The constraint $(x_1(t) − x_0(t))^2 + (y_1(t) − y_0(t))^2 = l^2$ eliminates one degree of freedom.</p>
 <p><img src="https://tgvaughan.github.io/sicm/images/Art_P166.jpg" alt="Figure 1.5" /></p>
 <p><strong>Figure 1.5</strong></p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">require </span><span>&#39;[clojupyter.misc.helper </span><span style="color:#d08770;">:as</span><span> helper])
-</span><span>(</span><span style="color:#bf616a;">helper/add-dependencies </span><span>&#39;[sicmutils &quot;</span><span style="color:#a3be8c;">0.22.0</span><span>&quot;])
-</span><span>(</span><span style="color:#bf616a;">require </span><span>&#39;[sicmutils.env </span><span style="color:#d08770;">:as</span><span> env])
-</span><span>(</span><span style="color:#bf616a;">env/bootstrap-repl!</span><span>)
-</span><span style="color:#65737e;">;; Helper functions for rendering equations
-</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">markdownify </span><span>[texstr]
-</span><span>    (</span><span style="color:#bf616a;">str </span><span>&quot;</span><span style="color:#a3be8c;">$$</span><span style="color:#96b5b4;">\n</span><span>&quot; (</span><span style="color:#bf616a;">clojure.string/join </span><span>&quot;&quot; texstr) &quot;</span><span style="color:#96b5b4;">\n</span><span style="color:#a3be8c;">$$</span><span>&quot;)
-</span><span>)
-</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">render </span><span>(</span><span style="color:#bf616a;">comp</span><span> clojupyter.display/latex -&gt;infix simplify))
-</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">rendermd </span><span>(</span><span style="color:#bf616a;">comp</span><span> clojupyter.display/markdown markdownify -&gt;TeX simplify))
-</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">rendertex </span><span>(</span><span style="color:#bf616a;">comp</span><span> clojupyter.display/latex -&gt;TeX simplify))
-</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">rendertexvec </span><span>(</span><span style="color:#bf616a;">comp</span><span> clojupyter.display/latex -&gt;TeX simplify structure-&gt;vector))
-</span><span style="color:#d08770;">:ok
-</span></code></pre>
-<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>:ok
-</span></code></pre>
 <p><strong>a. Write Newton’s equations for the balance of forces for the four rectangular coordinates of the two particles, given that the scalar tension in the rod is $F$.</strong></p>
 <div>
     $$

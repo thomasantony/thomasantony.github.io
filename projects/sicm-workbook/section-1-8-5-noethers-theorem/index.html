@@ -202,6 +202,7 @@ $$
 </span><span>
 </span><span style="color:#65737e;">;; Coordinate transformation with three angular &quot;inputs&quot; for rotations about
 </span><span style="color:#65737e;">;; all three axes
+</span><span style="color:#65737e;">;; Composing with `coordinate`, extracts the second element of the tuple that is passed in as the argument
 </span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">F-tilde </span><span>[angle-x angle-y angle-z]
 </span><span>  (</span><span style="color:#bf616a;">compose </span><span>(</span><span style="color:#bf616a;">RotX</span><span> angle-x) (</span><span style="color:#bf616a;">RotY</span><span> angle-y) (</span><span style="color:#bf616a;">RotZ</span><span> angle-z) coordinate))
 </span><span>
