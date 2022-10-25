@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Exercise 1.36: Noether Integral - Thomas Antony</title>
+
+    <script src="https://thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script  async defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h3 id="exercise-1-36-noether-integral">Exercise 1.36: Noether integral</h3>
+<p>Consider motion on an ellipsoidal surface. The surface is specified by $\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1$</p>
+<p>Formulate a Lagrangian for frictionless motion on this surface. Assume that two of the axes of the ellipsoid are equal: b = c.</p>
+<p>Using angular coordinates $(\theta, \phi)$, where $\theta$ is colatitude from the $z$-axis, and $\phi$ is longitude measured from the $x$-axis, formulate a Lagrangian that captures the symmetry of this ellipsoid: rotational symmetry around the $x$-axis. Formulate a parametric transformation that represents this symmetry and show that the Lagrangian you formulated is invariant under this transformation. Compute the Noether integral associated with this symmetry.</p>
+<p>Note that the choice of coordinates does not build in this symmetry.</p>
+<p>With $\theta$ being the colatitude from the $z$-axis, and $\phi$ being the longitude measured from the $x$ axis,
+The parameteric equations for an ellipsoid are:</p>
+<div>
+    $$
+\begin{align*}
+x &amp;= a\sin{\theta}\cos{\phi} \\
+y &amp;= b\sin{\theta}\sin{\phi} \\
+z &amp;= c\cos{\theta}
+\end{align*}
+$$
+</div>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Coordinate transformation for (theta, phi) to rectilinear coordinates
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">elliptical-&gt;rect </span><span>[a b c]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[_ [theta phi] _]]
+</span><span>        (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">*</span><span> a (</span><span style="color:#bf616a;">sin</span><span> theta) (</span><span style="color:#bf616a;">cos</span><span> phi))
+</span><span>            (</span><span style="color:#bf616a;">*</span><span> b (</span><span style="color:#bf616a;">sin</span><span> theta) (</span><span style="color:#bf616a;">sin</span><span> phi))
+</span><span>            (</span><span style="color:#bf616a;">*</span><span> c (</span><span style="color:#bf616a;">cos</span><span> theta)))))
+</span><span>
+</span><span style="color:#65737e;">;; Free particle Lagrangian
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-free-particle </span><span>[mass]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[_ _ v]]
+</span><span>        (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> mass (</span><span style="color:#bf616a;">dot-product</span><span> v v)))   
+</span><span>    )
+</span><span>
+</span><span style="color:#65737e;">;; Lagrangian for motion constrained to the ellipsoid
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-ellipsoid </span><span>[m a b c]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[q-prime]
+</span><span>          ((</span><span style="color:#bf616a;">compose </span><span>(</span><span style="color:#bf616a;">L-free-particle</span><span> m) (</span><span style="color:#bf616a;">F-&gt;C </span><span>(</span><span style="color:#bf616a;">elliptical-&gt;rect</span><span> a b c)))
+</span><span>           q-prime)))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendermd
+</span><span> (</span><span style="color:#bf616a;">let </span><span>[state (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;theta) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;phi))
+</span><span>       local ((</span><span style="color:#bf616a;">Gamma</span><span> state) &#39;t)
+</span><span>       ]
+</span><span>     ((</span><span style="color:#bf616a;">L-ellipsoid </span><span>&#39;m &#39;a &#39;b &#39;c) local)))
+</span></code></pre>
+<div>
+    $$
+\frac{1}{2}\,{a}^{2}\,m\,{\cos}^{2}\left(\phi\left(t\right)\right)\,{\cos}^{2}\left(\theta\left(t\right)\right)\,{\left(D\theta\left(t\right)\right)}^{2} - {a}^{2}\,m\,\cos\left(\phi\left(t\right)\right)\,\cos\left(\theta\left(t\right)\right)\,D\theta\left(t\right)\,\sin\left(\theta\left(t\right)\right)\,\sin\left(\phi\left(t\right)\right)\,D\phi\left(t\right) + \frac{1}{2}\,{a}^{2}\,m\,{\sin}^{2}\left(\theta\left(t\right)\right)\,{\sin}^{2}\left(\phi\left(t\right)\right)\,{\left(D\phi\left(t\right)\right)}^{2} + \frac{1}{2}\,{b}^{2}\,m\,{\cos}^{2}\left(\phi\left(t\right)\right)\,{\sin}^{2}\left(\theta\left(t\right)\right)\,{\left(D\phi\left(t\right)\right)}^{2} + {b}^{2}\,m\,\cos\left(\phi\left(t\right)\right)\,\cos\left(\theta\left(t\right)\right)\,D\theta\left(t\right)\,\sin\left(\theta\left(t\right)\right)\,\sin\left(\phi\left(t\right)\right)\,D\phi\left(t\right) + \frac{1}{2}\,{b}^{2}\,m\,{\cos}^{2}\left(\theta\left(t\right)\right)\,{\left(D\theta\left(t\right)\right)}^{2}\,{\sin}^{2}\left(\phi\left(t\right)\right) + \frac{1}{2}\,{c}^{2}\,m\,{\left(D\theta\left(t\right)\right)}^{2}\,{\sin}^{2}\left(\theta\left(t\right)\right)
+$$
+</div>
+ 
+<p>The above Lagrangian is for the motion of a particle constrained to move on an ellipsoid.</p>
+<p>The question asks that we look at a spheroid with $b = c$ and look at the symmetry about the $x$ axis. Without losing generality, we can instead consider the case where $a = b$ and look at the symmetry about the $z$ axis. This rotation gets reduced to a simple addition to $\phi$, i.e.</p>
+<div>
+    $$
+\begin{pmatrix}\theta\\\phi\end{pmatrix} = R_x(s)(\begin{pmatrix}\theta&#x27;\\\phi&#x27;\end{pmatrix}) = \begin{pmatrix}\theta&#x27;\\\phi&#x27; + s\end{pmatrix}
+$$
+</div>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Assuming two of the axes are equal, i.e., a = b
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">L-ellipsoid-sym </span><span>(</span><span style="color:#bf616a;">L-ellipsoid </span><span>&#39;m &#39;a &#39;a &#39;c))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendermd
+</span><span> (</span><span style="color:#bf616a;">let </span><span>[state (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;theta) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;phi))
+</span><span>       local ((</span><span style="color:#bf616a;">Gamma</span><span> state) &#39;t)
+</span><span>       ]
+</span><span>     (</span><span style="color:#bf616a;">L-ellipsoid-sym</span><span> local)))
+</span></code></pre>
+<div>
+    $$
+\frac{1}{2}\,{a}^{2}\,m\,{\cos}^{2}\left(\theta\left(t\right)\right)\,{\left(D\theta\left(t\right)\right)}^{2} + \frac{1}{2}\,{a}^{2}\,m\,{\sin}^{2}\left(\theta\left(t\right)\right)\,{\left(D\phi\left(t\right)\right)}^{2} + \frac{1}{2}\,{c}^{2}\,m\,{\left(D\theta\left(t\right)\right)}^{2}\,{\sin}^{2}\left(\theta\left(t\right)\right)
+$$
+</div>
+ <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Defining a parameteric transformation to rotate about the &quot;z&quot; axis
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">RotZ </span><span>[angle]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[theta</span><span style="color:#65737e;">,</span><span> phi]]
+</span><span>      (</span><span style="color:#bf616a;">up
+</span><span>        theta
+</span><span>        (</span><span style="color:#bf616a;">+</span><span> phi angle))))
+</span><span>
+</span><span style="color:#65737e;">;; Compose with &quot;coordinate&quot; to extract `q` from local tuple (t, q, qdot)
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">F-tilde </span><span>[angle]
+</span><span>  (</span><span style="color:#bf616a;">compose </span><span>(</span><span style="color:#bf616a;">RotZ</span><span> angle) coordinate))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">F-tilde-rotated-by-s </span><span>(</span><span style="color:#bf616a;">F-tilde </span><span>&#39;s))
+</span><span>
+</span><span style="color:#65737e;">;; Lagrangian after &quot;s&quot; degree rotation about X-axis
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">L-ellipsoid-sym-rotated
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[q-prime]
+</span><span>          ((</span><span style="color:#bf616a;">compose</span><span> L-ellipsoid-sym (</span><span style="color:#bf616a;">F-&gt;C</span><span> F-tilde-rotated-by-s))
+</span><span>           q-prime)))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendermd
+</span><span> (</span><span style="color:#bf616a;">let </span><span>[state (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;theta) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;phi))
+</span><span>       local ((</span><span style="color:#bf616a;">Gamma</span><span> state) &#39;t)
+</span><span>       ]
+</span><span>     (</span><span style="color:#bf616a;">L-ellipsoid-sym-rotated</span><span> local)))
+</span></code></pre>
+<div>
+    $$
+\frac{1}{2}\,{a}^{2}\,m\,{\cos}^{2}\left(\theta\left(t\right)\right)\,{\left(D\theta\left(t\right)\right)}^{2} + \frac{1}{2}\,{a}^{2}\,m\,{\sin}^{2}\left(\theta\left(t\right)\right)\,{\left(D\phi\left(t\right)\right)}^{2} + \frac{1}{2}\,{c}^{2}\,m\,{\left(D\theta\left(t\right)\right)}^{2}\,{\sin}^{2}\left(\theta\left(t\right)\right)
+$$
+</div>
+ 
+<p>The symmetry about $z$ axis is verified as the Lagrangian is unchanged post-rotation as shown above.</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Define the Noether integral
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">the-Noether-integral
+</span><span>    (</span><span style="color:#bf616a;">* </span><span>((</span><span style="color:#bf616a;">partial </span><span style="color:#d08770;">2</span><span>) L-ellipsoid-sym) ((</span><span style="color:#bf616a;">D</span><span> F-tilde) </span><span style="color:#d08770;">0 </span><span>)))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendermd
+</span><span>(</span><span style="color:#bf616a;">the-Noether-integral
+</span><span>  (</span><span style="color:#bf616a;">up </span><span>&#39;t
+</span><span>      (</span><span style="color:#bf616a;">up </span><span>&#39;theta &#39;phi)
+</span><span>      (</span><span style="color:#bf616a;">up </span><span>&#39;thetadot &#39;phidot))))
+</span></code></pre>
+<div>
+    $$
+{a}^{2}\,m\,\dot {\phi}\,{\sin}^{2}\left(\theta\right)
+$$
+</div>
+ 
+<p>The conserved quantity is $m (a\sin{\theta})^2\dot{\phi}$. Here, $\dot{\phi}$ is the rate of angular movement of the particle about the $z$ axis or the rate of change of longitude, and $a\sin(\theta)$ is the “radius”. This quantity is analogous to angular momentum.</p>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
