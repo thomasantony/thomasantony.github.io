@@ -35,10 +35,8 @@
   
 <section>
 <p id="post">
-  <article><h3 id="section-1-8-5-noether-s-theorem">Section 1.8.5: Noether’s Theorem</h3>
-<p><strong>Note</strong>:
-<em><strong>I will be cleaning up this section further and adding an example (or two) later</strong></em></p>
-<p>If a dynamical system has a symmetry, a coordinate system can be chosen so that the Lagrangian does not depend on a coordinate associated with the symmetry. There is also a conserved quantity associated with the symmetry (<a rel="noopener" target="_blank" href="https://tgvaughan.github.io/sicm/chapter001.html#h1-6c">Section 1.8</a>). However, there are general symmetries that no coordinate systems can fully express. For examplem, motion around a central potential is spherically symmetric, i.e., the dynamical system is invariant under rotation about any axis. However, the Lagrangian for this system only demonstrates symmetry about a single axis. </p>
+  <article><h2 id="1-8-5-noether-s-theorem">1.8.5 Noether’s Theorem</h2>
+<p>If a dynamical system has a symmetry, a coordinate system can be chosen so that the Lagrangian does not depend on a coordinate associated with the symmetry. There is also a conserved quantity associated with the symmetry (<a rel="noopener" target="_blank" href="https://tgvaughan.github.io/sicm/chapter001.html#h1-6c">Section 1.8</a>). However, there are general symmetries that no coordinate systems can fully express. For example, motion around a central potential is spherically symmetric, i.e., the dynamical system is invariant under rotation about any axis. However, the Lagrangian for this system only demonstrates symmetry about a single axis. </p>
 <p>In general, <strong>a Lagrangian is said to have a symmetry if there exists a coordinate transformation that leaves the Lagrangian unchanged</strong>.
 In this section we consider the more general case of <strong>continous symmetries</strong>. A <strong>continuous symmetry</strong> is defined as a parametric family of symmetries. <strong>Emmy Noether proved that for any continuous symmetry, there is a conserved quantity</strong>.</p>
 <p>Consider a parametric coordinate transformation, $\widetilde{F}$ with parameter $s$. This means that $\widetilde{F}$ represents an infinite number of coordinate transformations, one for each value of $s$. </p>
@@ -60,22 +58,21 @@ $$
 <p>We require that $\widetilde{F}(0)$ represent the identity transformation $x’ = \widetilde{F}(0)(t, x’)$, with $\widetilde{C}$ as the corresponding identity state transformation. If the Lagrangian $L$ has a continous symmetry corresponding to $\widetilde{F}$, then the Lagrangian should be unchanged when the coordinates are transformed using $\widetilde{F}$. Therefore:</p>
 <div>
     $$
-\widetilde{L}(s) = L\cdot \widetilde{C}(s) = L\quad\text{for any }s
+\widetilde{L}(s) = L\cdot \widetilde{C}(s) = L
 $$
-</div>
-<p>Expanding $\widetilde{C}$ in the above expression, we get:</p>
-<div>
-    $$
+for any $s$. Expanding $\widetilde{C}$ in the above expression, we get:
+
+{% mathjax() %}
+$$
 \widetilde{L}(s) = L\left(t,\quad\widetilde{F}(s)(t, x&#x27;),\quad\partial_1\widetilde{F}(s)(t, x&#x27;)v&#x27; \right)\\
 $$
 </div>
-<p>Undoing the “chainrule” in the second term and writing it in terms of the total time derivative,
+<p>Undoing the “chainrule” in the second term and writing it in terms of the total time derivative,</p>
 <div>
     $$
-\widetilde{L}(s) = L\left(t,\quad\widetilde{F}(s)(t, x&#x27;),\quad D_t\widetilde{F}(s)(t, x&#x27;, v&#x27;) \right) 
+\widetilde{L}(s) = L\left(t,\quad\widetilde{F}(s)(t, x&#x27;),\quad D_t\widetilde{F}(s)(t, x&#x27;, v&#x27;) \right)
 $$
 </div>
-</p>
 <p><strong>Note: One of the assumptions in the following derivation is that $\partial_0 L = \frac{\partial L}{\partial t} = 0$</strong></p>
 <p>That $\widetilde{L}(s) = L$ for any $s$ implies that $D\widetilde{L}(s) = 0$ (where the $D$ operator represents derivative w.r.t $s$). Therefore, applying the chain rule for each of the components of $\widetilde{L}$, the derivative of $\widetilde{L}$ w.r.t $s$ is:</p>
 <div>
@@ -110,6 +107,128 @@ $$
 $$
 </div>
 <p>is conserved along all solution trajectories. This quantity is called the <em><strong>Noether integral</strong></em>. It is the product of the momentum $\partial_2 L$ and a vector associated with the symmetry.</p>
+<h3 id="illustration-motion-in-a-central-potential">Illustration : Motion in a Central Potential</h3>
+<p>Consider the motion of a particle in a central potential. The Lagrangian in rectangular coordinates is:</p>
+<div>
+    $$
+L(t; x,y,z; v_x, v_y, v_z) = \frac{1}{2} m \left( v_x^2 + v_y^2 + v_z^2\right) - U(\sqrt{x^2 + y^2 + z^2})
+$$
+</div>
+<p>Consider a parameteric rotation about the $z$-axis:</p>
+<div>
+    $$
+\begin{pmatrix}x\\y\\z\end{pmatrix} = 
+R_z(s)\begin{pmatrix}x&#x27;\\y&#x27;\\z&#x27;\end{pmatrix} = \begin{pmatrix}x&#x27; \cos{s} - y&#x27;\sin{s}\\x&#x27; \sin{s} + y&#x27;\cos{s}\\z&#x27;\end{pmatrix}
+\tag{1.163}
+$$
+</div>
+<p>Since a rotation is an orthogonal transformation, it does not change the magnitude of the vector,</p>
+<div>
+    $$
+x^2 + y^2 + z^2 = (x&#x27;)^2 + (y&#x27;)^2 + (z&#x27;)^2
+$$
+
+Similarly, differentiating Eq.1.163 along a path, we get:
+
+{% mathjax() %}
+$$
+\begin{pmatrix}v_x\\v_y\\v_z\end{pmatrix} =
+R_z(s)\begin{pmatrix}v_x&#x27;\\v_y&#x27;\\v_z&#x27;\end{pmatrix}
+$$
+</div>
+<p>Therefore, $v_x^2 + v_y^2 + v_z^2 = v_x’^2 + v_y’^2 + v_z’^2$. Combining these, we can see that the post-transformation Lagrangian $L’$ is:</p>
+<div>
+    $$
+L&#x27;(t; x&#x27;,y,z&#x27;; v_x&#x27;,v_y&#x27;,v_z&#x27;) = \frac{1}{2} m \left( (v&#x27;_x)^2 + (v&#x27;_y)^2 + (v&#x27;_z)^2\right) - U(\sqrt{(x&#x27;)^2 + (y&#x27;)^2 + (z&#x27;)^2
+})
+$$
+</div>
+<p>Therefore $L’$ is the exact same function as $L$ and hence there is a conserved value corresponding to the rotational symmetry about the z-axis. The momenta are defined as:</p>
+<div>
+    $$
+\partial_2 L = [m v_x, m v_y, m v_z]
+$$
+</div>
+<p>and </p>
+<div>
+    $$
+D\widetilde{F}(0)(t;x,y,z)=D\widetilde{R}_z(0)(x,y,z) = [ y, -x, 0]
+$$
+</div>
+<hr />
+<p><strong>Note about the $D$ operator</strong></p>
+<p>The $D$ operator has the highest precedence, and therefore:</p>
+<div>
+    $$
+D\widetilde{F}(0)(t; x,y,z) = D\widetilde{F}(s)(x, y, z)|_{s=0} = \left.\begin{bmatrix} -x \sin{s} - y\cos{s}\\x \cos{s} - y\sin{s}\\0\end{bmatrix}\right|_{s=0}
+$$
+</div>
+<p>Here we are taking the derivative w.r.t $s$ and consider $x$, $y$ and $z$ to be constants. Also note that the original $\widetilde{F}(s)$ was defined in terms of the primed coordinates while here it was evaluated on the unprimed coordinates.</p>
+<hr />
+<p>Therefore, the Noether integral is:</p>
+<div>
+    $$
+\begin{align*}
+\mathscr{I}(t; x,y,z; v_x,v_y,v_z) &amp;= ((\partial_2 L)(D\widetilde{F}(0))) (t; x,y,z; v_x,v_y,v_z) \\
+&amp;= mv_xy -mv_yx + (mv_z)(0) \\
+&amp;= m(yv_x - xv_y)
+\end{align*}
+$$
+</div>
+<p>This is the $z$ component of the angular momentum vector, $\vec{x} \times m\vec{v}$</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">RotX </span><span>[angle]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[x</span><span style="color:#65737e;">,</span><span> y</span><span style="color:#65737e;">,</span><span> z]]
+</span><span>      (</span><span style="color:#bf616a;">let </span><span>[ca (</span><span style="color:#bf616a;">cos</span><span> angle)
+</span><span>            sa (</span><span style="color:#bf616a;">sin</span><span> angle)]
+</span><span>          (</span><span style="color:#bf616a;">up</span><span> x
+</span><span>              (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">*</span><span> ca y) (</span><span style="color:#bf616a;">*</span><span> sa z))
+</span><span>              (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">*</span><span> sa y) (</span><span style="color:#bf616a;">*</span><span> ca z))))))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">RotY </span><span>[angle]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[x</span><span style="color:#65737e;">,</span><span> y</span><span style="color:#65737e;">,</span><span> z]]
+</span><span>      (</span><span style="color:#bf616a;">let </span><span>[ca (</span><span style="color:#bf616a;">cos</span><span> angle)
+</span><span>            sa (</span><span style="color:#bf616a;">sin</span><span> angle)]
+</span><span>          (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">*</span><span> ca z) (</span><span style="color:#bf616a;">*</span><span> sa x))
+</span><span>              y
+</span><span>              (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">*</span><span> sa z) (</span><span style="color:#bf616a;">*</span><span> ca x))))))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">RotZ </span><span>[angle]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[x</span><span style="color:#65737e;">,</span><span> y</span><span style="color:#65737e;">,</span><span> z]]
+</span><span>      (</span><span style="color:#bf616a;">let </span><span>[ca (</span><span style="color:#bf616a;">cos</span><span> angle)
+</span><span>            sa (</span><span style="color:#bf616a;">sin</span><span> angle)]
+</span><span>          (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">*</span><span> ca x) (</span><span style="color:#bf616a;">*</span><span> sa y))
+</span><span>              (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">*</span><span> sa x) (</span><span style="color:#bf616a;">*</span><span> ca y))
+</span><span>              z))))
+</span><span>
+</span><span style="color:#65737e;">;; Coordinate transformation with three angular &quot;inputs&quot; for rotations about
+</span><span style="color:#65737e;">;; all three axes
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">F-tilde </span><span>[angle-x angle-y angle-z]
+</span><span>  (</span><span style="color:#bf616a;">compose </span><span>(</span><span style="color:#bf616a;">RotX</span><span> angle-x) (</span><span style="color:#bf616a;">RotY</span><span> angle-y) (</span><span style="color:#bf616a;">RotZ</span><span> angle-z) coordinate))
+</span><span>
+</span><span style="color:#65737e;">;; Lagrangian for motion in central potential
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-central-rectangular </span><span>[m U]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[t q v]]
+</span><span>        (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> m (</span><span style="color:#bf616a;">square</span><span> v))
+</span><span>           (</span><span style="color:#bf616a;">U </span><span>(</span><span style="color:#bf616a;">sqrt </span><span>(</span><span style="color:#bf616a;">square</span><span> q))))))
+</span><span>
+</span><span style="color:#65737e;">;; Define the Noether integral
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">the-Noether-integral
+</span><span>  (</span><span style="color:#bf616a;">let </span><span>[L (</span><span style="color:#bf616a;">L-central-rectangular </span><span>&#39;m (</span><span style="color:#bf616a;">literal-function </span><span>&#39;U))]
+</span><span>    (</span><span style="color:#bf616a;">* </span><span>((</span><span style="color:#bf616a;">partial </span><span style="color:#d08770;">2</span><span>) L) ((</span><span style="color:#bf616a;">D</span><span> F-tilde) </span><span style="color:#d08770;">0 0 0</span><span>))))
+</span><span>
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendertex
+</span><span>(</span><span style="color:#bf616a;">the-Noether-integral
+</span><span>  (</span><span style="color:#bf616a;">up </span><span>&#39;t
+</span><span>      (</span><span style="color:#bf616a;">up </span><span>&#39;x &#39;y &#39;z)
+</span><span>      (</span><span style="color:#bf616a;">up </span><span>&#39;v_x &#39;v_y &#39;v_z))))
+</span></code></pre>
+<div>
+    $$
+\begin{bmatrix}\displaystyle{- m\,v_y\,x + m\,v_z\,y}&amp;\displaystyle{- m\,v_x\,x + m\,v_z\,z}&amp;\displaystyle{m\,v_y\,x - m\,v_z\,y}\end{bmatrix}
+$$
+</div>
+<p>These are all three components of the angular momentum. therefore angular momentum is conserved for a particle in motion in a central potential</p>
 </article>
 </p>
 </section>
