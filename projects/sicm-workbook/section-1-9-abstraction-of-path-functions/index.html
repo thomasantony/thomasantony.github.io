@@ -112,8 +112,6 @@ $$
 </span><span>)
 </span><span>
 </span></code></pre>
-<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>#&#39;user/Gamma-bar2
-</span></code></pre>
 <p>Despite it’s name <code>Gamma-bar2</code> is <strong>not</strong> the inverse of $\Gamma[q]$. $\Gamma[q]$ takes a path, and returns a local tuple (the inverse of this is $O$ which takes a local tuple and returns a path). <code>Gamma-bar2</code> takes a function that has a path as an argument, and returns a fucntion that takes local tuples as the argument – this is a subtle but important difference.</p>
 <p><code>Gamma-bar2</code> can be used to define a more general version of the <code>F-&gt;C</code> function.  The procedure <code>F-&gt;C</code> first constructs a path-dependent procedure <code>f-bar</code> that takes a coordinate path in the primed system and returns the local tuple of the corresponding path in the unprimed coordinate system. It then uses <code>Gamma-bar2</code> to abstract f-bar to arbitrary local tuples in the primed coordinate system. The resulting procedure <code>C</code> can take local tuples with <code>n</code> components in the primed coordinate system and generate local tuples of <code>n</code> terms in the unprimed coordinate system.</p>
 <p>E.g. <code>p-&gt;r</code> which is defined as:</p>
@@ -148,11 +146,6 @@ $$
 </span><span>  ((</span><span style="color:#bf616a;">super-F-&gt;C</span><span> p2r)
 </span><span>   (</span><span style="color:#bf616a;">up </span><span>&#39;t (</span><span style="color:#bf616a;">up </span><span>&#39;r &#39;theta) (</span><span style="color:#bf616a;">up </span><span>&#39;rdot &#39;thetadot) (</span><span style="color:#bf616a;">up </span><span>&#39;rdotdot &#39;thetadotdot))))
 </span></code></pre>
-<div>
-    $$
-\begin{pmatrix}\displaystyle{t} \cr \cr \displaystyle{\begin{pmatrix}\displaystyle{r\,\cos\left(\theta\right)} \cr \cr \displaystyle{r\,\sin\left(\theta\right)}\end{pmatrix}} \cr \cr \displaystyle{\begin{pmatrix}\displaystyle{- r\,\dot {\theta}\,\sin\left(\theta\right) + \dot r\,\cos\left(\theta\right)} \cr \cr \displaystyle{r\,\dot {\theta}\,\cos\left(\theta\right) + \dot r\,\sin\left(\theta\right)}\end{pmatrix}} \cr \cr \displaystyle{\begin{pmatrix}\displaystyle{- r\,{\dot {\theta}}^{2}\,\cos\left(\theta\right) - r\,\ddot {\theta}\,\sin\left(\theta\right) -2\,\dot r\,\dot {\theta}\,\sin\left(\theta\right) + \ddot r\,\cos\left(\theta\right)} \cr \cr \displaystyle{- r\,{\dot {\theta}}^{2}\,\sin\left(\theta\right) + r\,\ddot {\theta}\,\cos\left(\theta\right) + 2\,\dot r\,\dot {\theta}\,\cos\left(\theta\right) + \ddot r\,\sin\left(\theta\right)}\end{pmatrix}}\end{pmatrix}
-$$
-</div>
 <p>This is a very convoluted function at first look but also elegant in certain ways. My understanding is that we go through this roundabout way of path-&gt;tuple-&gt;path-&gt;tuple so that we can expand/contract the number of components of the path description that we are interested in. One example of this can be seen when applying <code>F-&gt;C</code> to the <code>coordinate</code> function which simply extracts the position out of the local tuple (it returns the same local tuple that was passed in). </p>
 <pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>(rendertex
 </span><span>  ((super-F-&gt;C coordinate)
@@ -182,8 +175,6 @@ $$
 </span><span>                    (</span><span style="color:#bf616a;">D </span><span>(</span><span style="color:#bf616a;">compose</span><span> F (</span><span style="color:#bf616a;">Gamma</span><span> q (</span><span style="color:#bf616a;">-</span><span> n </span><span style="color:#d08770;">1</span><span>)))))]
 </span><span>      ((</span><span style="color:#bf616a;">Gamma-bar</span><span> DF-on-path) state)))
 </span><span>  )
-</span></code></pre>
-<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>#&#39;user/Dt
 </span></code></pre>
 <h3 id="lagrange-equations-at-a-moment-or-the-euler-lagrange-operator">Lagrange equations “at a moment” or the Euler Lagrange operator</h3>
 <p>The Euler-Lagrange equations can be defined as a path-dependent function, $\bar{\mathscr{E}}[L][q]$, the operates on a path, $q$ and returns zero if it s feasible path (according to the Lagrangian $L$).</p>
@@ -216,30 +207,17 @@ $$
 </span><span>   (</span><span style="color:#bf616a;">L-harmonic </span><span>&#39;m &#39;k))
 </span><span> (</span><span style="color:#bf616a;">up </span><span>&#39;t &#39;x &#39;v &#39;a)))
 </span></code></pre>
-<div>
-    $$
-a\,m + k\,x
-$$
-</div>
- <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">rendermd
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">rendermd
 </span><span>((</span><span style="color:#bf616a;">compose
 </span><span>   (</span><span style="color:#bf616a;">Euler-Lagrange-operator </span><span>(</span><span style="color:#bf616a;">L-harmonic </span><span>&#39;m &#39;k))
 </span><span>   (</span><span style="color:#bf616a;">Gamma </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;x) </span><span style="color:#d08770;">4</span><span>))
 </span><span> &#39;t)
 </span><span>    )
 </span></code></pre>
-<div>
-    $$
-k\,x\left(t\right) + m\,{D}^{2}x\left(t\right)
-$$
-</div>
- 
 <p>The <strong>Euler-Lagrange operator</strong> takes in a Lagrangian function as input and directly create a new function which will define the Euler-Lagrange equations on passing in the local tuple. </p>
 <h3 id="summary">Summary</h3>
 <p>The functions/operators introduced in this section such as <code>Gamma-bar</code>, <code>Dt</code> and <code>Euler-Lagrange-operator</code> seem to be aimed at delayed evaluation as much as possible. We can stay in the realm of functions until the very end where we evaluate it on a local tuple to get the result. Because these functions are eventually operating on paths, we need to make sure they are represented as path-dependent functions before transforming them. However, we wrap the path-dependant function in <code>Gamma-bar</code> at the end to make sure that we can still pass in the input as a local tuple.</p>
 <p>While there is still more I could understand about the mechanism/logic by which this is possible, this is where I will stop for now.</p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>
-</span></code></pre>
 </article>
 </p>
 </section>
