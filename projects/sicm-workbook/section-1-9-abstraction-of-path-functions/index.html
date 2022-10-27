@@ -236,7 +236,8 @@ $$
  
 <p>The <strong>Euler-Lagrange operator</strong> takes in a Lagrangian function as input and directly create a new function which will define the Euler-Lagrange equations on passing in the local tuple. </p>
 <h3 id="summary">Summary</h3>
-<p>The functions/operators introduced in this section such as <code>Gamma-bar</code>, <code>Dt</code> and <code>Euler-Lagrange-operator</code> seem to be aimed at delayed evaluation as much as possible. We can stay in the realm of functions until the very end where we evaluate it on a local tuple to get the result. While there is still more I could understand about the mechanism/logic by which this is possible, this is where I will stop for now.</p>
+<p>The functions/operators introduced in this section such as <code>Gamma-bar</code>, <code>Dt</code> and <code>Euler-Lagrange-operator</code> seem to be aimed at delayed evaluation as much as possible. We can stay in the realm of functions until the very end where we evaluate it on a local tuple to get the result. Because these functions are eventually operating on paths, we need to make sure they are represented as path-dependent functions before transforming them. However, we wrap the path-dependant function in <code>Gamma-bar</code> at the end to make sure that we can still pass in the input as a local tuple.</p>
+<p>While there is still more I could understand about the mechanism/logic by which this is possible, this is where I will stop for now.</p>
 <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>
 </span></code></pre>
 </article>
