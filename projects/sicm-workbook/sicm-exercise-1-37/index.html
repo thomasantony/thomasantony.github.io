@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Exercise 1.37: Velocity Transformation - Thomas Antony</title>
+
+    <script src="https://thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script  async defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h3 id="exercise-1-38-velocity-transformation">Exercise 1.38: Velocity transformation</h3>
+<p>Use the procedure Gamma-bar to construct a procedure that transforms velocities given a coordinate transformation. Apply this procedure to the procedure <code>p-&gt;r</code> to deduce (again) equation (1.67) on page 42.</p>
+<div>
+    $$
+\begin{align*}
+v_x &amp;= \dot{r} \cos{\varphi} − r \dot{\varphi} \sin{\varphi} \\
+v_y &amp;= \dot{r} \sin{\varphi} + r \dot{\varphi} \cos{\varphi}\tag{1.67}
+\end{align*}
+$$
+</div>
+<p>We need to define a function <code>F-&gt;C_v</code> that takes a local tuple coordinate transformation function $F$ and returns a new local tuple function $C_v$. $C_v$ when evaluated on a local tuple, returns the expression for velocity in terms of the new coordinates.</p>
+<p>If the fucntion $F$ is defined as $x = F(t, x’)$, then $v = C_v(t, x’, v’)$.</p>
+<p>We start with a path-dependent function $\bar{C_v}$ with path $q’$ as its input, defined as: </p>
+<div>
+    $$
+\bar{C_v}[q&#x27;] :=  \dot{Q} \circ \Gamma \left[ F \circ \Gamma[q&#x27;] \right]
+$$
+</div>
+<p>where $\dot{Q}$ is a selector function that extracts the velocity component of a local tuple. We get $C_v$ by applying the <code>Gamma-bar</code> function on $\bar{C_v}$</p>
+<div>
+    $$
+C_v = \bar{\Gamma}[ \bar{C_v} ]
+$$
+</div>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">F-&gt;C_v
+</span><span>    [F]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">C_v </span><span>[local]
+</span><span>        (</span><span style="color:#bf616a;">let </span><span>[f-bar (</span><span style="color:#b48ead;">fn </span><span>[q-prime]
+</span><span>                        (</span><span style="color:#bf616a;">let </span><span>[q (</span><span style="color:#bf616a;">compose</span><span> F (</span><span style="color:#bf616a;">Gamma</span><span> q-prime))] </span><span style="color:#65737e;">;; q = F . Gamma[q&#39;]
+</span><span>                        (</span><span style="color:#bf616a;">compose</span><span> velocity (</span><span style="color:#bf616a;">Gamma</span><span> q))         </span><span style="color:#65737e;">;; 
+</span><span>                    ))
+</span><span>              ]
+</span><span>        ((</span><span style="color:#bf616a;">Gamma-bar</span><span> f-bar) local))
+</span><span>))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendertex </span><span>((</span><span style="color:#bf616a;">F-&gt;C_v</span><span> p-&gt;r)
+</span><span>           (</span><span style="color:#bf616a;">up </span><span>&#39;t (</span><span style="color:#bf616a;">up </span><span>&#39;r &#39;varphi) (</span><span style="color:#bf616a;">up </span><span>&#39;rdot &#39;varphidot)))
+</span><span>           )
+</span></code></pre>
+<div>
+    $$
+\begin{pmatrix}\displaystyle{- r\,\dot {\varphi}\,\sin\left(\varphi\right) + \dot r\,\cos\left(\varphi\right)} \cr \cr \displaystyle{r\,\dot {\varphi}\,\cos\left(\varphi\right) + \dot r\,\sin\left(\varphi\right)}\end{pmatrix}
+$$
+</div>
+<p>^ The above answer matches Eq. 1.67</p>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
