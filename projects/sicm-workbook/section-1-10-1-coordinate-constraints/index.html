@@ -176,7 +176,8 @@ $$
 \begin{align*}
 0 &amp;=ml (\cos\theta D^2\theta - \sin\theta (D\theta)^2)\cos\theta - \cancel{2\lambda l\sin\theta \cos \theta}\\
   &amp; \quad+ ml (\sin\theta D^2\theta + \cos\theta (D\theta)^2)\sin\theta + \cancel{2\lambda l\cos\theta \sin\theta} + mg\sin\theta\\
- &amp;= ml (\cos^2\theta D^2\theta) - \cancel{ml \sin\theta \cos\theta(D\theta)^2} + ml (\sin^2 \theta D^2\theta) + \cancel{ml \cos\theta \sin\theta(D\theta)^2} + mg\sin\theta \\
+ &amp;= ml (\cos^2\theta D^2\theta) - \cancel{ml \sin\theta \cos\theta(D\theta)^2} \\
+  &amp; \quad+ ml (\sin^2 \theta D^2\theta) + \cancel{ml \cos\theta \sin\theta(D\theta)^2} + mg\sin\theta \\
  &amp;=ml D^2\theta (\cos^2\theta + \sin^2 \theta ) + mg\sin\theta \\
 0&amp;= ml D^2\theta + mg\sin\theta 
 \end{align*}
@@ -216,7 +217,7 @@ $$
 <p>Combining the two Lagrangians with the contact constraint, we get:</p>
 <div>
     $$
-L(t; x_1, x_2, xi; \dot{x_1},\dot{x_2},\dot{\xi}) = \frac{1}{2}(m_1\dot{x_1}^2 + m_2\dot{\xi}^2 + m_2\dot{x_2}^2) - \frac{1}{2}(k_1 x_1^2 + k_2 x_2^2) + \lambda(\xi - (X_1 + x_1))
+L(t; x_1, x_2, \xi; \dot{x_1},\dot{x_2},\dot{\xi}) = L_1(t; x_1; \dot{x_1}) + L_2(t; \xi,x_2; \dot{\xi},\dot{x_2}) + \lambda(\xi - (X_1 + x_1))
 $$
 </div>
 <p>The Lagrange’s equations for the system are:</p>
