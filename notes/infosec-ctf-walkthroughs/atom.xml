@@ -2,20 +2,20 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 	<title>Thomas Antony - Infosec CTF Walkthroughs</title>
 	<subtitle>My personal website and notes</subtitle>
-	<link href="https://thomasantony.com/notes/infosec-ctf-walkthroughs/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://thomasantony.com"/>
+	<link href="https://www.thomasantony.com/notes/infosec-ctf-walkthroughs/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.thomasantony.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
 	<updated>2022-03-20T05:08:47.753+00:00</updated>
-	<id>https://thomasantony.com/notes/infosec-ctf-walkthroughs/atom.xml</id>
+	<id>https://www.thomasantony.com/notes/infosec-ctf-walkthroughs/atom.xml</id>
 	<entry xml:lang="en">
 		<title>Solving VulnHub CTF - Mercury</title>
 		<published>2022-03-20T05:08:47.753+00:00</published>
 		<updated>2022-03-20T05:08:47.753+00:00</updated>
-		<link rel="alternate" href="https://thomasantony.com/notes/202202192208-solving-vulnhub-ctf-mercury/" type="text/html"/>
-		<id>https://thomasantony.com/notes/202202192208-solving-vulnhub-ctf-mercury/</id>
+		<link rel="alternate" href="https://www.thomasantony.com/notes/202202192208-solving-vulnhub-ctf-mercury/" type="text/html"/>
+		<id>https://www.thomasantony.com/notes/202202192208-solving-vulnhub-ctf-mercury/</id>
 		<content type="html">&lt;p&gt;Used a walkthrough for tips here. Here are the rough steps:&lt;&#x2F;p&gt;
 &lt;ol&gt;
-&lt;li&gt;Run kali linux VM alongside the CTF vm with &lt;a href=&quot;https:&#x2F;&#x2F;thomasantony.com&#x2F;notes&#x2F;202202192208-running-virtualbox-vms-with-networking&#x2F;&quot;&gt;Running Virtualbox VMs with networking&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Run kali linux VM alongside the CTF vm with &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202202192208-running-virtualbox-vms-with-networking&#x2F;&quot;&gt;Running Virtualbox VMs with networking&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
 &lt;li&gt;Run &lt;code&gt;sudo netdiscover&lt;&#x2F;code&gt; to find out the IP of target&lt;&#x2F;li&gt;
 &lt;li&gt;Run &lt;code&gt;nmap &amp;lt;ip&amp;gt;&lt;&#x2F;code&gt; to discover open ports and find that &lt;code&gt;8080&lt;&#x2F;code&gt; is open&lt;&#x2F;li&gt;
 &lt;li&gt;Port 8080 hosts a web app that can be accessed through the browser&lt;&#x2F;li&gt;

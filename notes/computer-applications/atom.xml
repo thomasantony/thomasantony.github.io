@@ -2,17 +2,17 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 	<title>Thomas Antony - Computer Applications</title>
 	<subtitle>My personal website and notes</subtitle>
-	<link href="https://thomasantony.com/notes/computer-applications/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://thomasantony.com"/>
+	<link href="https://www.thomasantony.com/notes/computer-applications/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.thomasantony.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
 	<updated>2022-03-20T05:08:45.753+00:00</updated>
-	<id>https://thomasantony.com/notes/computer-applications/atom.xml</id>
+	<id>https://www.thomasantony.com/notes/computer-applications/atom.xml</id>
 	<entry xml:lang="en">
 		<title>Running Virtualbox VMs with networking</title>
 		<published>2022-03-20T05:08:45.753+00:00</published>
 		<updated>2022-03-20T05:08:45.753+00:00</updated>
-		<link rel="alternate" href="https://thomasantony.com/notes/202202192208-running-virtualbox-vms-with-networking/" type="text/html"/>
-		<id>https://thomasantony.com/notes/202202192208-running-virtualbox-vms-with-networking/</id>
+		<link rel="alternate" href="https://www.thomasantony.com/notes/202202192208-running-virtualbox-vms-with-networking/" type="text/html"/>
+		<id>https://www.thomasantony.com/notes/202202192208-running-virtualbox-vms-with-networking/</id>
 		<content type="html">&lt;p&gt;Run the VMs with “Host-Only Networking”. This should allow each VM to get its own IP address and let them communicate with each other.&lt;&#x2F;p&gt;
 </content>
 	</entry>

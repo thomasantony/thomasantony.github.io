@@ -1,306 +1,306 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://thomasantony.com/</loc>
+        <loc>https://www.thomasantony.com/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/about/</loc>
+        <loc>https://www.thomasantony.com/about/</loc>
         <lastmod>2019-10-16T20:45:02-05:00</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/</loc>
+        <loc>https://www.thomasantony.com/notes/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108111516-optical-cavity-induced-current/</loc>
+        <loc>https://www.thomasantony.com/notes/202108111516-optical-cavity-induced-current/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108111837-minimal-fab/</loc>
+        <loc>https://www.thomasantony.com/notes/202108111837-minimal-fab/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108120021-zettelkasten/</loc>
+        <loc>https://www.thomasantony.com/notes/202108120021-zettelkasten/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108121143-how-to-test-pcbs-bed-of-nails/</loc>
+        <loc>https://www.thomasantony.com/notes/202108121143-how-to-test-pcbs-bed-of-nails/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108121759-gps-under-instrument-flight-rules/</loc>
+        <loc>https://www.thomasantony.com/notes/202108121759-gps-under-instrument-flight-rules/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108121802-non-waas-gps-ifr/</loc>
+        <loc>https://www.thomasantony.com/notes/202108121802-non-waas-gps-ifr/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108121819-waas-gps-under-ifr/</loc>
+        <loc>https://www.thomasantony.com/notes/202108121819-waas-gps-under-ifr/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108121824-circling-approaches/</loc>
+        <loc>https://www.thomasantony.com/notes/202108121824-circling-approaches/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108121928-when-can-gps-be-used-in-lieu-of-dme/</loc>
+        <loc>https://www.thomasantony.com/notes/202108121928-when-can-gps-be-used-in-lieu-of-dme/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108121942-when-can-you-descend-below-minimums-on-an-iap/</loc>
+        <loc>https://www.thomasantony.com/notes/202108121942-when-can-you-descend-below-minimums-on-an-iap/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108162030-parity-check/</loc>
+        <loc>https://www.thomasantony.com/notes/202108162030-parity-check/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108162031-how-do-hamming-codes-work/</loc>
+        <loc>https://www.thomasantony.com/notes/202108162031-how-do-hamming-codes-work/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108162211-elegance-of-hamming-codes/</loc>
+        <loc>https://www.thomasantony.com/notes/202108162211-elegance-of-hamming-codes/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108232349-optical-rectenna-for-power-generation-from-waste-heat/</loc>
+        <loc>https://www.thomasantony.com/notes/202108232349-optical-rectenna-for-power-generation-from-waste-heat/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108241644-vim-repeatable-actions-and-how-to-reverse-them/</loc>
+        <loc>https://www.thomasantony.com/notes/202108241644-vim-repeatable-actions-and-how-to-reverse-them/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108251347-vim-command-line/</loc>
+        <loc>https://www.thomasantony.com/notes/202108251347-vim-command-line/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108251543-vim-working-with-files-and-buffers/</loc>
+        <loc>https://www.thomasantony.com/notes/202108251543-vim-working-with-files-and-buffers/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108251616-vim-windows-and-tabs/</loc>
+        <loc>https://www.thomasantony.com/notes/202108251616-vim-windows-and-tabs/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202108302000-how-to-steal-file-descriptors-fdleak/</loc>
+        <loc>https://www.thomasantony.com/notes/202108302000-how-to-steal-file-descriptors-fdleak/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202111122106-what-is-the-gamma-function/</loc>
+        <loc>https://www.thomasantony.com/notes/202111122106-what-is-the-gamma-function/</loc>
         <lastmod>2021-12-13T03:06:04.286Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/</loc>
+        <loc>https://www.thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/</loc>
         <lastmod>2022-01-11T03:28:20.283Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/</loc>
+        <loc>https://www.thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/</loc>
         <lastmod>2022-02-06T17:05:33.089Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202202192208-running-virtualbox-vms-with-networking/</loc>
+        <loc>https://www.thomasantony.com/notes/202202192208-running-virtualbox-vms-with-networking/</loc>
         <lastmod>2022-03-20T05:08:45.753Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202202192208-solving-vulnhub-ctf-mercury/</loc>
+        <loc>https://www.thomasantony.com/notes/202202192208-solving-vulnhub-ctf-mercury/</loc>
         <lastmod>2022-03-20T05:08:47.753Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202203032013-triad-algorithm-for-attitude-determination/</loc>
+        <loc>https://www.thomasantony.com/notes/202203032013-triad-algorithm-for-attitude-determination/</loc>
         <lastmod>2022-04-04T03:13:13.208Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202204182247-attitude-control-using-reaction-wheels/</loc>
+        <loc>https://www.thomasantony.com/notes/202204182247-attitude-control-using-reaction-wheels/</loc>
         <lastmod>2022-05-19T05:47:36.416Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202205092031-what-is-tla/</loc>
+        <loc>https://www.thomasantony.com/notes/202205092031-what-is-tla/</loc>
         <lastmod>2022-06-10T03:31:49.999Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202207231848-allocating-torques-to-reaction-wheels/</loc>
+        <loc>https://www.thomasantony.com/notes/202207231848-allocating-torques-to-reaction-wheels/</loc>
         <lastmod>2022-08-20T01:49:19.119Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202207231849-points-in-a-plane-using-null-space/</loc>
+        <loc>https://www.thomasantony.com/notes/202207231849-points-in-a-plane-using-null-space/</loc>
         <lastmod>2022-08-24T01:49:19.119Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202207311849-nand2tetris-note-01/</loc>
+        <loc>https://www.thomasantony.com/notes/202207311849-nand2tetris-note-01/</loc>
         <lastmod>2022-09-01T01:49:00.451Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202207312135-nand2tetris-note-02-elementary-logic-gates/</loc>
+        <loc>https://www.thomasantony.com/notes/202207312135-nand2tetris-note-02-elementary-logic-gates/</loc>
         <lastmod>2022-09-01T04:35:04.243Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/</loc>
+        <loc>https://www.thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/</loc>
         <lastmod>2022-09-04T03:41:18.681Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202208041235-nand2tetris-note-03-the-hack-alu/</loc>
+        <loc>https://www.thomasantony.com/notes/202208041235-nand2tetris-note-03-the-hack-alu/</loc>
         <lastmod>2022-09-04T19:35:45.742Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202208041236-nand2tetris-note-04-sequential-logic-and-memory/</loc>
+        <loc>https://www.thomasantony.com/notes/202208041236-nand2tetris-note-04-sequential-logic-and-memory/</loc>
         <lastmod>2022-09-04T19:36:00.037Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202208042109-nand2tetris-note-05-hack-assembly-language/</loc>
+        <loc>https://www.thomasantony.com/notes/202208042109-nand2tetris-note-05-hack-assembly-language/</loc>
         <lastmod>2022-09-05T04:09:53.894Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202208141834-bdot-attitude-controller/</loc>
+        <loc>https://www.thomasantony.com/notes/202208141834-bdot-attitude-controller/</loc>
         <lastmod>2022-09-15T01:34:31.565Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202209132012-cross-product-by-matrix-multiplication/</loc>
+        <loc>https://www.thomasantony.com/notes/202209132012-cross-product-by-matrix-multiplication/</loc>
         <lastmod>2022-10-14T03:12:52.909Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202209132014-generating-perpendicular-basis-vectors-in-a-plane/</loc>
+        <loc>https://www.thomasantony.com/notes/202209132014-generating-perpendicular-basis-vectors-in-a-plane/</loc>
         <lastmod>2022-10-14T03:14:56.441Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202209152300-differential-geometry-manifolds/</loc>
+        <loc>https://www.thomasantony.com/notes/202209152300-differential-geometry-manifolds/</loc>
         <lastmod>2022-10-16T06:00:54.961Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202209152320-differential-geometry-point/</loc>
+        <loc>https://www.thomasantony.com/notes/202209152320-differential-geometry-point/</loc>
         <lastmod>2022-10-16T06:20:21.404Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/202209152326-differential-geometry-coordinate-functions-or-charts/</loc>
+        <loc>https://www.thomasantony.com/notes/202209152326-differential-geometry-coordinate-functions-or-charts/</loc>
         <lastmod>2022-10-16T06:26:58.868Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/aerospace-engineering/</loc>
+        <loc>https://www.thomasantony.com/notes/aerospace-engineering/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/aviation/</loc>
+        <loc>https://www.thomasantony.com/notes/aviation/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/computer-applications/</loc>
+        <loc>https://www.thomasantony.com/notes/computer-applications/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/computer-science/</loc>
+        <loc>https://www.thomasantony.com/notes/computer-science/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/differential-geometry/</loc>
+        <loc>https://www.thomasantony.com/notes/differential-geometry/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/electronics-and-embedded-systems/</loc>
+        <loc>https://www.thomasantony.com/notes/electronics-and-embedded-systems/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/information-security/</loc>
+        <loc>https://www.thomasantony.com/notes/information-security/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/infosec-ctf-walkthroughs/</loc>
+        <loc>https://www.thomasantony.com/notes/infosec-ctf-walkthroughs/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/mathematics/</loc>
+        <loc>https://www.thomasantony.com/notes/mathematics/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/nand2tetris/</loc>
+        <loc>https://www.thomasantony.com/notes/nand2tetris/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/physics/</loc>
+        <loc>https://www.thomasantony.com/notes/physics/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/productivity/</loc>
+        <loc>https://www.thomasantony.com/notes/productivity/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/software-development/</loc>
+        <loc>https://www.thomasantony.com/notes/software-development/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/notes/vim/</loc>
+        <loc>https://www.thomasantony.com/notes/vim/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/posts/</loc>
+        <loc>https://www.thomasantony.com/posts/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/posts/2016/tantony-flybywire-declarative-guis-for-python-inspired-by-react-ad2131d4cbc1/</loc>
+        <loc>https://www.thomasantony.com/posts/2016/tantony-flybywire-declarative-guis-for-python-inspired-by-react-ad2131d4cbc1/</loc>
         <lastmod>2016-09-04T05:26:46.557Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/posts/2016/tantony-training-a-neural-network-in-real-time-to-control-a-self-driving-car-9ee5654978b7/</loc>
+        <loc>https://www.thomasantony.com/posts/2016/tantony-training-a-neural-network-in-real-time-to-control-a-self-driving-car-9ee5654978b7/</loc>
         <lastmod>2016-12-11T05:02:01.849Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/posts/2018/tantony-using-virtualcan-inside-docker-on-macos-cfa10f7e75d6/</loc>
+        <loc>https://www.thomasantony.com/posts/2018/tantony-using-virtualcan-inside-docker-on-macos-cfa10f7e75d6/</loc>
         <lastmod>2018-02-09T03:42:31.359Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/posts/2019/hello-world/</loc>
+        <loc>https://www.thomasantony.com/posts/2019/hello-world/</loc>
         <lastmod>2019-10-16T20:47:55-05:00</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/posts/2020/orbiter-sdk-vs-2019/</loc>
+        <loc>https://www.thomasantony.com/posts/2020/orbiter-sdk-vs-2019/</loc>
         <lastmod>2020-08-08T12:39:52-05:00</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/posts/2021/msl-apollo-guidance/</loc>
+        <loc>https://www.thomasantony.com/posts/2021/msl-apollo-guidance/</loc>
         <lastmod>2021-08-19T15:05:51-05:00</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/posts/orbiter-addon-rust/</loc>
+        <loc>https://www.thomasantony.com/posts/orbiter-addon-rust/</loc>
         <lastmod>2022-01-10T23:49:12-06:00</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/projects/</loc>
+        <loc>https://www.thomasantony.com/projects/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/projects/classical-mechanics/</loc>
+        <loc>https://www.thomasantony.com/projects/classical-mechanics/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/projects/sicm-workbook/</loc>
+        <loc>https://www.thomasantony.com/projects/sicm-workbook/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/projects/sicm-workbook/section-1-10-1-coordinate-constraints/</loc>
-        <lastmod>2022-10-29T05:44:49Z</lastmod>
+        <loc>https://www.thomasantony.com/projects/sicm-workbook/section-1-10-1-coordinate-constraints/</loc>
+        <lastmod>2022-10-29T07:00:21Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/projects/sicm-workbook/section-1-10-constrained-motion/</loc>
+        <loc>https://www.thomasantony.com/projects/sicm-workbook/section-1-10-constrained-motion/</loc>
         <lastmod>2022-10-28T01:12:02Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/projects/sicm-workbook/section-1-8-5-noethers-theorem/</loc>
+        <loc>https://www.thomasantony.com/projects/sicm-workbook/section-1-8-5-noethers-theorem/</loc>
         <lastmod>2022-10-24T01:14:12Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/projects/sicm-workbook/section-1-9-abstraction-of-path-functions/</loc>
+        <loc>https://www.thomasantony.com/projects/sicm-workbook/section-1-9-abstraction-of-path-functions/</loc>
         <lastmod>2022-10-27T01:12:46Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/projects/sicm-workbook/sicm-exercise-1-21/</loc>
+        <loc>https://www.thomasantony.com/projects/sicm-workbook/sicm-exercise-1-21/</loc>
         <lastmod>2022-10-20T03:14:33Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/projects/sicm-workbook/sicm-exercise-1-36/</loc>
+        <loc>https://www.thomasantony.com/projects/sicm-workbook/sicm-exercise-1-36/</loc>
         <lastmod>2022-10-25T06:24:52Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/projects/sicm-workbook/sicm-exercise-1-37/</loc>
+        <loc>https://www.thomasantony.com/projects/sicm-workbook/sicm-exercise-1-37/</loc>
         <lastmod>2022-10-27T05:15:14Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/projects/sicm-workbook/sicm-exercise-1-38/</loc>
+        <loc>https://www.thomasantony.com/projects/sicm-workbook/sicm-exercise-1-38/</loc>
         <lastmod>2022-10-27T06:15:32Z</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/publications/</loc>
+        <loc>https://www.thomasantony.com/publications/</loc>
         <lastmod>2020-11-13T20:10:00-05:00</lastmod>
     </url>
     <url>
-        <loc>https://thomasantony.com/tags/</loc>
+        <loc>https://www.thomasantony.com/tags/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/tags/aviation/</loc>
+        <loc>https://www.thomasantony.com/tags/aviation/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/tags/compsec/</loc>
+        <loc>https://www.thomasantony.com/tags/compsec/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/tags/ctf/</loc>
+        <loc>https://www.thomasantony.com/tags/ctf/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/tags/fdleak/</loc>
+        <loc>https://www.thomasantony.com/tags/fdleak/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/tags/ifr/</loc>
+        <loc>https://www.thomasantony.com/tags/ifr/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/tags/information-theory/</loc>
+        <loc>https://www.thomasantony.com/tags/information-theory/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/tags/scientific-breakthroughs/</loc>
+        <loc>https://www.thomasantony.com/tags/scientific-breakthroughs/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/tags/vim/</loc>
+        <loc>https://www.thomasantony.com/tags/vim/</loc>
     </url>
     <url>
-        <loc>https://thomasantony.com/tags/wordle/</loc>
+        <loc>https://www.thomasantony.com/tags/wordle/</loc>
     </url>
 </urlset>

@@ -2,17 +2,17 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 	<title>Thomas Antony - Software Development</title>
 	<subtitle>My personal website and notes</subtitle>
-	<link href="https://thomasantony.com/notes/software-development/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://thomasantony.com"/>
+	<link href="https://www.thomasantony.com/notes/software-development/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.thomasantony.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
 	<updated>2022-01-11T03:28:20.283+00:00</updated>
-	<id>https://thomasantony.com/notes/software-development/atom.xml</id>
+	<id>https://www.thomasantony.com/notes/software-development/atom.xml</id>
 	<entry xml:lang="en">
 		<title>Transparent Rust bindings for C++ structs</title>
 		<published>2022-01-11T03:28:20.283+00:00</published>
 		<updated>2022-01-11T03:28:20.283+00:00</updated>
-		<link rel="alternate" href="https://thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/" type="text/html"/>
-		<id>https://thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/</id>
+		<link rel="alternate" href="https://www.thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/" type="text/html"/>
+		<id>https://www.thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/</id>
 		<content type="html">&lt;p&gt;This is a short note about the things I discovered about creating transparent bindings for C++ structs into Rust using &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;cxx.rs&quot;&gt;cxx&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
 &lt;h2 id=&quot;c-types&quot;&gt;C types&lt;&#x2F;h2&gt;
 &lt;p&gt;For scalar types like DWORD, and pointer types that reslve down to void*, a ctype wrapper macro can be used to generate a “new-type” that transparently resolves to the underlying type on the C++ side without having to use &lt;code&gt;Box&lt;&#x2F;code&gt; or &lt;code&gt;unique_ptr&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;

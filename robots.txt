@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 Allow: /
-Sitemap: https://thomasantony.com/sitemap.xml
+Sitemap: https://www.thomasantony.com/sitemap.xml
