@@ -47,15 +47,12 @@ $$
 <p>Now consider constraints that are only functions of the coordinates, i.e,</p>
 <div>
     $$
-\partial_2 \varphi = 0
+\partial_2 \varphi = 0\\
 $$
-
-
-Now the variation is tangent to the constraint if
-
-
-{% mathjax() %}
-$$
+</div>
+<p>Now the variation is tangent to the constraint if</p>
+<div>
+    $$
 (\partial_1 \varphi \circ \Gamma[q])\eta = 0 \tag{1.186}
 $$
 </div>
@@ -93,15 +90,12 @@ $$
 <p>Consider the Lagrangian with an extra term $\Lambda\varphi$ where $\varphi$ is the constraint function:</p>
 <div>
     $$
-L&#x27;&#x27; = L + \Lambda\varphi
+L&#x27;&#x27; = L + \Lambda\varphi\\
 $$
-
-
-The Lagrange equations for $L&#x27;&#x27;$ is the same as that for $L$ but with some extra terms arising from $\Lambda\varphi$. Applying the [Euler-Lagrange operator](&#x2F;projects&#x2F;sicm-workbook&#x2F;sicm-exercise-1-38&#x2F;) to $L&#x27;&#x27;$,
-
-
-{% mathjax() %}
-$$
+</div>
+<p>The Lagrange equations for $L’‘$ is the same as that for $L$ but with some extra terms arising from $\Lambda\varphi$. Applying the <a href="/projects/sicm-workbook/sicm-exercise-1-38">Euler-Lagrange operator</a> to $L’’$:</p>
+<div>
+    $$
 \begin{align*}
 \mathscr{E}[L&#x27;&#x27;] &amp;= \mathscr{E}[L + \Lambda\varphi] = \mathscr{E}[L] + \mathscr{E}[\Lambda\varphi]\\
  &amp;=  \mathscr{E}[L] + \mathscr{E}[\Lambda] \varphi + \Lambda\mathscr{E}[\varphi] + (D_t \Lambda)\partial_2 \varphi + (D_t \varphi)\partial_2 \Lambda
@@ -128,21 +122,20 @@ $$
 <p>The explicit Lagrange equations derived from the augmented Lagrangian depend on the accelerations $D^2 q$ as well as $\lambda$. Now that $\lambda$ has been showed to be derived purely form the unaugmented state, so too is $D^2 q$ (as there are no other elements in the dynamic equations). Therefore the dynamic evolution of the system is determined purely by the dynamical state.</p>
 <h3 id="the-pendulum-using-constraints">The Pendulum using Constraints</h3>
 <p>$$\require{cancel}$$</p>
-<p><img src="/images/projects/sicm-workbook/figure-1.8.jpg" alt="Figure 1.8" />
-<strong>Figure 1.8</strong></p>
+<p><img src="/images/projects/sicm-workbook/figure-1.8.jpg" alt="Figure 1.8" /></p>
+<p><strong>Figure 1.8</strong></p>
 <p>The pendulum can be modeled as a point-mass constrained to always be at a constant distance from a pivot point. The system can be represented by the following Lagrangian and constraint:</p>
 <div>
     $$
-L(t; x,y; v_x,v_y) = \frac{1}{2} m (v_x^2 + v_y^2) - mgy\\
-x^2+y^2-l^2 = 0
+\begin{align*}
+L(t; x,y; v_x,v_y) &amp;= \frac{1}{2} m (v_x^2 + v_y^2) - mgy\\
+x^2+y^2-l^2 &amp;= 0
+\end{align*}
 $$
-
-
-The augmented Lagrangian is:
-
-
-{% mathjax() %}
-$$
+</div>
+<p>The augmented Lagrangian is:</p>
+<div>
+    $$
 L(t; x,y,\lambda; v_x,v_y,\dot{\lambda}) = \frac{1}{2} m (v_x^2 + v_y^2) - mgy + \lambda(x^2+y^2-l^2)\\
 $$
 </div>
@@ -194,7 +187,7 @@ $$
         &amp;= \frac{ml \cos\theta D^2\theta - ml \sin\theta (D\theta)^2}{2l\sin\theta} \\
         &amp;= \frac{\overbrace{ml D^2\theta}^{-mg\sin\theta}\cos\theta  - ml \sin\theta (D\theta)^2}{2l\sin\theta} \\
         &amp;= \frac{-mg\cancel{\sin\theta}\cos\theta  - ml \cancel{\sin\theta} (D\theta)^2}{2l\cancel{\sin\theta}} \\
-\lambda &amp; = \frac{-1}{2l} (mg\cos\theta - ml(D\theta)^2)
+\lambda &amp; = \frac{-1}{2l} \left(mg\cos\theta - ml(D\theta)^2\right)
 \end{align*}
 $$
 </div>
@@ -207,24 +200,18 @@ $$
 <p>So the Lagrangian for the part attached to the wall is:</p>
 <div>
     $$
-L_1(t; x_1; \dot{x_1}) = \frac{1}{2}m_1\dot{x_1}^2 - \frac{1}{2}k_1 x_1^2
+L_1(t; x_1; \dot{x_1}) = \frac{1}{2}m_1\dot{x_1}^2 - \frac{1}{2}k_1 x_1^2\\
 $$
-
-
-and the Lagrangian for the part that attaches to it is:
-
-
-{% mathjax() %}
+</div>
+<p>and the Lagrangian for the part that attaches to it is:</p>
+<div>
+    $$
+L_2(t; \xi,x_2; \dot{\xi},\dot{x_2}) = \frac{1}{2}m_2(\dot{\xi}^2 + \dot{x_2}^2) - \frac{1}{2}k_2 x_2^2\\
 $$
-L_2(t; \xi,x_2; \dot{\xi},\dot{x_2}) = \frac{1}{2}m_2(\dot{\xi}^2 + \dot{x_2}^2) - \frac{1}{2}k_2 x_2^2
-$$
-
-
-Combining the two Lagrangians with the contact constraint, we get:
-
-
-{% mathjax() %}
-$$
+</div>
+<p>Combining the two Lagrangians with the contact constraint, we get:</p>
+<div>
+    $$
 L(t; x_1, x_2, xi; \dot{x_1},\dot{x_2},\dot{\xi}) = \frac{1}{2}(m_1\dot{x_1}^2 + m_2\dot{\xi}^2 + m_2\dot{x_2}^2) - \frac{1}{2}(k_1 x_1^2 + k_2 x_2^2) + \lambda(\xi - (X_1 + x_1))
 $$
 </div>
@@ -242,17 +229,15 @@ $$
 <p>For eliminating $\xi$ and $\lambda$, substitute Eq. 1.210 into Eq. 1.209,</p>
 <div>
     $$
-m( \underbrace{D^2X_1}_{=0} + D^2 x_1 + D^2 x_2 ) = \lambda
+m( \underbrace{D^2X_1}_{=0} + D^2 x_1 + D^2 x_2 ) = \lambda\\
 $$
-
-Substituting for $\lambda$ in Eq. 1.207,
-
-{% mathjax() %}
-$$
+</div>
+<p>Substituting for $\lambda$ in Eq. 1.207,</p>
+<div>
+    $$
 \begin{align*}
 m_1 D^2 x_1 &amp;= -k_1 x_1 - m_2 D^2 x_1 - m_2 D^2 x_2\\
-=&gt; m_1 D^2 x_1 + m_2 (D^2 x_1 + D^2 x_2) &amp;= -k_1 x_1 \\
-=&gt; m_1 D^2 x_1 + m_2 (D^2 x_1 + D^2 x_2) + k_1 x_1 &amp;= 0\tag{1.211}
+m_1 D^2 x_1 + m_2 (D^2 x_1 + D^2 x_2) + k_1 x_1 &amp;= 0\tag{1.211}
 \end{align*}
 $$
 </div>
@@ -260,8 +245,7 @@ $$
 <div>
     $$
 \begin{align*}
-m_2(D^2\xi + D^2 x_2) &amp;= -k_2 x_2\\
-=&gt; m_2(D^2 x_1+ D^2 x_2) + k_2 x_2 &amp;= 0\tag{1.212}
+m_2(D^2 x_1+ D^2 x_2) + k_2 x_2 &amp;= 0\tag{1.212}
 \end{align*}
 $$
 </div>
