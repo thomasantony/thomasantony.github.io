@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 1.11: Summary - Thomas Antony</title>
+
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script  async defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="summary">Summary</h2>
+<p>This chapter was primarily introducing the Lagrangian method of analyzing mechanical systems. Here are some of the key points:</p>
+<ul>
+<li>
+<p>To start with, we need to distinguish between realizable motions and other possible motions of the system. This is achieved using the “action function”, which is constructed to be stationary only on paths that describe realizable motions, with respect to variations in the path. This is called the <em>principle of stationary action</em> or <em>principle of least action</em> and is the foundation of classical mechanics (and apparently electrodynamics, quantum mechanics and general relativity). The stationary action principle is a coordinate-independent description of realizable paths. Regardless of if the system has constraints, we may choose any system of coordinates that uniquely determines the configuration of the system.</p>
+<ul>
+<li>
+<p>An action is defined as the integral of a function, <em>the Lagrangian</em> along a path. For many mechanical systems, the appropriate choice for a Lagrangian is the difference between the kinetic energy and potential energy of the system. This is not unique and there may be many choices of valid Lagrangians for a given system. </p>
+</li>
+<li>
+<p>By applying the Euler-Lagrange operator to the Lagrangian, we can derive a set of ordinary differential equations called the <em>Lagrange equations</em> that describes the motion of the system. Any realizable path saisfies these <em>equations of motion</em>. </p>
+</li>
+<li>
+<p>We can add a “total-time derivative” to a Lagrangian without affecting the Lagrange equations of system</p>
+</li>
+<li>
+<p>The entire time-history of a system can be simulated from a starting point with an initial state (which usually consists of the coordinates and the rate of change of the coordinates at the initial time) using these equations of motion</p>
+</li>
+</ul>
+</li>
+<li>
+<p>If there are continuous symmetries in a system, there are conserved quantities associated with that system (<a href="/projects/sicm-workbook/section-1.8.5-noethers-theorem">Noether’s theorem</a>)</p>
+<ul>
+<li>If the Lagrangian can be formulated such that the symmetries manifest as missing coordinates in the Lagrangian,  then there are conserved momenta that are “conjugate” to these coordinates</li>
+<li>If the Lagrangian is independent of time then there is a conserved energy.</li>
+</ul>
+</li>
+<li>
+<p><a href="/projects/sicm-workbook/section-1.10-constrained-motion">Constraints</a> in a dynamic system can be either holonomic or non-holonomic</p>
+<ul>
+<li>The constraints can be added to the systems by augmenting the Lagrangian with the constraint function.</li>
+<li>With Holonomic constraints, the “Lagrange multiplier” $\lambda$ and redundant coordinates can be eliminated from the system and the dynamic equations formulated in terms of just the coordinates and velocities.
+<ul>
+<li>Holonomic constraints are those which are either coordinate functions, or can be represented as coordinate functions (called integrable constraints)</li>
+</ul>
+</li>
+<li>Non-holonomic constraints have a velocity dependency and systems with these constraints do not currently have a general solution</li>
+</ul>
+</li>
+</ul>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
