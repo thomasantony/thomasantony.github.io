@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 1.10.1: Coordinate Constraints - Thomas Antony</title>
+
+    <script src="https://thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script  async defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="1-10-1-coordinate-constraints">1.10.1 Coordinate Constraints</h2>
+<p>In the <a href="/projects/sicm-workbook/section-1.10-constrained-motion">previous section</a>, we showed that for motion of a system with the constraint $\varphi(t, q(t), Dq(t)) = 0$, for stationary action, the path variations, $\eta(t)$, must be tangent to the constraint surface. And in order for the variation to be tangent to the constraint at a given time, it must satisfy the condition:</p>
+<div>
+    $$
+\begin{align*}
+(\partial_1 \varphi \circ \Gamma[q])\eta + (\partial_2 \varphi \circ \Gamma[q])D\eta = 0
+\end{align*}
+$$
+</div>
+<p>Now consider constraints that are only functions of the coordinates, i.e,</p>
+<div>
+    $$
+\partial_2 \varphi = 0
+$$
+
+
+Now the variation is tangent to the constraint if
+
+
+{% mathjax() %}
+$$
+(\partial_1 \varphi \circ \Gamma[q])\eta = 0 \tag{1.186}
+$$
+</div>
+<p>We also know from Eq. 1.183 in the previous section that,</p>
+<div>
+    $$
+\{ (\partial_1 L \circ \Gamma[q]) - D\left( \partial_2 L \circ \Gamma[q] \right) \} \eta = 0 \tag{1.183}
+$$
+</div>
+<p>Eq. 1.186 and 1.183 together should determine the motion of the constrained system.</p>
+<p>Eq 1.183 is satisfied if the dot product of the first term (aka the residual of Lagranges Equations) and $\eta(t)$ is zero at all times. This is also the definition for two functions of time to be orthogonal to each other. To quote footnote 92 from the book:</p>
+<blockquote>
+<p>We take two tuple-valued functions of time to be orthogonal if at each instant the dot product of the tuples is zero. Similarly, tuple-valued functions are considered parallel if at each moment one of the tuples is a scalar multiple of the other. The scalar multiplier is in general a function of time.</p>
+</blockquote>
+<p>So the residual of the Lagrange equations is orthogonal to any $\eta(t)$. Also, $\eta(t)$ is tangent to the constraint surface, which means that it is orthogonal to the normal to the constraint surface. </p>
+<blockquote>
+<p>A vector that is orthogonal to all vectors orthogonal to a given vector is parallel to the given vector.</p>
+</blockquote>
+<p>Therefore, the residual of Lagrange equations is parallel to the normal to the constraint surface; which means the two functions are proportional:</p>
+<div>
+    $$
+(\partial_1 L \circ \Gamma[q]) - D\left( \partial_2 L \circ \Gamma[q] \right) = \lambda (\partial_1 \varphi \circ \Gamma[q])\tag{1.187}
+$$
+</div>
+<p>The proportionality factor $\lambda$ is itself a function of time and need not be a constant. This equation, along with the constraint equation $\varphi \circ \Gamma[q] = 0$ is enough to determine the path $q$ and to eliminate the unknown function $\lambda$.</p>
+<p>We can now form an augmented Lagrangian by treating $\lambda$ as one of the coordinates.</p>
+<div>
+    $$
+L&#x27;(t; q,\lambda;\dot{q},\dot{\lambda}) = L(t,q,\dot{q})+ \lambda\varphi(t,q,\dot{q})
+$$
+</div>
+<p>The Lagrange equations associated with the coordinates are just the modified Lagrangian in Eq. 1.187. The equation assoicated with $\lambda$ is just the constraint equation. So the system is fully specified. This Lagrangian is also of the same form as the one described in <a rel="noopener" target="_blank" href="https://tgvaughan.github.io/sicm/chapter001.html#h3_1-6-2">Section 1.6.2</a>.</p>
+<h3 id="how-do-we-eliminate-lambda-from-the-lagrange-equations">How do we eliminate $\lambda$ from the Lagrange Equations?</h3>
+<p>If the new function $\lambda$, can be written as a composition of a local tuple function over the original, <em>unaugmented</em> path: $\lambda = \Lambda \circ \Gamma[q]$, then it is a redundant degree of freedom and can be eliminated from the system if required.</p>
+<p>Consider the Lagrangian with an extra term $\Lambda\varphi$ where $\varphi$ is the constraint function:</p>
+<div>
+    $$
+L&#x27;&#x27; = L + \Lambda\varphi
+$$
+
+
+The Lagrange equations for $L&#x27;&#x27;$ is the same as that for $L$ but with some extra terms arising from $\Lambda\varphi$. Applying the [Euler-Lagrange operator](&#x2F;projects&#x2F;sicm-workbook&#x2F;sicm-exercise-1-38&#x2F;) to $L&#x27;&#x27;$,
+
+
+{% mathjax() %}
+$$
+\begin{align*}
+\mathscr{E}[L&#x27;&#x27;] &amp;= \mathscr{E}[L + \Lambda\varphi] = \mathscr{E}[L] + \mathscr{E}[\Lambda\varphi]\\
+ &amp;=  \mathscr{E}[L] + \mathscr{E}[\Lambda] \varphi + \Lambda\mathscr{E}[\varphi] + (D_t \Lambda)\partial_2 \varphi + (D_t \varphi)\partial_2 \Lambda
+\end{align*}
+$$
+</div>
+<p>Composing $\mathscr{E}[L]$ with $\Lambda[q]$ results in the Lagrange equations for $L’’$. Since the constraints are satisfied on the path, $\varphi \circ \Gamma[q] = 0$, which implies that $D_t(\Lambda \circ \Gamma[q]) = 0$.</p>
+<p>Therefore, composing $\mathscr{E}[L]$ with $\Lambda[q]$, we get:</p>
+<div>
+    $$
+\begin{align*}
+\mathscr{E}[L&#x27;&#x27;]\circ\Gamma[q] &amp;= \mathscr{E}[L]\circ\Gamma[q] + (\mathscr{E}[\Lambda]\circ\Gamma[q])\underbrace{\varphi}_{=0} + \underbrace{(\Lambda\circ\Gamma[q])}_{=\lambda}(\mathscr{E}[\varphi]\circ\Gamma[q]) + (D_t \Lambda)(\partial_2 \varphi\circ\Gamma[q]) + (\underbrace{D_t \varphi}_{=0})(\partial_2 \Lambda\circ\Gamma[q]) \\
+&amp;= \mathscr{E}[L]\circ\Gamma[q] + \lambda(\mathscr{E}[\varphi]\circ\Gamma[q]) + (D_t \Lambda)(\partial_2 \varphi\circ\Gamma[q])
+\end{align*}
+$$
+</div>
+<p>$\partial_2\varphi = 0$ as the constraints do not depend on velocity. Then,</p>
+<div>
+    $$
+\mathscr{E}[L&#x27;&#x27;]\circ\Gamma[q] = \mathscr{E}[L]\circ\Gamma[q] + \lambda(\mathscr{E}[\varphi]\circ\Gamma[q])\tag{1.192}
+$$
+</div>
+<p>We can see here that the Lagrange equations for $L’‘$ is the same as that for $L’$, with an extra term. Comparing this to Eq. 1.187, we can see that $\lambda = \Lambda \circ \Gamma[q]$, which is determined purely by the unaugmented state. Therefore $\lambda$ can be eliminated from the Lagrange equations of the augmented Lagrangian.</p>
+<p>The explicit Lagrange equations derived from the augmented Lagrangian depend on the accelerations $D^2 q$ as well as $\lambda$. Now that $\lambda$ has been showed to be derived purely form the unaugmented state, so too is $D^2 q$ (as there are no other elements in the dynamic equations). Therefore the dynamic evolution of the system is determined purely by the dynamical state.</p>
+<h3 id="the-pendulum-using-constraints">The Pendulum using Constraints</h3>
+<p>$$\require{cancel}$$</p>
+<p><img src="/images/projects/sicm-workbook/figure-1.8.jpg" alt="Figure 1.8" />
+<strong>Figure 1.8</strong></p>
+<p>The pendulum can be modeled as a point-mass constrained to always be at a constant distance from a pivot point. The system can be represented by the following Lagrangian and constraint:</p>
+<div>
+    $$
+L(t; x,y; v_x,v_y) = \frac{1}{2} m (v_x^2 + v_y^2) - mgy\\
+x^2+y^2-l^2 = 0
+$$
+
+
+The augmented Lagrangian is:
+
+
+{% mathjax() %}
+$$
+L(t; x,y,\lambda; v_x,v_y,\dot{\lambda}) = \frac{1}{2} m (v_x^2 + v_y^2) - mgy + \lambda(x^2+y^2-l^2)\\
+$$
+</div>
+<p>The Lagrange equations for this augmented Lagrangian is:</p>
+<div>
+    $$
+\begin{align*}
+m D^2x - 2\lambda x = 0 \tag{1.196}\\
+m D^2y + mg - 2\lambda y = 0 \tag{1.197}\\
+x^2 + y^2 - l^2 = 0\tag{1.198}\\
+\end{align*}
+$$
+</div>
+<p>These equations can be simplified by switching to polar coordinates, $x = r\sin{\theta}$ and $y = -r\cos{\theta}$. Substituting this in the constraint equation, we get, $r = l$. Plugging this into the equations for $x$ and $y$, we get:</p>
+<div>
+    $$
+\begin{align*}
+m D^2 (l\sin\theta) - 2\lambda l\sin\theta &amp;= m (D(l \cos\theta D\theta)) - 2\lambda l\sin\theta\\
+  &amp;= ml (\cos\theta D^2\theta - \sin\theta (D\theta)^2) - 2\lambda l\sin\theta = 0 \tag{1.200}
+\end{align*}
+$$
+</div>
+<div>
+    $$
+\begin{align*}
+m D^2 (-l\cos\theta) + mgl - 2\lambda (-l\cos\theta) &amp;= m (D(l \sin\theta D\theta)) + 2\lambda l\cos\theta\\
+  &amp;= ml (\sin\theta D^2\theta + \cos\theta (D\theta)^2) + 2\lambda l\cos\theta + mg = 0 \tag{1.201}
+\end{align*}
+$$
+</div>
+<p>Multiply Eq. 1.200 by $\cos\theta$ and Eq. 1.201 by $\sin{\theta}$ and add to get:</p>
+<div>
+    $$
+\begin{align*}
+ml (\cos\theta D^2\theta - \sin\theta (D\theta)^2)\cos\theta - \cancel{2\lambda l\sin\theta \cos \theta}&amp; + \\
+ml (\sin\theta D^2\theta + \cos\theta (D\theta)^2)\sin\theta + \cancel{2\lambda l\cos\theta \sin\theta} &amp; + mg\sin\theta = 0 \\
+=&gt; ml (\cos^2\theta D^2\theta) - \cancel{ml \sin\theta \cos\theta(D\theta)^2} + ml (\sin^2 \theta D^2\theta) + \cancel{ml \cos\theta \sin\theta(D\theta)^2} &amp;+ mg\sin\theta = 0 \\
+=&gt; ml D^2\theta (\cos^2\theta + \sin^2 \theta ) &amp; + mg\sin\theta = 0 \\
+=&gt; ml D^2\theta &amp; + mg\sin\theta = 0
+\end{align*}
+$$
+</div>
+<p>This is indeed the same equation as what we get if we used $\theta$ as an unconstrained generalized coordinate for the pendulum. We can also compute $\lambda$ in terms of the other variables from Eq.1.196 as:</p>
+<div>
+    $$
+\begin{align*}
+\lambda &amp;= \frac{m D^2 x}{2x} = \frac{m D^2 (l\sin\theta)}{2l\sin\theta} \\
+        &amp;= \frac{m (D(l \cos\theta D\theta))}{2l\sin\theta} \\
+        &amp;= \frac{ml \cos\theta D^2\theta - ml \sin\theta (D\theta)^2}{2l\sin\theta} \\
+        &amp;= \frac{\overbrace{ml D^2\theta}^{-mg\sin\theta}\cos\theta  - ml \sin\theta (D\theta)^2}{2l\sin\theta} \\
+        &amp;= \frac{-mg\cancel{\sin\theta}\cos\theta  - ml \cancel{\sin\theta} (D\theta)^2}{2l\cancel{\sin\theta}} \\
+\lambda &amp; = \frac{-1}{2l} (mg\cos\theta - ml(D\theta)^2)
+\end{align*}
+$$
+</div>
+<p>This further confirms what we showed in the previous section, that $\lambda$ really is the composition function of the local state of the path. Also, to be noted here is the $2l\lambda$ is a force – the sum of the outward component of gravity and the centrifugal force. This is the tension in the pendulum rod. It is effectively the force that is constraining the mass to stay at a constant distance from the pivot.</p>
+<h3 id="building-systems-from-parts">Building systems from parts</h3>
+<p><img src="/images/projects/sicm-workbook/figure-1.8.jpg" alt="Figure 1.9" /></p>
+<p><strong>Figure 1.9: A compound spring-mass system is decomposed into two subsystems.</strong></p>
+<p>We can analyze compound systems using augmented Lagrangians to enforce constraints between the individual parts. Consider the compound spring-mass system at the top of Figure 1.9. One way to analyze this is as a single system with two coordinates $x_1$ and $x_2$ to represent the extension of the springs from their equilibrium lengths of $X_1$ and $X_2$.</p>
+<p>An alternative procedure would be to break it into two parts – one being the spring-mass attached to the wall, and the other being the second spring-mass system with its attachment point specified by an additional coordinate $\xi$ (which may have its own velocity). The Lagrangian for each part can be written separately. The Lagrangian of the combined system is the sum of the two component Lagrangians along with a constraint $\xi = X_1 + x_1$ to ensure that the two systems are attached.</p>
+<p>So the Lagrangian for the part attached to the wall is:</p>
+<div>
+    $$
+L_1(t; x_1; \dot{x_1}) = \frac{1}{2}m_1\dot{x_1}^2 - \frac{1}{2}k_1 x_1^2
+$$
+
+
+and the Lagrangian for the part that attaches to it is:
+
+
+{% mathjax() %}
+$$
+L_2(t; \xi,x_2; \dot{\xi},\dot{x_2}) = \frac{1}{2}m_2(\dot{\xi}^2 + \dot{x_2}^2) - \frac{1}{2}k_2 x_2^2
+$$
+
+
+Combining the two Lagrangians with the contact constraint, we get:
+
+
+{% mathjax() %}
+$$
+L(t; x_1, x_2, xi; \dot{x_1},\dot{x_2},\dot{\xi}) = \frac{1}{2}(m_1\dot{x_1}^2 + m_2\dot{\xi}^2 + m_2\dot{x_2}^2) - \frac{1}{2}(k_1 x_1^2 + k_2 x_2^2) + \lambda(\xi - (X_1 + x_1))
+$$
+</div>
+<p>The Lagrange’s equations for the system are:</p>
+<div>
+    $$
+\begin{align*}
+m_1D^2 x_1 = -k_1 x_1 - \lambda \tag{1.207} \\
+m_2(D^2\xi + D^2 x_2) = -k_2 x_2 \tag{1.208} \\
+m_2(D^2\xi + D^2 x_2) = \lambda \tag{1.209} \\
+0 = \xi - (X_1 + x_1) \tag{1.210}
+\end{align*}
+$$
+</div>
+<p>For eliminating $\xi$ and $\lambda$, substitute Eq. 1.210 into Eq. 1.209,</p>
+<div>
+    $$
+m( \underbrace{D^2X_1}_{=0} + D^2 x_1 + D^2 x_2 ) = \lambda
+$$
+
+Substituting for $\lambda$ in Eq. 1.207,
+
+{% mathjax() %}
+$$
+\begin{align*}
+m_1 D^2 x_1 &amp;= -k_1 x_1 - m_2 D^2 x_1 - m_2 D^2 x_2\\
+=&gt; m_1 D^2 x_1 + m_2 (D^2 x_1 + D^2 x_2) &amp;= -k_1 x_1 \\
+=&gt; m_1 D^2 x_1 + m_2 (D^2 x_1 + D^2 x_2) + k_1 x_1 &amp;= 0\tag{1.211}
+\end{align*}
+$$
+</div>
+<p>Substituting for $\xi$ in Eq. 1.208,</p>
+<div>
+    $$
+\begin{align*}
+m_2(D^2\xi + D^2 x_2) &amp;= -k_2 x_2\\
+=&gt; m_2(D^2 x_1+ D^2 x_2) + k_2 x_2 &amp;= 0\tag{1.212}
+\end{align*}
+$$
+</div>
+<p>Equations 1.211 and 1.212 are the equations of motion for the compound system. This is a general strategy that can be used to create a library of primitive components.</p>
+<blockquote>
+<p>Each component may be characterized by a Lagrangian with additional degrees of freedom for the terminals where that component may be attached to others. We then can construct composite Lagrangians by combining components, using constraints to glue together the terminals.</p>
+</blockquote>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>
+</span></code></pre>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
