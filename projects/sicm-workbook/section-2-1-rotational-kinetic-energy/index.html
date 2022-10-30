@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 2.1: Rotational Kinetic Energy - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="2-rigid-bodies">2 Rigid Bodies</h2>
+<blockquote>
+<p>The polhode rolls without slipping on the herpolhode lying in the invariable plane.</p>
+<p>Herbert Goldstein, <em>Classical Mechanics</em>, footnote, p. 207.</p>
+</blockquote>
+<ul>
+<li>
+<p>A rotating top - an axisymmetric body subject to gravity, with a point on the axis of symmetry that is fixed in space</p>
+<ul>
+<li>The axis of the top precesses about the vertical, apparently moving perpendicular to the direction in which gravity is pulling it</li>
+</ul>
+</li>
+<li>
+<p>Book thrown into the air - has two stable configurations about longest and shortest axes. Starts tumbling when rotated about intermediate axis</p>
+</li>
+<li>
+<p>The Moon always points the same face towards the Earth regardless of the interactions with the Sun and other planets</p>
+</li>
+<li>
+<p>A rigid body can be thought to consist of a large number of constituent particles with rigid constraints among them. While the dynamics are the same as any other rigidly constrained system, new tools are needed as the number of particles/constraints are very high.</p>
+</li>
+<li>
+<p>We need to define the kinetic and potential energies to define the Lagrangian for a system</p>
+<ul>
+<li>The strategy is to first rewrite the kinetic and potential energies in terms of quantities that characterize essential aspects of the distribution of mass in the body and the state of motion of the body</li>
+</ul>
+</li>
+<li>
+<p>For rotational kinetic energy, a small number of parameters completely specify the state of motion and the relevant aspects of the distribution of mass in the body</p>
+</li>
+<li>
+<p>For potential energy, some specific problems the potential energy can be represented with a small number of parameters, but in general we have to make approximations to obtain a representation with a manageable number of parameters</p>
+</li>
+</ul>
+<h2 id="2-1-rotational-kinetic-energy">2.1 Rotational Kinetic Energy</h2>
+<p>A rigid body can be considered to consist of a large number of particles with mass $m_\alpha$, $\vec{x}<em>\alpha$, and velocities $\dot{\vec{x}}</em>\alpha$ with positional constraints between them. The kinetic energy is:</p>
+<div>
+    $$
+\sum_{\alpha} \frac{1}{2} m_\alpha\dot{\vec{x}}_\alpha \cdot \dot{\vec{x}}_\alpha
+$$
+
+The configuration of a rigid body is fully specified by the position of *any* point inthe body and the orientation of the body. Therefore, we define the position vectors based on a reference point on the body $X$. The position of each particle relative to the reference point can be represented by $\xi_\alpha$:
+
+
+{% mathjax() %}
+$$
+\vec{x}_\alpha = \vec{X} + \vec{\xi}_\alpha\tag{2.2}
+$$
+</div>
+<p>The corresponding velocities are given by:</p>
+<div>
+    $$
+\dot{\vec{x}}_\alpha = \dot{\vec{X}} + \dot{\vec{\xi}}_\alpha\tag{2.3}
+$$
+</div>
+<p>The kinetic energy of the body can be rewritten as:</p>
+<div>
+    $$
+\begin{align*}
+\sum_{\alpha} \frac{1}{2} &amp; m_\alpha  (\vec{X} + \vec{\xi}_\alpha) \cdot (\vec{X} + \vec{\xi}_\alpha) \\
+        &amp;= \sum_{\alpha} \frac{1}{2} m_\alpha  (\vec{X} \cdot \vec{X} + \vec{X} \cdot \vec{\xi}_\alpha  + \vec{\xi}_\alpha\cdot\vec{\xi}_\alpha)\tag{2.4}
+\end{align*}
+$$
+</div>
+<p>If we choose the center of mass of the body as the reference point,</p>
+<div>
+    $$
+\vec{X} = \frac{1}{M}  \sum_{\alpha} m_\alpha\vec{x}_\alpha
+$$
+
+
+where $M = \sum_\alpha m_\alpha$ is the total mass of the body, then
+
+
+{% mathjax() %}
+$$
+\sum_{\alpha} m_\alpha\vec{\xi_\alpha} = \sum_\alpha m_\alpha (\vec{x}_\alpha - \vec{X})\tag{2.6}
+$$
+</div>
+<p>Taking the derivative of this, we can see that the relative velocities satisfy $\sum_\alpha m_\alpha \dot{\xi}_\alpha = 0$. So the kinetic energy is equal to:</p>
+<div>
+    $$
+\begin{align*}
+T &amp;= \frac{1}{2} \left(\sum_{\alpha} m_\alpha \dot{\vec{X}} \cdot \dot{\vec{X}} + \sum_{\alpha} m_\alpha \dot{\vec{X}} \cdot \vec{\xi}_\alpha  + \sum_{\alpha} m_\alpha \dot{\vec{\xi}}_\alpha\cdot\dot{\vec{\xi}}_\alpha\right) \\
+  &amp;= \frac{1}{2} \left(\sum_{\alpha} m_\alpha \dot{\vec{X}} \cdot \dot{\vec{X}} + \dot{\vec{X}} \sum_{\alpha} \underbrace{m_\alpha \dot{\vec{\xi}}_\alpha}_{= 0} + \sum_{\alpha} m_\alpha \dot{\vec{\xi}}_\alpha\cdot\dot{\vec{\xi}}_\alpha\right)\\
+  &amp;= \frac{1}{2} \sum_{\alpha} m_\alpha \dot{\vec{X}} \cdot \dot{\vec{X}} + \frac{1}{2} \sum_{\alpha} m_\alpha \dot{\vec{\xi}}_\alpha \cdot \dot{\vec{\xi}}_\alpha\tag{2.8}
+\end{align*}
+$$
+</div>
+<p>This shows that kinetic energy of the rigid body can be separated into two pieces. The translational kinetic energy is:</p>
+<div>
+    $$
+\frac{1}{2} \sum_{\alpha} m_\alpha \dot{\vec{X}} \cdot \dot{\vec{X}}\tag{2.9}
+$$
+</div>
+<p>The rotational kinetic energy is:</p>
+<div>
+    $$
+\frac{1}{2} \sum_{\alpha} m_\alpha \dot{\vec{\xi}}_\alpha \cdot \dot{\vec{\xi}}_\alpha\tag{2.10}
+$$
+</div>
+<p>When written in appropriate generalized coordinates, the kinetic energy is a Lagrangian for a free rigid body. Choosing generalized coordinates such that the coordinates specifying the position of the center of mass is separate from those specifying the orientation, then the Lagrange equations completely decouple. This makes the dynamics of translation decoupled from that of translation.</p>
+<p>However, this is not true in the general case once potential energies are included in the system. So the motion of the center of mass and the rigid body may be coupled through the potential energy. However, in some specific cases, such as for example, a rigid body moving in a uniform gravitational field, the equations may decouple.</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>
+</span></code></pre>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
