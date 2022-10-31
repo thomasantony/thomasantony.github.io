@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Exercise 1.40: Bead On A Triaxial Surface (Incomplete) - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h3 id="exercise-1-40-bead-on-a-triaxial-surface">Exercise 1.40: Bead on a triaxial surface</h3>
+<p><strong>Consider again the motion of a bead constrained to move on a triaxial surface (exercise 1.18). Reformulate this using rectangular coordinates as the generalized coordinates with an explicit constraint that the bead must stay on the surface. Find a Lagrangian and show that the Lagrange equations are equivalent to those found in <a rel="noopener" target="_blank" href="https://tgvaughan.github.io/sicm/chapter001.html#Exe_1-18">exercise 1.18</a> (<a href="/projects/sicm-workbook/sicm-exercise-1-18/">solution</a>).</strong></p>
+<p>We model the system as a point mass constrained to stay on a triaxial surface using the following coordinate constraint:</p>
+<div>
+    $$
+\varphi(t; x,y,z; \dot{x},\dot{y},\dot{z}) = \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} - 1 = 0
+$$
+
+where $a$, $b$ and $c$ are parameters defining the surface. The augmented Lagrangian is:
+
+
+{% mathjax() %}
+$$
+L&#x27; = \frac{1}{2} m \dot{x}^2 + \lambda \left(\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} - 1\right)
+$$
+</div>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-free-particle </span><span>[mass]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[_ _ v]]
+</span><span>        (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> mass (</span><span style="color:#bf616a;">dot-product</span><span> v v)))   
+</span><span>)
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">ellipsoid-constraint </span><span>[a b c]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[_ [x y z] _]] 
+</span><span>        (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">/ </span><span>(</span><span style="color:#bf616a;">square</span><span> x) (</span><span style="color:#bf616a;">square</span><span> a)) 
+</span><span>              (</span><span style="color:#bf616a;">/ </span><span>(</span><span style="color:#bf616a;">square</span><span> y) (</span><span style="color:#bf616a;">square</span><span> b))
+</span><span>              (</span><span style="color:#bf616a;">/ </span><span>(</span><span style="color:#bf616a;">square</span><span> z) (</span><span style="color:#bf616a;">square</span><span> c))) </span><span style="color:#d08770;">1</span><span>)
+</span><span>    )
+</span><span>)
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">Augment-Lagrangian </span><span>[L lambda phi]
+</span><span>    (</span><span style="color:#bf616a;">+</span><span> L (</span><span style="color:#bf616a;">*</span><span> lambda phi)))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-bead-on-ellipsoid </span><span>[m a b c]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[t [x y z lambda] [xdot ydot zdot lambdadot]]]
+</span><span>        (</span><span style="color:#bf616a;">let </span><span>[L (</span><span style="color:#bf616a;">L-free-particle</span><span> m)
+</span><span>              phi (</span><span style="color:#bf616a;">ellipsoid-constraint</span><span> a b c)
+</span><span>              q (</span><span style="color:#bf616a;">up</span><span> t (</span><span style="color:#bf616a;">up</span><span> x y z) (</span><span style="color:#bf616a;">up</span><span> xdot ydot zdot))]
+</span><span>        (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">L</span><span> q) (</span><span style="color:#bf616a;">*</span><span> lambda (</span><span style="color:#bf616a;">phi</span><span> q))))))
+</span></code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>#&#39;user/L-bead-on-ellipsoid
+</span></code></pre>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">eom-system 
+</span><span>        (</span><span style="color:#bf616a;">Lagrange-equations </span><span>(</span><span style="color:#bf616a;">L-bead-on-ellipsoid </span><span>&#39;m &#39;a &#39;b &#39;c)))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">eqs-system </span><span>(</span><span style="color:#bf616a;">let </span><span>[state (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;x) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;y) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;z) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;lambda))]
+</span><span>            ((</span><span style="color:#bf616a;">eom-system</span><span> state) &#39;t)))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendertexvec</span><span> eqs-system)
+</span></code></pre>
+<div>
+    $$
+\begin{pmatrix}\displaystyle{\frac{{a}^{2}\,m\,{D}^{2}x\left(t\right) -2\,x\left(t\right)\,\lambda\left(t\right)}{{a}^{2}}} \cr \cr \displaystyle{\frac{{b}^{2}\,m\,{D}^{2}y\left(t\right) -2\,y\left(t\right)\,\lambda\left(t\right)}{{b}^{2}}} \cr \cr \displaystyle{\frac{{c}^{2}\,m\,{D}^{2}z\left(t\right) -2\,z\left(t\right)\,\lambda\left(t\right)}{{c}^{2}}} \cr \cr \displaystyle{\frac{{a}^{2}\,{b}^{2}\,{c}^{2} - {a}^{2}\,{b}^{2}\,{\left(z\left(t\right)\right)}^{2} - {a}^{2}\,{c}^{2}\,{\left(y\left(t\right)\right)}^{2} - {b}^{2}\,{c}^{2}\,{\left(x\left(t\right)\right)}^{2}}{{a}^{2}\,{b}^{2}\,{c}^{2}}}\end{pmatrix}
+$$
+</div>
+<p>We can eliminate one of the coordinate as the system only has two degrees of freedom. First lets define some terminology:</p>
+<p>$$\require{cancel}$$</p>
+<div>
+    $$
+\begin{align*}
+K_1 &amp;= \frac{a^2}{c^2}, K_2 = \frac{a^2}{b^2}\\
+D^2(x(t)) &amp;= \ddot{x}, D^2 y(t) = \ddot{y}, D^2 z(t) = \ddot{z}\\
+\end{align*}
+$$
+</div>
+<p>From the constraint,</p>
+<div>
+    $$
+\begin{align*}
+a^2 x &amp;= a^2 b^2 c^2 - a^2 b^2 z - a^2 c^2 y \\
+x &amp;= \frac{a^2 b^2 c^2 - a^2 b^2 z - a^2 c^2 y}{b^2 c^2} \\
+x &amp;= a^2 - K_1 z - K_2 y
+\\
+=&gt; \dot{x} &amp;= - K_1 \dot{z} - K_2 \dot{y} \\
+=&gt; \ddot{x} &amp;= -K_1 (\ddot{z}z + \dot{z}^2) -K_2 (\ddot{y}y + \dot{y}^2)
+\end{align*}
+$$
+</div>
+<p>From the first equation,</p>
+<p>$\lambda = \frac{m a^2 \ddot{x}}{x}$</p>
+<p>Substituting $\lambda$ into the second equation, we get:</p>
+<div>
+    $$
+\begin{align*}
+b^2 \cancel{m} \ddot{y} &amp;=  2 y \frac{\cancel{m} a^2 \ddot{x}}{x} \\
+=&gt; \ddot{y} &amp;= 2 y \frac{a^2}{b^2} \left(\frac{-K_1 (\ddot{z}z + \dot{z}^2) -K_2 (\ddot{y}y + \dot{y}^2)}{a^2 - K_1 z - K_2 y}\right)\\
+=&gt; \ddot{y} &amp;= - 2 y K_2 \frac{K_1 (\ddot{z}z + \dot{z}^2) + K_2 (\ddot{y}y + \dot{y}^2)}{a^2 - K_1 z - K_2 y}
+\end{align*}
+$$
+</div>
+<p>Substituting $\lambda$ into the third equation, we get:</p>
+<div>
+    $$
+\begin{align*}
+c^2 \cancel{m} \ddot{z} &amp;=  2 y \frac{\cancel{m} a^2 \ddot{x}}{x} \\
+=&gt; \ddot{z} &amp;= 2 z \frac{a^2}{c^2} \left(\frac{-K_1 (\ddot{z}z + \dot{z}^2) -K_2 (\ddot{y}y + \dot{y}^2)}{a^2 - K_1 z - K_2 y}\right)\\
+=&gt; \ddot{z} &amp;= - 2 z K_1 \frac{K_1 (\ddot{z}z + \dot{z}^2) + K_2 (\ddot{y}y + \dot{y}^2)}{a^2 - K_1 z - K_2 y}
+\end{align*}
+$$
+</div>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>
+</span></code></pre>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

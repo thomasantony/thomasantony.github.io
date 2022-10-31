@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Exercise 1.18: Bead On A Triaxial Surface - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h3 id="exercise-1-18-bead-on-a-triaxial-surface">Exercise 1.18: Bead on a triaxial surface</h3>
+<p><strong>A bead of mass $m$ moves without friction on a triaxial ellipsoidal surface. In rectangular coordinates the surface satisfies</strong></p>
+<div>
+    $$
+\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1
+$$
+
+**for some constants $a$, $b$, and $c$. Identify suitable generalized coordinates, formulate a Lagrangian, and find Lagrange&#x27;s equations.**
+
+
+
+
+
+
+
+The parameteric equations for an ellipsoid are:
+
+{% mathjax() %}
+$$
+\begin{align}
+x &amp;= a\sin{\theta}\cos{\varphi} \\
+y &amp;= b\sin{\theta}\sin{\varphi} \\
+z &amp;= c\cos{\theta}
+\end{align}
+$$
+</div>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-free-particle </span><span>[mass]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[_ _ v]]
+</span><span>        (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> mass (</span><span style="color:#bf616a;">dot-product</span><span> v v)))   
+</span><span>)
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">elliptical-&gt;rect </span><span>[a b c]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[_ [theta phi] _]]
+</span><span>        (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">*</span><span> a (</span><span style="color:#bf616a;">sin</span><span> theta) (</span><span style="color:#bf616a;">cos</span><span> phi))
+</span><span>        (</span><span style="color:#bf616a;">*</span><span> b (</span><span style="color:#bf616a;">sin</span><span> theta) (</span><span style="color:#bf616a;">sin</span><span> phi))
+</span><span>        (</span><span style="color:#bf616a;">*</span><span> c (</span><span style="color:#bf616a;">cos</span><span> theta)))))
+</span><span>
+</span><span style="color:#65737e;">;; ;; L&#39; = L . C
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-ellipsoid </span><span>[m a b c]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[q-prime]
+</span><span>          ((</span><span style="color:#bf616a;">compose </span><span>(</span><span style="color:#bf616a;">L-free-particle</span><span> m) (</span><span style="color:#bf616a;">F-&gt;C </span><span>(</span><span style="color:#bf616a;">elliptical-&gt;rect</span><span> a b c)))
+</span><span>           q-prime)))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">eom-ellipsoid  
+</span><span> (</span><span style="color:#bf616a;">let </span><span>[L (</span><span style="color:#bf616a;">L-ellipsoid </span><span>&#39;m &#39;a &#39;b &#39;c)]
+</span><span>    (</span><span style="color:#bf616a;">Lagrange-equations</span><span> L)
+</span><span>))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendertexvec
+</span><span> (</span><span style="color:#bf616a;">let </span><span>[state (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;theta) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;varphi))]
+</span><span>     ((</span><span style="color:#bf616a;">eom-ellipsoid</span><span> state) &#39;t)))
+</span></code></pre>
+<div>
+    $$
+\begin{pmatrix}\displaystyle{- {a}^{2}\,m\,{\cos}^{2}\left(\varphi\left(t\right)\right)\,\cos\left(\theta\left(t\right)\right)\,{\left(D\theta\left(t\right)\right)}^{2}\,\sin\left(\theta\left(t\right)\right) - {a}^{2}\,m\,{\cos}^{2}\left(\varphi\left(t\right)\right)\,\cos\left(\theta\left(t\right)\right)\,\sin\left(\theta\left(t\right)\right)\,{\left(D\varphi\left(t\right)\right)}^{2} -2\,{a}^{2}\,m\,\cos\left(\varphi\left(t\right)\right)\,{\cos}^{2}\left(\theta\left(t\right)\right)\,D\theta\left(t\right)\,D\varphi\left(t\right)\,\sin\left(\varphi\left(t\right)\right) + 2\,{b}^{2}\,m\,\cos\left(\varphi\left(t\right)\right)\,{\cos}^{2}\left(\theta\left(t\right)\right)\,D\theta\left(t\right)\,D\varphi\left(t\right)\,\sin\left(\varphi\left(t\right)\right) - {b}^{2}\,m\,\cos\left(\theta\left(t\right)\right)\,{\left(D\theta\left(t\right)\right)}^{2}\,\sin\left(\theta\left(t\right)\right)\,{\sin}^{2}\left(\varphi\left(t\right)\right) - {b}^{2}\,m\,\cos\left(\theta\left(t\right)\right)\,\sin\left(\theta\left(t\right)\right)\,{\left(D\varphi\left(t\right)\right)}^{2}\,{\sin}^{2}\left(\varphi\left(t\right)\right) + {a}^{2}\,m\,{\cos}^{2}\left(\varphi\left(t\right)\right)\,{\cos}^{2}\left(\theta\left(t\right)\right)\,{D}^{2}\theta\left(t\right) - {a}^{2}\,m\,\cos\left(\varphi\left(t\right)\right)\,\cos\left(\theta\left(t\right)\right)\,\sin\left(\theta\left(t\right)\right)\,\sin\left(\varphi\left(t\right)\right)\,{D}^{2}\varphi\left(t\right) + {b}^{2}\,m\,\cos\left(\varphi\left(t\right)\right)\,\cos\left(\theta\left(t\right)\right)\,\sin\left(\theta\left(t\right)\right)\,\sin\left(\varphi\left(t\right)\right)\,{D}^{2}\varphi\left(t\right) + {b}^{2}\,m\,{\cos}^{2}\left(\theta\left(t\right)\right)\,{\sin}^{2}\left(\varphi\left(t\right)\right)\,{D}^{2}\theta\left(t\right) + {c}^{2}\,m\,\cos\left(\theta\left(t\right)\right)\,{\left(D\theta\left(t\right)\right)}^{2}\,\sin\left(\theta\left(t\right)\right) + {c}^{2}\,m\,{\sin}^{2}\left(\theta\left(t\right)\right)\,{D}^{2}\theta\left(t\right)} \cr \cr \displaystyle{{a}^{2}\,m\,\cos\left(\varphi\left(t\right)\right)\,{\left(D\theta\left(t\right)\right)}^{2}\,{\sin}^{2}\left(\theta\left(t\right)\right)\,\sin\left(\varphi\left(t\right)\right) + {a}^{2}\,m\,\cos\left(\varphi\left(t\right)\right)\,{\sin}^{2}\left(\theta\left(t\right)\right)\,{\left(D\varphi\left(t\right)\right)}^{2}\,\sin\left(\varphi\left(t\right)\right) + 2\,{a}^{2}\,m\,\cos\left(\theta\left(t\right)\right)\,D\theta\left(t\right)\,\sin\left(\theta\left(t\right)\right)\,D\varphi\left(t\right)\,{\sin}^{2}\left(\varphi\left(t\right)\right) + 2\,{b}^{2}\,m\,{\cos}^{2}\left(\varphi\left(t\right)\right)\,\cos\left(\theta\left(t\right)\right)\,D\theta\left(t\right)\,\sin\left(\theta\left(t\right)\right)\,D\varphi\left(t\right) - {b}^{2}\,m\,\cos\left(\varphi\left(t\right)\right)\,{\left(D\theta\left(t\right)\right)}^{2}\,{\sin}^{2}\left(\theta\left(t\right)\right)\,\sin\left(\varphi\left(t\right)\right) - {b}^{2}\,m\,\cos\left(\varphi\left(t\right)\right)\,{\sin}^{2}\left(\theta\left(t\right)\right)\,{\left(D\varphi\left(t\right)\right)}^{2}\,\sin\left(\varphi\left(t\right)\right) - {a}^{2}\,m\,\cos\left(\varphi\left(t\right)\right)\,\cos\left(\theta\left(t\right)\right)\,\sin\left(\theta\left(t\right)\right)\,\sin\left(\varphi\left(t\right)\right)\,{D}^{2}\theta\left(t\right) + {a}^{2}\,m\,{\sin}^{2}\left(\theta\left(t\right)\right)\,{\sin}^{2}\left(\varphi\left(t\right)\right)\,{D}^{2}\varphi\left(t\right) + {b}^{2}\,m\,{\cos}^{2}\left(\varphi\left(t\right)\right)\,{\sin}^{2}\left(\theta\left(t\right)\right)\,{D}^{2}\varphi\left(t\right) + {b}^{2}\,m\,\cos\left(\varphi\left(t\right)\right)\,\cos\left(\theta\left(t\right)\right)\,\sin\left(\theta\left(t\right)\right)\,\sin\left(\varphi\left(t\right)\right)\,{D}^{2}\theta\left(t\right)}\end{pmatrix}
+$$
+</div>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
