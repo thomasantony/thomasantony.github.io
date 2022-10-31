@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Exercise 1.14: Coordinate-Independence Of Lagrange Equations - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h3 id="exercise-1-14-coordinate-independence-of-lagrange-equations">Exercise 1.14: Coordinate-independence of Lagrange equations</h3>
+<p><strong>Check that the Lagrange equations for central force motion in polar coordinates and in rectangular coordinates are equivalent.</strong></p>
+<p><strong>In order to do this, compute the expressions for accelerations $a_x(t)$ and $a_y(t)$ in terms of the polar coordinates and substitute into the lagrange’s equations in cartesian coordinates.</strong></p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">eom-central-r2p </span><span>(</span><span style="color:#bf616a;">let </span><span>[r (</span><span style="color:#bf616a;">literal-function </span><span>&#39;r)
+</span><span>     phi (</span><span style="color:#bf616a;">literal-function </span><span>&#39;varphi)
+</span><span>     rt (</span><span style="color:#bf616a;">literal-function </span><span>&#39;r)
+</span><span>     x (</span><span style="color:#bf616a;">*</span><span> r (</span><span style="color:#bf616a;">cos</span><span> phi))
+</span><span>     y (</span><span style="color:#bf616a;">*</span><span> r (</span><span style="color:#bf616a;">sin</span><span> phi))
+</span><span>     v_x (</span><span style="color:#bf616a;">D</span><span> x)
+</span><span>     v_y (</span><span style="color:#bf616a;">D</span><span> y)
+</span><span>     a_x (</span><span style="color:#bf616a;">D</span><span> v_x)
+</span><span>     a_y (</span><span style="color:#bf616a;">D</span><span> v_y)
+</span><span>     state (</span><span style="color:#bf616a;">up</span><span> x y)
+</span><span>     eom ((</span><span style="color:#bf616a;">eom-central-rectangular</span><span> state) &#39;t)
+</span><span>     ]
+</span><span>        (</span><span style="color:#bf616a;">apply</span><span> up eom)
+</span><span>    ))
+</span><span>(</span><span style="color:#bf616a;">rendertex</span><span> eom-central-r2p)
+</span></code></pre>
+<div>
+    $$
+\begin{pmatrix}\displaystyle{- m\,r\left(t\right)\,{\left(D\varphi\left(t\right)\right)}^{2}\,\cos\left(\varphi\left(t\right)\right) - m\,r\left(t\right)\,{D}^{2}\varphi\left(t\right)\,\sin\left(\varphi\left(t\right)\right) -2\,m\,Dr\left(t\right)\,D\varphi\left(t\right)\,\sin\left(\varphi\left(t\right)\right) + m\,{D}^{2}r\left(t\right)\,\cos\left(\varphi\left(t\right)\right) + DU\left(r\left(t\right)\right)\,\cos\left(\varphi\left(t\right)\right)} \cr \cr \displaystyle{- m\,r\left(t\right)\,{\left(D\varphi\left(t\right)\right)}^{2}\,\sin\left(\varphi\left(t\right)\right) + m\,r\left(t\right)\,{D}^{2}\varphi\left(t\right)\,\cos\left(\varphi\left(t\right)\right) + 2\,m\,Dr\left(t\right)\,D\varphi\left(t\right)\,\cos\left(\varphi\left(t\right)\right) + m\,{D}^{2}r\left(t\right)\,\sin\left(\varphi\left(t\right)\right) + DU\left(r\left(t\right)\right)\,\sin\left(\varphi\left(t\right)\right)}\end{pmatrix}
+$$
+</div>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">let </span><span>[eom eom-central-r2p
+</span><span>      eom1 (</span><span style="color:#bf616a;">ref</span><span> eom </span><span style="color:#d08770;">0</span><span>)
+</span><span>      eom2 (</span><span style="color:#bf616a;">ref</span><span> eom </span><span style="color:#d08770;">1</span><span>)]
+</span><span>    (</span><span style="color:#bf616a;">rendertex </span><span>(</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">simplify </span><span>(</span><span style="color:#bf616a;">+</span><span> eom1 eom2)))))
+</span></code></pre>
+<div>
+    $$
+\begin{pmatrix}\displaystyle{- m\,r\left(t\right)\,{\left(D\varphi\left(t\right)\right)}^{2}\,\cos\left(\varphi\left(t\right)\right) - m\,r\left(t\right)\,{\left(D\varphi\left(t\right)\right)}^{2}\,\sin\left(\varphi\left(t\right)\right) + m\,r\left(t\right)\,{D}^{2}\varphi\left(t\right)\,\cos\left(\varphi\left(t\right)\right) - m\,r\left(t\right)\,{D}^{2}\varphi\left(t\right)\,\sin\left(\varphi\left(t\right)\right) + 2\,m\,Dr\left(t\right)\,D\varphi\left(t\right)\,\cos\left(\varphi\left(t\right)\right) -2\,m\,Dr\left(t\right)\,D\varphi\left(t\right)\,\sin\left(\varphi\left(t\right)\right) + m\,{D}^{2}r\left(t\right)\,\cos\left(\varphi\left(t\right)\right) + m\,{D}^{2}r\left(t\right)\,\sin\left(\varphi\left(t\right)\right) + DU\left(r\left(t\right)\right)\,\cos\left(\varphi\left(t\right)\right) + DU\left(r\left(t\right)\right)\,\sin\left(\varphi\left(t\right)\right)}\end{pmatrix}
+$$
+</div>
+<p>Rewriting the above equations, we get</p>
+<div>
+    $$
+\begin{align*}
+-mr\dot{\varphi}^2 \cos{\varphi} + (mr\ddot{\varphi} + 2m\dot{r}\dot{\varphi})(-\sin{\varphi}) + m\ddot{r}\cos{\varphi} + DU(r)\cos{\varphi} &amp;= 0 \\
+-mr\dot{\varphi}^2 \sin{\varphi} + (mr\ddot{\varphi} + 2m\dot{r}\dot{\varphi})\cos{\varphi} + m\ddot{r}\sin{\varphi} + DU(r)\sin{\varphi} &amp;= 0
+\end{align*}
+$$
+</div>
+<p>Multiply first eqn by $\cos{\varphi}$ and the second by $\sin{\varphi}$ and add</p>
+<div>
+    $$
+-mr\dot{\varphi}^2 + m\ddot{r} + DU(r) = 0\\
+$$
+</div>
+<p>Multiply first eqn by $\sin{\varphi}$ and the second by $\cos{\varphi}$ and subtract to get</p>
+<div>
+    $$
+mr \ddot{\varphi} + 2m\dot{r}\dot{\varphi} = 0\\
+$$
+</div>
+<p>These are the same equations of motion that we obtained by directly building the Lagrangian from polar coordinates.</p>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

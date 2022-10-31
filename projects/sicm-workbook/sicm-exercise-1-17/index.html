@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Exercise 1.17: Bead On A Helical Wire - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h3 id="exercise-1-17-bead-on-a-helical-wire">Exercise 1.17: Bead on a helical wire</h3>
+<p><strong>A bead of mass $m$ is constrained to move on a frictionless helical wire. The helix is oriented so that its axis is horizontal. The diameter of the helix is $d$ and its pitch (turns per unit length) is $h$. The system is in a uniform gravitational field with vertical acceleration $g$. Formulate a Lagrangian that describes the system and find the Lagrange equations of motion.</strong></p>
+<p>The system here has a single degree of freedom - the parameter $s$ describing the horizontal position of the bead along the x-axis. Let $r$ be the radius of the helix. The bead advances horizontally by distance $1/h$ for every rotation around the helix. The angle around the helix is equal to $\frac{2\pi}{1/h}s = 2\pi hs$.</p>
+<p>So when $s = 0$, $x, y, z = 0, 0, 0$. Halfway up the first loop, </p>
+<div>
+    $$
+s = \frac{1}{2h}\\
+x = s = \frac{1}{2h},\\
+y = r \cos{\left(2\pi h \frac{1}{2h}\right)} = r\cos{\pi},\\
+y = r \sin{\left(2\pi h \frac{1}{2h}\right)} = r\sin{\pi},\\
+$$
+</div>
+<p>The coordinates of the bead in rectangular coordinates are:</p>
+<div>
+    $$
+\begin{align*}
+x(t) &amp;= s(t) \\
+y(t) &amp;= \frac{d}{2} \cos{2 \pi h s} \\
+y(t) &amp;= \frac{d}{2} \sin{2 \pi h s} \\
+\end{align*}
+$$
+</div>
+<p>The velocities in rectangular coordinates are:</p>
+<div>
+    $$
+\begin{align*}
+v_x(t) &amp;= \dot{s}\\
+v_y(t) &amp;= -\pi d h \dot{s} \sin{2 \pi h s}  \\
+v_z(t) &amp;= \pi d h \dot{s} \cos{2 \pi h s} \\
+\end{align*}
+$$
+</div>
+<p>The kinetic energy in generalized coordinates is:</p>
+<div>
+    $$
+\begin{align*}
+T(t,s,\dot{s}) &amp;= \frac{1}{2} m \left({v_x}^2 + {v_y}^2 + {v_z}^2\right) \\
+               &amp;= \frac{1}{2} m \left( \dot{s}^2 + \left( \pi^2 d^2 h^2 \dot{s}^2 \right) (\sin^2{2 \pi h s} + \cos^2{2 \pi h s}) \right) \\
+               &amp;= \frac{1}{2} m \dot{s}^2 \left( 1 + \pi^2 d^2 h^2 \right)
+\end{align*}
+$$
+</div>
+<p>The potential energy in generalized coordinates is:</p>
+<div>
+    $$
+V(t,s,\dot{s}) = mgy(t) = m g \frac{d}{2} \cos{2 \pi h s}
+$$
+</div>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Computing EoMs
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">T-bead-helical </span><span>[m g d h]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[t [s] [sdot]]]
+</span><span>        (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> m (</span><span style="color:#bf616a;">square</span><span> sdot) 
+</span><span>           (</span><span style="color:#bf616a;">+ </span><span style="color:#d08770;">1 </span><span>(</span><span style="color:#bf616a;">square </span><span>&#39;pi) (</span><span style="color:#bf616a;">square</span><span> d) (</span><span style="color:#bf616a;">square</span><span> h))
+</span><span>        )
+</span><span>    )
+</span><span>)
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">V-bead-helical </span><span>[m g d h]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[t [s] [sdot]]]
+</span><span>        (</span><span style="color:#bf616a;">*</span><span> m g (</span><span style="color:#bf616a;">/</span><span> d </span><span style="color:#d08770;">2</span><span>) (</span><span style="color:#bf616a;">cos </span><span>(</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">2 </span><span>&#39;pi h s)))
+</span><span>))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">L-bead-helical </span><span>(</span><span style="color:#bf616a;">-</span><span> T-bead-helical V-bead-helical))
+</span><span>    
+</span><span>(</span><span style="color:#bf616a;">render
+</span><span> (</span><span style="color:#bf616a;">let </span><span>[local ((</span><span style="color:#bf616a;">Gamma </span><span>(</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;s))) &#39;t)
+</span><span>       L (</span><span style="color:#bf616a;">L-bead-helical </span><span>&#39;m &#39;g &#39;d &#39;h)
+</span><span>       ]
+</span><span>     (</span><span style="color:#bf616a;">L</span><span> local)
+</span><span>     ))
+</span><span>
+</span><span style="color:#65737e;">;; EOMs for bead on helical wire under gravity
+</span><span>(</span><span style="color:#bf616a;">let </span><span>[L (</span><span style="color:#bf616a;">L-bead-helical </span><span>&#39;m &#39;g &#39;d &#39;h)
+</span><span>      state (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;s))]
+</span><span>   (</span><span style="color:#bf616a;">rendertex </span><span>(((</span><span style="color:#bf616a;">Lagrange-equations</span><span> L) state) &#39;t)))
+</span></code></pre>
+<div>
+    $$
+\begin{bmatrix}\displaystyle{- d\,g\,h\,m\,\pi\,\sin\left(2\,h\,\pi\,s\left(t\right)\right) + {d}^{2}\,m\,{D}^{2}s\left(t\right) + {h}^{2}\,m\,{D}^{2}s\left(t\right) + m\,{\pi}^{2}\,{D}^{2}s\left(t\right) + m\,{D}^{2}s\left(t\right)}\end{bmatrix}
+$$
+</div>
+<p>The equations of motion for the bead on a helical wire is derived as:</p>
+<div>
+    $$
+\ddot{s} = \frac{dgh\pi \sin{\left( 2\pi h s \right)}} { d^2  + h^2  +  \pi^2 + 1 }
+$$
+</div>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
