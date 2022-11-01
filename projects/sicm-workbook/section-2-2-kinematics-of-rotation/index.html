@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 2.2: Kinematics Of Rotation - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="2-2-kinematics-of-rotation">2.2 Kinematics of Rotation</h2>
+<ul>
+<li>
+<p>The motion of a rigid body about a center of rotation (a body-fixed reference point) is characterized at each point in time by an axis of rotation and a rate of rotation</p>
+</li>
+<li>
+<p>According to <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Euler%27s_rotation_theorem">Euler’s theorem of rotations</a>, we can go from one orientation of a rigid body to another in a single rotation</p>
+<ul>
+<li>Rotations are not commutative in general, i.e., the order of rotations matter</li>
+<li>However the combination of any number of rotations in some order can be represented by a single rotation</li>
+</ul>
+</li>
+<li>
+<p>Orientations are specified by the rotations it takes to reach that orientation from some reference orientation.</p>
+</li>
+</ul>
+<p>Let $q$ by the path describing the motion of the body and $M(q(t))$ be the rotation that takes the body from a reference orientation to the orientation specified by $q(t)$. Let $\vec{\xi_\alpha}(t)$ be some vector in the body-frame (to some constituent particle) in orientation given by $q(t)$, and $\vec{\xi’_\alpha}$ be the same body-frame vector in the reference orientation, then:</p>
+<div>
+    $$
+\vec{\xi}_\alpha(t) = \mathscr{M}(q(t)) \vec{\xi&#x27;}_\alpha\tag{2.11}
+$$
+</div>
+<p>To find the kinetic energy, we need to combine the contributions of all the constituent particles, aka, the velocities of the particles.</p>
+<div>
+    $$
+\vec{\xi}_\alpha(t) = \mathscr{M}(q(t)) \vec{\xi&#x27;}_\alpha = M(t)\vec{\xi&#x27;}_\alpha\tag{2.12}
+$$
+</div>
+<p>where  $M = \mathscr{M} \circ q$. Taking the time derivative:</p>
+<div>
+    $$
+D\vec{\xi}_\alpha(t) = DM(t)\vec{\xi&#x27;}_\alpha\tag{2.13}
+$$
+</div>
+<p>By inverting Eq. 2.12, we can write $\vec{\xi’}_{\alpha}$ in terms of $\vec{\xi}_{\alpha}$,</p>
+<div>
+    $$
+D\vec{\xi}_\alpha(t) = DM(t)(M(t))^{-1}\vec{\xi}_\alpha(t)\tag{2.13}
+$$
+</div>
+<p>Since $M(t)$ is a rotation represented by an orthogonal matrix $\mathbf{M}(t)$, with the property, $(\mathbf{M}(t))^{-1}$ = $(\mathbf{M}(t))^{\intercal}$. Therefore, $\mathbf{M}(t)(\mathbf{M}(t))^{\intercal}$ = $\mathbf{I}$ and hence $D(\mathbf{M}\mathbf{M}^\intercal) = \mathbf{0}$.</p>
+<div>
+    $$
+\mathbf{0} = D(\mathbf{M}\mathbf{M}^\intercal) = D(\mathbf{M})\mathbf{M}^\intercal + \mathbf{M}D \mathbf{M}^\intercal\tag{2.15}
+$$
+</div>
+<blockquote>
+<p>Note: $(AB)^\intercal = B^\intercal A^\intercal =&gt; (D\mathbf{M}\mathbf{M}^\intercal)^\intercal = (\mathbf{M}^\intercal)^\intercal D\mathbf{M}^\intercal = \mathbf{M}D \mathbf{M}^\intercal$</p>
+</blockquote>
+<div>
+    $$
+D(\mathbf{M})\mathbf{M}^\intercal = -\mathbf{M}D \mathbf{M}^\intercal = -(D\mathbf{M}\mathbf{M}^\intercal)^\intercal\tag{2.16}
+$$
+</div>
+<p>This shows that $D(\mathbf{M})\mathbf{M}^\intercal$ is anti-symmetric. If $\mathbf{u}$ has the components $(x, y, z)
+$, all anti-symmetric 3x3 matrices have the following form:</p>
+<div>
+    $$
+\mathscr{A}(\mathbf{u}) = \begin{pmatrix}0 &amp;-z&amp; y\\ z &amp;0 &amp;-x\\-y &amp;x &amp;0\end{pmatrix}\\
+$$
+</div>
+<p>Multuplying this matrix by a vector is equivalent to a cross-product by the vector $\vec{u}$ (and $\mathbf{u}$ is the matrix representation of $\vec{u}$. The inverse of the function $\mathscr{A}$ is one that extracts the components of $\mathbf{u}$ from a given skew-symmetric matrix. </p>
+<blockquote>
+<p>Note: $\mathscr{A}^{-1}$ is <em>not</em> the inverse of the skew-symmetric matrix. Rather, this is a function that by definition, extracts the components of $\vec{u}$ from a skew-symmetric matrix.</p>
+</blockquote>
+<p>So the matrix multiplication $D\mathbf{M}\mathbf{M}^\intercal$ can be interpreted as a cross-product with a vector that we can call $\vec{\omega}$ which is the angular velocity vector. Therefore,</p>
+<div>
+    $$
+\mathbf{\omega} = \mathscr{A}^{-1}(D \mathbf{M} \mathbf{M}^\intercal) \tag{2.18}
+$$
+</div>
+<p>Therefore the differential equations of the constituent particles can be written as:</p>
+<div>
+    $$
+D \vec{\xi}_\alpha(t) = \vec{\omega}(t) \times \vec{\xi}_\alpha(t)\tag{2.19}
+$$
+</div>
+<p>This shows that the velocity o the constituent particles are perpendicular to their position vectors and proportional to the rate of rotation and distance from the instantaneous center:</p>
+<div>
+    $$
+\dot{\vec{\xi}}_\alpha = \vec{\omega} \times \vec{\xi}_\alpha\tag{2.20}
+$$
+</div>
+<p>The components, $\mathbf{\omega}‘$ of the angular velocity vector in the body frame are $\mathbf{\omega}’ = \mathbf{M}^\intercal \mathbf{\omega}$, or</p>
+<div>
+    $$
+\mathbf{\omega}&#x27; = \mathbf{M}^\intercal  \mathscr{A}^{-1}(D \mathbf{M} \mathbf{M}^\intercal) \tag{2.21}
+$$
+</div>
+<p><strong>Note: Need to figure out why it is $\mathbf{M}^\intercal$ and not $\mathbf{M}$ in Eq. 2.21. Is this not a “rotation” of the vector?</strong></p>
+<p>This is a kinematic relationship that is valid for any path and can be used to obtain the components of angular velocity given the configuration and velocity at any time.</p>
+<h3 id="implementation-of-angular-velocity-functions">Implementation of angular velocity functions</h3>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">M-of-q-&gt;omega-of-t </span><span>[M-of-q]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[q]
+</span><span>        (</span><span style="color:#b48ead;">fn </span><span>[t]
+</span><span>          (</span><span style="color:#bf616a;">let </span><span>[M-on-path (</span><span style="color:#bf616a;">compose</span><span> M-of-q q)
+</span><span>                omega-cross t]
+</span><span>             (</span><span style="color:#bf616a;">* </span><span>((</span><span style="color:#bf616a;">D</span><span> M-on-path) t)
+</span><span>               (</span><span style="color:#bf616a;">transpose </span><span>(</span><span style="color:#bf616a;">M-on-path</span><span> t)))
+</span><span>          (</span><span style="color:#bf616a;">rigid/antisymmetric-&gt;column-matrix </span><span>(</span><span style="color:#bf616a;">omega-cross</span><span> t)))
+</span><span>)))
+</span><span>
+</span><span style="color:#65737e;">;; `omega-cross` produces the matrix representation of cross product &quot;omega x&quot;
+</span><span style="color:#65737e;">;; antisymmetric-&gt;column-matrix corresponds to A^{-1} and extracts vector components from
+</span><span style="color:#65737e;">;; a skew symmetric matrix
+</span><span>
+</span><span>
+</span><span style="color:#65737e;">;; This function gives components of omega in body-fixed axes
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">M-of-q-&gt;omega-body-of-t </span><span>[M-of-q]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[q]
+</span><span>        (</span><span style="color:#b48ead;">fn </span><span>[t]
+</span><span>          (</span><span style="color:#bf616a;">* </span><span>(</span><span style="color:#bf616a;">transpose </span><span>(</span><span style="color:#bf616a;">M-of-q </span><span>(</span><span style="color:#bf616a;">q</span><span> t)))
+</span><span>             (((</span><span style="color:#bf616a;">M-of-q-&gt;omega-of-t</span><span> M-of-q) q) t)))))
+</span><span>
+</span><span>
+</span><span style="color:#65737e;">;; We use Gamma-bar to convert these functions of path to functions of local tuple
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">M-&gt;omega </span><span>[M-of-q]
+</span><span>  (</span><span style="color:#bf616a;">Gamma-bar
+</span><span>    (</span><span style="color:#bf616a;">M-of-q-&gt;omega-of-t</span><span> M-of-q)))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">M-&gt;omega-body </span><span>[M-of-q]
+</span><span>  (</span><span style="color:#bf616a;">Gamma-bar
+</span><span>    (</span><span style="color:#bf616a;">M-of-q-&gt;omega-body-of-t</span><span> M-of-q)))
+</span><span> 
+</span><span style="color:#d08770;">:ok
+</span></code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>:ok
+</span></code></pre>
+<p>These procedures will return angular velocities as a function of state (aka local tuple)</p>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

@@ -39,7 +39,17 @@
   <article><h3 id="exercise-1-14-coordinate-independence-of-lagrange-equations">Exercise 1.14: Coordinate-independence of Lagrange equations</h3>
 <p><strong>Check that the Lagrange equations for central force motion in polar coordinates and in rectangular coordinates are equivalent.</strong></p>
 <p><strong>In order to do this, compute the expressions for accelerations $a_x(t)$ and $a_y(t)$ in terms of the polar coordinates and substitute into the lagrange’s equations in cartesian coordinates.</strong></p>
-<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">eom-central-r2p </span><span>(</span><span style="color:#bf616a;">let </span><span>[r (</span><span style="color:#bf616a;">literal-function </span><span>&#39;r)
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-central-rectangular </span><span>[m U]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[_  [x y] [v_x v_y]]]
+</span><span>        (</span><span style="color:#bf616a;">let </span><span>[r (</span><span style="color:#bf616a;">sqrt </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">square</span><span> x) (</span><span style="color:#bf616a;">square</span><span> y)))]
+</span><span>            (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> m (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">square</span><span> v_x) (</span><span style="color:#bf616a;">square</span><span> v_y))) (</span><span style="color:#bf616a;">U</span><span> r)))))
+</span><span>
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">eom-central-rectangular </span><span>(</span><span style="color:#bf616a;">let </span><span>[L (</span><span style="color:#bf616a;">L-central-rectangular </span><span>&#39;m (</span><span style="color:#bf616a;">literal-function </span><span>&#39;U))]
+</span><span>                                 (</span><span style="color:#bf616a;">Lagrange-equations</span><span> L)))
+</span><span>
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">eom-central-r2p </span><span>(</span><span style="color:#bf616a;">let </span><span>[r (</span><span style="color:#bf616a;">literal-function </span><span>&#39;r)
 </span><span>     phi (</span><span style="color:#bf616a;">literal-function </span><span>&#39;varphi)
 </span><span>     rt (</span><span style="color:#bf616a;">literal-function </span><span>&#39;r)
 </span><span>     x (</span><span style="color:#bf616a;">*</span><span> r (</span><span style="color:#bf616a;">cos</span><span> phi))
@@ -57,17 +67,17 @@
 </span></code></pre>
 <div>
     $$
-\begin{pmatrix}\displaystyle{- m\,r\left(t\right)\,{\left(D\varphi\left(t\right)\right)}^{2}\,\cos\left(\varphi\left(t\right)\right) - m\,r\left(t\right)\,{D}^{2}\varphi\left(t\right)\,\sin\left(\varphi\left(t\right)\right) -2\,m\,Dr\left(t\right)\,D\varphi\left(t\right)\,\sin\left(\varphi\left(t\right)\right) + m\,{D}^{2}r\left(t\right)\,\cos\left(\varphi\left(t\right)\right) + DU\left(r\left(t\right)\right)\,\cos\left(\varphi\left(t\right)\right)} \cr \cr \displaystyle{- m\,r\left(t\right)\,{\left(D\varphi\left(t\right)\right)}^{2}\,\sin\left(\varphi\left(t\right)\right) + m\,r\left(t\right)\,{D}^{2}\varphi\left(t\right)\,\cos\left(\varphi\left(t\right)\right) + 2\,m\,Dr\left(t\right)\,D\varphi\left(t\right)\,\cos\left(\varphi\left(t\right)\right) + m\,{D}^{2}r\left(t\right)\,\sin\left(\varphi\left(t\right)\right) + DU\left(r\left(t\right)\right)\,\sin\left(\varphi\left(t\right)\right)}\end{pmatrix}
+\begin{pmatrix}\displaystyle{- m\,\cos\left(\varphi\left(t\right)\right)\,{\left(D\varphi\left(t\right)\right)}^{2}\,r\left(t\right) -2\,m\,D\varphi\left(t\right)\,\sin\left(\varphi\left(t\right)\right)\,Dr\left(t\right) - m\,r\left(t\right)\,\sin\left(\varphi\left(t\right)\right)\,{D}^{2}\varphi\left(t\right) + m\,\cos\left(\varphi\left(t\right)\right)\,{D}^{2}r\left(t\right) + \cos\left(\varphi\left(t\right)\right)\,DU\left(r\left(t\right)\right)} \cr \cr \displaystyle{- m\,{\left(D\varphi\left(t\right)\right)}^{2}\,r\left(t\right)\,\sin\left(\varphi\left(t\right)\right) + 2\,m\,\cos\left(\varphi\left(t\right)\right)\,D\varphi\left(t\right)\,Dr\left(t\right) + m\,\cos\left(\varphi\left(t\right)\right)\,r\left(t\right)\,{D}^{2}\varphi\left(t\right) + m\,\sin\left(\varphi\left(t\right)\right)\,{D}^{2}r\left(t\right) + \sin\left(\varphi\left(t\right)\right)\,DU\left(r\left(t\right)\right)}\end{pmatrix}
 $$
 </div>
 <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#bf616a;">let </span><span>[eom eom-central-r2p
 </span><span>      eom1 (</span><span style="color:#bf616a;">ref</span><span> eom </span><span style="color:#d08770;">0</span><span>)
 </span><span>      eom2 (</span><span style="color:#bf616a;">ref</span><span> eom </span><span style="color:#d08770;">1</span><span>)]
-</span><span>    (</span><span style="color:#bf616a;">rendertex </span><span>(</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">simplify </span><span>(</span><span style="color:#bf616a;">+</span><span> eom1 eom2)))))
+</span><span>    (</span><span style="color:#bf616a;">rendertexvec </span><span>(</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">simplify </span><span>(</span><span style="color:#bf616a;">+</span><span> eom1 eom2)))))
 </span></code></pre>
 <div>
     $$
-\begin{pmatrix}\displaystyle{- m\,r\left(t\right)\,{\left(D\varphi\left(t\right)\right)}^{2}\,\cos\left(\varphi\left(t\right)\right) - m\,r\left(t\right)\,{\left(D\varphi\left(t\right)\right)}^{2}\,\sin\left(\varphi\left(t\right)\right) + m\,r\left(t\right)\,{D}^{2}\varphi\left(t\right)\,\cos\left(\varphi\left(t\right)\right) - m\,r\left(t\right)\,{D}^{2}\varphi\left(t\right)\,\sin\left(\varphi\left(t\right)\right) + 2\,m\,Dr\left(t\right)\,D\varphi\left(t\right)\,\cos\left(\varphi\left(t\right)\right) -2\,m\,Dr\left(t\right)\,D\varphi\left(t\right)\,\sin\left(\varphi\left(t\right)\right) + m\,{D}^{2}r\left(t\right)\,\cos\left(\varphi\left(t\right)\right) + m\,{D}^{2}r\left(t\right)\,\sin\left(\varphi\left(t\right)\right) + DU\left(r\left(t\right)\right)\,\cos\left(\varphi\left(t\right)\right) + DU\left(r\left(t\right)\right)\,\sin\left(\varphi\left(t\right)\right)}\end{pmatrix}
+\begin{pmatrix}\displaystyle{- m\,\cos\left(\varphi\left(t\right)\right)\,{\left(D\varphi\left(t\right)\right)}^{2}\,r\left(t\right) - m\,{\left(D\varphi\left(t\right)\right)}^{2}\,r\left(t\right)\,\sin\left(\varphi\left(t\right)\right) + 2\,m\,\cos\left(\varphi\left(t\right)\right)\,D\varphi\left(t\right)\,Dr\left(t\right) + m\,\cos\left(\varphi\left(t\right)\right)\,r\left(t\right)\,{D}^{2}\varphi\left(t\right) -2\,m\,D\varphi\left(t\right)\,\sin\left(\varphi\left(t\right)\right)\,Dr\left(t\right) - m\,r\left(t\right)\,\sin\left(\varphi\left(t\right)\right)\,{D}^{2}\varphi\left(t\right) + m\,\cos\left(\varphi\left(t\right)\right)\,{D}^{2}r\left(t\right) + m\,\sin\left(\varphi\left(t\right)\right)\,{D}^{2}r\left(t\right) + \cos\left(\varphi\left(t\right)\right)\,DU\left(r\left(t\right)\right) + \sin\left(\varphi\left(t\right)\right)\,DU\left(r\left(t\right)\right)}\end{pmatrix}
 $$
 </div>
 <p>Rewriting the above equations, we get</p>
