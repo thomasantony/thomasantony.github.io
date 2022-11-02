@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 1.8.4: The Restricted Three Body Problem - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="1-8-4-the-restricted-three-body-problem">1.8.4 The Restricted Three-Body Problem</h2>
+<p>Consider two bodies of masses $M_0$ and $M_1$ in circular orbits about their barycenter. Assume that a third particle has a small enough mass $m$ to not have any effect on the orbits of the other two objects. This third particle moves in a field of time-varying gravitational potential energy.</p>
+<p>Let $a$ be the constant distance between the two bodies. If the center of mass is at the origin of the coordiante system, then the distances of the two bodies from the origin are given by:</p>
+<div>
+    $$
+a_0 = \frac{M_1}{M_0 + M_1}a, \quad a_1 =  \frac{M_0}{M_0 + M_1}a\\
+$$
+</div>
+<p>Each body revolves around the barycenter with angular frequency $\Omega$, with radii as defined above. Kepler’s Law gives the relation between $\Omega$ and $a$ as:</p>
+<div>
+    $$
+\Omega^2a^3 = G(M_0 + M_1)
+$$
+</div>
+<p>We choose our axes so that at time $t_0$, mass $M_1$ is on the positive $\hat{x}$-axis and $M_0$ is on the negative $\hat{x}$-axis. The gravitational potential energy function is:</p>
+<div>
+    $$
+V(t, r) = - \left(\frac{GM_0m}{r_0} + \frac{GM_1m}{r_1} \right)
+$$
+</div>
+<p>where:</p>
+<div>
+    $$
+\begin{align}
+r_0 &amp;= \sqrt{(x-x_0)^2 + (y-y_0)^2} \\
+r_1 &amp;= \sqrt{(x-x_1)^2 + (y-y_1)^2} \\
+\\
+x_0 &amp;= -a_0\cos(\Omega t) \\
+y_0 &amp;= -a_0\sin(\Omega t) \\
+x_1 &amp;=  a_1\cos(\Omega t) \\
+y_1 &amp;= -a_1\sin(\Omega t) \\
+\Omega &amp;= \frac{G(M_0+M_1)}{a^3} 
+\end{align}
+$$
+</div>
+<p>It is convenient to instead use a coordinate frame that is rotating along with the two bigger bodies, such that the bodies appear fixed. place the axes so that the two bodies are on the new $\hat{x}’$ axis and we can choose rotating and non-rotating axes to be coincident at time, $t=0$. We can transform to the rotating rectangular coordinates as we did in Section 1.6.1 and get the new Lagrangian as</p>
+<div>
+    $$
+L(t; x_r, y_r; \dot{x}_r, \dot{y}_r) = \frac{1}{2}m(\dot{x}_r^2 + \dot{y}_r^2) + \frac{1}{2}m\Omega^2(x_r^2 + y_r^2) + m\Omega(x_r \dot{y}_r - \dot{x}_r y_r) + \frac{G M_0 m}{r_0} + \frac{G M_1 m}{r_1} \tag{1.150}
+$$
+</div>
+<p>where now $r_0^2 = (x_r - -a_0)^2 + (y_r-0)^2$ and $r_0^2 = (x_r - a_1)^2 + (y_r-0)^2$.</p>
+<p>This Lagrangian in rotating coordinates is <em>independent</em> of time. Therefore the energy state function defined by this Lagrangian is conserved. Since it is clearest if we express this in terms of $\Omega$, $a_0$ and $a_1$, we should make those explicit parameters to the Lagrangian.</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L0 </span><span>[m V]
+</span><span>  (</span><span style="color:#b48ead;">fn </span><span>[[t</span><span style="color:#65737e;">,</span><span> q</span><span style="color:#65737e;">,</span><span> v]]
+</span><span>    (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> m (</span><span style="color:#bf616a;">square</span><span> v)) (</span><span style="color:#bf616a;">V</span><span> t q))
+</span><span>      ))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">V_3BP </span><span>[a GM0 GM1 m]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[t [x y]]
+</span><span>      (</span><span style="color:#bf616a;">let </span><span>[Omega (</span><span style="color:#bf616a;">sqrt </span><span>(</span><span style="color:#bf616a;">/ </span><span>(</span><span style="color:#bf616a;">+</span><span> GM0 GM1) (</span><span style="color:#bf616a;">expt</span><span> a </span><span style="color:#d08770;">3</span><span>)))
+</span><span>            a0 (</span><span style="color:#bf616a;">* </span><span>(</span><span style="color:#bf616a;">/</span><span> GM1 (</span><span style="color:#bf616a;">+</span><span> GM0 GM1)) a)
+</span><span>            a1 (</span><span style="color:#bf616a;">* </span><span>(</span><span style="color:#bf616a;">/</span><span> GM0 (</span><span style="color:#bf616a;">+</span><span> GM0 GM1)) a)
+</span><span>            x0 (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">-1</span><span> a0 (</span><span style="color:#bf616a;">cos </span><span>(</span><span style="color:#bf616a;">*</span><span> Omega t)))
+</span><span>            y0 (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">-1</span><span> a0 (</span><span style="color:#bf616a;">sin </span><span>(</span><span style="color:#bf616a;">*</span><span> Omega t)))
+</span><span>            x1 (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">+1</span><span> a1 (</span><span style="color:#bf616a;">cos </span><span>(</span><span style="color:#bf616a;">*</span><span> Omega t)))
+</span><span>            y1 (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">+1</span><span> a1 (</span><span style="color:#bf616a;">sin </span><span>(</span><span style="color:#bf616a;">*</span><span> Omega t)))
+</span><span>            r0 (</span><span style="color:#bf616a;">sqrt </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">square </span><span>(</span><span style="color:#bf616a;">-</span><span> x x0)) (</span><span style="color:#bf616a;">square </span><span>(</span><span style="color:#bf616a;">-</span><span> y y0))))
+</span><span>            r1 (</span><span style="color:#bf616a;">sqrt </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">square </span><span>(</span><span style="color:#bf616a;">-</span><span> x x1)) (</span><span style="color:#bf616a;">square </span><span>(</span><span style="color:#bf616a;">-</span><span> y y1))))]
+</span><span>        (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">/ </span><span>(</span><span style="color:#bf616a;">*</span><span> GM0 m) r0) (</span><span style="color:#bf616a;">/ </span><span>(</span><span style="color:#bf616a;">*</span><span> GM1 m) r1))))))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">LR3B </span><span>[m a0 a1 Omega GM0 GM1]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[t</span><span style="color:#65737e;">,</span><span> q</span><span style="color:#65737e;">,</span><span> qdot]]
+</span><span>  (</span><span style="color:#bf616a;">let </span><span>[x (</span><span style="color:#bf616a;">ref</span><span> q </span><span style="color:#d08770;">0</span><span>)
+</span><span>        y (</span><span style="color:#bf616a;">ref</span><span> q </span><span style="color:#d08770;">1</span><span>)
+</span><span>        r0 (</span><span style="color:#bf616a;">sqrt </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">square </span><span>(</span><span style="color:#bf616a;">+</span><span> x a0)) (</span><span style="color:#bf616a;">square</span><span> y)))
+</span><span>        r1 (</span><span style="color:#bf616a;">sqrt </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">square </span><span>(</span><span style="color:#bf616a;">-</span><span> x a1)) (</span><span style="color:#bf616a;">square</span><span> y)))
+</span><span>        xdot (</span><span style="color:#bf616a;">ref</span><span> qdot </span><span style="color:#d08770;">0</span><span>)
+</span><span>        ydot (</span><span style="color:#bf616a;">ref</span><span> qdot </span><span style="color:#d08770;">1</span><span>)]
+</span><span>        (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> m (</span><span style="color:#bf616a;">square</span><span> qdot))
+</span><span>           (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> m (</span><span style="color:#bf616a;">square</span><span> Omega) (</span><span style="color:#bf616a;">square</span><span> q))
+</span><span>           (</span><span style="color:#bf616a;">*</span><span> m Omega (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">*</span><span> x ydot) (</span><span style="color:#bf616a;">*</span><span> xdot y)))
+</span><span>           (</span><span style="color:#bf616a;">/ </span><span>(</span><span style="color:#bf616a;">*</span><span> GM0 m) r0) (</span><span style="color:#bf616a;">/ </span><span>(</span><span style="color:#bf616a;">*</span><span> GM1 m) r1)))))
+</span><span>
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendermd </span><span>(
+</span><span>(</span><span style="color:#bf616a;">Lagrangian-&gt;energy 
+</span><span>  (</span><span style="color:#bf616a;">LR3B </span><span>&#39;m &#39;a_0 &#39;a_1 &#39;Omega &#39;GM_0 &#39;GM_1)
+</span><span>)
+</span><span> (</span><span style="color:#bf616a;">up </span><span>&#39;t (</span><span style="color:#bf616a;">up </span><span>&#39;x_r &#39;y_r) (</span><span style="color:#bf616a;">up </span><span>&#39;v_rx &#39;v_ry)))
+</span><span>)
+</span></code></pre>
+<div>
+    $$
+\frac{\frac{-1}{2}\,{\Omega}^{2}\,m\,{x_r}^{2}\,\sqrt {{a_0}^{2}\,{a_1}^{2} -2\,{a_0}^{2}\,a_1\,x_r + {a_0}^{2}\,{x_r}^{2} + {a_0}^{2}\,{y_r}^{2} + 2\,a_0\,{a_1}^{2}\,x_r -4\,a_0\,a_1\,{x_r}^{2} + 2\,a_0\,{x_r}^{3} + 2\,a_0\,x_r\,{y_r}^{2} + {a_1}^{2}\,{x_r}^{2} + {a_1}^{2}\,{y_r}^{2} -2\,a_1\,{x_r}^{3} -2\,a_1\,x_r\,{y_r}^{2} + {x_r}^{4} + 2\,{x_r}^{2}\,{y_r}^{2} + {y_r}^{4}} + \frac{-1}{2}\,{\Omega}^{2}\,m\,{y_r}^{2}\,\sqrt {{a_0}^{2}\,{a_1}^{2} -2\,{a_0}^{2}\,a_1\,x_r + {a_0}^{2}\,{x_r}^{2} + {a_0}^{2}\,{y_r}^{2} + 2\,a_0\,{a_1}^{2}\,x_r -4\,a_0\,a_1\,{x_r}^{2} + 2\,a_0\,{x_r}^{3} + 2\,a_0\,x_r\,{y_r}^{2} + {a_1}^{2}\,{x_r}^{2} + {a_1}^{2}\,{y_r}^{2} -2\,a_1\,{x_r}^{3} -2\,a_1\,x_r\,{y_r}^{2} + {x_r}^{4} + 2\,{x_r}^{2}\,{y_r}^{2} + {y_r}^{4}} + \frac{1}{2}\,m\,{v_{rx}}^{2}\,\sqrt {{a_0}^{2}\,{a_1}^{2} -2\,{a_0}^{2}\,a_1\,x_r + {a_0}^{2}\,{x_r}^{2} + {a_0}^{2}\,{y_r}^{2} + 2\,a_0\,{a_1}^{2}\,x_r -4\,a_0\,a_1\,{x_r}^{2} + 2\,a_0\,{x_r}^{3} + 2\,a_0\,x_r\,{y_r}^{2} + {a_1}^{2}\,{x_r}^{2} + {a_1}^{2}\,{y_r}^{2} -2\,a_1\,{x_r}^{3} -2\,a_1\,x_r\,{y_r}^{2} + {x_r}^{4} + 2\,{x_r}^{2}\,{y_r}^{2} + {y_r}^{4}} + \frac{1}{2}\,m\,{v_{ry}}^{2}\,\sqrt {{a_0}^{2}\,{a_1}^{2} -2\,{a_0}^{2}\,a_1\,x_r + {a_0}^{2}\,{x_r}^{2} + {a_0}^{2}\,{y_r}^{2} + 2\,a_0\,{a_1}^{2}\,x_r -4\,a_0\,a_1\,{x_r}^{2} + 2\,a_0\,{x_r}^{3} + 2\,a_0\,x_r\,{y_r}^{2} + {a_1}^{2}\,{x_r}^{2} + {a_1}^{2}\,{y_r}^{2} -2\,a_1\,{x_r}^{3} -2\,a_1\,x_r\,{y_r}^{2} + {x_r}^{4} + 2\,{x_r}^{2}\,{y_r}^{2} + {y_r}^{4}} - {GM}_0\,m\,\sqrt {{a_1}^{2} -2\,a_1\,x_r + {x_r}^{2} + {y_r}^{2}} - {GM}_1\,m\,\sqrt {{a_0}^{2} + 2\,a_0\,x_r + {x_r}^{2} + {y_r}^{2}}}{\sqrt {{a_0}^{2}\,{a_1}^{2} -2\,{a_0}^{2}\,a_1\,x_r + {a_0}^{2}\,{x_r}^{2} + {a_0}^{2}\,{y_r}^{2} + 2\,a_0\,{a_1}^{2}\,x_r -4\,a_0\,a_1\,{x_r}^{2} + 2\,a_0\,{x_r}^{3} + 2\,a_0\,x_r\,{y_r}^{2} + {a_1}^{2}\,{x_r}^{2} + {a_1}^{2}\,{y_r}^{2} -2\,a_1\,{x_r}^{3} -2\,a_1\,x_r\,{y_r}^{2} + {x_r}^{4} + 2\,{x_r}^{2}\,{y_r}^{2} + {y_r}^{4}}}
+$$
+</div>
+ 
+<p>With some “hand simplification (tbd)” this turns into:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>(+ (* 1/2 m (expt v_r^x 2))
+</span><span>   (* 1/2 m (expt v_r^y 2))
+</span><span>   (/ (* -1 GM_0 m)
+</span><span>      (sqrt (+ (expt (+ x_r a_0) 2) (expt y_r 2))))
+</span><span>   (/ (* -1 GM_1 m)
+</span><span>      (sqrt (+ (expt (- x_r a_1) 2) (expt y_r 2))))
+</span><span>   (* -1/2 m (expt Omega 2) (expt x_r 2))
+</span><span>   (* -1/2 m (expt Omega 2) (expt y_r 2)))
+</span></code></pre>
+<p>If we separate this into a velocity-dependent part and a velocity-independent part we get</p>
+<div>
+    $$
+\mathscr{E}(t; x_r, y_r; \dot{x}_r, \dot{y}_r) = \frac{1}{2} m (\dot{x}_r^2 + \dot{y}_r^2) + mU_r(x_r, y_r)\\
+\text{where}\\
+U_r(x_r, y_r) = - \left( \frac{GM_0}{r_0} + \frac{GM_1}{r_1} + \frac{1}{2} \Omega^2 (x_r^2 + y_r^2) \right)
+$$
+</div>
+<p><strong>This constant of motion is called the <em>Jacobi Constant</em></strong>. This is traditionally defined as $C_\mathscr{J} = -2\mathscr{E}$. Note that this energy state function does not have terms that are linear in $\dot{x}_r$ or $\dot{y}_r$, although they appear in the Lagrangian.</p>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
