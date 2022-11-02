@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 1.6 : How To Find Lagrangians - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="1-6-how-to-find-lagrangians">1.6 How to Find Lagrangians</h2>
+<p>It is possible to work back from Newton’s second law and obtain the Lagrangian $L = T - V$. </p>
+<h3 id="constant-acceleration">Constant Acceleration</h3>
+<p>Consider a particle of mass $m$ in a gravitational field with acceleration, $g$. The potential energy is $mgh$ and kinetic energy is $\frac{1}{2} m v^2$. Therefore, a Lagrangian for the system is:</p>
+<div>
+    $$
+L(t; x,y; v_x, v_y) = \frac{1}{2} m (v_x^2 + v_y^2) - mgy
+$$
+
+
+The EOMs for this system can be obtained by applying the EL equations as follows:
+
+```clojure
+(defn L-const-accel [m g]
+    (fn [[_  [x y] [v_x v_y]]]
+        (- (* 1&#x2F;2 m (+ (square v_x) (square v_y))) (* m g y))))
+
+(let [L (L-const-accel &#x27;m &#x27;g)
+      state (up (literal-function &#x27;x) (literal-function &#x27;y))]
+   (rendertex (((Lagrange-equations L) state) &#x27;t)))
+```
+
+
+{% mathjax() %}
+$$
+\begin{bmatrix}\displaystyle{m\,{D}^{2}x\left(t\right)} \cr \cr \displaystyle{g\,m + m\,{D}^{2}y\left(t\right)}\end{bmatrix}
+$$
+</div>
+<p>The above equations describe constant velocity in the $x$ direction and constant acceleration in the $y$ direction.</p>
+<h3 id="central-force-field">Central Force Field</h3>
+<p>Consider the motion of a particle of mass $m$ through a potential field, $U(r)$ whose value depends only on the distance $r$ to the center of attraction (e.g. gravity). In rectangular coordinates, the Lagrangian is:</p>
+<div>
+    $$
+L(t; x,y; v_x, v_y) =  \frac{1}{2} m (v_x^2 + v_y^2) - U(\sqrt{x^2 + y^2})
+$$
+</div>
+<p>Applying EL equations, the equations of motion can be derived as:</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-central-rectangular </span><span>[m U]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[_  [x y] [v_x v_y]]]
+</span><span>        (</span><span style="color:#bf616a;">let </span><span>[r (</span><span style="color:#bf616a;">sqrt </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">square</span><span> x) (</span><span style="color:#bf616a;">square</span><span> y)))]
+</span><span>            (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> m (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">square</span><span> v_x) (</span><span style="color:#bf616a;">square</span><span> v_y))) (</span><span style="color:#bf616a;">U</span><span> r)))))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">eom-central-rectangular </span><span>(</span><span style="color:#bf616a;">let </span><span>[L (</span><span style="color:#bf616a;">L-central-rectangular </span><span>&#39;m (</span><span style="color:#bf616a;">literal-function </span><span>&#39;U))]
+</span><span>                                 (</span><span style="color:#bf616a;">Lagrange-equations</span><span> L)))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">let </span><span>[state (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;x) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;y))]
+</span><span>   (</span><span style="color:#bf616a;">rendertex </span><span>((</span><span style="color:#bf616a;">eom-central-rectangular</span><span> state) &#39;t)))
+</span></code></pre>
+<div>
+    $$
+\begin{bmatrix}\displaystyle{\frac{m\,{D}^{2}x\left(t\right)\,\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}} + x\left(t\right)\,DU\left(\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}}\right)}{\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}}}} \cr \cr \displaystyle{\frac{m\,{D}^{2}y\left(t\right)\,\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}} + y\left(t\right)\,DU\left(\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}}\right)}{\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}}}}\end{bmatrix}
+$$
+</div>
+<p>These equations can be rewriten as:</p>
+<div>
+    $$
+m D^2 x(t) = -\frac{x(t)}{r(t)} DU(r(t)) \\
+m D^2 y(t) = -\frac{y(t)}{r(t)} DU(r(t)) \\
+\text{where }r(t) = \sqrt{x(t)^2 + y(t)^2}
+$$
+</div>
+<p>This is the same form as two components of $F = ma$ where the particle is acted upon by a radial force of magnitude $-D U(r)$. </p>
+<p>If we describe the system in polar coordinates instead, then $x = r \cos{\varphi} \text{ and } y = r \sin{\varphi}$. </p>
+<p>Consider a configuration path that is represented in both rectangular and polar coordinates. Let $\widetilde{x}$ and $\widetilde{y}$ be components of the rectangular coordinate path, and let $\widetilde{r}$ and $\widetilde{\varphi}$ be components of the corresponding polar coordinate path. Applying the above conversion and differentiating, we get:</p>
+<div>
+    $$
+\begin{align}
+\widetilde{x}(t) &amp;= \widetilde{r}(t) \cos{ \widetilde{\varphi}(t) } \\
+\widetilde{y}(t) &amp;= \widetilde{r}(t) \sin{ \widetilde{\varphi}(t) } \\
+=&gt; D \widetilde{x}(t) &amp;= D \widetilde{r}(t) \cos{\widetilde{\varphi}(t)} -  \widetilde{r}(t) \sin{\widetilde{\varphi}(t)} D \widetilde{\varphi}(t) \\
+D \widetilde{y}(t) &amp;= D \widetilde{r}(t) \sin{\widetilde{\varphi}(t)} +  \widetilde{r}(t) \cos{\widetilde{\varphi}(t)} D \widetilde{\varphi}(t) \\
+=&gt; v_x &amp;= \dot{r}\cos{\varphi} - r\dot{\varphi} \sin{\varphi} \\
+v_y &amp;= \dot{r}\sin{\varphi} + r\dot{\varphi} \cos{\varphi}
+\end{align}
+$$
+</div>
+<p>From the above expressions for generalized velocities, the expression for kinetic energy can be obtained as:</p>
+<div>
+    $$
+T = \frac{1}{2} m ( \dot{r}^2 + r^2\dot{\varphi}^2 )
+$$
+</div>
+<p>And the Lagrangian as:</p>
+<div>
+    $$
+L = \frac{1}{2} m ( \dot{r}^2 + r^2\dot{\varphi}^2 ) - U(r)
+$$
+</div>
+<p>Applying Lagrange’s Equations, we get:</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-central-polar </span><span>[m U]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[_  [r phi] [rdot phidot]]]
+</span><span>            (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> m (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">square</span><span> rdot) (</span><span style="color:#bf616a;">* </span><span>(</span><span style="color:#bf616a;">square</span><span> r) (</span><span style="color:#bf616a;">square</span><span> phidot)))) (</span><span style="color:#bf616a;">U</span><span> r))))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">eom-central-polar </span><span>(</span><span style="color:#bf616a;">let </span><span>[L (</span><span style="color:#bf616a;">L-central-polar </span><span>&#39;m (</span><span style="color:#bf616a;">literal-function </span><span>&#39;U))]
+</span><span>                                 (</span><span style="color:#bf616a;">Lagrange-equations</span><span> L)))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">let </span><span>[state (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;r) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;varphi))]
+</span><span>   (</span><span style="color:#bf616a;">rendertex </span><span>((</span><span style="color:#bf616a;">eom-central-polar</span><span> state) &#39;t)))
+</span></code></pre>
+<div>
+    $$
+\begin{bmatrix}\displaystyle{- m\,{\left(D\varphi\left(t\right)\right)}^{2}\,r\left(t\right) + m\,{D}^{2}r\left(t\right) + DU\left(r\left(t\right)\right)} \cr \cr \displaystyle{2\,m\,D\varphi\left(t\right)\,r\left(t\right)\,Dr\left(t\right) + m\,{\left(r\left(t\right)\right)}^{2}\,{D}^{2}\varphi\left(t\right)}\end{bmatrix}
+$$
+</div>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; F-&gt;C in book
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">F2C </span><span>[F] 
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[q-prime]
+</span><span>        ((</span><span style="color:#bf616a;">Gamma </span><span>(</span><span style="color:#bf616a;">F</span><span> q-prime)) &#39;t)
+</span><span>    ))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">p2r </span><span>[[_ [r phi] [rdot phidot]]]
+</span><span>      (</span><span style="color:#bf616a;">let </span><span>[x (</span><span style="color:#bf616a;">*</span><span> r (</span><span style="color:#bf616a;">cos</span><span> phi))
+</span><span>            y (</span><span style="color:#bf616a;">*</span><span> r (</span><span style="color:#bf616a;">sin</span><span> phi))]
+</span><span>        (</span><span style="color:#bf616a;">up</span><span> x y)))
+</span><span>
+</span><span style="color:#65737e;">;; Local tuple after coordinate conversion from polar -&gt; rectilinear
+</span><span>(</span><span style="color:#bf616a;">rendertex </span><span>((</span><span style="color:#bf616a;">F2C</span><span> p2r)
+</span><span>            (</span><span style="color:#bf616a;">up </span><span>&#39;t 
+</span><span>                 (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;r) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;phi))
+</span><span>                 (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;rdot) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;phidot)))
+</span><span>            ))
+</span></code></pre>
+<div>
+    $$
+\begin{pmatrix}\displaystyle{t} \cr \cr \displaystyle{\begin{pmatrix}\displaystyle{r\left(t\right)\,\cos\left(\phi\left(t\right)\right)} \cr \cr \displaystyle{r\left(t\right)\,\sin\left(\phi\left(t\right)\right)}\end{pmatrix}} \cr \cr \displaystyle{\begin{pmatrix}\displaystyle{- r\left(t\right)\,\sin\left(\phi\left(t\right)\right)\,D\phi\left(t\right) + Dr\left(t\right)\,\cos\left(\phi\left(t\right)\right)} \cr \cr \displaystyle{r\left(t\right)\,\cos\left(\phi\left(t\right)\right)\,D\phi\left(t\right) + Dr\left(t\right)\,\sin\left(\phi\left(t\right)\right)}\end{pmatrix}}\end{pmatrix}
+$$
+</div>
+<p>The first equation says that mass times radial acceleration is equal to the sum of the force due to the potential field ($U(r)$) and the centrifugal force $mr\dot{\varphi}^2$. The second equation can be interpreted as $\frac{d}{dt}(mr^2 \dot{\varphi}) = 0$ or that the angular momentum is conserved.</p>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

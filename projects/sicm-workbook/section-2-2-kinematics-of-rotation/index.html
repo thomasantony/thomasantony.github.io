@@ -125,7 +125,7 @@ $$
 \mathbf{\omega}&#x27; = \mathbf{M}^\intercal  \mathscr{A}^{-1}(D \mathbf{M} \mathbf{M}^\intercal) \tag{2.21}
 $$
 </div>
-<p><strong>Note: Need to figure out why it is $\mathbf{M}^\intercal$ and not $\mathbf{M}$ in Eq. 2.21. Is this not a “rotation” of the vector?</strong></p>
+<p><strong>Note: Need to figure out why it is $\mathbf{M}^\intercal$ and not $\mathbf{M}$ in Eq. 2.21. Is this not a “rotation” of the vector? Question posted at: <a rel="noopener" target="_blank" href="https://physics.stackexchange.com/questions/734684/angular-velocity-in-body-frame-vs-inertial-frame">https://physics.stackexchange.com/questions/734684/angular-velocity-in-body-frame-vs-inertial-frame</a></strong></p>
 <p>This is a kinematic relationship that is valid for any path and can be used to obtain the components of angular velocity given the configuration and velocity at any time.</p>
 <h3 id="implementation-of-angular-velocity-functions">Implementation of angular velocity functions</h3>
 <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">M-of-q-&gt;omega-of-t </span><span>[M-of-q]

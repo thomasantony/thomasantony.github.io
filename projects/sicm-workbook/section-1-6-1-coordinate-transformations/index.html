@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 1.6.1: Coordinate Transformations - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="1-6-1-coordinate-transformations">1.6.1 Coordinate Transformations</h2>
+<p>Assume we have a mechanical system whose motion is described by a Lagrangian that depends on time, position and velocities. Assume also that we have a coordinate transformation $x = F(t, x’)$ that goes from “primed” to “unprimed” coordinates. The Lagrangian $L$ is expressed in unprimed coordinates. We want to find the Lagrangian expressed in primed coordinates. If $q$ is a configuration path in unprimed coordiantes an $q’$ is in primed coordinates, then they must satisfy:</p>
+<div>
+    $$
+L&#x27; \circ \Gamma[q&#x27;] = L \circ \Gamma [q]\\
+$$
+</div>
+<p>In general, the requirement that paths in two different coordinate systems be consistent with the coordinate transformation can be used to deduce how all of the components of the local tuple transform. Given a coordinate transformation $F$, let $C$ be the corresponding function that maps local tuples in the primed coordinate system to corresponding local tuples in the unprimed coordinate system:</p>
+<div>
+    $$
+C \circ \Gamma[q&#x27;] = \Gamma[q]
+$$
+</div>
+<p>Therefore,</p>
+<div>
+    $$
+L&#x27; = L \circ C\\
+$$
+</div>
+<p>Substituting q and q’ into the coordinate transformation, and taking its derivative w.r.t $t$ and applying the chain rule,</p>
+<div>
+    $$
+Dq(t) = \partial_0 F(t, q&#x27;(t)) + \partial_1 F(t, q&#x27;(t)) Dq&#x27;(t) \\
+\\
+\text{where } \partial_0 F(t, q&#x27;(t)) \text{ is the time derivative of } F(t, q&#x27;(t)) \\
+\text{ and } \partial_1 F(t, q&#x27;(t)) \text{ is the Jacobian of F w.r.t q&#x27;}
+$$
+</div>
+<p>Therefore the generalized velocity transforms as:</p>
+<div>
+    $$
+v = \partial_0 F(t, x&#x27;) + \partial_1 F(t, x&#x27;) v&#x27;\\
+$$
+</div>
+<p>If our local tuples have higher-derivative components,</p>
+<div>
+    $$
+\begin{align}
+(t, x, v, ... ) &amp;= C(t, x&#x27;, v&#x27;, ...) \\
+                &amp;= (t, F(t&#x27; x&#x27;), \partial_0 F(t, x&#x27;) + \partial_1 F(t, x&#x27;) v&#x27;, ...)
+\end{align}
+$$
+</div>
+<h4 id="note">Note</h4>
+<blockquote>
+<p>$L’ = L \circ C$ and $C$ converts from <strong>primed</strong> to <strong>unprimed</strong>. Therefore, the coordinate conversion function from  <strong>primed</strong> to <strong>unprimed</strong> is used to create the conversion from <strong>unprimed</strong> to <strong>primed</strong> Lagrangian. There is sort of an opposite thing going on here.</p>
+</blockquote>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
