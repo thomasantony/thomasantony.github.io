@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 2.3: Moments Of Inertia - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="2-3-moments-of-inertia">2.3 Moments of Inertia</h2>
+<p>The rotational kinetic energy consists of the sum of the kinetic energies of all the constituent particles. This can in turn be written in terms of the angular velocities and some aggregate properties that describe the mass distribution in the rigid body.</p>
+<div>
+    $$
+T = \frac{1}{2}\sum_\alpha m_\alpha \dot{\vec{\xi}}_\alpha \cdot \dot{\vec{\xi}}_\alpha\\
+$$
+</div>
+<p>substituting in the relation between $\vec{\omega}$ and $\dot{\vec{\xi}}_{\alpha}$</p>
+<div>
+    $$
+\frac{1}{2}\sum_\alpha m_\alpha \dot{\vec{\xi}}_{\alpha} \cdot \dot{\vec{\xi}}_\alpha = 
+\frac{1}{2}\sum_\alpha m_\alpha \left( \vec{\omega} \times \vec{\xi}_{\alpha} \right) \cdot \left(  \vec{\omega} \times \vec{\xi}_\alpha \right)\\
+$$
+</div>
+<p>Here, we introduce and arbitrary inertial coordiante frame its the origin at the center of rotation and basis vectors $\hat{e}_0$, $\hat{e}_1$ and $\hat{e}_2$, such that $\hat{e}_0 \times \hat{e}_1 = \hat{e}_2$. If the components of $\vec{\omega}$ in this frame are $\omega^0$, $\omega^1$ and $\omega^2$,</p>
+<div>
+    $$
+\begin{align*}
+\frac{1}{2} &amp; \sum_\alpha m_\alpha \left( \left(\sum_i \hat{e}_i \omega^j \right) \times \vec{\xi}_\alpha \right) \cdot \left(  \left(\sum_j \hat{e}_j \omega^j \right) \times \vec{\xi}_\alpha \right)\\
+ &amp;= \frac{1}{2} \sum_{ij} \omega^i\omega^j\sum_\alpha m_\alpha ( \hat{e}_i \times \vec{\xi}_\alpha) \cdot (\hat{e}_j \times \vec{\xi}_\alpha) \\
+ &amp;= \frac{1}{2} \sum_{ij} \omega^i\omega^j I_{ij}
+\end{align*}
+$$
+</div>
+<p>where</p>
+<div>
+    $$
+I_{ij} = \sum_\alpha m_\alpha ( \hat{e}_i \times \vec{\xi}_\alpha) \cdot (\hat{e}_j \times \vec{\xi}_\alpha)\tag{2.24}
+$$
+</div>
+<p>The nine <em>time-dependent</em> (?!) quantities, $I_{ij}$ form the components of the <em>inertia tensor</em> w.r.t the chosen coordinate system. </p>
+<p>If the components of $\vec{\xi_\alpha}$ are $\xi_{\alpha}^0$, $\xi_{\alpha}^1$ and $\xi_{\alpha}^2$, we can rewrite  $\vec{\xi}_\alpha$ as a sum over its components and simplify the vector products of the basis vectors. Thus we can get expressions for the components of the inertia tensor. The components of the inertia tensor can be arranged to form the <em>inertia matrix</em>.</p>
+<div>
+    $$
+\mathbf{I} = \begin{bmatrix}I_{00} &amp; I_{01} &amp; I_{02}\\
+I_{10} &amp; I_{11} &amp; I_{12}\\
+I_{20} &amp; I_{21} &amp; I_{22}\end{bmatrix}\tag{2.25}
+$$
+</div>
+<p>where </p>
+<div>
+    $$
+\begin{align*}
+I_{00} &amp;= \sum_\alpha m_\alpha \left( (\xi_\alpha^1)^2 + (\xi_\alpha^2)^2 \right)\\
+I_{11} &amp;= \sum_\alpha m_\alpha \left( (\xi_\alpha^2)^2 + (\xi_\alpha^0)^2 \right)\\
+I_{22} &amp;= \sum_\alpha m_\alpha \left( (\xi_\alpha^0)^2 + (\xi_\alpha^1)^2 \right)\\
+I_{ij} &amp;= - \sum_\alpha m_\alpha \xi_\alpha^i \xi_\alpha^j\quad\text{ for } i \neq j\\
+\end{align*}
+$$
+</div>
+<p>The components of the inertia tensor are real and symmetric, i.e., $I_{jk} = I_{kj}$. In general, the <em>moment of inertia</em> about a line can be defined as $\sum_\alpha m_\alpha (\xi_\alpha^\perp)^2$ where $\xi_\alpha^\perp$ is the distance from the line to the particle with index $\alpha$. The diagonal components of the inertia tensor are the moments of inertia about the lines coinciding with the basis vectors. The off-diagonal components are called the <em>products of inertia</em>.</p>
+<p>Since the inertia tensor involves only the second order moments of mass, the motion of a free rigid body does not depend on the detailed shape of the body. If two bodies have the same inertia tensor, they have the same kinetic energy regardless of what they look like. The potential energy might have effects based on the shape of the body but for the kinetic energy, the inertia tensor is all that matters.</p>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
