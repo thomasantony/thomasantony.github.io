@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 1.6.2: Systems With Rigid Constraints - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="1-6-2-systems-with-rigid-constraints">1.6.2 Systems with Rigid Constraints</h2>
+<p>So far we have found $L = T-V$ to be a suitable Lagrangian for systems of point particles subject to forces derived from a potential. In this section, we will find that $L = T − V$, expressed in <em>irredundant</em> coordinates, is also a suitable Lagrangian for modeling systems of point particles with rigid constraints.</p>
+<h3 id="lagrangians-for-rigidly-constrained-systems">Lagrangians for rigidly constrained systems</h3>
+<p>We start with a system of $N$ point masses, indexed by $\alpha$ in 3D space. We choose a set of generalized coordinates $q$ that have the system constraints built into them. The rectangular coordinates can then be defined as:</p>
+<div>
+    $$
+\mathbf{x}_\alpha = f_\alpha(t, q)\\
+$$
+</div>
+<p>where all the coordinate constraints are built into the functions $f_\alpha$. The velocities can then be obtained in terms of the generalized velocities, $v$ in the same manner as in the last section as:</p>
+<div>
+    $$
+\mathbf{v}_\alpha = \partial_0 f_\alpha(t, q) + \partial_1 f_\alpha(t, q) v\\
+$$
+</div>
+<p>The kinetic energy in rectangular coordinates can be obtained as:</p>
+<div>
+    $$
+\widetilde{T}(t; x_0 ... x_{N-1}; v_0 ... v_{N-1}) = \sum_\alpha \frac{1}{2} m_\alpha \mathbf{v}_\alpha^2\\
+$$
+</div>
+<p>Converting to generalized coordinates:</p>
+<div>
+    $$
+T(t, q, v) = \sum_\alpha \frac{1}{2} m_\alpha \left( \partial_0 f_\alpha(t, q) + \partial_1 f_\alpha(t, q) v \right)
+$$
+</div>
+<p>Similarly, the potential energy in generalized coordinates is:</p>
+<div>
+    $$
+V(t, q, v) = \widetilde{V}(t, f(t, q))
+$$
+</div>
+<p>The Lagrangian can then be obtained as $L = T - V$.</p>
+<h3 id="a-pendulum-driven-at-the-pivot">A pendulum driven at the pivot</h3>
+<p>Consider a pendulum of length $l$ and mass $m$, modeled as a point mass, supported by a pivot that is driven in the vertical direction by a given function of time $y_s(t)$. This system has a single degree of freedom and can be represented by the generalized coordinate $\theta$, the angle of the pendulum from the vertical. </p>
+<p><img src="https://tgvaughan.github.io/sicm/images/Art_P138.jpg" alt="Figure 1.2" /></p>
+<p>The position of the bob is given in rectangular coordinates by </p>
+<div>
+    $$
+x = l\sin{\theta} \text{ and } y = y_s(t) - l\cos{\theta}
+$$
+</div>
+<p>The velocities are:</p>
+<div>
+    $$
+v_x = l\dot{\theta}\cos{\theta} \text{ and } v_y = Dy_s(t) + l\dot{\theta}\sin{\theta}
+$$
+</div>
+<p>The kinetic energy is:</p>
+<div>
+    $$
+\begin{align*}
+\widetilde{T}(t; x,y; v_x, v_y) &amp;= \frac{1}{2}m(v_x^2 + v_y^2) \\
+T(t,\theta,\dot{\theta}) &amp;= \frac{1}{2}m ( (l\dot{\theta}\cos{\theta})^2 + (Dy_s(t) + l\dot{\theta}\sin{\theta})^2 \\
+&amp;= \frac{1}{2}m \left( l^2\dot{\theta}^2(\cos^2{\theta} + \sin^2{\theta}) + (Dy_s(t))^2 + 2l\dot{\theta}\sin{\theta}Dy_s(t) \right)\\
+&amp;= \frac{1}{2}m \left( l^2\dot{\theta}^2 + (Dy_s(t))^2 + 2l\sin{\theta}Dy_s(t) \dot{\theta} \right)
+\end{align*}
+$$
+</div>
+<p>The potential energy $\widetilde{V}(t; x,y) = mgy$ in rectangular coordinates. Therefore in generalized coordinates,</p>
+<div>
+    $$
+V(t,\theta,\dot{\theta}) = mg (y_s(t) - l\cos{\theta})
+$$
+</div>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Computing EoMs
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">T-pend-on-pivot </span><span>[m l g y_s]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[t [theta] [thetadot]]]
+</span><span>        (</span><span style="color:#bf616a;">let </span><span>[Dy_s ((</span><span style="color:#bf616a;">D</span><span> y_s) t)]
+</span><span>            (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> m 
+</span><span>               (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">square </span><span>(</span><span style="color:#bf616a;">*</span><span> l thetadot))
+</span><span>                  (</span><span style="color:#bf616a;">square</span><span> Dy_s)
+</span><span>                  (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">2</span><span> l (</span><span style="color:#bf616a;">sin</span><span> theta) Dy_s thetadot)
+</span><span>              )
+</span><span>           )
+</span><span>        )
+</span><span>    )
+</span><span>)
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">V-pend-on-pivot </span><span>[m l g y_s]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[t [theta] [thetadot]]]
+</span><span>        (</span><span style="color:#bf616a;">*</span><span> m g (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">y_s</span><span> t) (</span><span style="color:#bf616a;">*</span><span> l (</span><span style="color:#bf616a;">cos</span><span> theta))))
+</span><span>))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">L-pend-on-pivot </span><span>(</span><span style="color:#bf616a;">-</span><span> T-pend-on-pivot V-pend-on-pivot))
+</span><span>    
+</span><span style="color:#65737e;">;; (render
+</span><span style="color:#65737e;">;;  (let [local ((Gamma (up (literal-function &#39;theta))) &#39;t)
+</span><span style="color:#65737e;">;;        L (L-pend-on-pivot &#39;m &#39;l &#39;g (literal-function &#39;y_s))
+</span><span style="color:#65737e;">;;        ]
+</span><span style="color:#65737e;">;;      (L local)
+</span><span style="color:#65737e;">;;      ))
+</span><span>
+</span><span style="color:#65737e;">;; EOMs for pendulum driven at pivot
+</span><span>(</span><span style="color:#bf616a;">let </span><span>[L (</span><span style="color:#bf616a;">L-pend-on-pivot </span><span>&#39;m &#39;l &#39;g (</span><span style="color:#bf616a;">literal-function </span><span>&#39;y_s))
+</span><span>      state (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;theta))]
+</span><span>   (</span><span style="color:#bf616a;">rendertex </span><span>(((</span><span style="color:#bf616a;">Lagrange-equations</span><span> L) state) &#39;t)))
+</span></code></pre>
+<div>
+    $$
+\begin{bmatrix}\displaystyle{g\,l\,m\,\sin\left(\theta\left(t\right)\right) + {l}^{2}\,m\,{D}^{2}\theta\left(t\right) + l\,m\,\sin\left(\theta\left(t\right)\right)\,{D}^{2}y_s\left(t\right)}\end{bmatrix}
+$$
+</div>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
