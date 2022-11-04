@@ -5,8 +5,21 @@
 	<link href="https://www.thomasantony.com/notes/differential-geometry/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://www.thomasantony.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2022-10-16T06:26:58.868+00:00</updated>
+	<updated>2022-11-04T01:54:02.252+00:00</updated>
 	<id>https://www.thomasantony.com/notes/differential-geometry/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Seam carving algorithm</title>
+		<published>2022-11-04T01:54:02.252+00:00</published>
+		<updated>2022-11-04T01:54:02.252+00:00</updated>
+		<link rel="alternate" href="https://www.thomasantony.com/notes/202210031854-seam-carving-algorithm/" type="text/html"/>
+		<id>https://www.thomasantony.com/notes/202210031854-seam-carving-algorithm/</id>
+		<content type="html">&lt;p&gt;Seam carving is an algorithm that can be used to resize an image while removing the least important pixels from it. &lt;&#x2F;p&gt;
+&lt;p&gt;One possible implementation is to use an edge-detection algorithm first to create an edge-map[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Seam Carving | Week 2 | 18.S191 MIT Fall 2020 | Grant Sanderson&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rpB6zQNsbQU&quot;&gt;1&lt;&#x2F;a&gt;]. This is followed by finding continuous lines that run from top to the bottom, where the only directions of movement allowed are “south”, “south-east” and “south-west”, that minimize the sum of “edge” values. This can be solved using a dynamic programming approach of starting at the bottom and assigning the “minimum-cost-to-bottom” to each cell.&lt;&#x2F;p&gt;
+&lt;p&gt;Once this is done, we can find the path throug hthe image with the least cost and remove it. &lt;&#x2F;p&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
+&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Seam Carving | Week 2 | 18.S191 MIT Fall 2020 | Grant Sanderson&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rpB6zQNsbQU&quot;&gt;1&lt;&#x2F;a&gt;] “Seam Carving | Week 2 | 18.S191 MIT Fall 2020 | Grant Sanderson”&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Coordinate Functions aka Charts</title>
 		<published>2022-10-16T06:26:58.868+00:00</published>
