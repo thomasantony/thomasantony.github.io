@@ -88,10 +88,16 @@ $$
 </div>
 <p>The components of the inertia tensor are real and symmetric, i.e., $I_{jk} = I_{kj}$. In general, the <em>moment of inertia</em> about a line can be defined as $\sum_\alpha m_\alpha (\xi_\alpha^\perp)^2$ where $\xi_\alpha^\perp$ is the distance from the line to the particle with index $\alpha$. The diagonal components of the inertia tensor are the moments of inertia about the lines coinciding with the basis vectors. The off-diagonal components are called the <em>products of inertia</em>.</p>
 <p>Since the inertia tensor involves only the second order moments of mass, the motion of a free rigid body does not depend on the detailed shape of the body. If two bodies have the same inertia tensor, they have the same kinetic energy regardless of what they look like. The potential energy might have effects based on the shape of the body but for the kinetic energy, the inertia tensor is all that matters.</p>
+<p>For solid objects, the summation has to be converted to an integral. The general expression for moment of inertia is:</p>
+<p>{% mathjax() %}
+$$
+I_{P}=\iiint _{Q}\rho (x,y,z)\left|\mathbf {r} \right|^{2}dV
+$$</p>
+<p>where $\rho (x,y,z)$ is the density of the material, $\mathbf {r}$  is a vector perpendicular to the axis of rotation and extending from a point on the rotation axis to a point  $(x,y,z)$ in the solid, and the integration is evaluated over the volume $V$ of the body $Q$.</p>
 </article>
 </p>
 </section>
-
+<a href="https://www.thomasantony.com/projects/sicm-workbook">&larr; Back to workbook</a>
 
   </section>
   <footer class="sans">
