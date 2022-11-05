@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Exercise 2.4: Jupiter - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="exercise-2-4-jupiter">Exercise 2.4: Jupiter</h2>
+<hr />
+<p><strong>a. The density of a planet increases toward the center. Provide an argument that the moment of inertia of a planet is less than that of a sphere of uniform density of the same mass and radius.</strong></p>
+<p>The higher masses at the center of the planet are scaled by the smaller distances and the smaller masses at the periphery are multiplied the larger distances. With uniform density, there would be more mass at the periphery, contributing to a higher total moment of inertia.</p>
+<hr />
+<p><strong>b. The density as a function of radius inside Jupiter is well approximated by</strong></p>
+<div>
+    $$
+\rho(r) = \frac{M}{R^3} \frac{\sin{(\pi r&#x2F;R)}}{4r&#x2F;R}
+$$
+</div>
+<p><strong>where $M$ is the mass and $R$ is the radius of Jupiter. Find the moment of inertia of Jupiter in terms of $M$ and $R$.</strong></p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>               | z axis
+</span><span>               |
+</span><span>               |
+</span><span>              &gt;|      |&lt;--- r sinΦ
+</span><span>         , - ~ ~ ~ - ,|  
+</span><span>     , &#39;       |------&lt;&gt;&#39; ,  
+</span><span>   ,           |      /    ,
+</span><span>  ,            | Φ  /R      ,
+</span><span> ,             |   /         ,
+</span><span> ,             +-/--------R--&gt;,
+</span><span> ,             |             ,
+</span><span>  ,            |            ,
+</span><span>   ,           |           ,
+</span><span>     ,         |        , &#39;
+</span><span>       &#39; - , _ _ _ ,  &#39;
+</span><span>               |
+</span></code></pre>
+<p>Consider an infinitesimal volume at position $(r, \theta, \phi)$ where $r$ is the radial distance from the center, $\theta$ is the longitude and $\phi$ is the colatitude. Assume that the north-south axis is the axis we are interested in. The distance of the volume from the axis is $r_\perp = r\sin\phi$. The dimensions of the elemental volume are $dr$ in the radial direction, $d\theta$ along the longitude and $d\phi$ along the colatitude. The arc lengths of the “sides” of the element are $r\sin\phi d\theta$ and $r d\phi$. The volume is $dV = r\sin\phi~d\theta~rd\phi~dr$.</p>
+<div>
+    $$
+\begin{align*}
+I &amp;= \iiint_Q r_\perp^2 dm \\
+  &amp;= \iiint_Q r^2 \sin^2{\phi}~\rho(r)~dV \\
+  &amp;= \iiint_Q r^2 \sin^2{\phi}~\rho(r)~r\sin\phi~d\theta~rd\phi~dr \\
+  &amp;= \iiint_Q r^2 \sin^2{\phi}~\rho(r)~r^2 \sin{\phi}~d\theta~d\phi~dr \\
+  &amp;= \iiint_Q \rho(r) r^4 \sin^3{\phi}~d\theta~d\phi~dr \\
+  &amp;= \int_0^R \int_{-\pi}^{\pi} \int_{0}^{\pi} \rho(r) r^4 \sin^3{\phi}~d\phi~d\theta~dr\\
+  &amp;= \int_0^R \rho(r) r^4 \int_{-\pi}^{\pi} \int_{0}^{\pi} \sin^3{\phi}~d\phi~d\theta~dr\\
+\end{align*}
+$$
+</div>
+<p>Reference: <a rel="noopener" target="_blank" href="https://math.stackexchange.com/questions/1475096/why-does-the-volume-element-in-spherical-polar-coordinates-contain-a-sine-of-the">https://math.stackexchange.com/questions/1475096/why-does-the-volume-element-in-spherical-polar-coordinates-contain-a-sine-of-the</a></p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>r = </span><span style="color:#bf616a;">symbols</span><span>(&#39;</span><span style="color:#a3be8c;">r</span><span>&#39;, </span><span style="color:#bf616a;">positive</span><span>=</span><span style="color:#d08770;">True</span><span>)
+</span><span>theta, phi = </span><span style="color:#bf616a;">symbols</span><span>(&#39;</span><span style="color:#a3be8c;">theta phi</span><span>&#39;, </span><span style="color:#bf616a;">real</span><span>=</span><span style="color:#d08770;">True</span><span>)
+</span><span>M, R = </span><span style="color:#bf616a;">symbols</span><span>(&#39;</span><span style="color:#a3be8c;">M R</span><span>&#39;, </span><span style="color:#bf616a;">positive</span><span>=</span><span style="color:#d08770;">True</span><span>)
+</span><span>
+</span><span>rho = M/R**</span><span style="color:#d08770;">3 </span><span>* </span><span style="color:#bf616a;">sin</span><span>(pi*r/R)/(</span><span style="color:#d08770;">4</span><span>*r/R)
+</span><span>
+</span><span>integral_1 = </span><span style="color:#bf616a;">integrate</span><span>( </span><span style="color:#bf616a;">sin</span><span>(phi)**</span><span style="color:#d08770;">3</span><span>, (phi, </span><span style="color:#d08770;">0</span><span>, pi))
+</span><span>integral_2 = </span><span style="color:#bf616a;">integrate</span><span>( integral_1, (theta, -pi, pi) )
+</span><span>integral_3 = </span><span style="color:#bf616a;">integrate</span><span>( rho * r**</span><span style="color:#d08770;">4 </span><span>* integral_2, (r, </span><span style="color:#d08770;">0</span><span>, R))
+</span><span style="color:#bf616a;">simplify</span><span>(integral_3)
+</span></code></pre>
+<div>
+    $\displaystyle \frac{2 M R^{2} \left(-6 + \pi^{2}\right)}{3 \pi^{2}}$
+</div>
+<p>The moment of inertia of Jupiter is:</p>
+<div>
+    $$
+I = \frac{2}{3\pi^2} MR^2 \left(\pi^2 -6\right)
+$$
+</div>
+</article>
+</p>
+</section>
+<a href="https://www.thomasantony.com/projects/sicm-workbook">&larr; Back to workbook</a>
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
