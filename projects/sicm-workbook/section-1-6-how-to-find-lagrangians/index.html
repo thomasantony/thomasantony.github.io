@@ -42,27 +42,20 @@
 <p>Consider a particle of mass $m$ in a gravitational field with acceleration, $g$. The potential energy is $mgh$ and kinetic energy is $\frac{1}{2} m v^2$. Therefore, a Lagrangian for the system is:</p>
 <div>
     $$
-L(t; x,y; v_x, v_y) = \frac{1}{2} m (v_x^2 + v_y^2) - mgy
+L(t; x,y; v_x, v_y) = \frac{1}{2} m (v_x^2 + v_y^2) - mgy\\
 $$
-
-
-The EOMs for this system can be obtained by applying the EL equations as follows:
-
-```clojure
-(defn L-const-accel [m g]
-    (fn [[_  [x y] [v_x v_y]]]
-        (- (* 1&#x2F;2 m (+ (square v_x) (square v_y))) (* m g y))))
-
-(let [L (L-const-accel &#x27;m &#x27;g)
-      state (up (literal-function &#x27;x) (literal-function &#x27;y))]
-   (rendertex (((Lagrange-equations L) state) &#x27;t)))
-```
-
-
-{% mathjax() %}
-$$
-\begin{bmatrix}\displaystyle{m\,{D}^{2}x\left(t\right)} \cr \cr \displaystyle{g\,m + m\,{D}^{2}y\left(t\right)}\end{bmatrix}
-$$
+</div>
+<p>The EOMs for this system can be obtained by applying the EL equations as follows:</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-const-accel </span><span>[m g]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[_  [x y] [v_x v_y]]]
+</span><span>        (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> m (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">square</span><span> v_x) (</span><span style="color:#bf616a;">square</span><span> v_y))) (</span><span style="color:#bf616a;">*</span><span> m g y))))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">let </span><span>[L (</span><span style="color:#bf616a;">L-const-accel </span><span>&#39;m &#39;g)
+</span><span>      state (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;x) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;y))]
+</span><span>   (</span><span style="color:#bf616a;">rendertex </span><span>(((</span><span style="color:#bf616a;">Lagrange-equations</span><span> L) state) &#39;t)))
+</span></code></pre>
+<div>
+    \begin{bmatrix}\displaystyle{m\,{D}^{2}x\left(t\right)} \cr \cr \displaystyle{g\,m + m\,{D}^{2}y\left(t\right)}\end{bmatrix}
 </div>
 <p>The above equations describe constant velocity in the $x$ direction and constant acceleration in the $y$ direction.</p>
 <h3 id="central-force-field">Central Force Field</h3>
@@ -85,9 +78,7 @@ $$
 </span><span>   (</span><span style="color:#bf616a;">rendertex </span><span>((</span><span style="color:#bf616a;">eom-central-rectangular</span><span> state) &#39;t)))
 </span></code></pre>
 <div>
-    $$
-\begin{bmatrix}\displaystyle{\frac{m\,{D}^{2}x\left(t\right)\,\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}} + x\left(t\right)\,DU\left(\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}}\right)}{\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}}}} \cr \cr \displaystyle{\frac{m\,{D}^{2}y\left(t\right)\,\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}} + y\left(t\right)\,DU\left(\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}}\right)}{\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}}}}\end{bmatrix}
-$$
+    \begin{bmatrix}\displaystyle{\frac{m\,{D}^{2}x\left(t\right)\,\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}} + x\left(t\right)\,DU\left(\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}}\right)}{\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}}}} \cr \cr \displaystyle{\frac{m\,{D}^{2}y\left(t\right)\,\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}} + y\left(t\right)\,DU\left(\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}}\right)}{\sqrt {{\left(x\left(t\right)\right)}^{2} + {\left(y\left(t\right)\right)}^{2}}}}\end{bmatrix}
 </div>
 <p>These equations can be rewriten as:</p>
 <div>
@@ -136,9 +127,7 @@ $$
 </span><span>   (</span><span style="color:#bf616a;">rendertex </span><span>((</span><span style="color:#bf616a;">eom-central-polar</span><span> state) &#39;t)))
 </span></code></pre>
 <div>
-    $$
-\begin{bmatrix}\displaystyle{- m\,{\left(D\varphi\left(t\right)\right)}^{2}\,r\left(t\right) + m\,{D}^{2}r\left(t\right) + DU\left(r\left(t\right)\right)} \cr \cr \displaystyle{2\,m\,D\varphi\left(t\right)\,r\left(t\right)\,Dr\left(t\right) + m\,{\left(r\left(t\right)\right)}^{2}\,{D}^{2}\varphi\left(t\right)}\end{bmatrix}
-$$
+    \begin{bmatrix}\displaystyle{- m\,{\left(D\varphi\left(t\right)\right)}^{2}\,r\left(t\right) + m\,{D}^{2}r\left(t\right) + DU\left(r\left(t\right)\right)} \cr \cr \displaystyle{2\,m\,D\varphi\left(t\right)\,r\left(t\right)\,Dr\left(t\right) + m\,{\left(r\left(t\right)\right)}^{2}\,{D}^{2}\varphi\left(t\right)}\end{bmatrix}
 </div>
 <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; F-&gt;C in book
 </span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">F2C </span><span>[F] 
@@ -159,9 +148,7 @@ $$
 </span><span>            ))
 </span></code></pre>
 <div>
-    $$
-\begin{pmatrix}\displaystyle{t} \cr \cr \displaystyle{\begin{pmatrix}\displaystyle{r\left(t\right)\,\cos\left(\phi\left(t\right)\right)} \cr \cr \displaystyle{r\left(t\right)\,\sin\left(\phi\left(t\right)\right)}\end{pmatrix}} \cr \cr \displaystyle{\begin{pmatrix}\displaystyle{- r\left(t\right)\,\sin\left(\phi\left(t\right)\right)\,D\phi\left(t\right) + Dr\left(t\right)\,\cos\left(\phi\left(t\right)\right)} \cr \cr \displaystyle{r\left(t\right)\,\cos\left(\phi\left(t\right)\right)\,D\phi\left(t\right) + Dr\left(t\right)\,\sin\left(\phi\left(t\right)\right)}\end{pmatrix}}\end{pmatrix}
-$$
+    \begin{pmatrix}\displaystyle{t} \cr \cr \displaystyle{\begin{pmatrix}\displaystyle{r\left(t\right)\,\cos\left(\phi\left(t\right)\right)} \cr \cr \displaystyle{r\left(t\right)\,\sin\left(\phi\left(t\right)\right)}\end{pmatrix}} \cr \cr \displaystyle{\begin{pmatrix}\displaystyle{- r\left(t\right)\,\sin\left(\phi\left(t\right)\right)\,D\phi\left(t\right) + Dr\left(t\right)\,\cos\left(\phi\left(t\right)\right)} \cr \cr \displaystyle{r\left(t\right)\,\cos\left(\phi\left(t\right)\right)\,D\phi\left(t\right) + Dr\left(t\right)\,\sin\left(\phi\left(t\right)\right)}\end{pmatrix}}\end{pmatrix}
 </div>
 <p>The first equation says that mass times radial acceleration is equal to the sum of the force due to the potential field ($U(r)$) and the centrifugal force $mr\dot{\varphi}^2$. The second equation can be interpreted as $\frac{d}{dt}(mr^2 \dot{\varphi}) = 0$ or that the angular momentum is conserved.</p>
 </article>
