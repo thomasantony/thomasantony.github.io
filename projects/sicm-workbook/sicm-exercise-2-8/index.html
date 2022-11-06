@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Exercise 2.8: Rotational Angular Momentum - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="exercise-2-8-rotational-angular-momentum">Exercise 2.8: Rotational angular momentum</h2>
+<p><strong>Verify that expression in Eq. (2.50) for the components of the rotational angular momentum Eq. (2.49) in terms of the inertia tensor is correct.</strong></p>
+<div>
+    $$
+\vec{L} = \sum_\alpha m_\alpha \vec{\xi}_\alpha \times \left(\vec{\omega} \times  \vec{\xi}_\alpha \right)\tag{2.49}
+$$
+</div>
+<div>
+    $$
+L_j = \sum_k I_{jk} \omega^k\tag{2.50}
+$$
+</div>
+<p>Consider an arbitrary inertial coordinate frame its the origin at the center of rotation and basis vectors $\hat{e}_0$, $\hat{e}_1$ and $\hat{e}_2$, such that $\hat{e}_0 \times \hat{e}_1 = \hat{e}_2$. If the components of $\vec{\omega}$ in this frame are $\omega^0$, $\omega^1$ and $\omega^2$,
+The inertia matrix of a body in this coordinate frame is:</p>
+<div>
+    $$
+\begin{align*}
+\vec{L} &amp;= \sum_\alpha m_\alpha \vec{\xi}_\alpha \times \left(\vec{\omega} \times  \vec{\xi}_\alpha \right) \\
+          L_i = \vec{L}\cdot \hat{e}_i &amp;= \left( \sum_\alpha m_\alpha \vec{\xi}_\alpha \times \left(\vec{\omega} \times  \vec{\xi}_\alpha \right) \right) \cdot \hat{e}_i\\
+\end{align*}
+$$
+</div>
+<p>Applying the vector triple product formula, ${\displaystyle (\mathbf {a} \times \mathbf {b} )\cdot \mathbf {c} = \mathbf {a} \cdot (\mathbf {b} \times \mathbf {c} ) }$,</p>
+<div>
+    $$
+\begin{align*}
+L_j &amp;= \sum_\alpha \left( m_\alpha \overbrace{\vec{\xi}_\alpha}^{&quot;\mathbf{a}&quot;} \times \underbrace{\left(\vec{\omega} \times  \vec{\xi}_\alpha \right)}_{&quot;\mathbf{b}&quot;} \right) \cdot \overbrace{\hat{e}_j}^{&quot;\mathbf{c}&quot;}\\
+&amp;= \sum_\alpha m_\alpha \vec{\xi}_\alpha \cdot \left[ \left(\vec{\omega} \times  \vec{\xi}_\alpha \right) \times \hat{e}_j\right]\\
+&amp;= \sum_\alpha m_\alpha \vec{\xi}_\alpha \cdot \left[ \left(\sum_k \hat{e}_k \omega^k \times  \vec{\xi}_\alpha \right) \times \hat{e}_j \right]\\
+&amp;= \sum_k \omega^k \sum_\alpha m_\alpha \vec{\xi}_\alpha \cdot \left[ \left(\hat{e}_k \times  \vec{\xi}_\alpha \right) \times \hat{e}_j \right]\\
+\end{align*}
+$$
+</div>
+<p>Applying the vector triple product formula again, ${\displaystyle \mathbf {a} \cdot (\mathbf {b} \times \mathbf {c} )=\mathbf {b} \cdot (\mathbf {c} \times \mathbf {a} )}$,</p>
+<div>
+    $$
+\begin{align*}
+L_j &amp;= \sum_k \omega^k \sum_\alpha m_\alpha \underbrace{\vec{\xi}_\alpha}_{&quot;\mathbf{a}&quot;} \cdot \left[ \overbrace{\left(\hat{e}_k \times  \vec{\xi}_\alpha \right)}^{&quot;\mathbf{b}&quot;} \times \underbrace{\hat{e}_j}_{&quot;\mathbf{c}&quot;} \right]\\
+    &amp;= \sum_k \omega^k \sum_\alpha m_\alpha \left(\hat{e}_k \times  \vec{\xi}_\alpha \right) \cdot \left[ \hat{e}_j \times \vec{\xi}_\alpha \right]\\
+    &amp;= \sum_k \omega^k \underbrace{\sum_\alpha m_\alpha \left(\hat{e}_j \times  \vec{\xi}_\alpha \right) \cdot \left( \hat{e}_k \times \vec{\xi}_\alpha \right)}_{I_{jk}}\\
+    \\
+L_j &amp;= \sum_k I_{jk} \omega^k
+\end{align*}
+$$
+</div>
+<p>where $I_{jk}$ are components of the inertia tensor.</p>
+</article>
+</p>
+</section>
+<a href="https://www.thomasantony.com/projects/sicm-workbook">&larr; Back to workbook</a>
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 2.6: Vector Angular Momentum - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="2-6-vector-angular-momentum">2.6 Vector Angular Momentum</h2>
+<blockquote>
+<p>The vector angular momentum of a particle is the cross product of its position vector and its linear momentum vector. For a rigid body the vector angular momentum is the sum of the vector angular momentum of each of the constituents.</p>
+</blockquote>
+<p>The vector angular momentum of a rigid body is</p>
+<div>
+    $$
+\sum_\alpha \vec{x}_\alpha \times (m_\alpha \dot{\vec{x}}_\alpha)
+$$
+</div>
+<p>Similar to rotational kinetic energy, the vector angular momentum of a rigid body can also be decomposed to the angular momentum of the center of mass and the angular momentum about the center of mass. If we represent the position vectors as sum of the position of the center of mass, $\vec{X}$ and the vectors from the center of mass, $\vec{\xi}_\alpha$, we get:</p>
+<div>
+    $$
+\begin{align*}
+\vec{x}_\alpha &amp;= \vec{X} + \vec{\xi}_\alpha\tag{2.43}\\
+\dot{\vec{x}}_\alpha &amp;= \dot{\vec{X}} + \dot{\vec{\xi}}_\alpha\tag{2.44}\\
+\text{where }\vec{X} &amp;= \frac{\sum_\alpha m_\alpha \vec{x}_\alpha}{M} \\
+ M &amp;= \sum_\alpha m_\alpha
+\end{align*}
+$$
+</div>
+<p>As a result of $\vec{X}$ being the center of mass, </p>
+<div>
+    $$
+\sum_\alpha m_\alpha \vec{\xi}_\alpha = \sum_\alpha m_\alpha (\vec{x}_\alpha - \vec{X}) = \underbrace{\sum_\alpha m_\alpha \vec{x}_\alpha}_{= M\vec{X}} - \overbrace{\sum_\alpha m_\alpha}^{=M} \vec{X} = 0\\
+$$
+</div>
+<p>Similarly, $\sum_\alpha m_\alpha \dot{\vec{\xi}}_\alpha$ is also equal to zero. Substituting these in the angular momentum, we get:</p>
+<div>
+    $$
+\begin{align*}
+\sum_\alpha &amp; m_\alpha \left(\vec{X} + \vec{\xi}_\alpha \right) \times  \left(\dot{\vec{X}} + \dot{\vec{\xi}}_\alpha\right)\\
+          &amp;= \sum_\alpha m_\alpha (\vec{X} \times \dot{\vec{X}} + \vec{X} \times  \dot{\vec{\xi}}_\alpha + \vec{\xi}_\alpha \times  \dot{\vec{X}} + \vec{\xi}_\alpha \times  \dot{\vec{\xi}}_\alpha )\\
+          &amp;= \vec{X} \times M\dot{\vec{X}} +  \vec{X} \times \cancelto{0}{\sum_\alpha m_\alpha \dot{\vec{\xi}}_\alpha} + \cancelto{0}{\sum_\alpha m_\alpha \vec{\xi}_\alpha } \times \dot{\vec{X}}   + \sum_\alpha m_\alpha \vec{\xi}_\alpha \times  \dot{\vec{\xi}}_\alpha\\
+          &amp;= \vec{X} \times M\dot{\vec{X}} +  \sum_\alpha \vec{\xi}_\alpha \times  (m_\alpha \dot{\vec{\xi}}_\alpha)\tag{2.46}
+\end{align*}
+$$
+</div>
+<p>The first term of Eq. 2.46, $\vec{X} \times M\dot{\vec{X}}$ is the angular momentum of the center of mass and the rotational angular momentum is $\sum_\alpha \vec{\xi_\alpha} \times  (m_\alpha \dot{\vec{\xi_\alpha}})$. By substituting $\dot{\vec{\xi_\alpha}} = \vec{\omega} \times \vec{\xi_\alpha}$, we get:</p>
+<div>
+    $$
+\vec{L} = \sum_\alpha m_\alpha \vec{\xi}_\alpha \times \left(\vec{\omega} \times  \vec{\xi}_\alpha \right)\tag{2.49}
+$$
+</div>
+<p>Using the same technique as done for the rotational kinetic energy in <a href="/projects/sicm-workbook/section-2-3-moments-of-inertia/">Section 2.3</a>, we can resolve $\vec{\omega}$ into its components to find the angular momentum in terms of the moments of inertia as:</p>
+<div>
+    $$
+L_j = \sum_k I_{jk} \omega^k\tag{2.50}
+$$
+</div>
+<p>where $I_{jk}$ are components of the inertia tensor (the same one used to compute rotational kinetic energy). In terms of the principal moments of inertia, the components of $L$ are:</p>
+<div>
+    $$
+\begin{align*}
+L_a &amp;= A\omega^a\\
+L_b &amp;= B\omega^b\\
+L_c &amp;= C\omega^c\tag{2.51}\\
+\end{align*}
+$$
+</div>
+<p>These are also the partial derivatives of kinetic energy $T_R$ w.r.t angular velocities (Eq. 2.41 in <a href="/projects/sicm-workbook/section-2-5-principal-moments-of-inertia/">Section 2.5</a>). Therefore $\vec{L}$ is written as a down-tuple (or a row-matrix).</p>
+<p>If $\mathbf{M}$ is the matrix representation of the rotation that takes an angular-velocity vector  $\boldsymbol{\omega}’$ to a rotated vector $\boldsymbol{\omega}$, the components transform as $\boldsymbol{\omega} = \mathbf{M}\boldsymbol{\omega}$. 
+It is also conventient to work with a column matrix of the angular momentum components, $\overline{\mathbf{L}} = \mathbf{L}^{\mathscr{T}}$. </p>
+<p>Applying this transformation along with $\mathbf{I}’ = \mathbf{M}\mathbf{I}\mathbf{M}^{\mathscr{T}}$ to angular momentum</p>
+<div>
+    $$
+\begin{align*}
+\overline{\mathbf{L}} &amp;= \mathbf{I}\boldsymbol{\omega}\\
+                      &amp;= \mathbf{M}\mathbf{I}\mathbf{M}^{\mathscr{T}} \mathbf{M}\boldsymbol{\omega}&#x27;\\
+                      &amp;= \mathbf{M}\mathbf{I}\boldsymbol{\omega}&#x27;
+                      &amp;= \mathbf{M} \overline{\mathbf{L}}&#x27;\tag{2.52}
+\end{align*}
+$$
+</div>
+<p>Transposing the result in Eq. 2.52, </p>
+<div>
+    $$
+\mathbf{L} = (\overline{\mathbf{L}})^{\mathscr{T}} = (\mathbf{M} \overline{\mathbf{L}}&#x27;)^{\mathscr{T}} = \mathbf{L}&#x27; \mathbf{M}^{\mathscr{T}}
+$$
+</div>
+<p>Therefore, the angular momentum components transform as: $\mathbf{L} = \mathbf{L}’ \mathbf{M}^{\mathscr{T}}$</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-body </span><span>[A B C]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[omega-a omega-b omega-c]]
+</span><span>      (</span><span style="color:#bf616a;">down </span><span>(</span><span style="color:#bf616a;">*</span><span> A omega-a)
+</span><span>            (</span><span style="color:#bf616a;">*</span><span> B omega-b)
+</span><span>            (</span><span style="color:#bf616a;">*</span><span> C omega-c))))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-space </span><span>[M]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[A B C]
+</span><span>        (</span><span style="color:#b48ead;">fn </span><span>[omega-body]
+</span><span>          (</span><span style="color:#bf616a;">* </span><span>((</span><span style="color:#bf616a;">L-body</span><span> A B C) omega-body)
+</span><span>             (</span><span style="color:#bf616a;">transpose</span><span> M)))))
+</span><span>
+</span><span style="color:#d08770;">:ok
+</span></code></pre>
+</article>
+</p>
+</section>
+<a href="https://www.thomasantony.com/projects/sicm-workbook">&larr; Back to workbook</a>
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
