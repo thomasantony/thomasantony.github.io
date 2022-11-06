@@ -71,17 +71,15 @@
 </li>
 </ul>
 <h2 id="2-1-rotational-kinetic-energy">2.1 Rotational Kinetic Energy</h2>
-<p>A rigid body can be considered to consist of a large number of particles with mass $m_\alpha$, $\vec{x}<em>\alpha$, and velocities $\dot{\vec{x}}</em>\alpha$ with positional constraints between them. The kinetic energy is:</p>
+<p>A rigid body can be considered to consist of a large number of particles with mass $m_\alpha$, $\vec{x_\alpha}$, and velocities $\dot{\vec{x}}_\alpha$ with positional constraints between them. The kinetic energy is:</p>
 <div>
     $$
-\sum_{\alpha} \frac{1}{2} m_\alpha\dot{\vec{x}}_\alpha \cdot \dot{\vec{x}}_\alpha
+\sum_{\alpha} \frac{1}{2} m_\alpha\dot{\vec{x}}_\alpha \cdot \dot{\vec{x}}_\alpha\\
 $$
-
-The configuration of a rigid body is fully specified by the position of *any* point inthe body and the orientation of the body. Therefore, we define the position vectors based on a reference point on the body $X$. The position of each particle relative to the reference point can be represented by $\xi_\alpha$:
-
-
-{% mathjax() %}
-$$
+</div>
+<p>The configuration of a rigid body is fully specified by the position of <em>any</em> point inthe body and the orientation of the body. Therefore, we define the position vectors based on a reference point on the body $X$. The position of each particle relative to the reference point can be represented by $\xi_\alpha$:</p>
+<div>
+    $$
 \vec{x}_\alpha = \vec{X} + \vec{\xi}_\alpha\tag{2.2}
 $$
 </div>
@@ -103,15 +101,12 @@ $$
 <p>If we choose the center of mass of the body as the reference point,</p>
 <div>
     $$
-\vec{X} = \frac{1}{M}  \sum_{\alpha} m_\alpha\vec{x}_\alpha
+\vec{X} = \frac{1}{M}  \sum_{\alpha} m_\alpha\vec{x}_\alpha\\
 $$
-
-
-where $M = \sum_\alpha m_\alpha$ is the total mass of the body, then
-
-
-{% mathjax() %}
-$$
+</div>
+<p>where $M = \sum_\alpha m_\alpha$ is the total mass of the body, then</p>
+<div>
+    $$
 \sum_{\alpha} m_\alpha\vec{\xi_\alpha} = \sum_\alpha m_\alpha (\vec{x}_\alpha - \vec{X})\tag{2.6}
 $$
 </div>
