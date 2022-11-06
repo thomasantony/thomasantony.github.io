@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Exercise 2.5: A Constraint On The Moments Of Inertia - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="exercise-2-5-a-constraint-on-the-moments-of-inertia">Exercise 2.5: A constraint on the moments of inertia</h2>
+<p><strong>Show that the sum of any two of the moments of inertia is greater than or equal to the third moment of inertia. You may assume the moments of inertia are with respect to orthogonal axes.</strong></p>
+<p>Consider an arbitrary orthogonal coordinate frame with axes $x$, $y$ and $z$. The inertia matrix of a body in this coordinate frame is:</p>
+<div>
+    $$
+\begin{align*}
+I = \begin{bmatrix}\sum\nolimits_i m_i \left(y_i^2 + z_i^2 \right) &amp; -\sum\nolimits_i m_i x_i y_i &amp; -\sum\nolimits_i m_i x_i z_i\\
+- \sum\nolimits_i m_i y_i x_i &amp; \sum\nolimits_i m_i \left(x_i^2 + z_i^2 \right) &amp; -\sum\nolimits_i m_i y_i z_i\\
+- \sum\nolimits_i m_i z_i x_i &amp; -\sum\nolimits_i m_i z_i y_i &amp; \sum\nolimits_i m_i \left(x_i^2 + y_i^2 \right)\\
+\end{bmatrix}
+\end{align*}
+$$
+</div>
+<p>Therefore the moments of inertia are: $\left[ \sum\nolimits_i m_i \left(y_i^2 + z_i^2 \right), \sum\nolimits_i m_i \left(x_i^2 + z_i^2 \right), \sum\nolimits_i m_i \left(x_i^2 + y_i^2 \right) \right]$</p>
+<div>
+    $$
+\begin{align*}
+I_{xx} + I_{yy} - I_{zz} &amp;= \sum\nolimits_i m_i \left(y_i^2 + z_i^2 \right) + \sum\nolimits_i m_i \left(x_i^2 + z_i^2 \right) - \sum\nolimits_i m_i \left(x_i^2 + y_i^2 \right)\\
+                &amp;= \sum\nolimits_i m_i \left(\cancel{y_i^2} + 2 z_i^2 + \cancel{x_i^2} - \cancel{x_i^2} - \cancel{y_i^2}\right)\\
+                &amp;= \sum\nolimits_i m_i \left(2 z_i^2\right)\\
+\end{align*}
+$$
+</div>
+<p>Since $z_i^2$ are all positive, $\sum\nolimits_i m_i \left(2 z_i^2\right) \geq 0$. Therefore, </p>
+<div>
+    $$
+\begin{align*}
+I_{xx} + I_{yy} - I_{zz} &amp;\geq 0 \\
+\implies I_{xx} + I_{yy} &amp;\geq I_{zz} \\
+\end{align*}
+$$
+</div>
+</article>
+</p>
+</section>
+<a href="https://www.thomasantony.com/projects/sicm-workbook">&larr; Back to workbook</a>
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

@@ -43,7 +43,7 @@
 \mathbf{I}&#x27; = \mathbf{R}^{\mathscr{T}} \mathbf{I} \mathbf{R} \tag{2.35}
 $$
 </div>
-<p>This transformation can be used to show that there are special rectangular coordiante frames for which the inertia tensor is diagonal, that is, $I’_{ij} = 0\text{ for }i \neq j$. Let’s assume that $\mathbf{I}‘$ is diagonal and we need to solve for the rotation matrix $\mathbf{R}$ the gets us $\mathbf{I}’$ from $\mathbf{I}$. </p>
+<p>This transformation can be used to show that there are special rectangular coordiante frames for which the inertia tensor is diagonal, that is, $I^\prime_{ij} = 0\text{ for }i \neq j$. Let’s assume that $\mathbf{I}^\prime$ is diagonal and we need to solve for the rotation matrix $\mathbf{R}$ the gets us $\mathbf{I}^\prime$ from $\mathbf{I}$. </p>
 <p>Left-multiply both sides of Eq. 2.35 by $\mathbf{R}$ to get: </p>
 <div>
     $$
@@ -53,28 +53,28 @@ $$
 \end{align*}
 $$
 </div>
-<p>We can extract out the columns of this matrix by mutliplying it on the right with the coordinate axis unit vectors, $\mathbf{e}_i$. These vectors have a 1 in the $i$-th row and zero elsewhere. Multiply $\mathbf{R}$ with $\mathbf{e}_i$ extracts out the basis vector of the rotated frame, $\mathbf{e}‘_i$. That is, $\mathbf{e}’_i = \mathbf{R} \mathbf{e}_i$. Right-multiplying Eq. 2.36 by $\mathbf{e}_i$, we get:</p>
+<p>We can extract out the columns of this matrix by mutliplying it on the right with the coordinate axis unit vectors, $\mathbf{e}_i$. These vectors have a 1 in the $i$-th row and zero elsewhere. Multiply $\mathbf{R}$ with $\mathbf{e}_i$ extracts out the basis vector of the rotated frame, $\mathbf{e}^\prime_i$. That is, $\mathbf{e}^\prime_i = \mathbf{R} \mathbf{e}_i$. Right-multiplying Eq. 2.36 by $\mathbf{e}_i$, we get:</p>
 <div>
     $$
-\mathbf{R} \mathbf{I&#x27;} \mathbf{e}_i = \mathbf{I}\mathbf{R}\mathbf{e}_i = \mathbf{I}\mathbf{e}&#x27;_i\tag{2.37}
+\mathbf{R} \mathbf{I^\prime} \mathbf{e}_i = \mathbf{I}\mathbf{R}\mathbf{e}_i = \mathbf{I}\mathbf{e}^\prime_i\tag{2.37}
 $$
 </div>
-<p>Since $\mathbf{I}’$ is diagonal, </p>
+<p>Since $\mathbf{I}^\prime$ is diagonal, </p>
 <div>
     $$
-\mathbf{I}\mathbf{e}&#x27;_i = I&#x27;_{ii} \mathbf{e}&#x27;_i \tag{2.38}
+\mathbf{I}\mathbf{e}^\prime_i = I^\prime_{ii} \mathbf{e}^\prime_i \tag{2.38}
 $$
 </div>
 <p>From Eqs. 2.37 and 2.38, we get:</p>
 <div>
     $$
-\mathbf{I} \mathbf{e}&#x27;_i = I&#x27;_{ii} \mathbf{e}&#x27;_i\\
+\mathbf{I} \mathbf{e}^\prime_i = I^\prime_{ii} \mathbf{e}^\prime_i\\
 $$
 </div>
-<p>This equation says that transforming the vector $\mathbf{e}‘<em>i$ using the matrix $\mathbf{I}$ is equivalent to scaling the vector by the scalar value $I’</em>{ii}$. This means that $I’_{ii}$ is an eigen-value and $\mathbf{e}’_i$ is the associated eigen-vector of $\mathbf{I}$.</p>
-<p>Since $\mathbf{e}’_i$ are the columns of a rotation matrix, and rotqtion matrix are orthogonal, the vectors themselves are orthonormal, i.e. they are unit vectors and their dot products with each other are zero. </p>
+<p>This equation says that transforming the vector $\mathbf{e}^\prime_i$ using the matrix $\mathbf{I}$ is equivalent to scaling the vector by the scalar value $I^\prime_{ii}$. This means that $I^\prime_{ii}$ is an eigen-value and $\mathbf{e}^\prime_i$ is the associated eigen-vector of $\mathbf{I}$.</p>
+<p>Since $\mathbf{e}^\prime_i$ are the columns of a rotation matrix, and rotqtion matrix are orthogonal, the vectors themselves are orthonormal, i.e. they are unit vectors and their dot products with each other are zero. </p>
 <p>For a real, symmetric matrix (like $\mathbf{I}$). the eigen values are real. If the eigen values are distinct, then the eigen-vectors are orthogonal. However, if the eigen values are not distinct (say in the case of a symmetric body liuke a sphere), we have degrees of freedom on choosing the eigen vectors - and we may pick $\mathbf{e}_i$ that are orthogonal. For example, for a cylinder, one of the eigen vectors(corresponding to the central axis) are distinct and the other two (corrsponding to the diameters of the circular faces) are equal. This means that any of the diameters can be considered an eigen vector.</p>
-<p>This the rotated coordinate system has a special orientation with respect to the body. The basis vectors correspond to particular directions w.r.t the body. The axes through the center of mass in these directions are defined as the <em>principal axes</em>. Thus the moments of inertia about the principal axes are the eigenvalues $I’_{ii}$ and are called the <em>principal moments of inertia</em>.</p>
+<p>This the rotated coordinate system has a special orientation with respect to the body. The basis vectors correspond to particular directions w.r.t the body. The axes through the center of mass in these directions are defined as the <em>principal axes</em>. Thus the moments of inertia about the principal axes are the eigenvalues $I^\prime_{ii}$ and are called the <em>principal moments of inertia</em>.</p>
 <p>The principal moments of inertia are often labeled according their size: $A \leq B \leq C$ with the corresponding axes: $\hat{a}$, $\hat{b}$ or $\hat{c}$. The components of some vector $\mathbf{x}$ when represented in terms of the principal axes are called <em>body components</em> of the vector. Rewriting the kinetic energy in terms of the principal moments of inertia,</p>
 <div>
     $$
