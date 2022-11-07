@@ -82,50 +82,42 @@ $$
 <div>
     $\displaystyle \left[\begin{matrix}- \sin{\left(\phi \right)} \sin{\left(\psi \right)} \cos{\left(\theta \right)} + \cos{\left(\phi \right)} \cos{\left(\psi \right)} &amp; - \sin{\left(\phi \right)} \cos{\left(\psi \right)} \cos{\left(\theta \right)} - \sin{\left(\psi \right)} \cos{\left(\phi \right)} &amp; \sin{\left(\phi \right)} \sin{\left(\theta \right)}\\\sin{\left(\phi \right)} \cos{\left(\psi \right)} + \sin{\left(\psi \right)} \cos{\left(\phi \right)} \cos{\left(\theta \right)} &amp; - \sin{\left(\phi \right)} \sin{\left(\psi \right)} + \cos{\left(\phi \right)} \cos{\left(\psi \right)} \cos{\left(\theta \right)} &amp; - \sin{\left(\theta \right)} \cos{\left(\phi \right)}\\\sin{\left(\psi \right)} \sin{\left(\theta \right)} &amp; \sin{\left(\theta \right)} \cos{\left(\psi \right)} &amp; \cos{\left(\theta \right)}\end{matrix}\right]$
 </div>
-<p>The columns of $\mathbf{R}$ represent the orientations of the coordinate axes post-rotation. That is, if $\hat{x}$ becomes $\hat{x}’$ after being rotated by $R$, then </p>
+<p>$$
+R^T R = R R^T = I
+$$</p>
 <div>
     $$
-\hat{x}&#x27; = \begin{bmatrix}- \sin{(\phi )} \sin{(\psi )} \cos{(\theta )} + \cos{(\phi )} \cos{(\psi )}\\\sin{(\phi )} \cos{(\psi )} + \sin{(\psi )} \cos{(\phi )} \cos{(\theta )}\\\sin{(\psi )} \sin{(\theta )}\end{bmatrix}
+1 = det(I) = det(R^T R) = det(R^T) det(R) = det(R)^2 =&gt; det(R) = \pm 1
+$$
+
+
+Show $det(R-I) = 0$ =&gt; eigen value is 1.
+
+
+
+For any R, there exist an axis $\vec{\omega}$ which does not transform under the rotation.
+
+{% mathjax() %}
+$$
+\mathbf{R}\vec{\omega} = \vec{\omega}
 $$
 </div>
-<blockquote>
-<p>Note that the components of $\hat{x}’$ are being represented in terms of the original un-rotated frame.</p>
-</blockquote>
-<p>By <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Euler%27s_rotation_theorem">Euler’s rotation theorem</a>, any arbitrary rotation can be represented by an axis $\vec{v}$ and an angle $\delta$. </p>
-<p>If the coordinate axis $\hat{x}$ gets rotated into $\hat{x}‘$ by $R$, then $\hat{x} \cdot \hat{x}’ = \cos\delta$. Therefore,</p>
+<p>Therefore $\omega$ is the eigen vector of $\mathbf{R}$ with a corresponding eigen value of 1.</p>
 <div>
     $$
-\begin{align*}
-\cos\delta = \hat{x}&#x27; \cdot \hat{x} &amp;= \begin{bmatrix}- \sin{(\phi )} \sin{(\psi )} \cos{(\theta )} + \cos{(\phi )} \cos{(\psi )}\\ 
-\sin{(\phi )} \cos{(\psi )} + \sin{(\psi )} \cos{(\phi )} \cos{(\theta )}\\
-\sin{(\psi )} \sin{(\theta )}\end{bmatrix} \cdot [1, 0, 0] = - \sin{(\phi )} \sin{(\psi )} \cos{(\theta )} + \cos{(\phi )} \cos{(\psi )} \\
-\\
-\implies \delta &amp;= \cos^{-1}{\left(- \sin{(\phi )} \sin{(\psi )} \cos{(\theta )} + \cos{(\phi )} \cos{(\psi )}\right)}
-\end{align*}
+(\mathbf{R} - I)\vec{\omega} = \vec{0}
 $$
 </div>
-<p>The axis of rotation, $\vec{v}$ is perpendicular to the initial and final orientations of any vector undergoing rotation, and is therefore equal to the cross-product the pre- and post-rotation vectors.</p>
-<div>
-    $$
-\begin{align*}
-\vec{v} &amp;= \hat{x} \times \hat{x}&#x27;\\
-        &amp;= [1, 0, 0] \times \begin{bmatrix}- \sin{(\phi )} \sin{(\psi )} \cos{(\theta )} + \cos{(\phi )} \cos{(\psi )}\\ 
-\sin{(\phi )} \cos{(\psi )} + \sin{(\psi )} \cos{(\phi )} \cos{(\theta )}\\
-\sin{(\psi )} \sin{(\theta )}\end{bmatrix}\\
-        &amp;= \left[\begin{matrix}0 &amp; - \sin{\left(\psi \right)} \sin{\left(\theta \right)} &amp; \sin{\left(\phi \right)} \cos{\left(\psi \right)} + \sin{\left(\psi \right)} \cos{\left(\phi \right)} \cos{\left(\theta \right)}\end{matrix}\right]
-\end{align*}
-$$
-</div>
-<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>xhat = R[:,</span><span style="color:#d08770;">0</span><span>]
-</span><span>x = </span><span style="color:#bf616a;">Matrix</span><span>([[</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>]])
-</span><span>
-</span><span>v = x.</span><span style="color:#bf616a;">cross</span><span>(xhat)
-</span><span>v
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>omega = (R - </span><span style="color:#d08770;">1</span><span>*</span><span style="color:#bf616a;">eye</span><span>(</span><span style="color:#d08770;">3</span><span>)).</span><span style="color:#bf616a;">nullspace</span><span>()
+</span></code></pre>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#bf616a;">simplify</span><span>(omega[</span><span style="color:#d08770;">0</span><span>])
 </span></code></pre>
 <div>
-    $\displaystyle \left[\begin{matrix}0 &amp; - \sin{\left(\psi \right)} \sin{\left(\theta \right)} &amp; \sin{\left(\phi \right)} \cos{\left(\psi \right)} + \sin{\left(\psi \right)} \cos{\left(\phi \right)} \cos{\left(\theta \right)}\end{matrix}\right]$
+    $\displaystyle \left[\begin{matrix}\frac{\left(\sin{\left(\phi \right)} + \sin{\left(\psi \right)}\right) \sin{\left(\theta \right)}}{- \cos{\left(\theta \right)} \cos{\left(\phi + \psi \right)} + \cos{\left(\theta \right)} - \cos{\left(\phi + \psi \right)} + 1}\\\frac{\left(\cos{\left(\phi \right)} - \cos{\left(\psi \right)}\right) \sin{\left(\theta \right)}}{\cos{\left(\theta \right)} \cos{\left(\phi + \psi \right)} - \cos{\left(\theta \right)} + \cos{\left(\phi + \psi \right)} - 1}\\1\end{matrix}\right]$
 </div>
-<p>We have shown above that any arbitrary rotation, as represented by an axis and an angle, can be written in terms of Euler angles. <strong>This proves that Euler angles can represent any arbitrary rotation.</strong></p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>delta = </span><span style="color:#bf616a;">simplify</span><span>((xhat - xhat.</span><span style="color:#bf616a;">dot</span><span>(omega[</span><span style="color:#d08770;">0</span><span>])*omega[</span><span style="color:#d08770;">0</span><span>]).</span><span style="color:#bf616a;">dot</span><span>([</span><span style="color:#d08770;">1</span><span>,</span><span style="color:#d08770;">0</span><span>,</span><span style="color:#d08770;">0</span><span>]))
+</span></code></pre>
+<p>We have shown above that any arbitrary rotation, as represented by a direction cosine matrix, can be written in terms of Euler angles. <strong>This proves that Euler angles can represent any arbitrary rotation.</strong></p>
 </article>
 </p>
 </section>
