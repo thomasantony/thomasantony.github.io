@@ -82,6 +82,23 @@ T_R = \frac{1}{2} \left[ A(\omega^a)^2 + B(\omega^b)^2 + C(\omega^c)^2\right]\ta
 $$
 </div>
 <p>where $(\omega^a, \omega^b, \omega^c)$ are the components of the angular momentum vector on the principal axes.</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">T-body </span><span>[A B C]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[omega-body]
+</span><span>  (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2
+</span><span>     (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">*</span><span> A (</span><span style="color:#bf616a;">square </span><span>(</span><span style="color:#bf616a;">ref</span><span> omega-body </span><span style="color:#d08770;">0</span><span>)))
+</span><span>        (</span><span style="color:#bf616a;">*</span><span> B (</span><span style="color:#bf616a;">square </span><span>(</span><span style="color:#bf616a;">ref</span><span> omega-body </span><span style="color:#d08770;">1</span><span>)))
+</span><span>        (</span><span style="color:#bf616a;">*</span><span> C (</span><span style="color:#bf616a;">square </span><span>(</span><span style="color:#bf616a;">ref</span><span> omega-body </span><span style="color:#d08770;">2</span><span>)))))))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendermd </span><span>((</span><span style="color:#bf616a;">T-body </span><span>&#39;A &#39;B &#39;C)
+</span><span>           (</span><span style="color:#bf616a;">up </span><span>&#39;omega_a &#39;omega_b &#39;omega_c)))
+</span></code></pre>
+<div>
+    $$
+\frac{1}{2}\,A\,{{\omega}_a}^{2} + \frac{1}{2}\,B\,{{\omega}_b}^{2} + \frac{1}{2}\,C\,{{\omega}_c}^{2}
+$$
+</div>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>
+</span></code></pre>
 </article>
 </p>
 </section>

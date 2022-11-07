@@ -92,7 +92,7 @@ $$
 \frac{\frac{1}{2}\,l\,m_0\,{\left(Dx_0\left(t\right)\right)}^{2} + \frac{1}{2}\,l\,m_0\,{\left(Dy_0\left(t\right)\right)}^{2} + \frac{1}{2}\,l\,m_1\,{\left(Dx_1\left(t\right)\right)}^{2} + \frac{1}{2}\,l\,m_1\,{\left(Dy_1\left(t\right)\right)}^{2} + \frac{-1}{2}\,{l}^{2}\,F\left(t\right) + \frac{1}{2}\,F\left(t\right)\,{\left(x_1\left(t\right)\right)}^{2} - F\left(t\right)\,x_1\left(t\right)\,x_0\left(t\right) + \frac{1}{2}\,F\left(t\right)\,{\left(x_0\left(t\right)\right)}^{2} + \frac{1}{2}\,F\left(t\right)\,{\left(y_1\left(t\right)\right)}^{2} - F\left(t\right)\,y_1\left(t\right)\,y_0\left(t\right) + \frac{1}{2}\,F\left(t\right)\,{\left(y_0\left(t\right)\right)}^{2}}{l}
 $$
 </div>
- <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Deriving Lagrange equations for L-dumbbell
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Deriving Lagrange equations for L-dumbbell
 </span><span>
 </span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">eom-dumbbell </span><span>(</span><span style="color:#bf616a;">Lagrange-equations </span><span>(</span><span style="color:#bf616a;">L-dumbbell </span><span>&#39;m_0 &#39;m_1 &#39;l)))
 </span><span>
@@ -157,7 +157,7 @@ $$
 \frac{l\,m_0\,m_1\,{\left(c\left(t\right)\right)}^{2}\,{\left(D\theta\left(t\right)\right)}^{2} + l\,{m_0}^{2}\,{\left(Dx_{CM}\left(t\right)\right)}^{2} + l\,{m_0}^{2}\,{\left(Dy_{CM}\left(t\right)\right)}^{2} + l\,m_0\,m_1\,{\left(Dc\left(t\right)\right)}^{2} + 2\,l\,m_0\,m_1\,{\left(Dx_{CM}\left(t\right)\right)}^{2} + 2\,l\,m_0\,m_1\,{\left(Dy_{CM}\left(t\right)\right)}^{2} + l\,{m_1}^{2}\,{\left(Dx_{CM}\left(t\right)\right)}^{2} + l\,{m_1}^{2}\,{\left(Dy_{CM}\left(t\right)\right)}^{2} - {l}^{2}\,m_0\,F\left(t\right) - {l}^{2}\,m_1\,F\left(t\right) + m_0\,F\left(t\right)\,{\left(c\left(t\right)\right)}^{2} + m_1\,F\left(t\right)\,{\left(c\left(t\right)\right)}^{2}}{2\,l\,m_0 + 2\,l\,m_1}
 $$
 </div>
- <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Computing Lagrange Equations
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Computing Lagrange Equations
 </span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">eom-dumbbell-cm </span><span>(</span><span style="color:#bf616a;">Lagrange-equations </span><span>(</span><span style="color:#bf616a;">L-dumbbell-CM </span><span>&#39;m_0 &#39;m_1 &#39;l)))
 </span><span>(</span><span style="color:#bf616a;">rendertexvec </span><span>(</span><span style="color:#bf616a;">let </span><span>[state (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;x_CM) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;y_CM) 
 </span><span>                              (</span><span style="color:#bf616a;">literal-function </span><span>&#39;theta) 
@@ -234,7 +234,7 @@ $$
 \frac{{l}^{2}\,m_0\,m_1\,{\left(D\theta\left(t\right)\right)}^{2} + {m_0}^{2}\,{\left(Dx_{CM}\left(t\right)\right)}^{2} + {m_0}^{2}\,{\left(Dy_{CM}\left(t\right)\right)}^{2} + 2\,m_0\,m_1\,{\left(Dx_{CM}\left(t\right)\right)}^{2} + 2\,m_0\,m_1\,{\left(Dy_{CM}\left(t\right)\right)}^{2} + {m_1}^{2}\,{\left(Dx_{CM}\left(t\right)\right)}^{2} + {m_1}^{2}\,{\left(Dy_{CM}\left(t\right)\right)}^{2}}{2\,m_0 + 2\,m_1}
 $$
 </div>
- <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Computing Lagrange Equations
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Computing Lagrange Equations
 </span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">eom-dumbbell-part-e </span><span>(</span><span style="color:#bf616a;">Lagrange-equations </span><span>(</span><span style="color:#bf616a;">L-dumbbell-part-e </span><span>&#39;m_0 &#39;m_1 &#39;l)))
 </span><span>(</span><span style="color:#bf616a;">rendertexvec </span><span>(</span><span style="color:#bf616a;">let </span><span>[state (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;x_CM) (</span><span style="color:#bf616a;">literal-function </span><span>&#39;y_CM) 
 </span><span>                              (</span><span style="color:#bf616a;">literal-function </span><span>&#39;theta))]

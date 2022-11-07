@@ -82,7 +82,6 @@ $$
 \frac{1}{2}\,{a}^{2}\,m\,{\cos}^{2}\left(\phi\left(t\right)\right)\,{\cos}^{2}\left(\theta\left(t\right)\right)\,{\left(D\theta\left(t\right)\right)}^{2} - {a}^{2}\,m\,\cos\left(\phi\left(t\right)\right)\,\cos\left(\theta\left(t\right)\right)\,D\theta\left(t\right)\,\sin\left(\theta\left(t\right)\right)\,\sin\left(\phi\left(t\right)\right)\,D\phi\left(t\right) + \frac{1}{2}\,{a}^{2}\,m\,{\sin}^{2}\left(\theta\left(t\right)\right)\,{\sin}^{2}\left(\phi\left(t\right)\right)\,{\left(D\phi\left(t\right)\right)}^{2} + \frac{1}{2}\,{b}^{2}\,m\,{\cos}^{2}\left(\phi\left(t\right)\right)\,{\sin}^{2}\left(\theta\left(t\right)\right)\,{\left(D\phi\left(t\right)\right)}^{2} + {b}^{2}\,m\,\cos\left(\phi\left(t\right)\right)\,\cos\left(\theta\left(t\right)\right)\,D\theta\left(t\right)\,\sin\left(\theta\left(t\right)\right)\,\sin\left(\phi\left(t\right)\right)\,D\phi\left(t\right) + \frac{1}{2}\,{b}^{2}\,m\,{\cos}^{2}\left(\theta\left(t\right)\right)\,{\left(D\theta\left(t\right)\right)}^{2}\,{\sin}^{2}\left(\phi\left(t\right)\right) + \frac{1}{2}\,{c}^{2}\,m\,{\left(D\theta\left(t\right)\right)}^{2}\,{\sin}^{2}\left(\theta\left(t\right)\right)
 $$
 </div>
- 
 <p>The above Lagrangian is for the motion of a particle constrained to move on an ellipsoid.</p>
 <p>The question asks that we look at a spheroid with $b = c$ and look at the symmetry about the $x$ axis. Without losing generality, we can instead consider the case where $a = b$ and look at the symmetry about the $z$ axis. This rotation gets reduced to a simple addition to $\phi$, i.e.</p>
 <div>
@@ -104,7 +103,7 @@ $$
 \frac{1}{2}\,{a}^{2}\,m\,{\cos}^{2}\left(\theta\left(t\right)\right)\,{\left(D\theta\left(t\right)\right)}^{2} + \frac{1}{2}\,{a}^{2}\,m\,{\sin}^{2}\left(\theta\left(t\right)\right)\,{\left(D\phi\left(t\right)\right)}^{2} + \frac{1}{2}\,{c}^{2}\,m\,{\left(D\theta\left(t\right)\right)}^{2}\,{\sin}^{2}\left(\theta\left(t\right)\right)
 $$
 </div>
- <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Defining a parameteric transformation to rotate about the &quot;z&quot; axis
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Defining a parameteric transformation to rotate about the &quot;z&quot; axis
 </span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">RotZ </span><span>[angle]
 </span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[theta</span><span style="color:#65737e;">,</span><span> phi]]
 </span><span>      (</span><span style="color:#bf616a;">up
@@ -134,7 +133,6 @@ $$
 \frac{1}{2}\,{a}^{2}\,m\,{\cos}^{2}\left(\theta\left(t\right)\right)\,{\left(D\theta\left(t\right)\right)}^{2} + \frac{1}{2}\,{a}^{2}\,m\,{\sin}^{2}\left(\theta\left(t\right)\right)\,{\left(D\phi\left(t\right)\right)}^{2} + \frac{1}{2}\,{c}^{2}\,m\,{\left(D\theta\left(t\right)\right)}^{2}\,{\sin}^{2}\left(\theta\left(t\right)\right)
 $$
 </div>
- 
 <p>The symmetry about $z$ axis is verified as the Lagrangian is unchanged post-rotation as shown above.</p>
 <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Define the Noether integral
 </span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">the-Noether-integral
@@ -151,7 +149,6 @@ $$
 {a}^{2}\,m\,\dot {\phi}\,{\sin}^{2}\left(\theta\right)
 $$
 </div>
- 
 <p>The conserved quantity is $m (a\sin{\theta})^2\dot{\phi}$. Here, $\dot{\phi}$ is the rate of angular movement of the particle about the $z$ axis or the rate of change of longitude, and $a\sin(\theta)$ is the “radius”. This quantity is analogous to angular momentum.</p>
 </article>
 </p>
