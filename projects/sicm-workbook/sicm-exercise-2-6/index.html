@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Exercise 2.6: Principal Moments Of Inertia - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="exercise-2-5-principal-moments-of-inertia">Exercise 2.5: Principal moments of inertia</h2>
+<p><strong>For each of the configurations described below find the principal moments of inertia with respect to the center of mass, and find the corresponding principal axes.</strong></p>
+<hr />
+<p><strong>a. A regular tetrahedron consisting of four equal point masses tied together with rigid massless wire.</strong></p>
+<p>Let the sides of the tetrohedron be two units long. The coordinates of the masses are (<a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Tetrahedron#Coordinates_for_a_regular_tetrahedron">Reference</a>]:</p>
+<div>
+    $$
+(\pm 1, 0, -\frac{1}{\sqrt{2}}), (0, \pm 1, \frac{1}{\sqrt{2}})\\
+$$
+</div>
+<p>If the point masses all have mass $m$, the moments of inertia are:</p>
+<div>
+    $$
+\begin{align*}
+I_{00} &amp;= \sum_i m_i \left(y_i^2 + z_i^2 \right)\\
+       &amp;= m (0 + \frac{1}{2} + 0 + \frac{1}{2} + 1 + \frac{1}{2} + 1 + \frac{1}{2} = 4m\\
+I_{01} &amp;= -\sum\nolimits_i m_i x_i y_i \\
+       &amp;= -m ( 0 + 0 + 0 + 0 ) = 0\\
+I_{02} &amp;= -\sum\nolimits_i m_i x_i z_i \\
+       &amp;= -m ( -\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}} + 0 + 0) = 0\\
+\\
+I_{10} &amp;= - \sum\nolimits_i m_i y_i x_i\\
+       &amp;= - m (0 + 0 + 0 + 0) = 0\\
+I_{11} &amp;= \sum\nolimits_i m_i \left(x_i^2 + z_i^2 \right)\\
+       &amp;= m(1 + \frac{1}{2} + 1 + \frac{1}{2} + 0 + \frac{1}{2} + 0 + \frac{1}{2}) = 4m\\
+I_{12} &amp;= -\sum\nolimits_i m_i y_i z_i\\
+       &amp;= - m(0 + 0 + \frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}} ) = 0
+\\
+I_{20} &amp;= - \sum\nolimits_i m_i z_i x_i\\
+       &amp;= - m(-\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}} + 0 + 0) = 0\\
+I_{21} &amp;= - \sum\nolimits_i m_i z_i y_i\\
+       &amp;= - m(0 + 0 + \frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}) = 0\\
+I_{22} &amp;= \sum\nolimits_i m_i \left(x_i^2 + y_i^2 \right)\\
+       &amp;= m(1 + 0 + 1 + 0 + 1 + 0 + 1 + 0) = 4m\\
+\end{align*}
+$$
+</div>
+<p>The inertia matrix is:</p>
+<div>
+    $$
+\begin{align*}
+I &amp;= \begin{bmatrix}4m &amp; 0 &amp; 0\\
+                     0 &amp; 4m &amp; 0\\
+                     0 &amp; 0 &amp; 4m\end{bmatrix}
+\end{align*}
+$$
+</div>
+<p>Since the matrix is already diagonal, the values of the diagonal elements are the principal moments of inertia:</p>
+<div>
+    $$
+A = B = C = 4m\\
+$$
+</div>
+<p>The principal axes are $\hat{x}, \hat{y}, \hat{z}$.</p>
+<hr />
+<p><strong>b. A cube of uniform density</strong></p>
+<p>Assume origin at center of the cube. The moments of inertia are:</p>
+<div>
+    $$
+\begin{align*}
+I_{xx} = \int_{-L&#x2F;2}^{L&#x2F;2} \int_{-L&#x2F;2}^{L&#x2F;2} \int_{-L&#x2F;2}^{L&#x2F;2} \left(y^2 + z^2\right) \rho~dx dy dz\\
+I_{yy} = \int_{-L&#x2F;2}^{L&#x2F;2} \int_{-L&#x2F;2}^{L&#x2F;2} \int_{-L&#x2F;2}^{L&#x2F;2} \left(x^2 + z^2\right) \rho~dx dy dz\\
+I_{zz} = \int_{-L&#x2F;2}^{L&#x2F;2} \int_{-L&#x2F;2}^{L&#x2F;2} \int_{-L&#x2F;2}^{L&#x2F;2} \left(x^2 + y^2\right) \rho~dx dy dz\\
+\end{align*}
+$$
+</div>
+<p>where $\rho$ is the density of the material, $\rho = \frac{M}{L^3}$. Since the cube is symmetric, the moments of inertia are all equal to each other, $I_{xx} = I_{yy} = I_{zz}$</p>
+<p>Products of inertia are:</p>
+<div>
+    $$
+\begin{align*}
+I_{xy} &amp;= \int_{-L&#x2F;2}^{L&#x2F;2} \int_{-L&#x2F;2}^{L&#x2F;2} \int_{-L&#x2F;2}^{L&#x2F;2} xy \rho~dx dy dz\\
+I_{yz} &amp;= \int_{-L&#x2F;2}^{L&#x2F;2} \int_{-L&#x2F;2}^{L&#x2F;2} \int_{-L&#x2F;2}^{L&#x2F;2} yz \rho~dx dy dz\\
+I_{zx} &amp;= \int_{-L&#x2F;2}^{L&#x2F;2} \int_{-L&#x2F;2}^{L&#x2F;2} \int_{-L&#x2F;2}^{L&#x2F;2} zx \rho~dx dy dz\\
+\end{align*}
+$$
+</div>
+<p>As calculated below, the inertia matrix is diagonal with elements equal to $\frac{M L^2}{6}$. Therefore the principal moments of inertia are:</p>
+<div>
+    $$
+A = B = C = \frac{M L^2}{6}
+$$
+</div>
+<p>The principal axes are $\hat{x}, \hat{y}, \hat{z}$.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>x, y, z = </span><span style="color:#bf616a;">symbols</span><span>(&#39;</span><span style="color:#a3be8c;">x y z</span><span>&#39;, </span><span style="color:#bf616a;">real</span><span>=</span><span style="color:#d08770;">True</span><span>)
+</span><span>M, L = </span><span style="color:#bf616a;">symbols</span><span>(&#39;</span><span style="color:#a3be8c;">M L</span><span>&#39;, </span><span style="color:#bf616a;">positive</span><span>=</span><span style="color:#d08770;">True</span><span>)
+</span><span>rho = M/L**</span><span style="color:#d08770;">3
+</span><span>
+</span><span>Ixx = rho * </span><span style="color:#bf616a;">integrate</span><span>(y**</span><span style="color:#d08770;">2 </span><span>+ z**</span><span style="color:#d08770;">2</span><span>, (x, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>), (y, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>), (z, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>))
+</span><span>Iyy = rho * </span><span style="color:#bf616a;">integrate</span><span>(x**</span><span style="color:#d08770;">2 </span><span>+ z**</span><span style="color:#d08770;">2</span><span>, (x, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>), (y, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>), (z, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>))
+</span><span>Izz = rho * </span><span style="color:#bf616a;">integrate</span><span>(x**</span><span style="color:#d08770;">2 </span><span>+ y**</span><span style="color:#d08770;">2</span><span>, (x, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>), (y, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>), (z, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>))
+</span><span>
+</span><span>Ixy = rho * </span><span style="color:#bf616a;">integrate</span><span>(x*y, (x, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>), (y, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>), (z, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>))
+</span><span>Iyz = rho * </span><span style="color:#bf616a;">integrate</span><span>(y*z, (x, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>), (y, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>), (z, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>))
+</span><span>Ixz = rho * </span><span style="color:#bf616a;">integrate</span><span>(x*z, (x, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>), (y, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>), (z, -L/</span><span style="color:#d08770;">2</span><span>, L/</span><span style="color:#d08770;">2</span><span>))
+</span><span>
+</span><span>Iyx, Izy, Izx = Ixy, Iyz, Ixz
+</span><span>
+</span><span>I = </span><span style="color:#bf616a;">Matrix</span><span>([[Ixx, Ixy, Ixz],
+</span><span>            [Iyx, Iyy, Iyz],
+</span><span>            [Izx, Izy, Izz]])
+</span><span>
+</span><span>I
+</span></code></pre>
+<div>
+    $\displaystyle \left[\begin{matrix}\frac{L^{2} M}{6} &amp; 0 &amp; 0\\0 &amp; \frac{L^{2} M}{6} &amp; 0\\0 &amp; 0 &amp; \frac{L^{2} M}{6}\end{matrix}\right]$
+</div>
+<hr />
+<p><strong>c. Five equal point masses rigidly connected by massless stuff. The point masses are at the rectangular coordinates:
+(−1, 0, 0), (1, 0, 0), (1, 1, 0), (0, 0, 0), (0, 0, 1).</strong></p>
+<p>The center of mass is at $[\frac{1}{5}, \frac{1}{5}, \frac{1}{5}]$.</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">import </span><span>numpy </span><span style="color:#b48ead;">as </span><span>np
+</span><span>
+</span><span>points = np.</span><span style="color:#bf616a;">array</span><span>([[-</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>],
+</span><span>                   [</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>],
+</span><span>                   [</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">0</span><span>],
+</span><span>                   [</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>],
+</span><span>                   [</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>]])
+</span><span>
+</span><span>
+</span><span>N = points.shape[</span><span style="color:#d08770;">0</span><span>]
+</span><span>center_of_mass = points.</span><span style="color:#bf616a;">mean</span><span>(</span><span style="color:#bf616a;">axis</span><span>=</span><span style="color:#d08770;">0</span><span>)
+</span><span>cx,cy,cz = center_of_mass
+</span><span>
+</span><span>Ixx = </span><span style="color:#96b5b4;">sum</span><span>([(y - cy)**</span><span style="color:#d08770;">2 </span><span>+ (z - cz)**</span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">for </span><span>x, y, z </span><span style="color:#b48ead;">in </span><span>points])
+</span><span>Iyy = </span><span style="color:#96b5b4;">sum</span><span>([(x - cx)**</span><span style="color:#d08770;">2 </span><span>+ (z - cz)**</span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">for </span><span>x, y, z </span><span style="color:#b48ead;">in </span><span>points])
+</span><span>Izz = </span><span style="color:#96b5b4;">sum</span><span>([(x - cx)**</span><span style="color:#d08770;">2 </span><span>+ (y - cy)**</span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">for </span><span>x, y, z </span><span style="color:#b48ead;">in </span><span>points])
+</span><span>
+</span><span>Iyz = </span><span style="color:#96b5b4;">sum</span><span>([(y - cy)*(z - cz)**</span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">for </span><span>x, y, z </span><span style="color:#b48ead;">in </span><span>points])
+</span><span>Ixz = </span><span style="color:#96b5b4;">sum</span><span>([(x - cx)*(z - cz)**</span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">for </span><span>x, y, z </span><span style="color:#b48ead;">in </span><span>points])
+</span><span>Ixy = </span><span style="color:#96b5b4;">sum</span><span>([(x - cx)*(y - cy)**</span><span style="color:#d08770;">2 </span><span style="color:#b48ead;">for </span><span>x, y, z </span><span style="color:#b48ead;">in </span><span>points])
+</span><span>
+</span><span>I = </span><span style="color:#bf616a;">Matrix</span><span>([[Ixx, Ixy, Ixz],
+</span><span>            [Iyx, Iyy, Iyz],
+</span><span>            [Izx, Izy, Izz]]) * m
+</span><span>
+</span><span>I
+</span></code></pre>
+<div>
+    $\displaystyle \left[\begin{matrix}1.6 m &amp; 0.48 m &amp; - 0.12 m\\0 &amp; 3.6 m &amp; - 0.12 m\\0 &amp; 0 &amp; 3.6 m\end{matrix}\right]$
+</div>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>eigenvects = I.</span><span style="color:#bf616a;">eigenvects</span><span>()
+</span><span>eigenvects
+</span></code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[(1.6*m,
+</span><span>  1,
+</span><span>  [Matrix([
+</span><span>   [1.0],
+</span><span>   [  0],
+</span><span>   [  0]])]),
+</span><span> (3.6*m,
+</span><span>  2,
+</span><span>  [Matrix([
+</span><span>   [0.24],
+</span><span>   [ 1.0],
+</span><span>   [   0]])])]
+</span></code></pre>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>a = eigenvects[</span><span style="color:#d08770;">0</span><span>][</span><span style="color:#d08770;">2</span><span>][</span><span style="color:#d08770;">0</span><span>]
+</span><span>b = eigenvects[</span><span style="color:#d08770;">1</span><span>][</span><span style="color:#d08770;">2</span><span>][</span><span style="color:#d08770;">0</span><span>]
+</span><span>
+</span><span>c = a.</span><span style="color:#bf616a;">cross</span><span>(b)
+</span><span>c
+</span></code></pre>
+<div>
+    $\displaystyle \left[\begin{matrix}0\\0\\1.0\end{matrix}\right]$
+</div>
+<p>The principal moments of inertia are:</p>
+<div>
+    $$
+A = 1.6m, B = C = 3.6m\\
+$$
+</div>
+<p>The principal axes are: $\hat{x},~ 0.24\hat{x} + 1.0\hat{y},~\hat{z}$</p>
+</article>
+</p>
+</section>
+<a href="https://www.thomasantony.com/projects/sicm-workbook">&larr; Back to workbook</a>
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
