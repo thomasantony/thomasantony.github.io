@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 2.8.1: Computing The Motion Of Free Rigid Bodies (Incomplete) - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="2-8-1-computing-the-motion-of-free-rigid-bodies">2.8.1 Computing the Motion of Free Rigid Bodies</h2>
+<blockquote>
+<p>Lagrange’s equations for the motion of a free rigid body in terms of Euler angles are quite disgusting, so we will not show them here.</p>
+</blockquote>
+<p>Some configurations may have coordinate singularities when using Euler angles (e.g. <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Gimbal_lock">gimbal lock</a>). In the explicit Lagrange equations, the singularity arises when we try to find the expression for generalized accelerations. The expression for this involves the inverse of $\partial_2 \partial_2 L$. The determinant of this quantity may become zero when the Euler angle $\theta$ is zero (for 3-1-3 Euler angles).</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">Euler-state
+</span><span>  (</span><span style="color:#bf616a;">up </span><span>&#39;t
+</span><span>      (</span><span style="color:#bf616a;">up </span><span>&#39;theta &#39;varphi &#39;psi)
+</span><span>      (</span><span style="color:#bf616a;">up </span><span>&#39;thetadot &#39;varphidot &#39;psidot)))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendermd </span><span>(</span><span style="color:#bf616a;">determinant
+</span><span>    (((</span><span style="color:#bf616a;">square </span><span>(</span><span style="color:#bf616a;">partial </span><span style="color:#d08770;">2</span><span>)) (</span><span style="color:#bf616a;">rigid/T-rigid-body </span><span>&#39;A &#39;B &#39;C)) </span><span style="color:#65737e;">;; rigid/T-rigid-body = T-body-Euler from book
+</span><span>     Euler-state)))
+</span></code></pre>
+<div>
+    $$
+A\,B\,C\,{\sin}^{2}\left(\theta\right)
+$$
+</div>
+<p>So we cannot solve for the second derivatives when $\theta = 0$ and the Euler angles may change drastically when $\theta$ is small. This does not mean the actual motion of the rigid body is anything but well-behaved. The problem lies entirely in the representation of the motion using Euler angles. We may use another set of Euler angles when necessary to avoid this problem, but this tends to be cumbersome. In this section, we will be limiting our focus to trajectories that will not contain singularities for the chosen Euler angle set. </p>
+<p>To obtain trjectories, we numerically integrate the Lagrange equations. The system derivative can be obtained directly from the Lagrangian using <code>Lagrangian-&gt;state-derivative</code></p>
+<p>TBD: Figure out plotting in Clojupyter</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">rigid-sysder </span><span>[A B C]
+</span><span>  (</span><span style="color:#bf616a;">Lagrangian-&gt;state-derivative </span><span>(</span><span style="color:#bf616a;">rigid/T-rigid-body</span><span> A B C)))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">monitor-errors </span><span>[win A B C L0 E0]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[state]
+</span><span>  (</span><span style="color:#bf616a;">let </span><span>[t (</span><span style="color:#bf616a;">time</span><span> state)
+</span><span>        L ((</span><span style="color:#bf616a;">rigid/Euler-state-&gt;L-body</span><span> A B C) state)
+</span><span>        E ((</span><span style="color:#bf616a;">rigid/T-rigid-body</span><span> A B C) state)]
+</span><span>    (</span><span style="color:#bf616a;">plot-point</span><span> win t (</span><span style="color:#bf616a;">relative-error </span><span>(</span><span style="color:#bf616a;">ref</span><span> L </span><span style="color:#d08770;">0</span><span>) (</span><span style="color:#bf616a;">ref</span><span> L0 </span><span style="color:#d08770;">0</span><span>)))
+</span><span>    (</span><span style="color:#bf616a;">plot-point</span><span> win t (</span><span style="color:#bf616a;">relative-error </span><span>(</span><span style="color:#bf616a;">ref</span><span> L </span><span style="color:#d08770;">1</span><span>) (</span><span style="color:#bf616a;">ref</span><span> L0 </span><span style="color:#d08770;">1</span><span>)))
+</span><span>    (</span><span style="color:#bf616a;">plot-point</span><span> win t (</span><span style="color:#bf616a;">relative-error </span><span>(</span><span style="color:#bf616a;">ref</span><span> L </span><span style="color:#d08770;">2</span><span>) (</span><span style="color:#bf616a;">ref</span><span> L0 </span><span style="color:#d08770;">2</span><span>)))
+</span><span>    (</span><span style="color:#bf616a;">plot-point</span><span> win t (</span><span style="color:#bf616a;">relative-error</span><span> E E0)))))
+</span></code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Syntax error compiling at (REPL:9:5).
+</span><span>Unable to resolve symbol: plot-point in this context
+</span><span>
+</span><span>  Util.java:   221 clojure.lang.Util/runtimeException
+</span><span>   core.clj:  3214 clojure.core$eval/invokeStatic
+</span><span>   core.clj:  3210 clojure.core$eval/invoke
+</span><span>   main.clj:   437 clojure.main$repl$read_eval_print__9086$fn__9089/invoke
+</span><span>   main.clj:   458 clojure.main$repl$fn__9095/invoke
+</span><span>   main.clj:   368 clojure.main$repl/doInvoke
+</span><span>RestFn.java:  1523 clojure.lang.RestFn/invoke
+</span><span>   AFn.java:    22 clojure.lang.AFn/run
+</span><span>   AFn.java:    22 clojure.lang.AFn/run
+</span><span>Thread.java:  1589 java.lang.Thread/run
+</span></code></pre>
+</article>
+</p>
+</section>
+<a href="https://www.thomasantony.com/projects/sicm-workbook">&larr; Back to workbook</a>
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

@@ -60,11 +60,11 @@ $$
 <div>
     $$
 \begin{align*}
-\mathbf{R}(\theta, \varphi, \psi) = \mathbf{R}_z(\varphi) \mathbf{R}_x(\theta) \mathbf{R}_z(\psi)
+\mathbf{R}_{zxz}(\theta, \varphi, \psi) = \mathbf{R}_z(\varphi) \mathbf{R}_x(\theta) \mathbf{R}_z(\psi)
 \end{align*}
 $$
 </div>
-<p>Expanding this matrix multiplication, we can get the matrix $\mathbf{R}$ as a function of $(\theta, \varphi, \psi)$</p>
+<p>Expanding this matrix multiplication, we can get the matrix $\mathbf{R}_{zxz}$ as a function of $(\theta, \varphi, \psi)$</p>
 <pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>t = </span><span style="color:#bf616a;">symbols</span><span>(&#39;</span><span style="color:#a3be8c;">t</span><span>&#39;, </span><span style="color:#bf616a;">real</span><span>=</span><span style="color:#d08770;">True</span><span>)
 </span><span>theta, phi, psi = </span><span style="color:#bf616a;">symbols</span><span>(&#39;</span><span style="color:#a3be8c;">theta phi psi</span><span>&#39;, </span><span style="color:#bf616a;">real</span><span>=</span><span style="color:#d08770;">True</span><span>)
 </span><span>
@@ -76,47 +76,34 @@ $$
 </span><span>             [</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#bf616a;">cos</span><span>(t), -</span><span style="color:#bf616a;">sin</span><span>(t)],
 </span><span>             [</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#bf616a;">sin</span><span>(t), </span><span style="color:#bf616a;">cos</span><span>(t)]])
 </span><span>
-</span><span>R = Rz.</span><span style="color:#bf616a;">subs</span><span>(t, phi) * Rx.</span><span style="color:#bf616a;">subs</span><span>(t, theta) * Rz.</span><span style="color:#bf616a;">subs</span><span>(t, psi)
-</span><span>R
+</span><span>R_zxz = Rz.</span><span style="color:#bf616a;">subs</span><span>(t, phi) * Rx.</span><span style="color:#bf616a;">subs</span><span>(t, theta) * Rz.</span><span style="color:#bf616a;">subs</span><span>(t, psi)
+</span><span>R_zxz
 </span></code></pre>
 <div>
     $\displaystyle \left[\begin{matrix}- \sin{\left(\phi \right)} \sin{\left(\psi \right)} \cos{\left(\theta \right)} + \cos{\left(\phi \right)} \cos{\left(\psi \right)} &amp; - \sin{\left(\phi \right)} \cos{\left(\psi \right)} \cos{\left(\theta \right)} - \sin{\left(\psi \right)} \cos{\left(\phi \right)} &amp; \sin{\left(\phi \right)} \sin{\left(\theta \right)}\\\sin{\left(\phi \right)} \cos{\left(\psi \right)} + \sin{\left(\psi \right)} \cos{\left(\phi \right)} \cos{\left(\theta \right)} &amp; - \sin{\left(\phi \right)} \sin{\left(\psi \right)} + \cos{\left(\phi \right)} \cos{\left(\psi \right)} \cos{\left(\theta \right)} &amp; - \sin{\left(\theta \right)} \cos{\left(\phi \right)}\\\sin{\left(\psi \right)} \sin{\left(\theta \right)} &amp; \sin{\left(\theta \right)} \cos{\left(\psi \right)} &amp; \cos{\left(\theta \right)}\end{matrix}\right]$
 </div>
-<p>$$
-R^T R = R R^T = I
-$$</p>
+<p>Any proper rotation can be represented by the rotation matrix $\mathbf{R}$ where</p>
 <div>
     $$
-1 = det(I) = det(R^T R) = det(R^T) det(R) = det(R)^2 =&gt; det(R) = \pm 1
-$$
-
-
-Show $det(R-I) = 0$ =&gt; eigen value is 1.
-
-
-
-For any R, there exist an axis $\vec{\omega}$ which does not transform under the rotation.
-
-{% mathjax() %}
-$$
-\mathbf{R}\vec{\omega} = \vec{\omega}
+\mathbf{R} = \begin{bmatrix}R_{11} &amp; R_{12} &amp; R_{13}\\
+R_{21} &amp; R_{22} &amp; R_{23}\\
+R_{31} &amp; R_{32} &amp; R_{33}\\
+\end{bmatrix}
 $$
 </div>
-<p>Therefore $\omega$ is the eigen vector of $\mathbf{R}$ with a corresponding eigen value of 1.</p>
+<p>Comparing $\mathbf{R}$ and $\mathbf{R}_{zxz}$, we get</p>
 <div>
     $$
-(\mathbf{R} - I)\vec{\omega} = \vec{0}
+\begin{align*}
+\cos{\theta} &amp;= R_{33} \implies \theta = \arccos{(R_{33})}\\
+\sin(\phi)\sin(\theta) &amp;= R_{13}\\
+-\cos(\phi)\sin(\theta) &amp;= R_{23}\\
+\sin{(\theta)}\cos{(\psi)} &amp;= R_{32}\\
+\sin{(\theta)}\sin{(\psi)} &amp;= R_{31}\\
+\end{align*}
 $$
 </div>
-<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>omega = (R - </span><span style="color:#d08770;">1</span><span>*</span><span style="color:#bf616a;">eye</span><span>(</span><span style="color:#d08770;">3</span><span>)).</span><span style="color:#bf616a;">nullspace</span><span>()
-</span></code></pre>
-<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#bf616a;">simplify</span><span>(omega[</span><span style="color:#d08770;">0</span><span>])
-</span></code></pre>
-<div>
-    $\displaystyle \left[\begin{matrix}\frac{\left(\sin{\left(\phi \right)} + \sin{\left(\psi \right)}\right) \sin{\left(\theta \right)}}{- \cos{\left(\theta \right)} \cos{\left(\phi + \psi \right)} + \cos{\left(\theta \right)} - \cos{\left(\phi + \psi \right)} + 1}\\\frac{\left(\cos{\left(\phi \right)} - \cos{\left(\psi \right)}\right) \sin{\left(\theta \right)}}{\cos{\left(\theta \right)} \cos{\left(\phi + \psi \right)} - \cos{\left(\theta \right)} + \cos{\left(\phi + \psi \right)} - 1}\\1\end{matrix}\right]$
-</div>
-<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>delta = </span><span style="color:#bf616a;">simplify</span><span>((xhat - xhat.</span><span style="color:#bf616a;">dot</span><span>(omega[</span><span style="color:#d08770;">0</span><span>])*omega[</span><span style="color:#d08770;">0</span><span>]).</span><span style="color:#bf616a;">dot</span><span>([</span><span style="color:#d08770;">1</span><span>,</span><span style="color:#d08770;">0</span><span>,</span><span style="color:#d08770;">0</span><span>]))
-</span></code></pre>
+<p>We can therefore compute $(\theta, \phi, \psi)$ for a given arbitrary rotation. The particular set of Euler angles chosen may have coordinate singularities. For example, in the z-x-z Euler angle set chosen above, when $\theta = 0$, $\phi$ and $\psi$ are not defined. However, in this case, another set of Euler angles may be chosen that does not have a singularity in that particular configuration.</p>
 <p>We have shown above that any arbitrary rotation, as represented by a direction cosine matrix, can be written in terms of Euler angles. <strong>This proves that Euler angles can represent any arbitrary rotation.</strong></p>
 </article>
 </p>
