@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 2.9: Euler&#x27;S Equations - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h2 id="2-9-euler-s-equations">2.9 Euler’s Equations</h2>
+<blockquote>
+<p>For a free rigid body we have seen that the components of the angular momentum on the principal axes comprise a self-contained dynamical system: the variation of the principal axis components depends only on the principal axis components. Here we derive equations that govern the evolution of these components.</p>
+</blockquote>
+<p>The components of angular momentum (in column matrix form) on the principal axes are:</p>
+<div>
+    $$
+\overline{\mathbf{L}}&#x27; = \mathbf{I}&#x27;\boldsymbol{\omega}&#x27;
+$$
+
+where $\boldsymbol{\omega}&#x27;$ are the angular velocity components on the principal axes and $\mathbf{I}&#x27;$ is the diagonal inertia tensor in the principal axes basis:
+
+
+{% mathjax() %}
+$$
+\mathbf{I}&#x27; = \begin{bmatrix}A &amp; 0 &amp; 0 \\ 0 &amp; B &amp; 0 \\ 0 &amp; 0 &amp; C\end{bmatrix}
+$$
+</div>
+<p>If $\mathbf{M}$ is the rotation that rotates all vectorsand the body from the fixed reference frame to the actual orientation, then the components of angualr momentum in the inertial frame $\hat{e}_i$ are:</p>
+<div>
+    $$
+\mathbf{L} = \mathbf{M} \mathbf{\overline{L}}
+$$
+</div>
+<p>For a free rigid vody, the vector angular momentum and therefore its components in the inertial frame are conserved. Therefore:</p>
+<div>
+    $$
+\begin{align*}
+D\mathbf{L} = D (\mathbf{M} \mathbf{\overline{L}}&#x27;) &amp;= D\mathbf{M}\mathbf{\overline{L}}&#x27; + \mathbf{M} D\mathbf{\overline{L}&#x27;}\\
+\implies \mathbf{M} D\mathbf{\overline{L}&#x27;} &amp;= -D\mathbf{M}\mathbf{\overline{L}}&#x27;\\
+D\mathbf{\overline{L}&#x27;} &amp;= -\mathbf{M}^{\mathscr{T}} D\mathbf{M}\mathbf{\overline{L}}&#x27;\tag{2.65}
+\end{align*}
+$$
+</div>
+<p>From <a href="/projects/sicm-workbook/section-2-2-kinematics-of-rotation/">section 2.2</a>, we know that the components of the angular velocity can be written as:</p>
+<div>
+    $$
+\begin{align*}
+\boldsymbol{\omega}&#x27; &amp;= \mathbf{M}^\mathscr{T}  \mathscr{A}^{-1}(D \mathbf{M} \mathbf{M}^\mathscr{T}) \tag{2.21}\\
+\implies \mathbf{M}\boldsymbol{\omega}&#x27; &amp;= \mathscr{A}^{-1}(D \mathbf{M} \mathbf{M}^\mathscr{T}) \tag{2.21a}\\
+\implies \mathscr{A}(\mathbf{M}\boldsymbol{\omega}&#x27;) &amp;= D \mathbf{M} \mathbf{M}^\mathscr{T} \tag{2.21b}\\
+\implies \mathscr{A}(\mathbf{M}\boldsymbol{\omega}&#x27;)\mathbf{M} &amp;= D \mathbf{M} \tag{2.21c}\\
+\end{align*}
+$$
+</div>
+<p>Substituting Eq.2.21c in Eq.2.65 along with $\mathbf{I}\boldsymbol{\omega}’ = \overline{\mathbf{L}}’$</p>
+<div>
+    $$
+\begin{align*}
+\mathbf{I}&#x27; D\boldsymbol{\omega}&#x27; &amp;= -\mathbf{M}^{\mathscr{T}} D\mathbf{M}\mathbf{I}&#x27;\boldsymbol{\omega}&#x27;\\
+    &amp;= -\mathbf{M}^{\mathscr{T}} \mathscr{A}(\mathbf{M}\boldsymbol{\omega}&#x27;) \mathbf{M}~  \mathbf{I}&#x27;\boldsymbol{\omega}&#x27; \tag{2.66}
+\end{align*}
+$$
+</div>
+<p><strong>Note</strong>: The function $\mathscr{A}$ converts a vector into an anti-symmetric matrix. Multiplying this matrix with a vector is equivalent to taking a cross product of the original vector with this second vector. We also know that rotating the cross product of two vectors gives the same vector as is obtained by taking the cross product of two rotated vectors, or $R(\vec{u} \times \vec{v}) = (R\vec{u} )\times(R\vec{v})$</p>
+<p>These two terms can be written in terms of $\mathscr{A}$ as:</p>
+<div>
+    $$
+R(\vec{u} \times \vec{v}) = \mathbf{R} \mathscr{A}(\mathbf{u}) \mathbf{v}
+$$
+</div>
+<div>
+    $$
+(R\vec{u})\times(R\vec{v}) = \mathscr{A}(\mathbf{R} \mathbf{u}) \mathbf{R}\mathbf{v}\\
+$$
+</div>
+<div>
+    $$
+\begin{align*}
+\implies \mathbf{R} \mathscr{A}(\mathbf{u}) \mathbf{v} &amp;= \mathscr{A}(\mathbf{R} \mathbf{u}) \mathbf{R} \mathbf{v}\\
+\implies \mathbf{R} \mathscr{A}(\mathbf{u}) &amp;=  \mathscr{A}(\mathbf{R} \mathbf{u}) \mathbf{R}\\
+\mathscr{A}(\mathbf{u}) &amp;=  \mathbf{R}^{\mathscr{T}} \mathscr{A}(\mathbf{R} \mathbf{u}) \mathbf{R}\tag{2.67}\\
+\end{align*}
+$$
+</div>
+<p>Substituting Eq. 2.67 in Eq. 2.66:</p>
+<div>
+    $$
+\begin{align*}
+\mathbf{I}&#x27; D\boldsymbol{\omega}&#x27; &amp;= - \mathscr{A}(\boldsymbol{\omega}&#x27;) \mathbf{I}&#x27;\boldsymbol{\omega}&#x27; \tag{2.68}
+\end{align*}
+$$
+</div>
+<p>This is the matrix form of <strong>Euler’s Equations</strong> that gives the derivative of the body components of angular velocity entirely in terms of the angular velocity components and the principal moments of inertia. If the components of $\boldsymbol{\omega}’$ are $(\omega^a, \omega^b, \omega^c)$, then the equations can be re-written as:</p>
+<div>
+    $$
+\begin{align*}
+A D\omega^a &amp;= (B - C) \omega^b \omega^c\\
+B D\omega^b &amp;= (C - A) \omega^c \omega^a\\
+C D\omega^c &amp;= (A - B) \omega^a \omega^b\tag{2.69}\\
+\end{align*}
+$$
+</div>
+<p>These equations can also be written in terms of the components of angular momentum as:</p>
+<div>
+    $$
+\begin{align*}
+D L_a &amp;= \left(\frac{1}{C} - \frac{1}{B}\right) L_b L_c\\
+D L_b &amp;= \left(\frac{1}{A} - \frac{1}{C}\right) L_c L_a\\
+D L_c &amp;= \left(\frac{1}{B} - \frac{1}{A}\right) L_a L_b\tag{2.69}\\
+\end{align*}
+$$
+</div>
+<p>These equations <em>only</em> depend on the principal axes components of $L$. Equations 2.21b and 2.67 can be used to get the derivatives of the orientation of the body in terms of the angular velocity.</p>
+<div>
+    $$
+\begin{align*}
+D \mathbf{M} &amp;= \mathscr{A}(\mathbf{M}\boldsymbol{\omega}&#x27;)\mathbf{M}\tag{2.21c}\\
+             &amp;= \mathbf{M} \overbrace{\mathbf{M}^{\mathscr{T}}~\mathscr{A}(\mathbf{M}\boldsymbol{\omega}&#x27;)\mathbf{M}}^{\text{Refer Eq. 2.67}}\\
+             &amp;= \mathbf{M} \mathscr{A}(\boldsymbol{\omega}&#x27;)
+\end{align*}
+$$
+</div>
+<div>
+    $$
+D\mathbf{M} = \mathbf{M}\mathscr{A}(\boldsymbol{\omega}&#x27;)\tag{2.71}
+$$
+</div>
+<p>When the orientation of the body is represented by a DCM, this gives nine ordinary differential equations. These equations can be integrated witht eh initial conditions determined by the initial configuration matrix to get the evolution of the spatial orientation of the body. Combined with Euler’s equations, these equations completely definet the motion of a rigid body.</p>
+<p>However, having to integrate nine equations is rather cumbersome when we know that the orientation can be represented by just three states (the Euler angles). In order to reduce this to a system of three equations we can go back to parameterizing the rotation matrix with the Euler angles. We can form the matrix $\mathbf{M}$ by composing $\mathscr{M}$ with an Euler coordinate path (i.e. write it as the product of three rotation matrices, $R_z$, $R_x$ and $R_z$). We can then solve for $D\theta$, $D\phi$ and $D\psi$ as:</p>
+<div>
+    $$
+\begin{pmatrix}
+D\theta \\ D\phi \\ D\psi
+\end{pmatrix} = \frac{1}{\sin\theta}\begin{pmatrix}
+\cos\psi\sin\theta &amp; -\sin\psi\sin\theta &amp; 0\\
+\sin\psi &amp; \cos\psi &amp; 0 \\
+-\sin\psi\cos\theta &amp; -\cos\psi\cos\theta &amp; \sin\theta\end{pmatrix} \begin{pmatrix}\omega^a\\ \omega^b\\ \omega^c \end{pmatrix}
+$$
+</div>
+<p>These equations are singular for $\theta = 0$, as expected. To quote the book:</p>
+<blockquote>
+<p>The singularity in the equations of motion for $\theta = 0$ does not correspond to anything funny in the motion of the rigid body. A practical solution to the singularity problem is to choose another set of Euler-like angles that have a singularity in a different place, and switch from one to the other when the going gets tough.</p>
+</blockquote>
+</article>
+</p>
+</section>
+<a href="https://www.thomasantony.com/projects/sicm-workbook">&larr; Back to workbook</a>
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
