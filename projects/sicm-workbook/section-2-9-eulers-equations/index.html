@@ -43,14 +43,12 @@
 <p>The components of angular momentum (in column matrix form) on the principal axes are:</p>
 <div>
     $$
-\overline{\mathbf{L}}&#x27; = \mathbf{I}&#x27;\boldsymbol{\omega}&#x27;
+\overline{\mathbf{L}}&#x27; = \mathbf{I}&#x27;\boldsymbol{\omega}&#x27;\\
 $$
-
-where $\boldsymbol{\omega}&#x27;$ are the angular velocity components on the principal axes and $\mathbf{I}&#x27;$ is the diagonal inertia tensor in the principal axes basis:
-
-
-{% mathjax() %}
-$$
+</div>
+<p>where $\boldsymbol{\omega}‘$ are the angular velocity components on the principal axes and $\mathbf{I}’$ is the diagonal inertia tensor in the principal axes basis:</p>
+<div>
+    $$
 \mathbf{I}&#x27; = \begin{bmatrix}A &amp; 0 &amp; 0 \\ 0 &amp; B &amp; 0 \\ 0 &amp; 0 &amp; C\end{bmatrix}
 $$
 </div>
@@ -81,7 +79,7 @@ $$
 \end{align*}
 $$
 </div>
-<p>Substituting Eq.2.21c in Eq.2.65 along with $\mathbf{I}\boldsymbol{\omega}’ = \overline{\mathbf{L}}’$</p>
+<p>Substituting Eq.2.21c in Eq.2.65 along with $\mathbf{I}‘\boldsymbol{\omega}’ = \overline{\mathbf{L}}’$</p>
 <div>
     $$
 \begin{align*}
@@ -170,6 +168,75 @@ $$
 <blockquote>
 <p>The singularity in the equations of motion for $\theta = 0$ does not correspond to anything funny in the motion of the rigid body. A practical solution to the singularity problem is to choose another set of Euler-like angles that have a singularity in a different place, and switch from one to the other when the going gets tough.</p>
 </blockquote>
+<h2 id="euler-s-equations-for-forced-rigid-bodies">Euler’s equations for forced rigid bodies</h2>
+<p>$$\require{cancel}$$</p>
+<p>In this section, we derive Euler’s equations for a rigid body subject to an external torque. Consider a rigid body subject to some potential energy that is a function of time and configuration ($t$ and $q$). A suitable Lagrangian is $L = T - V$. If we use the 3-1-3 Euler angle set as the coordinates, the last of the three active rotations that define the coordinate is about the $z$ axis by the angle $\phi$. The Lagrange equation for $\phi$ is:</p>
+<div>
+    $$
+D \partial_{\dot{\phi}} L = -D \underbrace{p_\phi}_{\text{conjugate momentum of }\phi} = \partial_{1,1} V(t; \theta(t), \phi(t), \psi(t))
+$$
+</div>
+<p>where $\partial_{1,1}$ refers to a partial derivative with respect to a component (at index 1 or $\phi$) of the coordinate argument of the potential energy function. If we define the torque component $T_z$, to be minus the derivative of the potential energy with respect to the angle of rotation of the body about the z axis, then,</p>
+<div>
+    $$
+T_z(t) = -D p_\phi = \partial_{1,1} V(t; \theta(t), \phi(t), \psi(t))
+$$
+</div>
+<p>and so $D p_\phi (t) = T_z$. Since the orientation of the coordinate axes are arbitrary, we may choose and orient them as we want. Thus if we want any component of the vector torque, we may choose the z-axis so that we can compute it in this way. Therefore the vector torque gives the derivative of the vector angular momentum (<strong>why?</strong>):</p>
+<div>
+    $$
+D\vec{L} = \vec{T}
+$$
+</div>
+<p>This can be substituted in Eq. 2.65 with $\mathbf{T}$ being the torque components in a column vector.</p>
+<div>
+    $$
+D\overline{\mathbf{L}} = \overline{\mathbf{T}} = D\mathbf{M}~\overline{\mathbf{L}}&#x27; + \mathbf{M}D\overline{\mathbf{L}}&#x27;\\
+$$
+</div>
+<p>Substituting in $\mathbf{I}‘\boldsymbol{\omega}’ = \overline{\mathbf{L}}’$, and $D\mathbf{M}$ from Eq. 2.21c,</p>
+<div>
+    $$
+\begin{align*}
+\overline{\mathbf{T}} &amp;= \left(\mathscr{A}(\mathbf{M}\boldsymbol{\omega}&#x27;)\mathbf{M}\right)~\mathbf{I}&#x27;\boldsymbol{\omega}&#x27; + \mathbf{M}\mathbf{I}&#x27;D\boldsymbol{\omega}&#x27;\\
+\implies \mathbf{M}^\mathscr{T} \overline{\mathbf{T}} &amp;= \underbrace{\left(\mathbf{M}^\mathscr{T}  \mathscr{A}(\mathbf{M}\boldsymbol{\omega}&#x27;)\mathbf{M}\right)}_{\text{see Eq. 2.67}}~\mathbf{I}&#x27;\boldsymbol{\omega}&#x27; + \mathbf{I}&#x27;D\boldsymbol{\omega}&#x27;\\
+\implies \overbrace{\mathbf{M}^\mathscr{T} \overline{\mathbf{T}}}^{= \overline{\mathbf{T}}&#x27;} &amp;= \mathscr{A}(\boldsymbol{\omega}&#x27;) \mathbf{I}&#x27;\boldsymbol{\omega}&#x27; + \mathbf{I}&#x27; D\boldsymbol{\omega}&#x27;\\
+\implies \overline{\mathbf{T}}&#x27; &amp;= \mathscr{A}(\boldsymbol{\omega}&#x27;) \mathbf{I}&#x27;\boldsymbol{\omega}&#x27; + \mathbf{I}&#x27; D\boldsymbol{\omega}&#x27;\tag{2.82}
+\end{align*}
+$$
+</div>
+<p>where $\overline{\mathbf{T}}‘$ represents the torque vector components on the principal axes and $\mathbf{I}’$ is the inertia tensor in the basis vectors of the principal axes. The angular velocity rates can be determined from Eq. 2.82 as:</p>
+<div>
+    $$
+\begin{align*}
+A D \boldsymbol{\omega^a} - \left(B - C\right) \omega^b \omega^c &amp;= \mathbf{T}_a\\
+B D \boldsymbol{\omega^b} - \left(C - A\right) \omega^c \omega^a &amp;= \mathbf{T}_b\\
+C D \boldsymbol{\omega^c} - \left(A - B\right) \omega^a \omega^b &amp;= \mathbf{T}_c\tag{2.83}\\
+\end{align*}
+$$
+</div>
+<p>The angular velocity components (on the principal axes) can be substituted by the angular momentum components on the principal axes as: $\omega^a = \frac{L_a}{A}, \omega^b = \frac{L_b}{B}, \omega^c = \frac{L_c}{C}$, to get:</p>
+<div>
+    $$
+\begin{align*}
+\cancel{A} \frac{D L_a}{\cancel{A}} - \left(B - C\right) \frac{L_b L_c}{BC} &amp;= T_a\\
+\cancel{B} \frac{D L_b}{\cancel{B}} - \left(C - A\right) \frac{L_c L_a}{CA} &amp;= T_b\\
+\cancel{C} \frac{D L_c}{\cancel{C}} - \left(A - B\right) \frac{L_a L_b}{AB} &amp;= T_c\\
+\end{align*}
+$$
+</div>
+<p>This simplifies into:</p>
+<div>
+    $$
+\begin{align*}
+T_a &amp;= D L_a - \left(\frac{1}{C} - \frac{1}{B}\right) L_b L_c\\
+T_b &amp;= D L_b - \left(\frac{1}{A} - \frac{1}{C}\right) L_c L_a\\
+T_c &amp;= D L_c - \left(\frac{1}{B} - \frac{1}{A}\right) L_a L_b\tag{2.80}\\
+\end{align*}
+$$
+</div>
+<p>where the torque components on the principal axes can be obtained as: $\overline{\mathbf{T}}’ = \mathbf{M}^{-1}\overline{\mathbf{T}}$. </p>
+<p>It is to be noted that the torque does not affect the orientation directly, but instead only affects the angular momentum or angular velocity. Therefore Euler’s equations define the dynamics of the system while the derivatives of orientation define the kinematics of the system.</p>
 </article>
 </p>
 </section>
