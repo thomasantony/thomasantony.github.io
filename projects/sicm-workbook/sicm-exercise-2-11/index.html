@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Exercise 2.11: Conservation Of Angular Momentum - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h3 id="exercise-2-11-conservation-of-angular-momentum">Exercise 2.11: Conservation of Angular Momentum</h3>
+<p><strong>Fill in the details of the argument that Noether’s theorem implies that vector angular momentum is conserved by the motion of the free rigid body.</strong></p>
+<p>$$\require{cancel}$$</p>
+<p>According to <a href="/projects/sicm-workbook/section-1-8-5-noethers-theorem/">Noether’s theorem</a>, for any continuous symmetry in a system (aka a parametric family of symmetries), there is a conserved quantity. </p>
+<p>In the case of rigid bodies, rotations about any axis is a symmetry. This can be proved as shown below:</p>
+<p>The Lagrangian in rectangular coordinates for a rigid body with particles indexed by $\alpha$ is:</p>
+<div>
+    $$
+L(t; x,y,z; v_x, v_y, v_z) = \frac{1}{2} \sum_\alpha m_\alpha \left( \dot{x}_\alpha^2 + \dot{y}_\alpha^2 + \dot{z}_\alpha^2\right) \tag{1}
+$$
+</div>
+<p>Consider a parameteric rotation about the $z$-axis:</p>
+<div>
+    $$
+\begin{pmatrix}x_\alpha \\y_\alpha \\z_\alpha \end{pmatrix} = 
+R_z(s)\begin{pmatrix}x_\alpha&#x27; \\y_\alpha&#x27; \\z_\alpha&#x27; \end{pmatrix} = \begin{pmatrix}x_\alpha&#x27; \cos{s} - y_\alpha&#x27;\sin{s}\\x_\alpha&#x27; \sin{s} + y_\alpha&#x27;\cos{s}\\z_\alpha&#x27;\end{pmatrix}\tag{2}
+$$
+</div>
+<p>Since a rotation is an orthogonal transformation, it does not change the magnitude of the vector,</p>
+<div>
+    $$
+x_\alpha^2 + y_\alpha^2 + z_\alpha^2 = (x_\alpha&#x27;)^2 + (y_\alpha&#x27;)^2 + (z_\alpha&#x27;)^2\\
+$$
+</div>
+<p>Similarly, differentiating Eq.2 along a path, we get:</p>
+<div>
+    $$
+\begin{pmatrix}\dot{x}_\alpha\\ \dot{y}_\alpha\\ \dot{z}_\alpha\end{pmatrix} =
+R_z(s)\begin{pmatrix}\dot{x}_\alpha&#x27;\\ \dot{y}_\alpha&#x27;\\ \dot{z}_\alpha&#x27;\end{pmatrix}
+$$
+</div>
+<p>Therefore, </p>
+<div>
+    $$
+\dot{x}_\alpha^2 + \dot{y}_\alpha^2 + \dot{z}_\alpha^2 = \dot{x}_\alpha&#x27;^2 + \dot{y}_\alpha&#x27;^2 + \dot{z}_\alpha&#x27;^2
+$$ 
+
+
+Combining these, we can see that the post-transformation Lagrangian $L&#x27;$ is:
+
+
+{% mathjax() %}
+$$
+L&#x27;(t; x_\alpha&#x27;,y_\alpha&#x27;,z_\alpha&#x27;; \dot{x}_\alpha&#x27;,\dot{y}_\alpha&#x27;,\dot{z}_\alpha&#x27;) = \frac{1}{2} \sum_\alpha m \left(\dot{x}_\alpha&#x27;^2 + \dot{y}_\alpha&#x27;^2 + \dot{z}_\alpha&#x27;^2 \right)\tag{3}
+$$
+</div>
+<p>Therefore $L’$ in Eq.3 is the exact same function as $L$ in Eq. 1 and hence there is a conserved value corresponding to the rotational symmetry about the z-axis. The momenta are defined as:</p>
+<div>
+    $$
+\partial_2 L = \left[\sum_\alpha m_\alpha \dot{x}, \sum_\alpha m_\alpha \dot{y}, \sum_\alpha m_\alpha \dot{z}\right]
+$$
+</div>
+<p>and </p>
+<div>
+    $$
+D\widetilde{F}(0)(t;x,y,z)=D\widetilde{R}_z(0)(x,y,z) = [ y, -x, 0]\\
+$$
+</div>
+<p>Therefore the Noether integral is:</p>
+<div>
+    $$
+\begin{align*}
+\mathscr{I}(t; x_\alpha,y_\alpha,z_\alpha; \dot{x}_\alpha,\dot{y}_\alpha,\dot{z}_\alpha) &amp;= ((\partial_2 L)(D\widetilde{F}(0))) (t; x_\alpha,y_\alpha,z_\alpha; \dot{x}_\alpha,\dot{y}_\alpha,\dot{z}_\alpha) \\
+&amp;= \sum_\alpha \left(m_\alpha \dot{x}_\alpha~y_\alpha -m_\alpha \dot{y}_\alpha~x_\alpha + (m_\alpha \dot{z}_\alpha)(0) \right) \\
+&amp;= \sum_\alpha m_\alpha \left(y_\alpha \dot{x}_\alpha - x_\alpha \dot{y}_\alpha \right)
+\end{align*}
+$$
+</div>
+<p>This is the $z$ component of the angular momentum vector $\sum_\alpha \vec{\xi_\alpha} \times (m_\alpha \dot{\vec{\xi}}_\alpha)$</p>
+<p>In the following program, we compute the noether integrals for rotations around all three coordinate axes.</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">RotX </span><span>[angle]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[x</span><span style="color:#65737e;">,</span><span> y</span><span style="color:#65737e;">,</span><span> z]]
+</span><span>      (</span><span style="color:#bf616a;">let </span><span>[ca (</span><span style="color:#bf616a;">cos</span><span> angle)
+</span><span>            sa (</span><span style="color:#bf616a;">sin</span><span> angle)]
+</span><span>          (</span><span style="color:#bf616a;">up</span><span> x
+</span><span>              (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">*</span><span> ca y) (</span><span style="color:#bf616a;">*</span><span> sa z))
+</span><span>              (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">*</span><span> sa y) (</span><span style="color:#bf616a;">*</span><span> ca z))))))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">RotY </span><span>[angle]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[x</span><span style="color:#65737e;">,</span><span> y</span><span style="color:#65737e;">,</span><span> z]]
+</span><span>      (</span><span style="color:#bf616a;">let </span><span>[ca (</span><span style="color:#bf616a;">cos</span><span> angle)
+</span><span>            sa (</span><span style="color:#bf616a;">sin</span><span> angle)]
+</span><span>          (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">*</span><span> ca x) (</span><span style="color:#bf616a;">*</span><span> sa z))
+</span><span>              y
+</span><span>              (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">*</span><span> sa x)) (</span><span style="color:#bf616a;">*</span><span> ca z))))))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">RotZ </span><span>[angle]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[x</span><span style="color:#65737e;">,</span><span> y</span><span style="color:#65737e;">,</span><span> z]]
+</span><span>      (</span><span style="color:#bf616a;">let </span><span>[ca (</span><span style="color:#bf616a;">cos</span><span> angle)
+</span><span>            sa (</span><span style="color:#bf616a;">sin</span><span> angle)]
+</span><span>          (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">*</span><span> ca x) (</span><span style="color:#bf616a;">*</span><span> sa y))
+</span><span>              (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">*</span><span> sa x) (</span><span style="color:#bf616a;">*</span><span> ca y))
+</span><span>              z))))
+</span><span>
+</span><span style="color:#65737e;">;; Coordinate transformation with three angular &quot;inputs&quot; for rotations about
+</span><span style="color:#65737e;">;; all three axes
+</span><span style="color:#65737e;">;; Composing with `coordinate`, extracts the second element of the tuple that is passed in as the argument
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">F-tilde </span><span>[angle-x angle-y angle-z]
+</span><span>  (</span><span style="color:#bf616a;">compose </span><span>(</span><span style="color:#bf616a;">RotX</span><span> angle-x) (</span><span style="color:#bf616a;">RotY</span><span> angle-y) (</span><span style="color:#bf616a;">RotZ</span><span> angle-z) coordinate))
+</span><span>
+</span><span style="color:#65737e;">;; Lagrangian for motion of single particle in rigid body
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">L-rigid-body_particle </span><span>[m]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[[t q v]]
+</span><span>        (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">1/2</span><span> m (</span><span style="color:#bf616a;">square</span><span> v)))))
+</span><span>
+</span><span style="color:#65737e;">;; Define the Noether integral
+</span><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">the-Noether-integral
+</span><span>  (</span><span style="color:#bf616a;">let </span><span>[L (</span><span style="color:#bf616a;">L-rigid-body_particle </span><span>&#39;m_alpha)]
+</span><span>    (</span><span style="color:#bf616a;">* </span><span>((</span><span style="color:#bf616a;">partial </span><span style="color:#d08770;">2</span><span>) L) ((</span><span style="color:#bf616a;">D</span><span> F-tilde) </span><span style="color:#d08770;">0 0 0</span><span>))))
+</span><span>
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendertex
+</span><span>(</span><span style="color:#bf616a;">the-Noether-integral
+</span><span>  (</span><span style="color:#bf616a;">up </span><span>&#39;t
+</span><span>      (</span><span style="color:#bf616a;">up </span><span>&#39;x_alpha &#39;y_alpha &#39;z_alpha)
+</span><span>      (</span><span style="color:#bf616a;">up </span><span>&#39;xdot_alpha &#39;ydot_alpha &#39;zdot_alpha))))
+</span></code></pre>
+<div>
+    \begin{bmatrix}\displaystyle{- m_{\alpha}\,y_{\alpha}\,{\dot z}_{\alpha} + m_{\alpha}\,{\dot y}_{\alpha}\,z_{\alpha}} \cr \cr \displaystyle{m_{\alpha}\,x_{\alpha}\,{\dot z}_{\alpha} - m_{\alpha}\,{\dot x}_{\alpha}\,z_{\alpha}} \cr \cr \displaystyle{- m_{\alpha}\,x_{\alpha}\,{\dot y}_{\alpha} + m_{\alpha}\,{\dot x}_{\alpha}\,y_{\alpha}}\end{bmatrix}
+</div>
+<p>The results above correspond to the components of the angular momentum vector for a single particle in a rigid body. Therefore the conserved quantities for a rigid body are:</p>
+<div>
+    $$
+\begin{align*}
+\sum_\alpha m_\alpha &amp; \left( z_\alpha{\dot{y}_\alpha} - \dot{z}_\alpha y_\alpha \right)\\
+\sum_\alpha m_\alpha &amp; \left( x_\alpha{\dot{z}_\alpha} - \dot{x}_\alpha z_\alpha \right)\\
+\sum_\alpha m_\alpha &amp; \left( y_\alpha{\dot{x}_\alpha} - \dot{y}_\alpha x_\alpha \right)\\
+\end{align*}
+$$
+</div>
+<p>This proves that all three components of the angular moementum vector are conserved for a rigid body in free-rotation.</p>
+</article>
+</p>
+</section>
+<a href="https://www.thomasantony.com/projects/sicm-workbook">&larr; Back to workbook</a>
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>

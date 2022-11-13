@@ -65,15 +65,12 @@ $$
 <p>$O$ is defined to take a finite number of local tuple components, $n$. $O$ can be considered to be “inverse” of the $\Gamma$ function. One caveat is that it only make sense to use $O$ when we have concrete expressions defining the entire local tuple of interest, rather than symbolic functions. One possible way of construction $O$ is using a power series:</p>
 <div>
     $$
-O(t, q, v, ...)(t&#x27;) = q + v(t&#x27; - t) + \frac{1}{2} a (t&#x27; - t)^2 + ...
+O(t, q, v, ...)(t&#x27;) = q + v(t&#x27; - t) + \frac{1}{2} a (t&#x27; - t)^2 + ...\\
 $$
-
-
-So, given a path function $\bar{f}$, we can reconstitute the $f$ function as:
-
-
-{% mathjax() %}
-$$
+</div>
+<p>So, given a path function $\bar{f}$, we can reconstitute the $f$ function as:</p>
+<div>
+    $$
 \begin{align*}
 f(t, q, v, ...) &amp;= (f \circ \Gamma[O(t, q, v, ...)]) (t)\\
                 &amp;= \bar{f}[O(t,q,v,...)](t)

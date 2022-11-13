@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Exercise 2.12: Derivation Of Euler Angle Kinematics - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h3 id="exercise-2-12-derivation-of-euler-angle-kinematics">Exercise 2.12: Derivation of Euler Angle Kinematics</h3>
+<p><strong>Fill in the details of the derivation of equation (2.73). You may want to use the computer to help with the algebra.</strong></p>
+<div>
+    $$
+\begin{pmatrix}D\theta \\ D\varphi \\ D\psi \end{pmatrix} = \frac{1}{\sin\theta} \begin{pmatrix} 
+\cos\psi \sin\theta &amp; -\sin\psi\sin\theta &amp; 0 \\
+\sin\psi &amp; \cos\psi &amp; 0 \\
+-\sin\psi \cos\theta &amp; -\cos\psi\cos\theta &amp; \sin\theta \\
+\end{pmatrix}\begin{pmatrix}\omega^a \\ \omega^b \\ \omega^c\end{pmatrix}\tag{2.73}
+$$
+</div>
+<p><strong>Note how the order of $\theta$, $\varphi$ and $\psi$ are different in the vector</strong></p>
+<p>$$\require{cancel}$$</p>
+<p>With 3-1-3 Euler angles, $\mathbf{M}$ is defined as:</p>
+<div>
+    $$
+\mathbf{M} = \mathbf{R}_z(\varphi)\cdot\mathbf{R}_x(\theta)\cdot\mathbf{R}_z(\psi)\\
+$$
+</div>
+<p>For 3-1-3 Euler angles, there are three rotations with two intermediate frames starting from the inertial frame. Let the inertial frame be represented by the $\hat{a}$, the frame after first rotation by $\hat{b’}$, and the frame after the second rotation by $\hat{b’’}$. Let $\hat{b}$ represent the final “body-frame”.</p>
+<p>Therefore, ${}^{A}\omega^{B’} = \dot{\varphi} \hat{a}_3 = \dot{\varphi} \hat{b}_3’$, $^{B’}\omega^{B’‘} = \dot{\theta} \hat{b}_1’ = \dot{\theta} \hat{b}_1’‘$ and $^{B’‘}\omega^{B} = \dot{\psi} \hat{b}_3’’ = \dot{\psi} \hat{b}_3$ .</p>
+<p>The total angular velocity is the sum of all three components, that is,</p>
+<div>
+    $$
+\begin{align*}
+^{A}\vec{\omega}^{B} &amp;=~^{A}\omega^{B&#x27;} +~^{B&#x27;}\omega^{B&#x27;&#x27;} +~^{B&#x27;&#x27;}\omega^{B} \\
+                     &amp;=\dot{\varphi} \hat{b}_3&#x27; + \dot{\theta} \hat{b}_1&#x27;&#x27; + \dot{\psi} \hat{b}_3 \\
+\end{align*}
+$$
+</div>
+<p><strong>To get the components in body-frame, we need to convert $\hat{a}_3$ and $\hat{c}_1$ to be in terms of $\hat{b}$.</strong></p>
+<p>We know that the $\hat{c}$ rotated about its $z$ axis, forms the body-frame, $\hat{b}$. Therefore, (need to draw coordinate frame rotations to get this expression)</p>
+<div>
+    $$
+\begin{pmatrix}\hat{b}_1&#x27;&#x27;\\ \hat{b}_2&#x27;&#x27; \\ \hat{b}_3&#x27;&#x27;\end{pmatrix} = \begin{pmatrix}\cos\psi &amp; -\sin\psi &amp; 0\\ \sin\psi &amp; \cos\psi &amp; 0 \\0 &amp; 0 &amp; 1\\ \end{pmatrix} \begin{pmatrix}\hat{b}_1\\ \hat{b}_2 \\ \hat{b}_3\end{pmatrix}
+$$
+</div>
+<div>
+    $$
+\begin{align*}
+\hat{b}_1&#x27;&#x27; &amp;= \cos{\psi}~\hat{b}_1 - \sin\psi~\hat{b}_2\\
+\hat{b}_2&#x27;&#x27; &amp;= \sin{\psi}~\hat{b}_1 + \cos\psi~\hat{b}_2\\
+\hat{b}_3&#x27;&#x27; &amp;= \hat{b}_3
+\end{align*}
+$$
+</div>
+<p>Similarly, for the $\hat{b}’$ frame,</p>
+<div>
+    $$
+\begin{pmatrix}\hat{b}_1&#x27;\\ \hat{b}_2&#x27; \\ \hat{b}_3&#x27;\end{pmatrix} = \begin{pmatrix}
+1 &amp; 0 &amp; 0\\ 
+0 &amp; \cos\theta &amp; -\sin\theta\\
+0 &amp; \sin\theta &amp; \cos\theta\\
+\end{pmatrix} \begin{pmatrix}\hat{b}&#x27;&#x27;_1\\ \hat{b}&#x27;&#x27;_2 \\ \hat{b}&#x27;&#x27;_3\end{pmatrix}
+$$
+</div>
+<div>
+    $$
+\begin{align*}
+\hat{b}_3&#x27; &amp;= \sin\theta~\hat{b}_2&#x27;&#x27; + \cos\theta~\hat{b}_3&#x27;&#x27;\\
+ &amp;= \sin\theta\left(\sin{\psi}~\hat{b}_1 + \cos\psi~\hat{b}_2\right) + \cos\theta~\hat{b}_3\\
+ &amp;= \sin\theta\sin{\psi}~\hat{b}_1 + \sin\theta\cos\psi~\hat{b}_2 + \cos\theta~\hat{b}_3\\
+\end{align*}
+$$
+</div>
+<p>Assuming that the body-frame is the principal axes frame, the angular velocity vector is:</p>
+<div>
+    $$
+\begin{align*}
+\vec{\omega} &amp;= \dot{\varphi} \hat{b}_3&#x27; + \dot{\theta} \hat{b}_1&#x27;&#x27; + \dot{\psi} \hat{b}_3 \\
+ &amp;= \dot{\varphi} \left(\sin\psi \sin\theta~\hat{b}_1 + \cos\psi\sin\theta~\hat{b}_2 + \cos\theta~\hat{b}_3 \right) + \dot{\theta}\left(\cos{\psi}~\hat{b}_1 - \sin\psi~\hat{b}_2\right) + \dot{\psi}~\hat{b}_3\\
+\omega^a \hat{b}_1  + \omega^b \hat{b}_2 + \omega^c \hat{b}_3 &amp;= (\sin\psi \sin\theta\dot{\varphi} + \dot{\theta} \cos{\psi})~\hat{b}_1 + \left( + \cos\psi \sin{\theta}\dot{\varphi} - \dot{\theta}\sin\psi\right)\hat{b}_2 + \left( \dot{\varphi}\cos\theta + \dot{\psi} \right)\hat{b}_3
+\end{align*}
+$$
+</div>
+<p>This can be written in matrix form as:</p>
+<div>
+    $$
+\begin{pmatrix}\omega^a \\ \omega^b \\ \omega^c\end{pmatrix} = \begin{pmatrix}
+\sin\psi \sin\theta &amp; \cos{\psi} &amp; 0\\
+\cos\psi\sin\theta &amp; -\sin\psi &amp; 0\\
+\cos\theta &amp; 0 &amp; 1
+\end{pmatrix}
+\begin{pmatrix}\dot{\varphi} \\ \dot{\theta} \\ \dot{\psi}\end{pmatrix}
+$$
+</div>
+<p>Inverting this equation, we get:</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>theta, phi, psi = </span><span style="color:#bf616a;">symbols</span><span>(&#39;</span><span style="color:#a3be8c;">theta phi psi</span><span>&#39;, </span><span style="color:#bf616a;">real</span><span>=</span><span style="color:#d08770;">True</span><span>)
+</span><span>A = </span><span style="color:#bf616a;">Matrix</span><span>([ [</span><span style="color:#bf616a;">sin</span><span>(psi)*</span><span style="color:#bf616a;">sin</span><span>(theta), </span><span style="color:#bf616a;">cos</span><span>(psi), </span><span style="color:#d08770;">0</span><span>], [</span><span style="color:#bf616a;">cos</span><span>(psi)*</span><span style="color:#bf616a;">sin</span><span>(theta), -</span><span style="color:#bf616a;">sin</span><span>(psi), </span><span style="color:#d08770;">0</span><span>], [</span><span style="color:#bf616a;">cos</span><span>(theta), </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>] ])
+</span><span style="color:#bf616a;">simplify</span><span>(A.</span><span style="color:#bf616a;">inv</span><span>())
+</span></code></pre>
+<div>
+    $\displaystyle \left[\begin{matrix}\frac{\sin{\left(\psi \right)}}{\sin{\left(\theta \right)}} &amp; \frac{\cos{\left(\psi \right)}}{\sin{\left(\theta \right)}} &amp; 0\\\cos{\left(\psi \right)} &amp; - \sin{\left(\psi \right)} &amp; 0\\- \frac{\sin{\left(\psi \right)}}{\tan{\left(\theta \right)}} &amp; - \frac{\cos{\left(\psi \right)}}{\tan{\left(\theta \right)}} &amp; 1\end{matrix}\right]$
+</div>
+<p>Therefore,</p>
+<div>
+    $$
+\begin{pmatrix}\dot{\varphi} \\ \dot{\theta} \\ \dot{\psi}\end{pmatrix} = \frac{1}{\sin\theta}\begin{pmatrix}
+\sin\psi &amp; \cos{\psi} &amp; 0\\
+\cos\psi\sin\theta &amp; -\sin\psi\sin\theta &amp; 0\\
+-\sin\psi\cos\theta &amp; -\cos\psi\cos\theta &amp; \sin\theta
+\end{pmatrix}\begin{pmatrix}\omega^a \\ \omega^b \\ \omega^c\end{pmatrix}
+$$
+</div>
+<p>Swapping the rows 1 and 2 to match the order in the question, we get:</p>
+<div>
+    $$
+\begin{pmatrix}D\theta \\ D\varphi \\D\psi\end{pmatrix} = \begin{pmatrix}\dot{\theta} \\ \dot{\varphi} \\\dot{\psi}\end{pmatrix} = \frac{1}{\sin\theta}\begin{pmatrix}
+\cos\psi\sin\theta &amp; -\sin\psi\sin\theta &amp; 0\\
+\sin\psi &amp; \cos{\psi} &amp; 0\\
+-\sin\psi\cos\theta &amp; -\cos\psi\cos\theta &amp; \sin\theta
+\end{pmatrix}\begin{pmatrix}\omega^a \\ \omega^b \\ \omega^c\end{pmatrix}
+$$
+</div>
+<h3 id="references">References</h3>
+<p>[[1]]: https://www.youtube.com/watch?v=af041z8jujU</p>
+</article>
+</p>
+</section>
+<a href="https://www.thomasantony.com/projects/sicm-workbook">&larr; Back to workbook</a>
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
