@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 2.12: Nonsingular Coordinates And Quaternions - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h3 id="2-12-nonsingular-coordinates-and-quaternions">2.12 Nonsingular Coordinates and Quaternions</h3>
+<blockquote>
+<p>The Euler angles provide a convenient way to parameterize the orientation of a rigid body. However, the equations of motion derived for them have singularities. Though we can avoid the singularities by using other Euler-like combinations with different singularities, this kludge is not very satisfying.</p>
+</blockquote>
+<ul>
+<li>
+<p>We know from Euler’s theorem that any orientation can be reached with a single rotation. Specifying this rotation requires specifying its axis and the angle of rotation.</p>
+</li>
+<li>
+<p>One possibility: Use latitude and longitude to define the axis. But this becomes undefined in the case of zero rotation</p>
+</li>
+<li>
+<p>Another possibility: Use a vector whose direction is that of the axis vector and whose length defines the amount of rotation. In this case, rotation by $2\pi$ is equal to no rotation at all. Every rotation can be represented by a countably infinite number of vectors, each with a length of $\theta + 2M\pi$ for an integer $M$. This makes it problematic to invert the mapping from other representations of rotation.</p>
+</li>
+<li>
+<p>A fix for the above point is to scale the vector by sine of half of the rotation angle. With this choice a rotation by zero angle will have the same orientation vector as a rotation by $2\pi$. But there is still another problem: rotations by $\theta$ and $2\pi - \theta$ are not distinguished. That is, a vector may represent both the “short-rotation” and the “long rotation” for the same orientation.</p>
+</li>
+<li>
+<p>We can solve this by keeping track of the cosine of half the angle of rotation (though in reality we just need the sign of the cosine). Wrapping this all up into 4-tuples gives us Hamilton’s <em>quaternions</em>.</p>
+</li>
+</ul>
+<p>For a rotation by angle $\theta$ about axis $\hat{n}$, the components of a quaternion defining the rotation are:</p>
+<div>
+    $$
+(\cos(\theta&#x2F;2),~\sin(\theta&#x2F;2)\hat{n}_x,~\sin(\theta&#x2F;2)\hat{n}_y,~\sin(\theta&#x2F;2)\hat{n}_z)
+$$
+</div>
+<p>This is a unit quaternion as the sum of squares of its components is equal to one. The first element is called the “real part”, $r$, and the other three elements can form a tuple $v$ called the “imaginary part”. The angle of rotation can be obtained by computing $\theta = \arctan(|v|, r)$, and the axis direction is $v/|v|$.</p>
+<ul>
+<li>The rotation represented by a quaternion is not changed by reversing the sign of all its components. This is because changing the sign of v reverses the axis but does not change the angle and changing the sign of the first component changes the angle $\theta$ to $2\pi − \theta$, so the actual rotation is unchanged.</li>
+</ul>
+<h3 id="dcm-from-quaternion">DCM from Quaternion</h3>
+<p>Given the four elements of a quaternion, we can do compute the corresponding rotation matrix. First we get the angle $\theta$ and axis, $\hat{n}$ when given a quaternion. We rotate by angle $\theta$ about the $z$ axis and then transform this rotation by a rotation to the axis specified by the colatitude ($\varphi$) and longitude ($\lambda$) of the axis $\hat{n}$:</p>
+<div>
+    $$
+\mathbf{R}(\theta, \hat{n}) = \mathbf{R}_z(\lambda)\mathbf{R}_y(\varphi)~\mathbf{R}_z(\theta)~\mathbf{R}_y(\varphi)^\mathscr{T}\mathbf{R}_z(\lambda)^\mathscr{T}
+$$
+</div>
+<p>where $\varphi = \arccos(\hat{n_z})$ and $\lambda = \arctan(\hat{n}_y, \hat{n}_x)$.</p>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">my-angle-axis-&gt;rotation-matrix </span><span>[theta n]
+</span><span>  (</span><span style="color:#bf616a;">let </span><span>[nx (</span><span style="color:#bf616a;">ref</span><span> n </span><span style="color:#d08770;">0</span><span>)
+</span><span>        ny (</span><span style="color:#bf616a;">ref</span><span> n </span><span style="color:#d08770;">1</span><span>)
+</span><span>        nz (</span><span style="color:#bf616a;">ref</span><span> n </span><span style="color:#d08770;">2</span><span>)
+</span><span>        colatitude (</span><span style="color:#bf616a;">acos</span><span> nz)
+</span><span>        longitude (</span><span style="color:#bf616a;">atan</span><span> ny nx)]
+</span><span>      (</span><span style="color:#bf616a;">* </span><span>(</span><span style="color:#bf616a;">rotate-z-matrix</span><span> longitude)
+</span><span>         (</span><span style="color:#bf616a;">rotate-y-matrix</span><span> colatitude)
+</span><span>         (</span><span style="color:#bf616a;">rotate-z-matrix</span><span> theta)
+</span><span>         (</span><span style="color:#bf616a;">transpose </span><span>(</span><span style="color:#bf616a;">rotate-y-matrix</span><span> colatitude))
+</span><span>         (</span><span style="color:#bf616a;">transpose </span><span>(</span><span style="color:#bf616a;">rotate-z-matrix</span><span> longitude)))))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendermd </span><span>(</span><span style="color:#bf616a;">my-angle-axis-&gt;rotation-matrix </span><span>(</span><span style="color:#bf616a;">/</span><span> pi </span><span style="color:#d08770;">4</span><span>) (</span><span style="color:#bf616a;">up </span><span style="color:#d08770;">0 0 1</span><span>)))
+</span></code></pre>
+<div>
+    $$
+\mathsf{matrix-by-rows}\left(\begin{pmatrix}\displaystyle{0.7071067811865476} \cr \cr \displaystyle{-0.7071067811865475} \cr \cr \displaystyle{0}\end{pmatrix}, \begin{pmatrix}\displaystyle{0.7071067811865475} \cr \cr \displaystyle{0.7071067811865476} \cr \cr \displaystyle{0}\end{pmatrix}, \begin{pmatrix}\displaystyle{0.0} \cr \cr \displaystyle{0.0} \cr \cr \displaystyle{1}\end{pmatrix}\right)
+$$
+</div>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">quaternion-&gt;angle-axis </span><span>[q]
+</span><span>  (</span><span style="color:#bf616a;">let </span><span>[v (</span><span style="color:#bf616a;">quat/three-vector</span><span> q)
+</span><span>        sintheta (</span><span style="color:#bf616a;">sqrt </span><span>(</span><span style="color:#bf616a;">dot-product</span><span> v v))
+</span><span>        theta (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">2 </span><span>(</span><span style="color:#bf616a;">atan</span><span> sintheta (</span><span style="color:#bf616a;">quat/real-part</span><span> q)))
+</span><span>        axis (</span><span style="color:#bf616a;">/</span><span> v sintheta)]
+</span><span>    (</span><span style="color:#bf616a;">up</span><span> theta axis)))
+</span><span>
+</span><span style="color:#65737e;">;; Quaternion to DCM
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">quaternion-&gt;DCM </span><span>[q]
+</span><span>  (</span><span style="color:#bf616a;">let </span><span>[aa (</span><span style="color:#bf616a;">quaternion-&gt;angle-axis</span><span> q)
+</span><span>        theta (</span><span style="color:#bf616a;">ref</span><span> aa </span><span style="color:#d08770;">0</span><span>)
+</span><span>        n (</span><span style="color:#bf616a;">ref</span><span> aa </span><span style="color:#d08770;">1</span><span>)]
+</span><span>      (</span><span style="color:#bf616a;">angle-axis-&gt;rotation-matrix</span><span> theta n)))
+</span><span>
+</span><span style="color:#65737e;">;; 30 degrees about z axis
+</span><span>(</span><span style="color:#bf616a;">render </span><span>(</span><span style="color:#bf616a;">quaternion-&gt;DCM </span><span>(</span><span style="color:#bf616a;">quat/make </span><span>(</span><span style="color:#bf616a;">cos </span><span>(</span><span style="color:#bf616a;">/ </span><span>(</span><span style="color:#bf616a;">/</span><span> pi </span><span style="color:#d08770;">6</span><span>) </span><span style="color:#d08770;">2</span><span>)) </span><span style="color:#d08770;">0 0 </span><span>(</span><span style="color:#bf616a;">sin </span><span>(</span><span style="color:#bf616a;">/ </span><span>(</span><span style="color:#bf616a;">/</span><span> pi </span><span style="color:#d08770;">6</span><span>) </span><span style="color:#d08770;">2</span><span>)))))
+</span></code></pre>
+<div>
+    matrix-by-rows(up(0.8660254037844387, -0.49999999999999994, 0), up(0.49999999999999994, 0.8660254037844387, 0), up(0.0, 0.0, 1))
+</div>
+<p>The matrix terms here are all divided by the magnitude of $q$ which can be ignored since we use unit quaternions. Once this is removed, we get the following form for the rotation matrix from a quaternion $(q_0, q_1, q_2, q_3)$:</p>
+<div>
+    $$
+\begin{pmatrix}q_0^2 + q_1^2 - q_2^2 -q_3^2 &amp; -2q_0q_3 + 2q_1q_2 &amp; 2q_0q_2 + 2q_1q_3 \\
+2q_0q_3 + 2q_1q_2 &amp; q_0^2 - q_1^2 + q_2^2 - q_3^2 &amp; -2q_0q_1 + 2q_2q_3\\
+-2q_0q_2 + 2q_1q_3 &amp; 2q_0q_1 + 2q_2q_3 &amp; q_0^2 - q_1^2 - q_2^2 + q_3^2\\
+\end{pmatrix}
+$$
+</div>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">quaternion-&gt;rotation-matrix </span><span>[q]
+</span><span>  (</span><span style="color:#bf616a;">let </span><span>[q-vec (</span><span style="color:#bf616a;">quat/-&gt;vector</span><span> q)
+</span><span>        q0 (</span><span style="color:#bf616a;">ref</span><span> q-vec </span><span style="color:#d08770;">0</span><span>) 
+</span><span>        q1 (</span><span style="color:#bf616a;">ref</span><span> q-vec </span><span style="color:#d08770;">1</span><span>)
+</span><span>        q2 (</span><span style="color:#bf616a;">ref</span><span> q-vec </span><span style="color:#d08770;">2</span><span>)
+</span><span>        q3 (</span><span style="color:#bf616a;">ref</span><span> q-vec </span><span style="color:#d08770;">3</span><span>)
+</span><span>        m-2
+</span><span>            (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">expt</span><span> q0 </span><span style="color:#d08770;">2</span><span>) (</span><span style="color:#bf616a;">expt</span><span> q1 </span><span style="color:#d08770;">2</span><span>)
+</span><span>               (</span><span style="color:#bf616a;">expt</span><span> q2 </span><span style="color:#d08770;">2</span><span>) (</span><span style="color:#bf616a;">expt</span><span> q3 </span><span style="color:#d08770;">2</span><span>))]
+</span><span>      (</span><span style="color:#bf616a;">/ </span><span>(</span><span style="color:#bf616a;">matrix-by-rows
+</span><span>           (</span><span style="color:#bf616a;">list </span><span>(</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">expt</span><span> q0 </span><span style="color:#d08770;">2</span><span>) (</span><span style="color:#bf616a;">expt</span><span> q1 </span><span style="color:#d08770;">2</span><span>))
+</span><span>                    (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">expt</span><span> q2 </span><span style="color:#d08770;">2</span><span>) (</span><span style="color:#bf616a;">expt</span><span> q3 </span><span style="color:#d08770;">2</span><span>)))
+</span><span>                 (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">2 </span><span>(</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">*</span><span> q1 q2) (</span><span style="color:#bf616a;">*</span><span> q0 q3)))
+</span><span>                 (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">2 </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">*</span><span> q1 q3) (</span><span style="color:#bf616a;">*</span><span> q0 q2))))
+</span><span>           (</span><span style="color:#bf616a;">list </span><span>(</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">2 </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">*</span><span> q1 q2) (</span><span style="color:#bf616a;">*</span><span> q0 q3)))
+</span><span>                 (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">expt</span><span> q0 </span><span style="color:#d08770;">2</span><span>) (</span><span style="color:#bf616a;">expt</span><span> q2 </span><span style="color:#d08770;">2</span><span>))
+</span><span>                    (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">expt</span><span> q1 </span><span style="color:#d08770;">2</span><span>) (</span><span style="color:#bf616a;">expt</span><span> q3 </span><span style="color:#d08770;">2</span><span>)))
+</span><span>                 (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">2 </span><span>(</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">*</span><span> q2 q3) (</span><span style="color:#bf616a;">*</span><span> q0 q1))))
+</span><span>           (</span><span style="color:#bf616a;">list </span><span>(</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">2 </span><span>(</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">*</span><span> q1 q3) (</span><span style="color:#bf616a;">*</span><span> q0 q2)))
+</span><span>                 (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">2 </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">*</span><span> q2 q3) (</span><span style="color:#bf616a;">*</span><span> q0 q1)))
+</span><span>                 (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">expt</span><span> q0 </span><span style="color:#d08770;">2</span><span>) (</span><span style="color:#bf616a;">expt</span><span> q3 </span><span style="color:#d08770;">2</span><span>))
+</span><span>                    (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">expt</span><span> q1 </span><span style="color:#d08770;">2</span><span>) (</span><span style="color:#bf616a;">expt</span><span> q2 </span><span style="color:#d08770;">2</span><span>)))))
+</span><span>         m-2)))
+</span><span>
+</span><span style="color:#65737e;">;; This function can be further used to compute the components of angular velocity using M-&gt;omega-body
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendermat
+</span><span>  ((</span><span style="color:#bf616a;">rigid/M-&gt;omega-body
+</span><span>     (</span><span style="color:#bf616a;">compose</span><span> quaternion-&gt;rotation-matrix quat/make))
+</span><span>   (</span><span style="color:#bf616a;">up </span><span>&#39;t
+</span><span>       (</span><span style="color:#bf616a;">up </span><span>&#39;q_0 &#39;q_1 &#39;q_2 &#39;q_3)
+</span><span>       (</span><span style="color:#bf616a;">up </span><span>&#39;qdot_0 &#39;qdot_1 &#39;qdot_2 &#39;qdot_3))))
+</span></code></pre>
+<div>
+    $$
+\begin{bmatrix}\displaystyle{\begin{pmatrix}\displaystyle{\frac{2\,q_0\,{\dot q}_1 -2\,q_1\,{\dot q}_0 -2\,q_2\,{\dot q}_3 + 2\,q_3\,{\dot q}_2}{{q_0}^{2} + {q_1}^{2} + {q_2}^{2} + {q_3}^{2}}} \cr \cr \displaystyle{\frac{2\,q_0\,{\dot q}_2 + 2\,q_1\,{\dot q}_3 -2\,q_2\,{\dot q}_0 -2\,q_3\,{\dot q}_1}{{q_0}^{2} + {q_1}^{2} + {q_2}^{2} + {q_3}^{2}}} \cr \cr \displaystyle{\frac{2\,q_0\,{\dot q}_3 -2\,q_1\,{\dot q}_2 + 2\,q_2\,{\dot q}_1 -2\,q_3\,{\dot q}_0}{{q_0}^{2} + {q_1}^{2} + {q_2}^{2} + {q_3}^{2}}}\end{pmatrix}}\end{bmatrix}
+$$
+</div>
+<p>Ignoring the denominator, the quaternion is independent of the scale of the quaternion. And since it is a fucntion of time, the rates of $q$ are also independent of scale. This can be further simplified by representing the products in the numerator as a matrix product. Define the following matrices:</p>
+<div>
+    $$
+\begin{align*}
+\mathbf{i} &amp;= \begin{pmatrix}0 &amp; +1 &amp; 0 &amp; 0\\
+-1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; -1\\
+0 &amp; 0 &amp; +1 &amp; 0\\\end{pmatrix}\\
+\mathbf{j} &amp;= \begin{pmatrix}0 &amp; 0 &amp; +1 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; +1\\
+-1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; -1 &amp; 0 &amp; 0\\\end{pmatrix}\\
+\mathbf{k} &amp;= \begin{pmatrix}0 &amp; 0 &amp; 0 &amp; +1\\
+0 &amp; 0 &amp; -1 &amp; 0\\
+0 &amp; +1 &amp; 0 &amp; 0\\
+-1 &amp; 0 &amp; 0 &amp; 0\\\end{pmatrix}\tag{2.125}
+\end{align*}
+$$
+</div>
+<p>The angular velocity components can now be written as :</p>
+<div>
+    $$
+\begin{align*}
+\omega^a &amp;= 2\mathscr{q}^\mathscr{T}\mathbf{i}\dot{\mathscr{q}}~&#x2F;~\|\mathscr{q}\|^2\\
+\omega^b &amp;= 2\mathscr{q}^\mathscr{T}\mathbf{j}\dot{\mathscr{q}}~&#x2F;~\|\mathscr{q}\|^2\\
+\omega^c &amp;= 2\mathscr{q}^\mathscr{T}\mathbf{k}\dot{\mathscr{q}}~&#x2F;~\|\mathscr{q}\|^2\\
+\end{align*}
+$$
+</div>
+<p>where $\mathscr{q}$ is a column vector of the components of $q$. The anti-symmetric matrices $\mathbf{i}$, $\mathbf{j}$ and $\mathbf{k}$ have the interesting properties that make it the basis vectors for the quaternions:</p>
+<div>
+    $$
+\mathbf{i}^2 = \mathbf{j}^2 = \mathbf{k}^2 = \mathbf{i}\mathbf{j}\mathbf{k} = -\mathbf{1}
+$$
+</div>
+<p>where $\mathbf{1}$ is the identity matrix.</p>
+<h3 id="composition-of-rotations">Composition of rotations</h3>
+<p>An easy way to compose ttwo rotations would be to convert ehm to DCMs and multiply them. However this results in a very messy results where each component is scaled by a factor of $|q||p|$ (which is equal to $1$ for unit quaternions). Eliminating this scale factor, we get the following form for composition of quaternions</p>
+<div>
+    $$
+\begin{pmatrix}
+p_0q_0-p_1q_1-p_2q_2-p_3q_3\\
+p_0q_1+p_1q_0-p_2q_3+p_3q_2\\
+p_0q_2+p_1q_3+p_2q_0-p_3q_1\\
+p_0q_3-p_1q_2+p_2q_1+p_3q_0\\
+\end{pmatrix}
+$$
+</div>
+<p>This can be re-stated as:</p>
+<div>
+    $$
+r_0 = q_0p_0 - v_q \cdot v_p\\
+$$
+</div>
+<div>
+    $$
+v_r = q_0v_p+p_0v_q + v_q \times v_p\\
+$$
+</div>
+<p>where $r_0$ is the scalar part of the result, $v_r$ is the vector part of the result and $v_p$ and $v_q$ are the vector parts of the original quaternions. This can be considered to be the product of the two quaternions. </p>
+<div>
+    $$
+\mathbf{r} = \mathbf{q}\mathbf{p}
+$$
+</div>
+</article>
+</p>
+</section>
+<a href="https://www.thomasantony.com/projects/sicm-workbook">&larr; Back to workbook</a>
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
