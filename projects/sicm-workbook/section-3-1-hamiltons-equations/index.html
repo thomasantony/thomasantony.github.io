@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My personal website and notes">
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Section 3.1 : Hamilton&#x27;S Equations - Thomas Antony</title>
+
+    <!-- MathJax configuration -->
+    <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <article><h1 id="3-hamiltonian-mechanics">3 Hamiltonian Mechanics</h1>
+<blockquote>
+<p>Numerical experiments are just what their name implies: experiments. In describing and evaluating them, one should enter the state of mind of the experimental physicist, rather than that of the mathematician. Numerical experiments cannot be used to prove theorems; but, from the physicist’s point of view, they do often provide convincing evidence for the existence of a phenomenon. We will therefore follow an informal, descriptive and non-rigorous approach. Briefly stated, our aim will be to understand the fundamental properties of dynamical systems rather than to prove them.
+~ Michel Hénon, “Numerical Exploration of Hamiltonian Systems,” in Chaotic Behavior of Deterministic Systems [21], p. 57.</p>
+</blockquote>
+<ul>
+<li>
+<p>The formulation of mechanics with generalized coordinates and momenta as the dynamic state variables is called the Hamiltonian formulation. This is equivalent to the Lagrangian formulation, but present a differnet point of view. It is especially useful for understanding the evolution of a system, especially when there are symmetries and conserved quantities</p>
+</li>
+<li>
+<p>In systems with symmetries, the conjugate momenta of “cyclic coordinates” (which do not appear in the Lagrangian) are conserved. This insight can be used to simplify and solve many problems in dynamics (e.g. spinning top). The Hamiltonian formulation is motivated by the desire to focus attention on the momenta.</p>
+</li>
+<li>
+<p>In the Lagrangian formulation, the momenta are “secondary” quantities – they are functions of state variables and the evolution of these state variables only depend on the state variables themselves and not the momenta. Since the momenta can be inferred form velocities, it is possible to represent the dynamics in terms of coordinates and momenta. In such a formulation, if a momentum is conserved, it is immediately apparent from its dynamic equation.</p>
+</li>
+<li>
+<p>Mechanical systems can exhibit simple or complex behavior - periodic motion, chaotic motion etc. Sometimes the periodicity may be driven by an external force. <strong>The Hamiltonian formulation of dynamics provides a convenient framework in which the possible motions may be placed and understood. We will be able to see the range of stable resonance motions and the range of states reached by chaotic trajectories, and discover other unsuspected possible motions.</strong></p>
+</li>
+</ul>
+<h2 id="3-1-hamilton-s-equations">3.1 Hamilton’s Equations</h2>
+<p>$\require{cancel}$</p>
+<p>Restricting our attention to Lagrangians that only depend onf time, coordinates and velocities, the momenta in a system can be represented as functions of coordinates, velocities and time. It is possible to invert these functions to get a local representation of velocity in terms of time, coordinates and momenta. The equations of motion when recast in terms of coordinates and momenta are called <strong>Hamilton’s canonical equations</strong>. We will look at three derivations of these equations: </p>
+<ul>
+<li>
+<p>The first strategy is an expansion of the one described in the above paragraph - starting with  inverting the momentum state function.</p>
+</li>
+<li>
+<p>The second derivation in Section 3.1.1 first abstracts a key part of the first derivation and then applies the more abstract machinery to derive Hamilton’s equations. The third (section 3.1.2) uses the action principle.</p>
+</li>
+</ul>
+<p>The equations for the time derivative of a momentum can be found from Lagrange’s equations as:</p>
+<div>
+    $$
+D{p}(t) = \partial_1 L(t, q(t),D{q}(t))\tag{3.1}
+$$
+</div>
+<p>where (by definition of generalized momenta),</p>
+<div>
+    $$
+p(t) = \partial_2 L(t, q(t), Dq(t))\tag{3.2}
+$$
+</div>
+<p>To eliminate $Dq(t)$ from Eq. 3.1, we need to invert Eq.3.2. To avoid confusion, we will do this by assigning simple variable names to the function arguments and its output. If Eq.3.1 is restated as:</p>
+<div>
+    $$
+a = \partial_2 L (b, c, d)\tag{3.3}
+$$
+</div>
+<p>Then the equation can be inverted in terms of the third argument to get the new function $\mathscr{V}$ so that:</p>
+<div>
+    $$
+d = \mathscr{V}(b, c, a)\tag{3.4}
+$$
+</div>
+<p>Substituting $a$ from Eq. 3.3 in 3.4 (and $d$ in Eq. 3.3), </p>
+<div>
+    $$
+\begin{align*}
+d = \mathscr{V}(b, c, \partial_2 L(b, c, d))\tag{3.5}\\
+a = \partial_2 L(b, c, \mathscr{V}(b, c, a))\tag{3.6}\\
+\end{align*}
+$$
+</div>
+<p>THis pattern can be applied to Eq. 3.1 to get:</p>
+<div>
+    $$
+Dp(t) = \partial_1 L (t, q(t), \mathscr{V}(t, q(t), p(t)))\tag{3.7}
+$$
+</div>
+<p>Similarly, Eq. 3.2 can be inverted to get:</p>
+<div>
+    $$
+Dq(t) = \mathscr{V}(t, q(t), \partial_1 L(t, q(t), Dq(t))\tag{3.8}
+$$
+</div>
+<p>Equations 3.7 and 3.8 give dynamic equations for $q$ and $p$ as functions of time, coordinates and momenta. To represent this better, we can define a new Lagrangian as a function of time, coordinates and momenta.</p>
+<div>
+    $$
+\widetilde{L}(t, q, p) = L(t, q, \mathscr{V}(t, q, p))
+$$
+</div>
+<blockquote>
+<p>Here we are using mnemonic names t, q, p for formal parameters of the function being defined. We could have used names like a, b, c as above, but this would have made the argument harder to read.</p>
+</blockquote>
+<p>To get the equations of motion, we need to compute $\partial_1 L$ (applying the chain rule, assuming that $L$ is not an explicit function of time):</p>
+<div>
+    $$
+\begin{align*}
+\partial_1 \widetilde{L}(t, q, \mathscr{V}(t, q, p)) &amp;= \partial_1 L (t, q, \mathscr{V}(t, q, p)) + \overbrace{\partial_2 L (t, q, \mathscr{V}(t, q, p))}^{=p~\text{from Eq 3.2}}\partial_1 \mathscr{V}(t, q, p)\\
+ &amp;= \partial_1 L (t, q, \mathscr{V}(t, q, p)) + p \partial_1 \mathscr{V}(t, q, p)\tag{3.10}
+\end{align*}
+$$
+</div>
+<p>We introduce the “momentum selector” function here, $P(t,q,p) = p$ such that $\partial_1 P = 0$ to get,</p>
+<div>
+    $$
+\begin{align*}
+\partial_1 L (t, q, \mathscr{V}(t, q, p)) &amp;= \partial_1 \widetilde{L}(t, q, p) - p \partial_1 \mathscr{V}(t, q, p)\\
+           &amp;= \partial_1 \widetilde{L}(t, q, p) - P(t, q, p)\partial_1 \mathscr{V}(t, q, p)\\
+           &amp;= -\partial_1 H(t, q, p)\tag{3.11}
+\end{align*}
+$$
+</div>
+<p>In Eq. 3.11, $H$ is the <em>Hamiltonian</em> defined as:</p>
+<div>
+    $$
+H = P\mathscr{V} - \widetilde{L}\tag{3.12}
+$$
+</div>
+<p>Substituing Eq. 3.11 in 3.7, we get the dynamic equation for momentum as:</p>
+<div>
+    $$
+Dp(t) = -\partial_1 H(t, q(t), p(t))\tag{3.11}
+$$
+</div>
+<p>The equation for $Dq(t)$ can also be written in terms of the Hamiltonian as shown below:</p>
+<div>
+    $$
+\begin{align*}
+\partial_2 H (t, q, p) &amp;= \partial_2 (P\mathscr{V} - \widetilde{L})(t, q, p)\\
+           &amp;= \overbrace{\partial_2 P(t, q, p)}^{=1} \mathscr{V}(t, q, p) + \overbrace{P(t, q, p)}^{=p} \partial_2 \mathscr{V}(t, q, p) - \partial_2 \widetilde{L}(t, q, p)\\
+           &amp;= \mathscr{V}(t, q, p) + p\partial_2 \mathscr{V}(t, q, p) - \partial_2 \widetilde{L}(t, q, p)\tag{3.14}
+\end{align*}
+$$
+</div>
+<p>$\partial_2 \widetilde{L}$ can be computed using the chain rule as:</p>
+<div>
+    $$
+\begin{align*}
+\partial_2 \widetilde{L}(t, q, p) &amp;= \partial_2 \left(L(t, q, \mathscr{V}(t, q, p))\right)\\
+    &amp;= \partial_2 L(t, q, \mathscr{V}(t, q, p)) \partial_2 \mathscr{V}(t, q, p)\\
+    &amp;= p \partial_2\mathscr{V}(t, q, p)\tag{3.15}
+\end{align*}
+$$
+</div>
+<p>Eq. 3.14 now reduces to: $\partial_2 H (t, q, \mathscr{V}(t, q, p)) = \mathscr{V}(t, q, p) + \cancel{p\partial_2 \mathscr{V}(t, q, p)} - \cancel{p\partial_2 \mathscr{V}(t, q, p)} = \mathscr{V}(t, q, p)$.  This can be substituted in Eq. 3.8 to get:</p>
+<div>
+    $$
+Dq(t) = \partial_2 H (t, q, \mathscr{V}(t, q, p))\tag{3.17}
+$$
+</div>
+<p>Equations 3.13 and 3.17 are called <em>Hamilton’s equations</em>.</p>
+<div>
+    $$
+\begin{align*}
+Dq(t) &amp;= \partial_2 H (t, q, \mathscr{V}(t, q, p))\\
+Dp(t) &amp;= -\partial_1 H(t, q(t), p(t))\tag{3.18}\\
+\end{align*}
+$$
+</div>
+<p>The first equation in 3.18 is restating the relation between velocity and momenta in terms of the Hamiltonian and applies for all paths regardless of whether they are realizable. The second equation only applies for realizable paths. The Hamiltonian has the same value as the energy function $\mathscr{E}$ from Chapter 1. The only difference is that that the velocities are expressed in terms of time, coordinates, and momenta using $\mathscr{V}$:</p>
+<div>
+    $$
+H(t, q, p) = \mathscr{E}(t, q, \mathscr{V}(t,q,p))\tag{3.20}
+$$
+</div>
+<h3 id="illustration-using-free-particle">Illustration using free particle</h3>
+<p>The Lagrangian for the motion of a free-particle of mass $m$ is:</p>
+<div>
+    $$
+L(t; x,y; v_x,v_y) = \frac{1}{2} m (v_x^2 + v_y^2) - V(x, y)
+$$
+</div>
+<p>To compute the Hamiltonian, we first ocmpute the momenta as $p = \partial_2 L; p_x = mv_x; p_y = mv_y$. Solving for velocities, we get,
+$v_x = p_x/m, v_y = p_y/m$ (This is the definition of $\mathscr{V}$). The Hamiltonian is $H = pv - L(t,q,v)$ with $v$ expressed in terms of $(t, q, p)$.</p>
+<div>
+    $$
+\begin{align*}
+H &amp;= p_x\frac{p_x}{m} + p_y\frac{p_y}{m} - L = \frac{p_x^2 + p_y^2}{m} - \frac{1}{2}\frac{p_x^2 + p_y^2}{m} + V(x,y)\\
+  &amp;= \frac{p_x^2 + p_y^2}{2m} + V(x, y)
+\end{align*}
+$$
+</div>
+<p>This is the total energy $T + V$ expressed in terms of the momenta.  Hamilton’s equations for $Dq(t)$ are:</p>
+<div>
+    $$
+D_x(t) = p_x(t)&#x2F;m \quad D_y(t) = p_y(t)&#x2F;m\\
+$$
+</div>
+<p>The Hamilton’s equations for the momenta are:</p>
+<div>
+    $$
+\begin{align*}
+Dp_x(t) &amp;= -\partial_{p_x} H = -\partial_0 V(x(t), y(t))\\
+Dp_y(t) &amp;= -\partial_{p_y} H = -\partial_1 V(x(t), y(t))
+\end{align*}
+$$
+</div>
+<h3 id="hamiltonian-state">Hamiltonian State</h3>
+<p>Given a coordinate path $q$ and a Lagrangian $L$, the corresponding momentum path $p$ is given by Eq. 3.2. This can also be represented in terms of the Hamiltonian as was shown in the section above. The expression for momntum is valid whether or not the path is realizable, i.e., $p = \partial_2 L(t, q, v)$. In the Lagrangian formulation, $(t, q, v)$ represents the state of the path at a given moment and Lagrange’s equations describe a unique path emnating from this state. Similarly, $(t, q, p)$ represents the starte of a path in the Hamiltonian formulation and Hamilton’s equations describe a path emnating from this state. The two formulations are equivalent and creates the same path for the a given initial state.</p>
+<p>When converting Lagrange equations into first order ODEs (prior to integration), we need to invert $ \partial_2 \partial_2 L$. While Hamilton’s equations are already first order ODEs, their construction involves an inversion in the form of the function $\mathscr{V}$. A system that is non-invertible in the Lagrangian formulation remains so in the Hamiltonian formulation as well. </p>
+<p>For any given path, $q$, the Lagrangian and Hamiltonian state paths can be deduced from it. For the Lagrangian formulation, the state path is given by:</p>
+<div>
+    $$
+\Gamma[q](t) = (t, q(t), Dq(t))
+$$
+</div>
+<p>The construction of the Hamiltonian path requires the definition of a Lagrangian. The Hamiltonian path is given by:</p>
+<div>
+    $$
+\Pi_L[q](t) = (t, q(t), \partial_2 L(t, q(t), Dq(t))) = (t, q(t), p(t))
+$$
+</div>
+<p>The Hamiltonian state path is not unique for a given path as it is dependent on the Lagrangian that we choose when formulating it. There is no unique choice for the Lagrangian and hence there is no unique Hamiltonian state path for a given path.</p>
+<blockquote>
+<p>The $2n$-dimensional space whose elements are labeled by the n generalized coordinates $q^i$ and the $n$ generalized momenta $p_i$ is called the <em>phase space</em>. The components of the generalized coordinates and momenta are collectively called the <em>phase-space components</em>. The dynamical state of the system is completely specified by the phase-space state tuple $(t, q, p)$, given a Lagrangian or Hamiltonian to provide the map between velocities and momenta.</p>
+</blockquote>
+<h3 id="computing-hamilton-s-equations">Computing Hamilton’s Equations</h3>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Implementation of Hamilton&#39;s Equations
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">qp-&gt;H-state-path </span><span>[q p]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[t]
+</span><span>      (</span><span style="color:#bf616a;">up</span><span> t (</span><span style="color:#bf616a;">q</span><span> t) (</span><span style="color:#bf616a;">p</span><span> t))))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">my-Hamiltonian-&gt;state-derivative </span><span>[Hamiltonian]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[H-state]
+</span><span>      (</span><span style="color:#bf616a;">up </span><span style="color:#d08770;">1
+</span><span>          (((</span><span style="color:#bf616a;">partial </span><span style="color:#d08770;">2</span><span>) Hamiltonian) H-state)
+</span><span>          (</span><span style="color:#bf616a;">- </span><span>(((</span><span style="color:#bf616a;">partial </span><span style="color:#d08770;">1</span><span>) Hamiltonian) H-state)))))
+</span><span>
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">my-Hamilton-equations </span><span>[Hamiltonian]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[q p]
+</span><span>        (</span><span style="color:#bf616a;">let </span><span>[state-path (</span><span style="color:#bf616a;">qp-&gt;H-state-path</span><span> q p)]
+</span><span>            (</span><span style="color:#bf616a;">- </span><span>(</span><span style="color:#bf616a;">D</span><span> state-path)
+</span><span>               (</span><span style="color:#bf616a;">compose </span><span>(</span><span style="color:#bf616a;">my-Hamiltonian-&gt;state-derivative</span><span> Hamiltonian)
+</span><span>                state-path)))))
+</span></code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>#&#39;user/my-Hamilton-equations
+</span></code></pre>
+<pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span style="color:#65737e;">;; Free particle Hamtiltonian
+</span><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">H-rectangular </span><span>[m V]
+</span><span>    (</span><span style="color:#b48ead;">fn </span><span>[state]
+</span><span>      (</span><span style="color:#bf616a;">let </span><span>[q (</span><span style="color:#bf616a;">coordinate</span><span> state)
+</span><span>            p (</span><span style="color:#bf616a;">momentum</span><span> state)]
+</span><span>            (</span><span style="color:#bf616a;">+ </span><span>(</span><span style="color:#bf616a;">/ </span><span>(</span><span style="color:#bf616a;">square</span><span> p) (</span><span style="color:#bf616a;">* </span><span style="color:#d08770;">2</span><span> m))
+</span><span>               (</span><span style="color:#bf616a;">V </span><span>(</span><span style="color:#bf616a;">ref</span><span> q </span><span style="color:#d08770;">0</span><span>) (</span><span style="color:#bf616a;">ref</span><span> q </span><span style="color:#d08770;">1</span><span>))))))
+</span><span>
+</span><span>(</span><span style="color:#bf616a;">rendermd </span><span>(</span><span style="color:#bf616a;">let </span><span>[V (</span><span style="color:#bf616a;">literal-function </span><span>&#39;V (</span><span style="color:#bf616a;">-&gt; </span><span>(</span><span style="color:#bf616a;">X</span><span> Real Real) Real))
+</span><span>        q (</span><span style="color:#bf616a;">up </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;x)
+</span><span>               (</span><span style="color:#bf616a;">literal-function </span><span>&#39;y))
+</span><span>        p (</span><span style="color:#bf616a;">down </span><span>(</span><span style="color:#bf616a;">literal-function </span><span>&#39;p_x)
+</span><span>                 (</span><span style="color:#bf616a;">literal-function </span><span>&#39;p_y))]
+</span><span>    (((</span><span style="color:#bf616a;">Hamilton-equations </span><span>(</span><span style="color:#bf616a;">H-rectangular </span><span>&#39;m V)) q p) &#39;t)))
+</span></code></pre>
+<div>
+    $$
+\begin{pmatrix}\displaystyle{0} \cr \cr \displaystyle{\begin{pmatrix}\displaystyle{\frac{m\,Dx\left(t\right) - p_x\left(t\right)}{m}} \cr \cr \displaystyle{\frac{m\,Dy\left(t\right) - p_y\left(t\right)}{m}}\end{pmatrix}} \cr \cr \displaystyle{\begin{bmatrix}\displaystyle{Dp_x\left(t\right) + \partial_0V\left(x\left(t\right), y\left(t\right)\right)} \cr \cr \displaystyle{Dp_y\left(t\right) + \partial_1V\left(x\left(t\right), y\left(t\right)\right)}\end{bmatrix}}\end{pmatrix}
+$$
+</div>
+<blockquote>
+<p>The zero in the first element of the structure of Hamilton’s equation residuals is just the tautology that time advances uniformly: the time function is just the identity, so its derivative is one and the residual is zero. The equations in the second element of the structure relate the coordinate paths and the momentum paths. The equations in the third element give the rate of change of the momenta in terms of the applied forces.</p>
+</blockquote>
+</article>
+</p>
+</section>
+<a href="https://www.thomasantony.com/projects/sicm-workbook">&larr; Back to workbook</a>
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
