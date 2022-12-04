@@ -3,19 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@thomasantony" />
+    <meta name="twitter:creator" content="@thomasantony" />
+    <meta name="og:url" content="https://www.thomasantony.com/posts/chatgpt-music/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Thomas Antony" />
-    
-    
     <title>Generating music using ChatGPT</title>
     <meta name="og:title" content="Generating music using ChatGPT" />
-    
-    
-    
-    <meta name="description" content="My attempts at generating music using ChatGPT" />
-    <meta name="og:description" content="My attempts at generating music using ChatGPT" />
-    
+    <meta name="description" content="My experiments with generating music using ChatGPT" />
+    <meta name="og:description" content="My experiments with generating music using ChatGPT" />
     <link rel="stylesheet" href="/normalize.css" />
     <link rel="stylesheet" href="/style.css" media="screen" />
     <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
@@ -49,7 +46,10 @@
   <small>
     <em>Posted on <time datetime="2022-12-04T13:00:42-08:00">04 December, 2022</time></em>
   </small>
-  <article><p>I have been experimenting with OpenAI’s <a rel="noopener" target="_blank" href="https://chat.openai.com">ChatGPT</a> since it came out a couple of days ago. You can see the transcripts of some of my conversations with it <a href="/chatgpt/">here</a>. Today I tried to get it to generate audio, specifically music. Now, my musical background extends as far as trying to teach myself to play the piano and the violin using Youtube tutorials and I didn’t really get too far. But I decided to try anyway. In my <a href="/chatgpt/ChatGPT_Music_Player.html">first conversation</a>, I asked it for a suitable format and it informed me about the existence of <a rel="noopener" target="_blank" href="https://www.musicxml.com/">MusicXML</a>. I also had it write a parser/player for it in Python. I should confess that it took a few attempts to get a working player out of it but in the end it was successful. I discovered the library <code>music21</code> with my initial prompts and then found that <code>pygame</code> can playback MIDI files. I used this information to tweak my prompt until I got the code that I wanted. </p>
+  <article><p>I have been experimenting with OpenAI’s <a rel="noopener" target="_blank" href="https://chat.openai.com">ChatGPT</a> since it came out a couple of days ago. You can see the transcripts of some of my conversations with it <a href="/chatgpt/">here</a>. Today I tried to get it to generate audio, specifically music. </p>
+<p>TLDR: It can generate some notes. But maybe it can do more with careful prompting.</p>
+<p>Anyway, my musical background extends as far as trying to teach myself to play the piano and the violin using Youtube tutorials and I didn’t really get too far. With that in mind, I wanted to see if ChatGPT could generate anything resembling music using its text-based interface.</p>
+<p>In my <a href="/chatgpt/ChatGPT_Music_Player.html">first conversation</a>, I asked it for a suitable format and it informed me about the existence of <a rel="noopener" target="_blank" href="https://www.musicxml.com/">MusicXML</a>. I also had it write a parser/player for it in Python. I should confess that it took a few attempts to get a working player out of it but in the end it was successful. I discovered the library <code>music21</code> with my initial prompts and then found that <code>pygame</code> can playback MIDI files. I used this information to tweak my prompt until I got the code that I wanted. </p>
 <p>Here is the final code it generated for playing MusicXML files:</p>
 <pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">import </span><span>sys
 </span><span style="color:#b48ead;">import </span><span>music21
