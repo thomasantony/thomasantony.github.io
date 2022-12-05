@@ -199,6 +199,83 @@
 </span></code></pre>
 <p>My prior prompts about MusicXML may also have pointed it to go down that path instead of generating MIDI directly. These are interesting results regardless! </p>
 <p>I didn’t try GPT3 when it first came out and I didn’t really get the hype. But now, … now I see it. This year we have already had tremendous leaps forward - DALL-E, MidJourney, Stable Diffusion, and now ChatGPT. It seems like we have hit the vertical part of the exponential curve.</p>
+<p>===</p>
+<p>On further probing, it came up with a script where the musical notes were directly stored in a list in Python. This led me to asking it to use that to store music as CSV files. The conversation in question can be found <a href="/chatgpt/ChatGPT_Music_CSV.html">here</a>. Interestingly, when I asked it to generate a CSV file containing the first few bars of “Ode to Joy”, I got something that sounded like “Twinkle Twinkle Little Star”. Try out the following code and input file:</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">import </span><span>csv
+</span><span style="color:#b48ead;">import </span><span>sys
+</span><span style="color:#b48ead;">from </span><span>midiutil.MidiFile </span><span style="color:#b48ead;">import </span><span>MIDIFile
+</span><span style="color:#b48ead;">from </span><span>pygame </span><span style="color:#b48ead;">import </span><span>mixer
+</span><span>
+</span><span style="color:#65737e;"># Parse command line argument
+</span><span style="color:#b48ead;">try</span><span>:
+</span><span>    csv_filename = sys.argv[</span><span style="color:#d08770;">1</span><span>]
+</span><span style="color:#b48ead;">except </span><span>IndexError:
+</span><span>    </span><span style="color:#96b5b4;">print</span><span>(&quot;</span><span style="color:#a3be8c;">Please provide the CSV file as a command line argument.</span><span>&quot;)
+</span><span>    sys.</span><span style="color:#bf616a;">exit</span><span>(</span><span style="color:#d08770;">1</span><span>)
+</span><span>
+</span><span style="color:#65737e;"># Parse CSV file
+</span><span>pitches = []
+</span><span>durations = []
+</span><span>times = []
+</span><span style="color:#b48ead;">with </span><span style="color:#96b5b4;">open</span><span>(csv_filename) </span><span style="color:#b48ead;">as </span><span>csvfile:
+</span><span>    reader = csv.</span><span style="color:#bf616a;">reader</span><span>(csvfile)
+</span><span>    </span><span style="color:#b48ead;">for </span><span>row </span><span style="color:#b48ead;">in </span><span>reader:
+</span><span>        pitches.</span><span style="color:#bf616a;">append</span><span>(</span><span style="color:#bf616a;">int</span><span>(row[</span><span style="color:#d08770;">0</span><span>]))
+</span><span>        durations.</span><span style="color:#bf616a;">append</span><span>(</span><span style="color:#bf616a;">int</span><span>(row[</span><span style="color:#d08770;">1</span><span>]))
+</span><span>        times.</span><span style="color:#bf616a;">append</span><span>(</span><span style="color:#bf616a;">float</span><span>(row[</span><span style="color:#d08770;">2</span><span>]))
+</span><span>
+</span><span style="color:#65737e;"># Create MIDI file
+</span><span>midi_file = </span><span style="color:#bf616a;">MIDIFile</span><span>(</span><span style="color:#d08770;">1</span><span>) </span><span style="color:#65737e;"># One track
+</span><span>track = </span><span style="color:#d08770;">0
+</span><span>time = </span><span style="color:#d08770;">0
+</span><span>midi_file.</span><span style="color:#bf616a;">addTrackName</span><span>(track, time, &quot;</span><span style="color:#a3be8c;">Temporary MIDI Track</span><span>&quot;)
+</span><span>midi_file.</span><span style="color:#bf616a;">addTempo</span><span>(track, time, </span><span style="color:#d08770;">120</span><span>)
+</span><span>
+</span><span style="color:#65737e;"># Add notes to the MIDI file
+</span><span style="color:#b48ead;">for </span><span>pitch, duration, time_offset </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">zip</span><span>(pitches, durations, times):
+</span><span>    midi_file.</span><span style="color:#bf616a;">addNote</span><span>(track, </span><span style="color:#d08770;">0</span><span>, pitch, time + time_offset, duration, </span><span style="color:#d08770;">100</span><span>)
+</span><span>
+</span><span style="color:#65737e;"># Write the MIDI file to disk
+</span><span style="color:#b48ead;">with </span><span style="color:#96b5b4;">open</span><span>(&quot;</span><span style="color:#a3be8c;">temp.mid</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">wb</span><span>&quot;) </span><span style="color:#b48ead;">as </span><span>output_file:
+</span><span>    midi_file.</span><span style="color:#bf616a;">writeFile</span><span>(output_file)
+</span><span>
+</span><span style="color:#65737e;"># Play back the MIDI file using pygame.mixer
+</span><span>mixer.</span><span style="color:#bf616a;">init</span><span>()
+</span><span>mixer.music.</span><span style="color:#bf616a;">load</span><span>(&quot;</span><span style="color:#a3be8c;">temp.mid</span><span>&quot;)
+</span><span>mixer.music.</span><span style="color:#bf616a;">play</span><span>()
+</span><span>
+</span><span style="color:#65737e;"># Wait until MIDI file is done playing before exiting
+</span><span style="color:#b48ead;">while </span><span>mixer.music.</span><span style="color:#bf616a;">get_busy</span><span>():
+</span><span>    </span><span style="color:#b48ead;">continue
+</span></code></pre>
+<p>And here is the “music”:</p>
+<pre data-lang="csv" style="background-color:#2b303b;color:#c0c5ce;" class="language-csv "><code class="language-csv" data-lang="csv"><span style="color:#d08770;">60</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">0
+</span><span style="color:#d08770;">60</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">0.5
+</span><span style="color:#d08770;">67</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">1
+</span><span style="color:#d08770;">67</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">1.5
+</span><span style="color:#d08770;">69</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">2
+</span><span style="color:#d08770;">69</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">2.5
+</span><span style="color:#d08770;">67</span><span>,</span><span style="color:#d08770;">4</span><span>,</span><span style="color:#d08770;">3
+</span><span style="color:#d08770;">65</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">4
+</span><span style="color:#d08770;">65</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">4.5
+</span><span style="color:#d08770;">64</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">5
+</span><span style="color:#d08770;">64</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">5.5
+</span><span style="color:#d08770;">62</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">6
+</span><span style="color:#d08770;">62</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">6.5
+</span><span style="color:#d08770;">60</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">7
+</span><span style="color:#d08770;">60</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">7.5
+</span><span style="color:#d08770;">67</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">8
+</span><span style="color:#d08770;">67</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">8.5
+</span><span style="color:#d08770;">69</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">9
+</span><span style="color:#d08770;">69</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">9.5
+</span><span style="color:#d08770;">67</span><span>,</span><span style="color:#d08770;">4</span><span>,</span><span style="color:#d08770;">10
+</span><span style="color:#d08770;">65</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">11
+</span><span style="color:#d08770;">65</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">11.5
+</span><span style="color:#d08770;">64</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">12
+</span><span style="color:#d08770;">64</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">12.5
+</span><span style="color:#d08770;">62</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">13
+</span><span style="color:#d08770;">62</span><span>,</span><span style="color:#d08770;">2</span><span>,</span><span style="color:#d08770;">13.5
+</span></code></pre>
 </article>
 </p>
 </section>
