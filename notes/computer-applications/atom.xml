@@ -5,8 +5,19 @@
 	<link href="https://www.thomasantony.com/notes/computer-applications/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://www.thomasantony.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2022-03-20T05:08:45.753+00:00</updated>
+	<updated>2023-04-07T04:47:57.397+00:00</updated>
 	<id>https://www.thomasantony.com/notes/computer-applications/atom.xml</id>
+	<entry xml:lang="en">
+		<title>How to send UDP packets from command line</title>
+		<published>2023-04-07T04:47:57.397+00:00</published>
+		<updated>2023-04-07T04:47:57.397+00:00</updated>
+		<link rel="alternate" href="https://www.thomasantony.com/notes/202303062147-how-to-send-udp-packets-from-command-line/" type="text/html"/>
+		<id>https://www.thomasantony.com/notes/202303062147-how-to-send-udp-packets-from-command-line/</id>
+		<content type="html">&lt;p&gt;The following command sends the 4-byte packet ‘\x01\x02\x03\x04’ to 127.0.0.1 on port 2222&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;echo -n -e &amp;#39;\x01\x02\x03\x04&amp;#39; &amp;gt; &#x2F;dev&#x2F;udp&#x2F;127.0.0.1&#x2F;2222
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Running Virtualbox VMs with networking</title>
 		<published>2022-03-20T05:08:45.753+00:00</published>

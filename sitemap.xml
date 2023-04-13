@@ -163,7 +163,26 @@
         <lastmod>2022-11-04T01:54:02.252Z</lastmod>
     </url>
     <url>
+        <loc>https://www.thomasantony.com/notes/202211312202-plasma/</loc>
+        <lastmod>2023-01-01T06:02:10.759Z</lastmod>
+    </url>
+    <url>
+        <loc>https://www.thomasantony.com/notes/202302142319-how-was-chatgpt-trained/</loc>
+        <lastmod>2023-03-15T06:19:22.987Z</lastmod>
+    </url>
+    <url>
+        <loc>https://www.thomasantony.com/notes/202302271614-python-extension-debugging-in-vscode/</loc>
+        <lastmod>2023-03-27T15:14:29.276Z</lastmod>
+    </url>
+    <url>
+        <loc>https://www.thomasantony.com/notes/202303062147-how-to-send-udp-packets-from-command-line/</loc>
+        <lastmod>2023-04-07T04:47:57.397Z</lastmod>
+    </url>
+    <url>
         <loc>https://www.thomasantony.com/notes/aerospace-engineering/</loc>
+    </url>
+    <url>
+        <loc>https://www.thomasantony.com/notes/ai/</loc>
     </url>
     <url>
         <loc>https://www.thomasantony.com/notes/aviation/</loc>
@@ -187,6 +206,9 @@
         <loc>https://www.thomasantony.com/notes/infosec-ctf-walkthroughs/</loc>
     </url>
     <url>
+        <loc>https://www.thomasantony.com/notes/machine-learning/</loc>
+    </url>
+    <url>
         <loc>https://www.thomasantony.com/notes/mathematics/</loc>
     </url>
     <url>
@@ -194,6 +216,9 @@
     </url>
     <url>
         <loc>https://www.thomasantony.com/notes/physics/</loc>
+    </url>
+    <url>
+        <loc>https://www.thomasantony.com/notes/plasma-physics/</loc>
     </url>
     <url>
         <loc>https://www.thomasantony.com/notes/productivity/</loc>

@@ -5,8 +5,20 @@
 	<link href="https://www.thomasantony.com/notes/software-development/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://www.thomasantony.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2022-01-11T03:28:20.283+00:00</updated>
+	<updated>2023-03-27T15:14:29.276+00:00</updated>
 	<id>https://www.thomasantony.com/notes/software-development/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Python extension debugging in Vscode</title>
+		<published>2023-03-27T15:14:29.276+00:00</published>
+		<updated>2023-03-27T15:14:29.276+00:00</updated>
+		<link rel="alternate" href="https://www.thomasantony.com/notes/202302271614-python-extension-debugging-in-vscode/" type="text/html"/>
+		<id>https://www.thomasantony.com/notes/202302271614-python-extension-debugging-in-vscode/</id>
+		<content type="html">&lt;h2 id=&quot;troubleshooting&quot;&gt;Troubleshooting&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;If you get EXC_BAD_INSTRUCTION on M1 Mac, downgrade openssl from 3.1.0 to 3.0.7 (and Python to 3.10.9)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Transparent Rust bindings for C++ structs</title>
 		<published>2022-01-11T03:28:20.283+00:00</published>

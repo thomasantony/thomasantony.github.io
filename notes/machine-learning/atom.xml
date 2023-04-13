@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Thomas Antony - Machine Learning</title>
+	<subtitle>My personal website and notes</subtitle>
+	<link href="https://www.thomasantony.com/notes/machine-learning/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.thomasantony.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2023-03-15T06:19:22.987+00:00</updated>
+	<id>https://www.thomasantony.com/notes/machine-learning/atom.xml</id>
+	<entry xml:lang="en">
+		<title>How was ChatGPT trained?</title>
+		<published>2023-03-15T06:19:22.987+00:00</published>
+		<updated>2023-03-15T06:19:22.987+00:00</updated>
+		<link rel="alternate" href="https://www.thomasantony.com/notes/202302142319-how-was-chatgpt-trained/" type="text/html"/>
+		<id>https://www.thomasantony.com/notes/202302142319-how-was-chatgpt-trained/</id>
+		<content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Train a GPT-like model to “understand langauge”. This could be based on a data-set of prompts and expected responses.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Sample several outputs from the model for a given prompt. Have human labeler rank the outputs. Train yet &lt;em&gt;another&lt;&#x2F;em&gt; transformer based model (the “reward model”) that can predict this rank&#x2F;“goodness” of the answer based on the human labeled answers.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Stack the reward model (RM) at the end of GPT and use it to generate the loss function. This is then used to fine-tune the GPT while keeping the RM frozen. And thus you get ChatGPT.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
+&lt;p&gt;[1] https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=_MPJ3CyDokU&lt;&#x2F;p&gt;
+&lt;p&gt;[1] “Learning to summarize from human feedback” https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2009.01325.pdf&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

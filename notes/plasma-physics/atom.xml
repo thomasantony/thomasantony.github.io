@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Thomas Antony - Plasma Physics</title>
+	<subtitle>My personal website and notes</subtitle>
+	<link href="https://www.thomasantony.com/notes/plasma-physics/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.thomasantony.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2023-01-01T06:02:10.759+00:00</updated>
+	<id>https://www.thomasantony.com/notes/plasma-physics/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Plasma</title>
+		<published>2023-01-01T06:02:10.759+00:00</published>
+		<updated>2023-01-01T06:02:10.759+00:00</updated>
+		<link rel="alternate" href="https://www.thomasantony.com/notes/202211312202-plasma/" type="text/html"/>
+		<id>https://www.thomasantony.com/notes/202211312202-plasma/</id>
+		<content type="html">&lt;p&gt;Plasma, also called the “fourth state of matter”, consists of a collection of ions and electrons that is &lt;em&gt;quasi-neutral&lt;&#x2F;em&gt; and exhibits collective behavior.&lt;&#x2F;p&gt;
+&lt;p&gt;This behavior is primarily caused due to the electromagnetic interactions between the particles. The degree of interactions will depend on the average density of charged particles to neutral particles.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>
