@@ -47,7 +47,7 @@
 <section>
 <p id="post">
   <h1>Generalization through memorization: Nearest neighbor language models</h1>
-  <article><p>This paper[1] describes a method for augmenting an existing language model with external memory to improve its performance without requiring any extra training. The datastore is initialized for a given dataset and used during inference time. The authors demonstrate performance improvements (measured in perplexity over a given dataset) even when operating on data-stores for datasets the model was not trained on.</p>
+  <article><p>This paper<a rel="noopener" target="_blank" title="Generalization through memorization: Nearest neighbor language models" href="https://arxiv.org/pdf/1911.00172.pdf">1</a> describes a method for augmenting an existing language model with external memory to improve its performance without requiring any extra training. The datastore is initialized for a given dataset and used during inference time. The authors demonstrate performance improvements (measured in perplexity over a given dataset) even when operating on data-stores for datasets the model was not trained on.</p>
 <h2 id="how-it-works">How it works</h2>
 <p>The method essentially involves “memorizing” the training set and using it to directly augment the model at inference time. This can also be used for memorizing data <em>other than the training set</em> and give similar improvements.</p>
 <h3 id="indexing-or-memorizing">Indexing or “Memorizing”</h3>
@@ -74,12 +74,10 @@ $$
 P(y|x) = \lambda P_{kNN}(y|x) + (1 - \lambda) P_{LM}(y|x)
 $$
 </div>
-<p>where $\lambda$ is a fixed coefficient. Reference [2] talks about selecting $\lambda$ based on “semantic similarity” (the cosine distance?) between the closest key from the search results and the search query. They trained a model to predict what the coefficient-profile should be for a given dataset (i.e how to map semantic similarity to the interpolation coefficient $\lambda$).</p>
+<p>where $\lambda$ is a fixed coefficient. Reference <a rel="noopener" target="_blank" title="You can't pick your neighbors, or can you? When and how to rely on retrieval in the kNN-LM" href="https://arxiv.org/pdf/2210.15859">2</a> talks about selecting $\lambda$ based on “semantic similarity” (the cosine distance?) between the closest key from the search results and the search query. They trained a model to predict what the coefficient-profile should be for a given dataset (i.e how to map semantic similarity to the interpolation coefficient $\lambda$).</p>
 <h2 id="references">References</h2>
-<p>[1]: Khandelwal, U., Levy, O., Jurafsky, D., Zettlemoyer, L., &amp; Lewis, M. (2019). Generalization through memorization: Nearest neighbor language models. <a rel="noopener" target="_blank" href="https://arxiv.org/pdf/1911.00172.pdf">arXiv preprint arXiv:1911.00172</a>.
-[[1]] https://arxiv.org/pdf/1911.00172.pdf</p>
-<p>[2]: Drozdov, A., Wang, S., Rahimi, R., McCallum, A., Zamani, H., &amp; Iyyer, M. (2022). You can’t pick your neighbors, or can you? When and how to rely on retrieval in the $ k $ NN-LM. <a rel="noopener" target="_blank" href="https://arxiv.org/pdf/2210.15859">arXiv preprint arXiv:2210.15859</a>.
-[[2]] https://arxiv.org/pdf/2210.15859</p>
+<p>[<a rel="noopener" target="_blank" title="Generalization through memorization: Nearest neighbor language models" href="https://arxiv.org/pdf/1911.00172.pdf">1</a>] Khandelwal, U., Levy, O., Jurafsky, D., Zettlemoyer, L., &amp; Lewis, M. (2019). Generalization through memorization: Nearest neighbor language models. <a rel="noopener" target="_blank" href="https://arxiv.org/pdf/1911.00172.pdf">arXiv preprint arXiv:1911.00172</a>.</p>
+<p>[<a rel="noopener" target="_blank" title="You can't pick your neighbors, or can you? When and how to rely on retrieval in the kNN-LM" href="https://arxiv.org/pdf/2210.15859">2</a>] Drozdov, A., Wang, S., Rahimi, R., McCallum, A., Zamani, H., &amp; Iyyer, M. (2022). You can’t pick your neighbors, or can you? When and how to rely on retrieval in the kNN-LM. <a rel="noopener" target="_blank" href="https://arxiv.org/pdf/2210.15859">arXiv preprint arXiv:2210.15859</a>.</p>
 </article>
 </p>
 <p>
