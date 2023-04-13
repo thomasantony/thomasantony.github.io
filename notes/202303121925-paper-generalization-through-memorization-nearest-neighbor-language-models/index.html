@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@thomasantony" />
+    <meta name="twitter:creator" content="@thomasantony" />
+    <meta name="og:url" content="https://www.thomasantony.com/notes/202303121925-paper-generalization-through-memorization-nearest-neighbor-language-models/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Thomas Antony" />
+    <title>Generalization through memorization: Nearest neighbor language models</title>
+    <meta name="og:title" content="Generalization through memorization: Nearest neighbor language models" />
+    <meta name="description" content="My personal website and notes">
+    <meta name="og:description" content="My personal website and notes" />
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Generalization Through Memorization: Nearest Neighbor Language Models - Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/chatgpt">chatgpt</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1>Generalization through memorization: Nearest neighbor language models</h1>
+  <article><p>This paper[[1]] describes a method for augmenting an existing language model with external memory to improve its performance without requiring any extra training. The datastore is initialized for a given dataset and used during inference time. The authors demonstrate performance improvements (measured in perplexity over a given dataset) even when operating on data-stores for datasets the model was not trained on.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>The method essentially involves “memorizing” the training set and using it to directly augment the model at inference time. This can also be used for memorizing data <em>other than the training set</em> and give similar improvements.</p>
+<h3 id="indexing-or-memorizing">Indexing or “Memorizing”</h3>
+<p>The data-store is a “key-value” database, similar to <a rel="noopener" target="_blank" href="https://github.com/facebookresearch/faiss">faiss</a> or <a rel="noopener" target="_blank" href="https://www.pinecone.io/">pinecone</a> with vectors (of floating point numbers) that form keys and some arbitrary data as value. To “memorize” a data set, the existing LLM is evaluated on the data split into some chunk size, and the outputs of the network right before the final “softmax” layer is used as the “key” for the database, while the subsequent token in the dataset (which the model is supposed to predict) is stored as the value. </p>
+<p>Assume that $x_0$, $x_1$ … $x_{n-1}$, are the different tokens in a chunk of text from the dataset. Let <code>f</code> be a function that converts this token sequence into the “key” vector. In the paper, they examined different layer outputs for this and showed that the output of the final layer, right before the soft-max activation, is a good candidate for this. So for a given token-sequence, the key and value are given by</p>
+<p>$$
+k = f([x_0, x_1, … , x_{n-1}])\
+v = x_n
+$$</p>
+<p>For a chunk of n-tokens, we may have up to n-1 different data-points stored in the database, i.e. $f([x_0]) \rightarrow x_1$, $f([x_0, x_1]) \rightarrow x_2$ and so on.</p>
+<h3 id="inference">Inference</h3>
+<p>At inference time, the input token-sequence is run through the LM to get the probability distribution for the next token. The activations of the final layer prior to the soft-max is then used to perform a k-nearest-neighbors search in the vector datastore created in the last step (the authors used Euclidean distance and k=1000 for this search). The vectors are then converted into a probability distribution of its own using the distances as follows:</p>
+<p>$$
+P_{kNN}(y|x) = \sum_{(k_i, v_i \in N)} \mathbb{1}_{y=v_i} \exp\left(\ -d(k_i, f(x_i)) \right)
+$$</p>
+<p>where $\mathbb{1}_{y=v_i}$ is the one-hot encoded vector for token $v_i$, $d(k_i, f(x_i))$ is the distance for the search result from the search-key.</p>
+<p>$P_{LM}(y|x)$ are the logits from the original model. The final probability distribution is then computed by linearly interpolating between the two distributions:</p>
+<p>$$
+P(y|x) = \lambda P_{kNN}(y|x) + (1 - \lambda) P_{LM}(y|x)
+$$</p>
+<p>where $\lambda$ is a fixed coefficient. Reference [[2]] talks about selecting $\lambda$ based on “semantic similarity” (the cosine distance?) between the closest key from the search results and the search query. They trained a model to predict what the coefficient-profile should be for a given dataset (i.e how to map semantic similarity to the interpolation coefficient $\lambda$).</p>
+<h2 id="references">References</h2>
+<p>[1]: Khandelwal, U., Levy, O., Jurafsky, D., Zettlemoyer, L., &amp; Lewis, M. (2019). Generalization through memorization: Nearest neighbor language models. <a rel="noopener" target="_blank" href="https://arxiv.org/pdf/1911.00172.pdf">arXiv preprint arXiv:1911.00172</a>.</p>
+<p>[[1]] https://arxiv.org/pdf/1911.00172.pdf</p>
+<p>[2]: Drozdov, A., Wang, S., Rahimi, R., McCallum, A., Zamani, H., &amp; Iyyer, M. (2022). You can’t pick your neighbors, or can you? When and how to rely on retrieval in the $ k $ NN-LM. <a rel="noopener" target="_blank" href="https://arxiv.org/pdf/2210.15859">arXiv preprint arXiv:2210.15859</a>.</p>
+<p>[[2]] https://arxiv.org/pdf/2210.15859</p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;ai-ml&#x2F;">AI&#x2F;ML</a></li>
+  
+  
+  <li><a href="https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;ai-research-papers&#x2F;">AI Research Papers</a></li>
+  
+  
+</p>
+</section>
+
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
