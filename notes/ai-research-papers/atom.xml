@@ -19,21 +19,28 @@
 &lt;h3 id=&quot;indexing-or-memorizing&quot;&gt;Indexing or “Memorizing”&lt;&#x2F;h3&gt;
 &lt;p&gt;The data-store is a “key-value” database, similar to &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;facebookresearch&#x2F;faiss&quot;&gt;faiss&lt;&#x2F;a&gt; or &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.pinecone.io&#x2F;&quot;&gt;pinecone&lt;&#x2F;a&gt; with vectors (of floating point numbers) that form keys and some arbitrary data as value. To “memorize” a data set, the existing LLM is evaluated on the data split into some chunk size, and the outputs of the network right before the final “softmax” layer is used as the “key” for the database, while the subsequent token in the dataset (which the model is supposed to predict) is stored as the value. &lt;&#x2F;p&gt;
 &lt;p&gt;Assume that $x_0$, $x_1$ … $x_{n-1}$, are the different tokens in a chunk of text from the dataset. Let &lt;code&gt;f&lt;&#x2F;code&gt; be a function that converts this token sequence into the “key” vector. In the paper, they examined different layer outputs for this and showed that the output of the final layer, right before the soft-max activation, is a good candidate for this. So for a given token-sequence, the key and value are given by&lt;&#x2F;p&gt;
-&lt;p&gt;$$
-k = f([x_0, x_1, … , x_{n-1}])\
+&lt;div&gt;
+    $$
+k = f([x_0, x_1, ... , x_{n-1}])\\
 v = x_n
-$$&lt;&#x2F;p&gt;
+$$
+&lt;&#x2F;div&gt;
 &lt;p&gt;For a chunk of n-tokens, we may have up to n-1 different data-points stored in the database, i.e. $f([x_0]) \rightarrow x_1$, $f([x_0, x_1]) \rightarrow x_2$ and so on.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;inference&quot;&gt;Inference&lt;&#x2F;h3&gt;
 &lt;p&gt;At inference time, the input token-sequence is run through the LM to get the probability distribution for the next token. The activations of the final layer prior to the soft-max is then used to perform a k-nearest-neighbors search in the vector datastore created in the last step (the authors used Euclidean distance and k=1000 for this search). The vectors are then converted into a probability distribution of its own using the distances as follows:&lt;&#x2F;p&gt;
-&lt;p&gt;$$
+&lt;div&gt;
+    $$
 P_{kNN}(y|x) = \sum_{(k_i, v_i \in N)} \mathbb{1}_{y=v_i} \exp\left(\ -d(k_i, f(x_i)) \right)
-$$&lt;&#x2F;p&gt;
+$$
+&lt;&#x2F;div&gt;
 &lt;p&gt;where $\mathbb{1}_{y=v_i}$ is the one-hot encoded vector for token $v_i$, $d(k_i, f(x_i))$ is the distance for the search result from the search-key.&lt;&#x2F;p&gt;
 &lt;p&gt;$P_{LM}(y|x)$ are the logits from the original model. The final probability distribution is then computed by linearly interpolating between the two distributions:&lt;&#x2F;p&gt;
-&lt;p&gt;$$
+&lt;div&gt;
+    c
+$$
 P(y|x) = \lambda P_{kNN}(y|x) + (1 - \lambda) P_{LM}(y|x)
-$$&lt;&#x2F;p&gt;
+$$
+&lt;&#x2F;div&gt;
 &lt;p&gt;where $\lambda$ is a fixed coefficient. Reference [[2]] talks about selecting $\lambda$ based on “semantic similarity” (the cosine distance?) between the closest key from the search results and the search query. They trained a model to predict what the coefficient-profile should be for a given dataset (i.e how to map semantic similarity to the interpolation coefficient $\lambda$).&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
 &lt;p&gt;[1]: Khandelwal, U., Levy, O., Jurafsky, D., Zettlemoyer, L., &amp;amp; Lewis, M. (2019). Generalization through memorization: Nearest neighbor language models. &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1911.00172.pdf&quot;&gt;arXiv preprint arXiv:1911.00172&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
