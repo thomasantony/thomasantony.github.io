@@ -70,17 +70,16 @@ $$
 <p>where $\mathbb{1}_{y=v_i}$ is the one-hot encoded vector for token $v_i$, $d(k_i, f(x_i))$ is the distance for the search result from the search-key.</p>
 <p>$P_{LM}(y|x)$ are the logits from the original model. The final probability distribution is then computed by linearly interpolating between the two distributions:</p>
 <div>
-    c
-$$
+    $$
 P(y|x) = \lambda P_{kNN}(y|x) + (1 - \lambda) P_{LM}(y|x)
 $$
 </div>
 <p>where $\lambda$ is a fixed coefficient. Reference [2] talks about selecting $\lambda$ based on “semantic similarity” (the cosine distance?) between the closest key from the search results and the search query. They trained a model to predict what the coefficient-profile should be for a given dataset (i.e how to map semantic similarity to the interpolation coefficient $\lambda$).</p>
 <h2 id="references">References</h2>
-<p>[1]: Khandelwal, U., Levy, O., Jurafsky, D., Zettlemoyer, L., &amp; Lewis, M. (2019). Generalization through memorization: Nearest neighbor language models. <a rel="noopener" target="_blank" href="https://arxiv.org/pdf/1911.00172.pdf">arXiv preprint arXiv:1911.00172</a>.</p>
-<p>[[1]] https://arxiv.org/pdf/1911.00172.pdf</p>
-<p>[2]: Drozdov, A., Wang, S., Rahimi, R., McCallum, A., Zamani, H., &amp; Iyyer, M. (2022). You can’t pick your neighbors, or can you? When and how to rely on retrieval in the $ k $ NN-LM. <a rel="noopener" target="_blank" href="https://arxiv.org/pdf/2210.15859">arXiv preprint arXiv:2210.15859</a>.</p>
-<p>[[2]] https://arxiv.org/pdf/2210.15859</p>
+<p>[1]: Khandelwal, U., Levy, O., Jurafsky, D., Zettlemoyer, L., &amp; Lewis, M. (2019). Generalization through memorization: Nearest neighbor language models. <a rel="noopener" target="_blank" href="https://arxiv.org/pdf/1911.00172.pdf">arXiv preprint arXiv:1911.00172</a>.
+[[1]] https://arxiv.org/pdf/1911.00172.pdf</p>
+<p>[2]: Drozdov, A., Wang, S., Rahimi, R., McCallum, A., Zamani, H., &amp; Iyyer, M. (2022). You can’t pick your neighbors, or can you? When and how to rely on retrieval in the $ k $ NN-LM. <a rel="noopener" target="_blank" href="https://arxiv.org/pdf/2210.15859">arXiv preprint arXiv:2210.15859</a>.
+[[2]] https://arxiv.org/pdf/2210.15859</p>
 </article>
 </p>
 <p>
