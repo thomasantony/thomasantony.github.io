@@ -5,8 +5,56 @@
 	<link href="https://www.thomasantony.com/notes/ai-research-papers/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://www.thomasantony.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2023-04-13T02:25:07.127+00:00</updated>
+	<updated>2023-04-23T04:10:30.070+00:00</updated>
 	<id>https://www.thomasantony.com/notes/ai-research-papers/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Hyena Hierarchy: Towards Larger Convolutional Language Models</title>
+		<published>2023-04-23T04:10:30.070+00:00</published>
+		<updated>2023-04-23T04:10:30.070+00:00</updated>
+		<link rel="alternate" href="https://www.thomasantony.com/notes/202303222110-hyena-hierarchy-towards-larger-convolutional-language-models/" type="text/html"/>
+		<id>https://www.thomasantony.com/notes/202303222110-hyena-hierarchy-towards-larger-convolutional-language-models/</id>
+		<content type="html">&lt;p&gt;Here are some rough notes on the “Hyena Hierarchy” architecture described in the paper &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Hyena Hierarchy: Towards Larger Convolutional Language Models&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2302.10866&quot;&gt;1&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;This is a new way of getting sub-quadratic scaling for attention&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;it uses convolution filter&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;typical convolution filters are in the form of an array of values which are learned and applied like an Finite-Impulse-Response discrete filter (FIR)&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Finite Impulse Response&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Finite_impulse_response&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;this doesn’t scale well&lt;&#x2F;li&gt;
+&lt;li&gt;instead the filter parameters are represented as a function of “t” where “t” represents the index or “time-step” in the filter. This means you can get a filter of any length from a limited number of parameters&lt;&#x2F;li&gt;
+&lt;li&gt;furthermore, this function is chosen to be the output of a state-space model of the type from control theory (Ax+Bu, Cx+Du etc.)&lt;&#x2F;li&gt;
+&lt;li&gt;If x0 = 0, then you can get an expression for the output “y” (aka the filter), in terms of matrices A, B, C and D (which can be learned during training)&lt;&#x2F;li&gt;
+&lt;li&gt;dimensions of the state-space model and structore of the matrices represent the degrees of freedom available&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;FFT can be used to implement convolutions&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Typical attention involves three linear projections passed through a softmax function - called query, key and value&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;“Hyena” uses N+1 linear projections (not necessarily equal to three). One of these projections take the role of the “value”.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;So &lt;code&gt;y = H(u)v&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;H(u) is defined by “interleaving implicit long convolutions and element-wise multiplication” with one projection at a time&lt;&#x2F;li&gt;
+&lt;li&gt;It somehow retains the sublinear scaling by not “materializing” H(u)&lt;&#x2F;li&gt;
+&lt;li&gt;The element-wise product in time domain corresponds to convolution in frequency domain&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;more details to come as I understand the paper further&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
+&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Hyena Hierarchy: Towards Larger Convolutional Language Models&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2302.10866&quot;&gt;1&lt;&#x2F;a&gt;] “Hyena Hierarchy: Towards Larger Convolutional Language Models”, Poli et.al, https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2302.10866&lt;&#x2F;p&gt;
+&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Finite Impulse Response&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Finite_impulse_response&quot;&gt;2&lt;&#x2F;a&gt;] “Finite-Impulse Response”, https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Finite_impulse_response&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Generalization through memorization: Nearest neighbor language models</title>
 		<published>2023-04-13T02:25:07.127+00:00</published>
