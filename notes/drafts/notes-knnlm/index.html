@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@thomasantony" />
+    <meta name="twitter:creator" content="@thomasantony" />
+    <meta name="og:url" content="https://www.thomasantony.com/notes/drafts/notes-knnlm/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Thomas Antony" />
+    <meta name="description" content="My personal website and notes">
+    <meta name="og:description" content="My personal website and notes" />
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/style.css" media="screen" />
+    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
+    <title>Thomas Antony</title>
+
+</head>
+<body>
+  <header>
+    <div id="nav-brand-wrapper">
+      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
+    </div>
+    <nav>
+      
+      [
+        
+        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/chatgpt">chatgpt</a>,
+        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
+      ]
+      
+    </nav>
+  </header>
+  <section class="main">
+  
+<section>
+<p id="post">
+  <h1></h1>
+  <article><p><em>Ideas</em></p>
+<ul>
+<li>
+<p>Make a “squat” LM with large context and fewer params?</p>
+</li>
+<li>
+<p>train adapter to use external weights as storage?</p>
+</li>
+<li>
+<p>*** Khandelwal’s KNN-LM paper - 1911.00172.pdf ***</p>
+<ul>
+<li>Cache the inputs to the last FFN after layer-norm is used as the “key” and the token(?) is used as the value in the datastore
+<ul>
+<li>encode first (n-1) words of document as a vector using the output of selected layer</li>
+<li>value is the n-th word</li>
+<li>maybe recursive? and repeated for each word?</li>
+</ul>
+</li>
+<li>the model queries datastore at inference times and returns “k” possible values</li>
+<li>uses Euclidean distance</li>
+<li>the values are converted into a prob-distribution using softmax of negative distances and the output of LM is interpolated with it using a fixed coefficient lambda</li>
+<li>p(y|x) = lambda * p_knn(y|x) + (1-lambda) * p_lm(y|x)</li>
+</ul>
+</li>
+<li>
+<p>Drozdov’s followup - 2210.15859.pdf</p>
+<ul>
+<li>How to pick “lambda” automatically using “retrieval quality”</li>
+<li>Uses semantic similarity of the retrieved context to base LM</li>
+<li>Uses “buckets” of distance - one coefficient tuned per bucket</li>
+<li>Use coefficient of the top/closest result</li>
+<li>coefficient is “trained”?
+<ul>
+<li>could we just have some kind of exponential dropoff for this based on distance?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>“Yogatama”</p>
+<ul>
+<li>goes further and uses both short term and longterm memory (somehow related to Transformer-XL caching)</li>
+<li>not sure I understand this one fully</li>
+<li>uses memory from a separately trained model according to another paper (arxiv:2205.12674)</li>
+</ul>
+</li>
+<li>
+<p>Lample et al</p>
+<ul>
+<li>replace FFN layers with a KNN lookup layer called PKM - “Product Key Memory”</li>
+<li>based on “Sukhbataar”’s observation that FFN acts like attention if ReLU is replaced with Softmax</li>
+<li>very interesting - they added 2 to 3 kNN lookup layers instead of FFNs during training</li>
+<li>seems to require some weird stuff at training time which makes it work</li>
+<li>does not use a database - storage is part of network still</li>
+<li>eh</li>
+</ul>
+</li>
+<li>
+<p>“Memory-efficient Transformers” - Gupta et al 2021</p>
+<ul>
+<li>replace dense attention with kNN lookup
+<ul>
+<li>actually more like a computational trick for attention rather than using memory</li>
+</ul>
+</li>
+<li>doesn’t seem to include actual databases here though</li>
+<li>eh</li>
+</ul>
+</li>
+<li>
+<p>Memorizing transformers - Wu et al 2022</p>
+<ul>
+<li>
+<p>during training, store “keys and values” (from attention layers?) in one of the last layers into a KV-db</p>
+</li>
+<li>
+<p>only store “n” elements at a time dropping the older stuff</p>
+</li>
+<li>
+<p>perform attention on both local context (per usual) and on the memory, subbing in the search result
+keys and values in place of the usual keys and values and using the same queries as the other attention block</p>
+</li>
+<li>
+<p>a learned “gate”, g, (same as lambda from knn-lm) scales between local attn and memory</p>
+<ul>
+<li>there is a per-head parameter that is passed through a sigmoid fn to get the value of “g”</li>
+</ul>
+</li>
+<li>
+<p>“no position bias” for retrieved memories</p>
+</li>
+<li>
+<p>normalization of keys and queries help mitigate some of the “staleness” during training</p>
+<ul>
+<li>staleness caused by the model params changing the queries over time during training</li>
+</ul>
+</li>
+<li>
+<p>knn attention layer has its own weights separate from that used for local attention</p>
+<ul>
+<li>the input search query is of size “hidden_size” and there are “seq_len” number of queries</li>
+</ul>
+</li>
+<li>
+<p>non-memory model can be fine-tuned to use memory</p>
+</li>
+<li>
+<p><strong>very interesting stuff</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>“Training Language Models with Memory Augmentation”
+- use in-batch examples as memory during training?
+- three types of memory
+- local memory - from recent past that is obtained using attention
+- long term memory - from same doc but beyond context size
+- external memory - stored data from training or other data
+- “ By packing consecutive segments from the same document in one training batch, our model can access long-term memories beyond the attention context“
+- “training memories” - presumably used only during training and is from the same batch
+- loss function includes a term for memory - computed similar to how Khandelwal’s work does it
+- maximizes similarity between lastlayeroutput(c) w/ same output for c_j from batch memory
+- scaled dot product is used as similarity function
+- “local memory” = using current token sequence as training memory for above loss fn
+- simply incorporating local memory provides a notable gain on multiple benchmarks at little cost
+- “long term memory”
+- use consecutive segments from document in batch
+- M_train includes tokens from previous segments as well as the preceding tokens in the same segment
+- “external memory”
+- packing segments that have large lexical overlap into the same batch using “BM25” scores
+- Specifically, we start with a single segment and repeatedly add segments with highest BM25 scores into the same batch
+- To encourage the use of information from other segments, we exclude the local memory from M_train with a probability of p (=90%) during training
+- training process
+- standard loss function for first 5% updates
+- inference
+- interpolate similar to KNN-LM</p>
+<p>-knn-adapter - 2302.10879
+- improves on Khandelwal et al
+- train a small network to predict token-wise interpolation coefficients + context-specific correction coefficients
+- create data-store from traininset, train on validation set (possibly to minimize cross entropy with ground truth next token prob?)
+- On the order of 10^4 parameters - much better than fine tuning?
+- generalizes to other datasets even when using data stores from different data</p>
+</article>
+</p>
+</section>
+
+
+  </section>
+  <footer class="sans">
+    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
+  </footer>
+</body>
+</html>
