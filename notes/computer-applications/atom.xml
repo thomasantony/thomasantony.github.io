@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title>Thomas Antony - Computer Applications</title>
+	<title>thomasantony.com - Computer Applications</title>
 	<subtitle>My personal website and notes</subtitle>
 	<link href="https://www.thomasantony.com/notes/computer-applications/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://www.thomasantony.com"/>

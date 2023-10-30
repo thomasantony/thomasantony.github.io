@@ -1,48 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@thomasantony" />
-    <meta name="twitter:creator" content="@thomasantony" />
-    <meta name="og:url" content="https://www.thomasantony.com/projects/classical-mechanics/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Thomas Antony" />
-    <title>Self Study -- Classical Mechanics</title>
-    <meta name="og:title" content="Self Study -- Classical Mechanics" />
-    <meta name="description" content="My personal website and notes">
-    <meta name="og:description" content="My personal website and notes" />
-    <link rel="stylesheet" href="/normalize.css" />
-    <link rel="stylesheet" href="/style.css" media="screen" />
-    <link rel="stylesheet" href="/style-dark.css" media="screen and (prefers-color-scheme: dark)" />
-    <title>Self Study -- Classical Mechanics - Thomas Antony</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
-</head>
-<body>
-  <header>
-    <div id="nav-brand-wrapper">
-      <a class="sakura-blossom sans" href="/">Thomas Antony</a>
-    </div>
-    <nav>
-      
-      [
         
-        <a class="sakura-fade" href="https://www.thomasantony.com/about">about</a>,
-        <a class="sakura-fade" href="https://www.thomasantony.com/posts">posts</a>,
-        <a class="sakura-fade" href="https://www.thomasantony.com/projects">projects</a>,
-        <a class="sakura-fade" href="https://www.thomasantony.com/notes">notes</a>,
-        <a class="sakura-fade" href="https://www.thomasantony.com/chatgpt">chatgpt</a>,
-        <a class="sakura-fade" href="https://www.thomasantony.com/publications">publications</a>
-      ]
-      
-    </nav>
-  </header>
-  <section class="main">
-  
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+
+        <title>Classical Mechanics</title>
+        
+        <meta name="title" content="Classical Mechanics">
+        
+        <meta name="description" content="My personal website and notes">
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.thomasantony.com/projects/classical-mechanics/">
+        <meta property="og:site_name" content="thomasantony.com">
+        <meta property="og:title" content="Classical Mechanics">
+        <meta property="og:description" content="My personal website and notes">
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://www.thomasantony.com/projects/classical-mechanics/">
+        <meta property="twitter:title" content="Classical Mechanics">
+        <meta property="twitter:description" content="My personal website and notes">
+        
+        
+
+        <link rel="canonical" href="https://www.thomasantony.com/projects/classical-mechanics/">
+        
+        <script type="application/ld+json">
+            {
+                "description":"My personal website and notes",
+                "url":"https://www.thomasantony.com/projects/classical-mechanics/",
+                "@type":"WebSite",
+                "headline":"Classical Mechanics",
+                "name":"Classical Mechanics",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
+        <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
+        
+
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                <nav>
+                    
+                    [
+                      
+                      <a href="https://www.thomasantony.com">home</a>,
+                      <a href="https://www.thomasantony.com/posts">posts</a>,
+                      <a href="https://www.thomasantony.com/projects">projects</a>,
+                      <a href="https://www.thomasantony.com/notes">notes</a>
+                    ]
+                    
+                </nav>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
 <section>
 <p id="post">
-  <h1>Self Study -- Classical Mechanics</h1>
+  <h2>Classical Mechanics</h2>
   <article><p>Go to <a href="/projects/sicm-workbook"><strong>Workbook</strong></a></p>
 <p>I am currently studying classical mechanics using <em><a rel="noopener" target="_blank" href="https://tgvaughan.github.io/sicm/">Structure and Interpretation of Classical Mechanics</a></em> (aka SICM) by Gerald Sussman and Jack Wisdom. This is part of working towards my eventual goal of properly understanding the math behind General Relativity. Once I am done with SICM, I will move on to <a rel="noopener" target="_blank" href="https://mitpress.mit.edu/9780262019347/functional-differential-geometry/"><em>Functional Differential Geometry</em></a> (aka FDG) by the same authors. I have taken a couple of courses on Classical Mechanics and Variational Calculus while in gradschool. But this is the first book on the subject that I have found to be engaging while also explaining the concepts really well. I am hoping that the GR book will be similarly elucidating on the subject.</p>
 <p>The key factor that sets apart SICM (and FDG) from other textbooks is that it uses computer programs as a way to present its ideas. Expressing the concepts in a computer language (in this case, <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Scheme_(programming_language)">Scheme</a>), forces the author to be precise and unambiguous. The authors have written a library called <a rel="noopener" target="_blank" href="https://groups.csail.mit.edu/mac/users/gjs/6946/installation.html">scmutils</a> that is required for implementing the methods presented in the book while working through it. Sam Ritchie has made a Clojure version of <code>scmutils</code> called <a rel="noopener" target="_blank" href="https://github.com/sicmutils/sicmutils">sicmutils</a>. This is what I used to create my workbooks, along with along with <a rel="noopener" target="_blank" href="https://github.com/clojupyter/clojupyter">CloJupyter</a>.</p>
@@ -57,9 +105,11 @@
 </section>
 
 
-  </section>
-  <footer class="sans">
-    <a href="https://github.com/thomasantony/thomasantony.github.io-src" target="_blank"> Source code</a>. Built using <a href="https://getzola.org" target="_blank">Zola</a> and <a href="https://github.com/oxalorg/sakura" target="_blank">Sakura</a>.
-  </footer>
-</body>
+            </main>
+            <footer>
+                
+                
+            </footer>
+        </div>
+    </body>
 </html>
