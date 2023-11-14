@@ -5,8 +5,155 @@
 	<link href="https://www.thomasantony.com/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://www.thomasantony.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2023-04-23T04:10:30.070+00:00</updated>
+	<updated>2023-11-13T19:10:35-08:00</updated>
 	<id>https://www.thomasantony.com/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Understanding 3D Gaussian Splats by writing a software renderer</title>
+		<published>2023-11-13T19:10:35-08:00</published>
+		<updated>2023-11-13T19:10:35-08:00</updated>
+		<link rel="alternate" href="https://www.thomasantony.com/posts/gaussian-splatting-renderer/" type="text/html"/>
+		<id>https://www.thomasantony.com/posts/gaussian-splatting-renderer/</id>
+		<content type="html">&lt;p&gt;If you want to skip to the code, you can find it &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;thomasantony&#x2F;splat&#x2F;&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;repo-sam.inria.fr&#x2F;fungraph&#x2F;3d-gaussian-splatting&#x2F;&quot;&gt;3D gaussian splats&lt;&#x2F;a&gt; have been all the rage since they were published. They may end up revolutionizing how we model realistic 3D worlds and seems to be the successor to &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;docs.nerf.studio&#x2F;&quot;&gt;NeRFs&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Most of the articles that I have seen about them addresses the training-side of it (which is arguably more important). Hardly any addresses the nitty-gritty details on how to parse a pre-trained model and view it. While differentiable rendering is a key part of what makes this technology possible, the differentiable part is not really necessary if all you are interested in is viewing a pre-trained model.&lt;&#x2F;p&gt;
+&lt;p&gt;There are a few indepndantly written renderers on github - most of them using OpenGL, and some using WebGPU or WebGL. Some of the Python versions require CUDA (and are hence tied to NVIDIA systems). There is also a &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Lichtso&#x2F;splatter&quot;&gt;Rust version&lt;&#x2F;a&gt; that is pretty platform-agnostic.&lt;&#x2F;p&gt;
+&lt;p&gt;However, even the &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;limacv&#x2F;GaussianSplattingViewer&quot;&gt;simplest&lt;&#x2F;a&gt; of these use shaders - pieces of code written a special languages that run on the GPU. The particular example I linked also depends on OpenGL 4.3 and hence does not run on macOS.&lt;&#x2F;p&gt;
+&lt;p&gt;My goal with this project was to write a renderer in plain Rust, doing all the rendering math on the CPU. And after spinning my wheels for a bit, I realized that I need to start even simpler - with a version written in pure Python in a [Jupyter notebook].&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;what-are-3d-gaussian-splats&quot;&gt;What are 3D gaussian splats?&lt;&#x2F;h2&gt;
+&lt;p&gt;3D Gaussian Splats are a method of encoding information from a scene such that we can synthesize “novel views”, that were not in the original set of photos used to generate it. There are some very neat examples on the &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;repo-sam.inria.fr&#x2F;fungraph&#x2F;3d-gaussian-splatting&#x2F;&quot;&gt;official site&lt;&#x2F;a&gt; for the paper. There have been also been a few web-based viwers (&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;gsplat.tech&#x2F;&quot;&gt;https:&#x2F;&#x2F;gsplat.tech&#x2F;&lt;&#x2F;a&gt;, &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;poly.cam&#x2F;gaussian-splatting&quot;&gt;https:&#x2F;&#x2F;poly.cam&#x2F;gaussian-splatting&lt;&#x2F;a&gt; ) that show off some really good examples.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;results&quot;&gt;Results&lt;&#x2F;h2&gt;
+&lt;p&gt;As of the time of writing, I have a working CPU-based Gaussian splat renderer prototype written in Python and a faster one written in Rust. On my M1 Max Macbook Pro, the Python version takes about 2-3 minutes to render a 2560x1440 image for the “&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;gsplat.tech&#x2F;&quot;&gt;push sledge&lt;&#x2F;a&gt;” model (&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;media.reshot.ai&#x2F;models&#x2F;plush_sledge&#x2F;output.zip&quot;&gt;download here&lt;&#x2F;a&gt;) with about ~284000 gaussians in it. The Rust version renders the same model pretty much instantly.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;how-it-works&quot;&gt;How it works&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;python-version&quot;&gt;Python version&lt;&#x2F;h3&gt;
+&lt;p&gt;While the CPU-based renderer does not use any OpenGL or WebGPU shaders, it still follows mostly the same logic. For the Python version, I had to add in some (not-so-efficient) versions of things that are typically handled by the graphics rendering pipeline on a GPU. Here is the overall workflow for the renderer in the &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;thomasantony&#x2F;splat&#x2F;blob&#x2F;master&#x2F;notes&#x2F;00_Gaussian_Projection.ipynb&quot;&gt;Jupyter notebook&lt;&#x2F;a&gt;:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Load the gaussians from the .ply file. I used the &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;docs.rs&#x2F;ply-rs&#x2F;latest&#x2F;ply_rs&#x2F;&quot;&gt;ply-rs&lt;&#x2F;a&gt; crate in the Rust version and the &lt;code&gt;load_plyfile&lt;&#x2F;code&gt; functions from &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;limacv&#x2F;GaussianSplattingViewer&#x2F;blob&#x2F;main&#x2F;util_gau.py&quot;&gt;util_gau.py&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;from &lt;&#x2F;span&gt;&lt;span&gt;tqdm &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;tqdm
+&lt;&#x2F;span&gt;&lt;span&gt; model = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;load_ply&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;point_cloud.ply&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Loading gaussians ...&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)
+&lt;&#x2F;span&gt;&lt;span&gt; gaussian_objects = []
+&lt;&#x2F;span&gt;&lt;span&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;(pos, scale, rot, opacity, sh) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tqdm&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;zip&lt;&#x2F;span&gt;&lt;span&gt;(model.xyz, model.scale, model.rot, model.opacity, model.sh)):
+&lt;&#x2F;span&gt;&lt;span&gt;     gaussian_objects.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Gaussian&lt;&#x2F;span&gt;&lt;span&gt;(pos, scale, rot, opacity, sh))
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Initialize a Camera model with a certain dimensions and position. I used one based off of the version at https:&#x2F;&#x2F;github.com&#x2F;limacv&#x2F;GaussianSplattingViewer&#x2F; .&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt; (h, w) = (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;720&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1280&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt; camera = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Camera&lt;&#x2F;span&gt;&lt;span&gt;(h, w, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;position&lt;&#x2F;span&gt;&lt;span&gt;=(-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.57651054&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2.99040512&lt;&#x2F;span&gt;&lt;span&gt;, -&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.03924271&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;target&lt;&#x2F;span&gt;&lt;span&gt;=(-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.0&lt;&#x2F;span&gt;&lt;span&gt;))
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Sort the gaussians by depth from the camera model (this may need to be repeated if the camera can be moved).&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;print&lt;&#x2F;span&gt;&lt;span&gt;(&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Sorting the gaussians by depth&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)
+&lt;&#x2F;span&gt;&lt;span&gt; indices = np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;argsort&lt;&#x2F;span&gt;&lt;span&gt;([gau.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_depth&lt;&#x2F;span&gt;&lt;span&gt;(camera) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;gau &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;gaussian_objects])
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;xoft.tistory.com&#x2F;49&quot;&gt;Project the 3D gaussians&lt;&#x2F;a&gt; on to the camera plane to form ellipses. Compute the parameters of this ellipse (which represents a 2D gaussian and is represted by a variable called &lt;code&gt;conic&lt;&#x2F;code&gt;). See the &lt;code&gt;get_cov2d()&lt;&#x2F;code&gt; and the &lt;code&gt;get_conic_and_bb()&lt;&#x2F;code&gt; methods in the &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;thomasantony&#x2F;splat&#x2F;blob&#x2F;master&#x2F;notes&#x2F;00_Gaussian_Projection.ipynb&quot;&gt;Jupyter notebook&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;This step is a quirk of how graphics rendering pipelines work. We start with a list of four 3D vertices (called a “quad”). In a typical 3D rendering pipeline, these may be actual vertices from a 3D model. In our case, we make the quad cover the entire screen. This is represented by the vertices [-1, 1], [1, 1], [1, -1] and [-1, -1]. This is essentially a square centered at the origin. These are in something called “Normalized Device Coordinates” which is agnostic to the actual resolution of the camera model or the screen.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span&gt;    vertices = np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;array&lt;&#x2F;span&gt;&lt;span&gt;([[-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;], [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;], [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, -&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;], [-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, -&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;]])
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Four values (bounds of the values used to evaluate gaussian)
+&lt;&#x2F;span&gt;&lt;span&gt;    bboxsize_cam = np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;multiply&lt;&#x2F;span&gt;&lt;span&gt;(vertices, bboxsize_cam)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    view_matrix = camera.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_view_matrix&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;    projection_matrix = camera.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;get_projection_matrix&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    position4 = np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;append&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.pos, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1.0&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    g_pos_view = view_matrix @ position4
+&lt;&#x2F;span&gt;&lt;span&gt;    g_pos_screen = projection_matrix @ g_pos_view
+&lt;&#x2F;span&gt;&lt;span&gt;    g_pos_screen = g_pos_screen &#x2F; g_pos_screen[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Bounds of gaussian in Normalized Device Coordinates (-1 to 1)
+&lt;&#x2F;span&gt;&lt;span&gt;    bbox_ndc = np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;multiply&lt;&#x2F;span&gt;&lt;span&gt;(vertices, bboxsize_ndc) + g_pos_screen[:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;    bbox_ndc = np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;hstack&lt;&#x2F;span&gt;&lt;span&gt;((bbox_ndc, np.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;zeros&lt;&#x2F;span&gt;&lt;span&gt;((vertices.shape[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;],&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;))))
+&lt;&#x2F;span&gt;&lt;span&gt;    bbox_ndc[:,&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;] = g_pos_screen[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;:&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Since the final rendered view consists of a combination of all the gaussians, we add identical full-screen quads for each gaussian and procees them one by one. For each one, we generate the 2D gaussian parameters, as well as the bounding box of the gaussian in screen-coordinates.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;In an actual graphics pipeline, this bounding box is then used to determine what pixels to draw on the screen. Since we are doing everything manually in the Python version, I scale the 2D gaussian bounding box by the screen size and iterate over each pixel within it, one by one. See the &lt;code&gt;plot_opacity()&lt;&#x2F;code&gt; function in the notebook for details.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;For each pixel, sample the gaussian to obtain the opacity (alpha) value. Use the &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;xoft.tistory.com&#x2F;50&quot;&gt;spherical harmonics coefficients&lt;&#x2F;a&gt; to determine the RGB color of the pixel for the particular viewing direction from the camera to the gaussian. This pixel value is then added to the output image.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;rust-version&quot;&gt;Rust version&lt;&#x2F;h3&gt;
+&lt;p&gt;The Rust version uses the &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;zesterer&#x2F;euc&quot;&gt;euc&lt;&#x2F;a&gt; software rendering crate. I define a rendering pipeline with a “vertex” and “fragment” shader. It works very similar to how OpenGL or other graphics library does things. So I did not have to iterate over individual pixels like I did in the Python version.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;repository-layout&quot;&gt;Repository layout&lt;&#x2F;h3&gt;
+&lt;p&gt;Github: &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;thomasantony&#x2F;splat&#x2F;&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;thomasantony&#x2F;splat&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;.
+&lt;&#x2F;span&gt;&lt;span&gt;├── Cargo.lock
+&lt;&#x2F;span&gt;&lt;span&gt;├── Cargo.toml
+&lt;&#x2F;span&gt;&lt;span&gt;├── LICENSE
+&lt;&#x2F;span&gt;&lt;span&gt;├── README.md
+&lt;&#x2F;span&gt;&lt;span&gt;├── notes
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── 00_Gaussian_Projection.ipynb  &amp;lt;--- Python prototype
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── requirements.txt              &amp;lt;--- install before running notebook
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── util.py
+&lt;&#x2F;span&gt;&lt;span&gt;│   └── util_gau.py
+&lt;&#x2F;span&gt;&lt;span&gt;├── notes.md
+&lt;&#x2F;span&gt;&lt;span&gt;├── src
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── bin
+&lt;&#x2F;span&gt;&lt;span&gt;│   │   ├── 00_ply_load.rs        &amp;lt;-- PLY file loading in Rust
+&lt;&#x2F;span&gt;&lt;span&gt;│   │   ├── 01_naive_gaussian.rs  &amp;lt;-- Rendering some hard-coded gaussians
+&lt;&#x2F;span&gt;&lt;span&gt;│   │   ├── 02_ply_demo.rs        &amp;lt;-- First version the worked
+&lt;&#x2F;span&gt;&lt;span&gt;│   │   └── attempt03.rs          &amp;lt;-- incomplete attempt at a different approach
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── camera.rs
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── gaussians.rs
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── lib.rs
+&lt;&#x2F;span&gt;&lt;span&gt;│   ├── main.rs                   &amp;lt;-- Current version
+&lt;&#x2F;span&gt;&lt;span&gt;│   └── pipelines.rs
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;lessons-learned&quot;&gt;Lessons Learned&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;When working on a new project, it is always better if you have a working example, or at least some kind of data or reference that you can use to figure out if you are going in the right direction. In this case, the “naive gaussians” example from &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;limacv&#x2F;GaussianSplattingViewer&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;limacv&#x2F;GaussianSplattingViewer&lt;&#x2F;a&gt;, as well as viewing the GPU buffers for that code using &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;renderdoc.org&#x2F;&quot;&gt;RenderDoc&lt;&#x2F;a&gt; was extremely helpful&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Unless you are familiar with the field, it is really easy to mess up simple things like loading data from a data file. For example, the PLY model files used for storing the gaussian splats all contain fields called &lt;code&gt;opacity&lt;&#x2F;code&gt; and &lt;code&gt;scale&lt;&#x2F;code&gt;, the former being the visual opacity of the gaussian and the latter being a 3-vector describing the spread of the gaussian. It is easy to assume that &lt;code&gt;opacity&lt;&#x2F;code&gt; is a value between &lt;code&gt;[0,1]&lt;&#x2F;code&gt; and &lt;code&gt;scale&lt;&#x2F;code&gt; can be used directly to scale the gaussians. It turned out that the opacity was actually &lt;code&gt;log(opacity)&lt;&#x2F;code&gt; and had to be exponentiated before use.  Similarly, the &lt;code&gt;scale&lt;&#x2F;code&gt; parameter had to be passed through a sigmoid function before use. For someone not too familar with this field, it seems entirely arbitrary (though it makes sense later once you read about it). I would have been stuck with this for a lot longer if I had not seen the existing examples.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;      ...
+&lt;&#x2F;span&gt;&lt;span&gt;      (&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;scale_0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, Property::Float(v)) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.scale[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;] = v.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;exp&lt;&#x2F;span&gt;&lt;span&gt;(),
+&lt;&#x2F;span&gt;&lt;span&gt;      (&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;scale_1&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, Property::Float(v)) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.scale[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;] = v.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;exp&lt;&#x2F;span&gt;&lt;span&gt;(),
+&lt;&#x2F;span&gt;&lt;span&gt;      (&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;scale_2&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, Property::Float(v)) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.scale[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;] = v.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;exp&lt;&#x2F;span&gt;&lt;span&gt;(),
+&lt;&#x2F;span&gt;&lt;span&gt;      (&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;opacity&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, Property::Float(v)) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;.opacity = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1.0 &lt;&#x2F;span&gt;&lt;span&gt;&#x2F; (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1.0 &lt;&#x2F;span&gt;&lt;span&gt;+ (-v).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;exp&lt;&#x2F;span&gt;&lt;span&gt;()),
+&lt;&#x2F;span&gt;&lt;span&gt;      ...
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;nalgebra.org&#x2F;&quot;&gt;nalgebra&lt;&#x2F;a&gt; crate, while being a great library for numerical manipulation, has some quirks that can trip you up. For example, if you print a matrix using the debug formatter (&lt;code&gt;{:?}&lt;&#x2F;code&gt;), it will print the transpose of the matrix for some reason. This led to me wasting a couple of hours trying to figure out why matrix multiplication no longer worked how I thought it did.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-a.max(b)&lt;&#x2F;code&gt; is not the same as &lt;code&gt;(-a).max(b)&lt;&#x2F;code&gt; in Rust&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;renderdoc.org&#x2F;&quot;&gt;RenderDoc&lt;&#x2F;a&gt; does not seem to be able to capture frames from OpenGL programs run in WSL2&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;what-s-next&quot;&gt;What’s Next&lt;&#x2F;h2&gt;
+&lt;p&gt;While the Python version is far from being real-time, it seems like the rust version is performant enough to run in real-time. Some possible improvements:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use “structure-of-arrays” layout to hold the data. This may make a few operations such as sorting the gaussians significantly faster. I opted for array-of-structures in the current version due to how the &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;docs.rs&#x2F;ply-rs&#x2F;latest&#x2F;ply_rs&#x2F;&quot;&gt;ply-rs&lt;&#x2F;a&gt; file parses data from the point cloud (PLY) files.&lt;&#x2F;li&gt;
+&lt;li&gt;Use a “&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;zesterer&#x2F;euc&#x2F;blob&#x2F;290e14c0cbe7505867c44ca33a994a9fcfa00fb1&#x2F;src&#x2F;pipeline.rs#L221&quot;&gt;geometry shader&lt;&#x2F;a&gt;” to generate the vertices for each gaussian.&lt;&#x2F;li&gt;
+&lt;li&gt;Add camera controls using &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;emilk&#x2F;egui&quot;&gt;egui&lt;&#x2F;a&gt; or &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;imgui-rs&#x2F;imgui-rs&quot;&gt;imgui&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;acknowledgements&quot;&gt;Acknowledgements&lt;&#x2F;h2&gt;
+&lt;p&gt;The following articles&#x2F;code bases were extremely helpful in teaching me about how 3D Gaussian Splats work&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;medium.com&#x2F;@AriaLeeNotAriel&#x2F;numbynum-3d-gaussian-splatting-for-real-time-radiance-field-rendering-kerbl-et-al-60c0b25e5544&quot;&gt;numbyNum :: 3D Gaussian Splatting for Real-Time Radiance Field Rendering (Reviewed) | Medium&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.reshot.ai&#x2F;3d-gaussian-splatting&quot;&gt;3D Gaussian Splatting -
+A beginner friendly introduction to 3D Gaussian Splats and tutorial on how to train them.&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;limacv&#x2F;GaussianSplattingViewer&quot;&gt;limacv&#x2F;GaussianSplattingViewer&lt;&#x2F;a&gt; - most of my code is based on the vertex and fragment shader code in this repository. Also &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;renderdoc.org&#x2F;&quot;&gt;RenderDoc&lt;&#x2F;a&gt; for digging into this program further.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;xoft.tistory.com&#x2F;49&quot;&gt;[Concept summary] 3D Gaussian and 2D projection&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Hyena Hierarchy: Towards Larger Convolutional Language Models</title>
 		<published>2023-04-23T04:10:30.070+00:00</published>
