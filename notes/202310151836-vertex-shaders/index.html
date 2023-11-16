@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+
+        <title>Vertex Shaders</title>
+        
+        <meta name="title" content="Vertex Shaders">
+        
+        <meta name="description" content="My personal website and notes">
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.thomasantony.com/notes/202310151836-vertex-shaders/">
+        <meta property="og:site_name" content="thomasantony.com">
+        <meta property="og:title" content="Vertex Shaders">
+        <meta property="og:description" content="My personal website and notes">
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://www.thomasantony.com/notes/202310151836-vertex-shaders/">
+        <meta property="twitter:title" content="Vertex Shaders">
+        <meta property="twitter:description" content="My personal website and notes">
+        
+        
+
+        <link rel="canonical" href="https://www.thomasantony.com/notes/202310151836-vertex-shaders/">
+        
+        <script type="application/ld+json">
+            {
+                "description":"My personal website and notes",
+                "url":"https://www.thomasantony.com/notes/202310151836-vertex-shaders/",
+                "@type":"WebSite",
+                "headline":"Vertex Shaders",
+                "name":"Vertex Shaders",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
+        <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
+        
+
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                <nav>
+                    
+                    [
+                      
+                      <a href="https://www.thomasantony.com">home</a>,
+                      <a href="https://www.thomasantony.com/posts">posts</a>,
+                      <a href="https://www.thomasantony.com/projects">projects</a>,
+                      <a href="https://www.thomasantony.com/notes">notes</a>
+                    ]
+                    
+                </nav>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+<section>
+<p id="post">
+  <h1>Vertex Shaders</h1>
+  <article><p>A vertex shader is a program that runs on the GPU that is one of the stages in a “rendering pipeline” (e.g. the OpenGL rendering pipelline<a rel="noopener" target="_blank" href="https://www.khronos.org/opengl/wiki/Rendering_Pipeline_Overview">2</a>). It is typically written ina special programming language such as GLSL<a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/OpenGL_Shading_Language">3</a> or WGSL<a rel="noopener" target="_blank" href="https://google.github.io/tour-of-wgsl/">4</a>. The job of a vertex shader is to take a single vertex as input and output a single vertex (usually in 4D homogenous coordinates), in “clip-space”, after doing some user-defined transformation on it. It may also generate other user-defined outputs.</p>
+<p>The rendering pipeline takes these outputs and the output vertex and then interpolates them to generate values for points between two vertices (e.g. on a triangle formed by three vertices). These are called “Fragments”. The pipeline then eventually calls the <a href="https://www.thomasantony.com/notes/202310151842-fragment-shaders/">fragment shader</a> to generate pixels (of some color) corresponding to these fragments.</p>
+<h2 id="references">References</h2>
+<p>[<a rel="noopener" target="_blank" href="https://www.khronos.org/opengl/wiki/Vertex_Shader">1</a>] <a rel="noopener" target="_blank" href="https://www.khronos.org/opengl/wiki/Vertex_Shader">Vertex Shader - OpenGL Wiki</a>
+[<a rel="noopener" target="_blank" href="https://www.khronos.org/opengl/wiki/Rendering_Pipeline_Overview">2</a>] <a rel="noopener" target="_blank" href="https://www.khronos.org/opengl/wiki/Rendering_Pipeline_Overview">Rendering Pipeline Overview - OpenGL Wiki</a>
+[<a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/OpenGL_Shading_Language">3</a>] <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/OpenGL_Shading_Language">GLSL</a>
+[<a rel="noopener" target="_blank" href="https://google.github.io/tour-of-wgsl/">4</a>] <a rel="noopener" target="_blank" href="https://google.github.io/tour-of-wgsl/">WebGPU Shading Language</a></p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;computer-graphics&#x2F;">Computer Graphics</a></li>
+  
+  
+</p>
+</section>
+
+
+
+            </main>
+            <footer>
+                
+                
+            </footer>
+        </div>
+    </body>
+</html>
