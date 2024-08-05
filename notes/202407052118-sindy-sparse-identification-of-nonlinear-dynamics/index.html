@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+
+        <title>SINDy: Sparse Identification of Nonlinear Dynamics</title>
+        
+        <meta name="title" content="SINDy: Sparse Identification of Nonlinear Dynamics">
+        
+        <meta name="description" content="My personal website and notes">
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/">
+        <meta property="og:site_name" content="thomasantony.com">
+        <meta property="og:title" content="SINDy: Sparse Identification of Nonlinear Dynamics">
+        <meta property="og:description" content="My personal website and notes">
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/">
+        <meta property="twitter:title" content="SINDy: Sparse Identification of Nonlinear Dynamics">
+        <meta property="twitter:description" content="My personal website and notes">
+        
+        
+
+        <link rel="canonical" href="https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/">
+        
+        <script type="application/ld+json">
+            {
+                "description":"My personal website and notes",
+                "url":"https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/",
+                "@type":"WebSite",
+                "headline":"SINDy: Sparse Identification of Nonlinear Dynamics",
+                "name":"SINDy: Sparse Identification of Nonlinear Dynamics",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
+        <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
+        
+
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                <nav>
+                    
+                    [
+                      
+                      <a href="https://www.thomasantony.com">home</a>,
+                      <a href="https://www.thomasantony.com/posts">posts</a>,
+                      <a href="https://www.thomasantony.com/projects">projects</a>,
+                      <a href="https://www.thomasantony.com/notes">notes</a>
+                    ]
+                    
+                </nav>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+<section>
+<p id="post">
+  <h1>SINDy: Sparse Identification of Nonlinear Dynamics</h1>
+  <article><p>SINDy<a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=NxAn0oglMVw">1</a> is an algorithm for identifying a nonlinear dynamic model from data. The algorithm fits a dynamic model, $\dot{x} = f(\mathbf{x}(t))$, for a state vector $\mathbf{x}$. Steps:</p>
+<ol>
+<li>
+<p>Sample $\mathbf{x}$ and $\mathbf{\dot{x}}$ at $m$ points in time into matrices $\mathbf{X}$ and $\mathbf{\dot{X}}$
+. The derivative may also be approximated here using numerical methods.</p>
+</li>
+<li>
+<p>Compute a “library” matrix $\Theta(\mathbf{X})$ where each column is a candidate nonlinear function like $1$, $X$, $X^2$, $\sin{X}$ etc. This is completely arbitrary and is chosen based on intuition or prior knowledge about the system.</p>
+</li>
+<li>
+<p>A vector of coefficients $\Xi = {\xi_1, \xi_2, … }$ are fit such that $\mathbf{\dot{X}} = \Phi(\mathbf{X}) \Xi$. The fitting is done while encouraging sparsity in $\Xi$ in order to have the fewest number of terms in the final dynamic equations.</p>
+</li>
+</ol>
+<p>Libraries like PySINDy<a rel="noopener" target="_blank" href="https://pysindy.readthedocs.io/en/latest/examples/index.html">2</a> implements this algorithm.</p>
+<h2 id="references">References</h2>
+<p>[<a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=NxAn0oglMVw">1</a>] <a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=NxAn0oglMVw">Sparse Identification of Nonlinear Dynamics (SINDy): Sparse Machine Learning Models 5 Years Later
+</a></p>
+<p>[<a rel="noopener" target="_blank" href="https://pysindy.readthedocs.io/en/latest/examples/index.html">2</a>] <a rel="noopener" target="_blank" href="https://pysindy.readthedocs.io/en/latest/examples/index.html">PySINDy Examples
+</a></p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;ai-ml&#x2F;">AI&#x2F;ML</a></li>
+  
+  
+  <li><a href="https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;dynamic-systems&#x2F;">Dynamic Systems</a></li>
+  
+  
+</p>
+</section>
+
+
+
+            </main>
+            <footer>
+                
+                
+            </footer>
+        </div>
+    </body>
+</html>
