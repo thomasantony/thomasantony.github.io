@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A spacecraft landing simulator for learning GNC principles" />
+    <meta property="og:title" content="GNC Trainer" />
+    <meta property="og:description" content="A spacecraft landing simulator" />
+    <meta property="og:image" content="assets/logo.svg" />
+    <meta property="og:url" content="https://www.thomasantony.com/gnc-trainer" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="GNC Trainer" />
+    <meta name="twitter:description" content="A spacecraft landing simulator" />
+    <meta name="twitter:image" content="assets/logo.svg" />
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <link rel="icon" href="assets/logo.svg" sizes="any" type="image/svg+xml" />
+    <title>GNC Trainer</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        canvas {
+            background-color: black;
+            outline: none;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0); /* mobile webkit */
+        }
+    </style>
+
+  <link rel="modulepreload" href="/gnc-trainer/gnc-trainer-262eefb0b18ef9be.js" crossorigin=anonymous integrity="sha384-psVDbo2ARfuhQwff2czlPnDDkHYAAPcSZs4iqmIISEcsrNXCtpAKtkqFRUc0T0EF"><link rel="preload" href="/gnc-trainer/gnc-trainer-262eefb0b18ef9be_bg.wasm" crossorigin=anonymous integrity="sha384-X/5sGga0jgrfXj60VeRi0Hk0Ej4rNU/eTKw/VhMVivoqAP9UfUwjaTiUncE5Lpk0" as="fetch" type="application/wasm"></head>
+  <body>
+  
+<script type="module" nonce="qoxSSQYWlpPsnxIQbaK1ig==">
+import init, * as bindings from '/gnc-trainer/gnc-trainer-262eefb0b18ef9be.js';
+const wasm = await init({ module_or_path: '/gnc-trainer/gnc-trainer-262eefb0b18ef9be_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script></body>
+</html>
