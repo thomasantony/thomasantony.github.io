@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+
+        <title>What Is A Schmitt Trigger?</title>
+        
+        <meta name="title" content="What Is A Schmitt Trigger?">
+        
+        <meta name="description" content="My personal website and notes">
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.thomasantony.com/notes/202502242155-what-is-a-schmitt-trigger/">
+        <meta property="og:site_name" content="thomasantony.com">
+        <meta property="og:title" content="What Is A Schmitt Trigger?">
+        <meta property="og:description" content="My personal website and notes">
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://www.thomasantony.com/notes/202502242155-what-is-a-schmitt-trigger/">
+        <meta property="twitter:title" content="What Is A Schmitt Trigger?">
+        <meta property="twitter:description" content="My personal website and notes">
+        
+        
+
+        <link rel="canonical" href="https://www.thomasantony.com/notes/202502242155-what-is-a-schmitt-trigger/">
+        
+        <script type="application/ld+json">
+            {
+                "description":"My personal website and notes",
+                "url":"https://www.thomasantony.com/notes/202502242155-what-is-a-schmitt-trigger/",
+                "@type":"WebSite",
+                "headline":"What Is A Schmitt Trigger?",
+                "name":"What Is A Schmitt Trigger?",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
+        <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
+        
+
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                <nav>
+                    
+                    [
+                      
+                      <a href="https://www.thomasantony.com">home</a>,
+                      <a href="https://www.thomasantony.com/posts">posts</a>,
+                      <a href="https://www.thomasantony.com/projects">projects</a>,
+                      <a href="https://www.thomasantony.com/notes">notes</a>
+                    ]
+                    
+                </nav>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+<section>
+<p id="post">
+  <h1>What Is A Schmitt Trigger?</h1>
+  <article><p>A Schmitt trigger is a <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Comparator">Comparator</a> with hysteris. A typical comparator returns HIGH when the input exceeds a threshold and LOW once it is below. This can cause oscillations/noise at borderline values. A Schmitt trigger instead has two thresholds. Between the two thresholds, the output does not change. The output goes LOW only once the input goes below the lower threshold and HIGH when it goes above the upper threshold. An inverting Schmitt trigger has basically the opposite output as the Schmitt trigger (put a NOT in front of it).</p>
+<p>One simple application of this is for debouncing a button input.</p>
+<h2 id="references">References</h2>
+<p>[1] https://www.youtube.com/watch?v=woTiKij76cA</p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+</p>
+</section>
+
+
+
+            </main>
+            <footer>
+                
+                
+            </footer>
+        </div>
+    </body>
+</html>
