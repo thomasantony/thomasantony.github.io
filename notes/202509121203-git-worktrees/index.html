@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+        
+        
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+
+        <title>Git Worktrees</title>
+        
+        <meta name="title" content="Git Worktrees">
+        
+        <meta name="description" content="My personal website and notes">
+        <meta name="generator" content="Zola v0.16.1">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.thomasantony.com/notes/202509121203-git-worktrees/">
+        <meta property="og:site_name" content="thomasantony.com">
+        <meta property="og:title" content="Git Worktrees">
+        <meta property="og:description" content="My personal website and notes">
+        
+
+        
+        
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://www.thomasantony.com/notes/202509121203-git-worktrees/">
+        <meta property="twitter:title" content="Git Worktrees">
+        <meta property="twitter:description" content="My personal website and notes">
+        
+        
+
+        <link rel="canonical" href="https://www.thomasantony.com/notes/202509121203-git-worktrees/">
+        
+        <script type="application/ld+json">
+            {
+                "description":"My personal website and notes",
+                "url":"https://www.thomasantony.com/notes/202509121203-git-worktrees/",
+                "@type":"WebSite",
+                "headline":"Git Worktrees",
+                "name":"Git Worktrees",
+                
+                "@context":"https://schema.org"
+            }
+        </script>
+        
+        
+        
+        <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
+        
+
+        
+    </head>
+    <body theme="auto">
+        <div class="w">
+            <header>
+                <nav>
+                    
+                    [
+                      
+                      <a href="https://www.thomasantony.com">home</a>,
+                      <a href="https://www.thomasantony.com/posts">posts</a>,
+                      <a href="https://www.thomasantony.com/projects">projects</a>,
+                      <a href="https://www.thomasantony.com/notes">notes</a>
+                    ]
+                    
+                </nav>
+
+            </header>
+            <main class="page-content" aria-label="Content">
+                
+<section>
+<p id="post">
+  <h1>Git Worktrees</h1>
+  <article><p>Git worktrees allow you to check out multiple branches simultaneously without re-cloning the repository multiple times. This is an alternative to using “stash” to save uncommited changes and switching branches.</p>
+<p>For example, if we are currently on branch <code>feature/ticket-number-xxxx</code> and want to go work on <code>bugfix/ticket-yyyy</code>, we can run the command</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">git</span><span> worktree add ../proj-ticket-yyyy bugfix/ticket-yyyy
+</span></code></pre>
+<p>The command is to be run from the root directory of your repo, but the worktree itself will be created in the parent directory (or elsewhere). There is no <code>.git</code> folder in the new folder that gets created, but instead it has a <code>.git</code> file. It is recommended to do it this way to avoid confusion from nesting folders in the same repo. </p>
+<p>You can run git commands such as commit, push, pull, rebase etc. in the separate worktree folder even while another branch is checked out in your original folder.</p>
+<p>Once you are done with the branch, you can run <code>git worktree remove .</code> to remove the folder with the worktree.</p>
+<p>A worktree is also useful when doing code reviews if you want to check out an existing branch without moving away from whatever branch you were working on. This is especially useful on projects with long compile times when switching between branches.</p>
+<h2 id="references">References</h2>
+<p>[<a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=ntM7utSjeVU">1</a>] <a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=ntM7utSjeVU">Git Worktrees - An Alternative to Git Stash</a></p>
+</article>
+</p>
+<p>
+  <h2>Backlinks</h2>
+  
+  
+  
+  
+  <li><a href="https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;software-development&#x2F;">Software Development</a></li>
+  
+  
+</p>
+</section>
+
+
+
+            </main>
+            <footer>
+                
+                
+            </footer>
+        </div>
+    </body>
+</html>

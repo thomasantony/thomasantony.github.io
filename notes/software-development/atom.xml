@@ -5,8 +5,26 @@
 	<link href="https://www.thomasantony.com/notes/software-development/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://www.thomasantony.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2023-03-27T15:14:29.276+00:00</updated>
+	<updated>2025-10-12T19:03:44.388+00:00</updated>
 	<id>https://www.thomasantony.com/notes/software-development/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Git Worktrees</title>
+		<published>2025-10-12T19:03:44.388+00:00</published>
+		<updated>2025-10-12T19:03:44.388+00:00</updated>
+		<link rel="alternate" href="https://www.thomasantony.com/notes/202509121203-git-worktrees/" type="text/html"/>
+		<id>https://www.thomasantony.com/notes/202509121203-git-worktrees/</id>
+		<content type="html">&lt;p&gt;Git worktrees allow you to check out multiple branches simultaneously without re-cloning the repository multiple times. This is an alternative to using “stash” to save uncommited changes and switching branches.&lt;&#x2F;p&gt;
+&lt;p&gt;For example, if we are currently on branch &lt;code&gt;feature&#x2F;ticket-number-xxxx&lt;&#x2F;code&gt; and want to go work on &lt;code&gt;bugfix&#x2F;ticket-yyyy&lt;&#x2F;code&gt;, we can run the command&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span&gt; worktree add ..&#x2F;proj-ticket-yyyy bugfix&#x2F;ticket-yyyy
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The command is to be run from the root directory of your repo, but the worktree itself will be created in the parent directory (or elsewhere). There is no &lt;code&gt;.git&lt;&#x2F;code&gt; folder in the new folder that gets created, but instead it has a &lt;code&gt;.git&lt;&#x2F;code&gt; file. It is recommended to do it this way to avoid confusion from nesting folders in the same repo. &lt;&#x2F;p&gt;
+&lt;p&gt;You can run git commands such as commit, push, pull, rebase etc. in the separate worktree folder even while another branch is checked out in your original folder.&lt;&#x2F;p&gt;
+&lt;p&gt;Once you are done with the branch, you can run &lt;code&gt;git worktree remove .&lt;&#x2F;code&gt; to remove the folder with the worktree.&lt;&#x2F;p&gt;
+&lt;p&gt;A worktree is also useful when doing code reviews if you want to check out an existing branch without moving away from whatever branch you were working on. This is especially useful on projects with long compile times when switching between branches.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
+&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=ntM7utSjeVU&quot;&gt;1&lt;&#x2F;a&gt;] &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=ntM7utSjeVU&quot;&gt;Git Worktrees - An Alternative to Git Stash&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Python extension debugging in Vscode</title>
 		<published>2023-03-27T15:14:29.276+00:00</published>
