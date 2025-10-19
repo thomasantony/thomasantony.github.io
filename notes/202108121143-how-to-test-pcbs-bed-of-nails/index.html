@@ -87,10 +87,11 @@
 <section>
 <p id="post">
   <h1>How to test PCBs using a bed-of-nails test fixture</h1>
-  <article><p>Testing printed circuit boards manually can be a time consuming process. The almight algorithm recommended a video<a rel="noopener" target="_blank" title="These Are a Game Changer for PCB Production" href="https://www.youtube.com/watch?v=gicoRcQYhlA">1</a> that describes how to make a “bed of nails” tester for PCBs. The “bed-of-nails” consists of a circuit board with pogo-pins at each contact point for the candidate PCB to be tested. The candidate PCB will be loaded with firmware that listens for input on each GPIO pin, I2C/SPI/Serial port etc. and sends back a pre-determined response. The tester is a simple microcontroller that listens for a serial command, sends a probing signal via the pogo-pins and transmits the response back over serial. The whole system is controlled by a script running on a computer (Raspberry pi?) that programs the target board with the test firmware, sends the commands to the tester and verifies the responses.</p>
+  <article><p>Testing printed circuit boards manually can be a time consuming process. The almight algorithm recommended a video<sup class="footnote-reference"><a href="#1">1</a></sup> that describes how to make a “bed of nails” tester for PCBs. The “bed-of-nails” consists of a circuit board with pogo-pins at each contact point for the candidate PCB to be tested. The candidate PCB will be loaded with firmware that listens for input on each GPIO pin, I2C/SPI/Serial port etc. and sends back a pre-determined response. The tester is a simple microcontroller that listens for a serial command, sends a probing signal via the pogo-pins and transmits the response back over serial. The whole system is controlled by a script running on a computer (Raspberry pi?) that programs the target board with the test firmware, sends the commands to the tester and verifies the responses.</p>
 <p>The production test procedure would involve pressing down the test article and clamping it down somehow on the pogo pins, and running the test script which returns a PASS/FAIL response.</p>
-<h2 id="references">References</h2>
-<p>[<a rel="noopener" target="_blank" title="These Are a Game Changer for PCB Production" href="https://www.youtube.com/watch?v=gicoRcQYhlA">1</a>] <a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=gicoRcQYhlA">https://www.youtube.com/watch?v=gicoRcQYhlA</a></p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=gicoRcQYhlA">These Are a Game Changer for PCB Production</a></p>
+</div>
 </article>
 </p>
 <p>

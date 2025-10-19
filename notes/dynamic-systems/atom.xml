@@ -13,7 +13,7 @@
 		<updated>2024-08-05T20:18:21.325+00:00</updated>
 		<link rel="alternate" href="https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/" type="text/html"/>
 		<id>https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/</id>
-		<content type="html">&lt;p&gt;SINDy&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=NxAn0oglMVw&quot;&gt;1&lt;&#x2F;a&gt; is an algorithm for identifying a nonlinear dynamic model from data. The algorithm fits a dynamic model, $\dot{x} = f(\mathbf{x}(t))$, for a state vector $\mathbf{x}$. Steps:&lt;&#x2F;p&gt;
+		<content type="html">&lt;p&gt;SINDy&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; is an algorithm for identifying a nonlinear dynamic model from data. The algorithm fits a dynamic model, $\dot{x} = f(\mathbf{x}(t))$, for a state vector $\mathbf{x}$. Steps:&lt;&#x2F;p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Sample $\mathbf{x}$ and $\mathbf{\dot{x}}$ at $m$ points in time into matrices $\mathbf{X}$ and $\mathbf{\dot{X}}$
@@ -26,12 +26,13 @@
 &lt;p&gt;A vector of coefficients $\Xi = {\xi_1, \xi_2, … }$ are fit such that $\mathbf{\dot{X}} = \Phi(\mathbf{X}) \Xi$. The fitting is done while encouraging sparsity in $\Xi$ in order to have the fewest number of terms in the final dynamic equations.&lt;&#x2F;p&gt;
 &lt;&#x2F;li&gt;
 &lt;&#x2F;ol&gt;
-&lt;p&gt;Libraries like PySINDy&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;pysindy.readthedocs.io&#x2F;en&#x2F;latest&#x2F;examples&#x2F;index.html&quot;&gt;2&lt;&#x2F;a&gt; implements this algorithm.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
-&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=NxAn0oglMVw&quot;&gt;1&lt;&#x2F;a&gt;] &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=NxAn0oglMVw&quot;&gt;Sparse Identification of Nonlinear Dynamics (SINDy): Sparse Machine Learning Models 5 Years Later
-&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
-&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;pysindy.readthedocs.io&#x2F;en&#x2F;latest&#x2F;examples&#x2F;index.html&quot;&gt;2&lt;&#x2F;a&gt;] &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;pysindy.readthedocs.io&#x2F;en&#x2F;latest&#x2F;examples&#x2F;index.html&quot;&gt;PySINDy Examples
-&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Libraries like PySINDy&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; implements this algorithm.&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=NxAn0oglMVw&quot;&gt;Sparse Identification of Nonlinear Dynamics (SINDy): Sparse Machine Learning Models 5 Years Later&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;pysindy.readthedocs.io&#x2F;en&#x2F;latest&#x2F;examples&#x2F;index.html&quot;&gt;PySINDy Examples&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
 </content>
 	</entry>
 </feed>

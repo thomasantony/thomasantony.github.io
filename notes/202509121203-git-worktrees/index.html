@@ -87,7 +87,7 @@
 <section>
 <p id="post">
   <h1>Git Worktrees</h1>
-  <article><p>Git worktrees allow you to check out multiple branches simultaneously without re-cloning the repository multiple times. This is an alternative to using “stash” to save uncommited changes and switching branches.</p>
+  <article><p>Git worktrees allow you to check out multiple branches simultaneously without re-cloning the repository multiple times <sup class="footnote-reference"><a href="#1">1</a></sup>. This is an alternative to using “stash” to save uncommited changes and switching branches.</p>
 <p>For example, if we are currently on branch <code>feature/ticket-number-xxxx</code> and want to go work on <code>bugfix/ticket-yyyy</code>, we can run the command</p>
 <pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">git</span><span> worktree add ../proj-ticket-yyyy bugfix/ticket-yyyy
 </span></code></pre>
@@ -95,10 +95,12 @@
 <p>You can run git commands such as commit, push, pull, rebase etc. in the separate worktree folder even while another branch is checked out in your original folder.</p>
 <p>Once you are done with the branch, you can run <code>git worktree remove .</code> to remove the folder with the worktree.</p>
 <p>A worktree is also useful when doing code reviews if you want to check out an existing branch without moving away from whatever branch you were working on. This is especially useful on projects with long compile times when switching between branches.</p>
-<p>Worktrees are also very useful when working with agentic coding tools like Claude Code. You can have multiple parallel instances of the AI working on different branches of the code simultaneously <a rel="noopener" target="_blank" href="https://blog.fsck.com/2025/10/05/how-im-using-coding-agents-in-september-2025/">2</a>.</p>
+<p>Worktrees are also very useful when working with agentic coding tools like Claude Code. You can have multiple parallel instances of the AI working on different branches of the code simultaneously <sup class="footnote-reference"><a href="#2">2</a></sup>.</p>
 <h2 id="references">References</h2>
-<p>[<a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=ntM7utSjeVU">1</a>] <a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=ntM7utSjeVU">Git Worktrees - An Alternative to Git Stash</a>
-[<a rel="noopener" target="_blank" href="https://blog.fsck.com/2025/10/05/how-im-using-coding-agents-in-september-2025/">2</a>] <a rel="noopener" target="_blank" href="https://blog.fsck.com/2025/10/05/how-im-using-coding-agents-in-september-2025/">How I am using Coding Agents in September 2025</a></p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=ntM7utSjeVU">Git Worktrees - An Alternative to Git Stash</a>
+<sup class="footnote-reference"><a href="#2">2</a></sup>: <a rel="noopener" target="_blank" href="https://blog.fsck.com/2025/10/05/how-im-using-coding-agents-in-september-2025/">How I am using Coding Agents in September 2025</a></p>
+</div>
 </article>
 </p>
 <p>

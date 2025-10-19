@@ -91,7 +91,7 @@
 <section>
 <p id="post">
   <h1>SINDy: Sparse Identification of Nonlinear Dynamics</h1>
-  <article><p>SINDy<a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=NxAn0oglMVw">1</a> is an algorithm for identifying a nonlinear dynamic model from data. The algorithm fits a dynamic model, $\dot{x} = f(\mathbf{x}(t))$, for a state vector $\mathbf{x}$. Steps:</p>
+  <article><p>SINDy<sup class="footnote-reference"><a href="#1">1</a></sup> is an algorithm for identifying a nonlinear dynamic model from data. The algorithm fits a dynamic model, $\dot{x} = f(\mathbf{x}(t))$, for a state vector $\mathbf{x}$. Steps:</p>
 <ol>
 <li>
 <p>Sample $\mathbf{x}$ and $\mathbf{\dot{x}}$ at $m$ points in time into matrices $\mathbf{X}$ and $\mathbf{\dot{X}}$
@@ -104,12 +104,13 @@
 <p>A vector of coefficients $\Xi = {\xi_1, \xi_2, … }$ are fit such that $\mathbf{\dot{X}} = \Phi(\mathbf{X}) \Xi$. The fitting is done while encouraging sparsity in $\Xi$ in order to have the fewest number of terms in the final dynamic equations.</p>
 </li>
 </ol>
-<p>Libraries like PySINDy<a rel="noopener" target="_blank" href="https://pysindy.readthedocs.io/en/latest/examples/index.html">2</a> implements this algorithm.</p>
-<h2 id="references">References</h2>
-<p>[<a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=NxAn0oglMVw">1</a>] <a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=NxAn0oglMVw">Sparse Identification of Nonlinear Dynamics (SINDy): Sparse Machine Learning Models 5 Years Later
-</a></p>
-<p>[<a rel="noopener" target="_blank" href="https://pysindy.readthedocs.io/en/latest/examples/index.html">2</a>] <a rel="noopener" target="_blank" href="https://pysindy.readthedocs.io/en/latest/examples/index.html">PySINDy Examples
-</a></p>
+<p>Libraries like PySINDy<sup class="footnote-reference"><a href="#2">2</a></sup> implements this algorithm.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=NxAn0oglMVw">Sparse Identification of Nonlinear Dynamics (SINDy): Sparse Machine Learning Models 5 Years Later</a></p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p><a rel="noopener" target="_blank" href="https://pysindy.readthedocs.io/en/latest/examples/index.html">PySINDy Examples</a></p>
+</div>
 </article>
 </p>
 <p>

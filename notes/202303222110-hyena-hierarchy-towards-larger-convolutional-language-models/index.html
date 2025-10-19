@@ -91,7 +91,7 @@
 <section>
 <p id="post">
   <h1>Hyena Hierarchy: Towards Larger Convolutional Language Models</h1>
-  <article><p>Here are some rough notes on the “Hyena Hierarchy” architecture described in the paper <a rel="noopener" target="_blank" title="Hyena Hierarchy: Towards Larger Convolutional Language Models" href="https://arxiv.org/abs/2302.10866">1</a>.</p>
+  <article><p>Here are some rough notes on the “Hyena Hierarchy” architecture described in the paper <sup class="footnote-reference"><a href="#1">1</a></sup>.</p>
 <ul>
 <li>
 <p>This is a new way of getting sub-quadratic scaling for attention</p>
@@ -99,7 +99,7 @@
 <li>
 <p>it uses convolution filter</p>
 <ul>
-<li>typical convolution filters are in the form of an array of values which are learned and applied like an Finite-Impulse-Response discrete filter (FIR)<a rel="noopener" target="_blank" title="Finite Impulse Response" href="https://en.wikipedia.org/wiki/Finite_impulse_response">2</a></li>
+<li>typical convolution filters are in the form of an array of values which are learned and applied like an Finite-Impulse-Response discrete filter (FIR)<sup class="footnote-reference"><a href="#2">2</a></sup></li>
 <li>this doesn’t scale well</li>
 <li>instead the filter parameters are represented as a function of “t” where “t” represents the index or “time-step” in the filter. This means you can get a filter of any length from a limited number of parameters</li>
 <li>furthermore, this function is chosen to be the output of a state-space model of the type from control theory (Ax+Bu, Cx+Du etc.)</li>
@@ -128,9 +128,12 @@
 <p>more details to come as I understand the paper further</p>
 </li>
 </ul>
-<h2 id="references">References</h2>
-<p>[<a rel="noopener" target="_blank" title="Hyena Hierarchy: Towards Larger Convolutional Language Models" href="https://arxiv.org/abs/2302.10866">1</a>] “<a rel="noopener" target="_blank" href="https://arxiv.org/abs/2302.10866">Hyena Hierarchy: Towards Larger Convolutional Language Models</a>”, Poli et.al</p>
-<p>[<a rel="noopener" target="_blank" title="Finite Impulse Response" href="https://en.wikipedia.org/wiki/Finite_impulse_response">2</a>] <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Finite_impulse_response">Finite-Impulse Response</a></p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a rel="noopener" target="_blank" href="https://arxiv.org/abs/2302.10866">Hyena Hierarchy: Towards Larger Convolutional Language Models</a>, Poli et.al</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p><a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Finite_impulse_response">Finite Impulse Response</a></p>
+</div>
 </article>
 </p>
 <p>

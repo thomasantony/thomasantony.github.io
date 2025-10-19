@@ -35,11 +35,12 @@
 		<updated>2022-11-04T01:54:02.252+00:00</updated>
 		<link rel="alternate" href="https://www.thomasantony.com/notes/202210031854-seam-carving-algorithm/" type="text/html"/>
 		<id>https://www.thomasantony.com/notes/202210031854-seam-carving-algorithm/</id>
-		<content type="html">&lt;p&gt;Seam carving is an algorithm that can be used to resize an image while removing the least important pixels from it. &lt;&#x2F;p&gt;
-&lt;p&gt;One possible implementation is to use an edge-detection algorithm first to create an edge-map[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Seam Carving | Week 2 | 18.S191 MIT Fall 2020 | Grant Sanderson&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rpB6zQNsbQU&quot;&gt;1&lt;&#x2F;a&gt;]. This is followed by finding continuous lines that run from top to the bottom, where the only directions of movement allowed are “south”, “south-east” and “south-west”, that minimize the sum of “edge” values. This can be solved using a dynamic programming approach of starting at the bottom and assigning the “minimum-cost-to-bottom” to each cell.&lt;&#x2F;p&gt;
-&lt;p&gt;Once this is done, we can find the path throug hthe image with the least cost and remove it. &lt;&#x2F;p&gt;
-&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
-&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Seam Carving | Week 2 | 18.S191 MIT Fall 2020 | Grant Sanderson&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rpB6zQNsbQU&quot;&gt;1&lt;&#x2F;a&gt;] “Seam Carving | Week 2 | 18.S191 MIT Fall 2020 | Grant Sanderson”&lt;&#x2F;p&gt;
+		<content type="html">&lt;p&gt;Seam carving is an algorithm that can be used to resize an image while removing the least important pixels from it.&lt;&#x2F;p&gt;
+&lt;p&gt;One possible implementation is to use an edge-detection algorithm first to create an edge-map&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. This is followed by finding continuous lines that run from top to the bottom, where the only directions of movement allowed are “south”, “south-east” and “south-west”, that minimize the sum of “edge” values. This can be solved using a dynamic programming approach of starting at the bottom and assigning the “minimum-cost-to-bottom” to each cell.&lt;&#x2F;p&gt;
+&lt;p&gt;Once this is done, we can find the path throug hthe image with the least cost and remove it.&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rpB6zQNsbQU&quot;&gt;Seam Carving | Week 2 | 18.S191 MIT Fall 2020 | Grant Sanderson&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
@@ -64,10 +65,12 @@
 (x - 1) = x + 0b1111….
 (x - y) = ~(~x + y)
 (y - x) = ~(x + y)&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
-&lt;p&gt;[1] Nand2Tetris Unit 2.3
-[2]: https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Two%27s_complement#Addition
-[[2]] &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Two%27s_complement#Addition&quot;&gt;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Two%27s_complement#Addition&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;Nand2Tetris Unit 2.3&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Two%27s_complement#Addition&quot;&gt;Two’s complement - Wikipedia&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
@@ -77,9 +80,12 @@
 		<link rel="alternate" href="https://www.thomasantony.com/notes/202205092031-what-is-tla/" type="text/html"/>
 		<id>https://www.thomasantony.com/notes/202205092031-what-is-tla/</id>
 		<content type="html">&lt;p&gt;TLA+ is a language for creating “specifications” for computer programs&#x2F;algorithms and then verify all the possible execution paths and mathematically prove assertions. The program is represented as a state machine where everything from variables to the program counter “pc” is part of the state. The spec contains an initial state and rule specifying “next state” as a bunch of logical statements linked by “and” (&#x2F;) or “or” aka &#x2F; clauses. &lt;&#x2F;p&gt;
-&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
-&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;The Man Who Revolutionized Computer Science With Math&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rkZzg7Vowao&quot;&gt;1&lt;&#x2F;a&gt;] https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rkZzg7Vowao&lt;&#x2F;p&gt;
-&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Introduction to TLA+&quot; href=&quot;https:&#x2F;&#x2F;lamport.azurewebsites.net&#x2F;video&#x2F;intro.html&quot;&gt;2&lt;&#x2F;a&gt;] &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;lamport.azurewebsites.net&#x2F;video&#x2F;intro.html&quot;&gt;https:&#x2F;&#x2F;lamport.azurewebsites.net&#x2F;video&#x2F;intro.html&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rkZzg7Vowao&quot;&gt;The Man Who Revolutionized Computer Science With Math&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;lamport.azurewebsites.net&#x2F;video&#x2F;intro.html&quot;&gt;Introduction to TLA+&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">

@@ -13,7 +13,7 @@
 		<updated>2023-04-23T04:10:30.070+00:00</updated>
 		<link rel="alternate" href="https://www.thomasantony.com/notes/202303222110-hyena-hierarchy-towards-larger-convolutional-language-models/" type="text/html"/>
 		<id>https://www.thomasantony.com/notes/202303222110-hyena-hierarchy-towards-larger-convolutional-language-models/</id>
-		<content type="html">&lt;p&gt;Here are some rough notes on the “Hyena Hierarchy” architecture described in the paper &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Hyena Hierarchy: Towards Larger Convolutional Language Models&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2302.10866&quot;&gt;1&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+		<content type="html">&lt;p&gt;Here are some rough notes on the “Hyena Hierarchy” architecture described in the paper &lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;This is a new way of getting sub-quadratic scaling for attention&lt;&#x2F;p&gt;
@@ -21,7 +21,7 @@
 &lt;li&gt;
 &lt;p&gt;it uses convolution filter&lt;&#x2F;p&gt;
 &lt;ul&gt;
-&lt;li&gt;typical convolution filters are in the form of an array of values which are learned and applied like an Finite-Impulse-Response discrete filter (FIR)&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Finite Impulse Response&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Finite_impulse_response&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;typical convolution filters are in the form of an array of values which are learned and applied like an Finite-Impulse-Response discrete filter (FIR)&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
 &lt;li&gt;this doesn’t scale well&lt;&#x2F;li&gt;
 &lt;li&gt;instead the filter parameters are represented as a function of “t” where “t” represents the index or “time-step” in the filter. This means you can get a filter of any length from a limited number of parameters&lt;&#x2F;li&gt;
 &lt;li&gt;furthermore, this function is chosen to be the output of a state-space model of the type from control theory (Ax+Bu, Cx+Du etc.)&lt;&#x2F;li&gt;
@@ -50,9 +50,12 @@
 &lt;p&gt;more details to come as I understand the paper further&lt;&#x2F;p&gt;
 &lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
-&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
-&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Hyena Hierarchy: Towards Larger Convolutional Language Models&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2302.10866&quot;&gt;1&lt;&#x2F;a&gt;] “&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2302.10866&quot;&gt;Hyena Hierarchy: Towards Larger Convolutional Language Models&lt;&#x2F;a&gt;”, Poli et.al&lt;&#x2F;p&gt;
-&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Finite Impulse Response&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Finite_impulse_response&quot;&gt;2&lt;&#x2F;a&gt;] &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Finite_impulse_response&quot;&gt;Finite-Impulse Response&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2302.10866&quot;&gt;Hyena Hierarchy: Towards Larger Convolutional Language Models&lt;&#x2F;a&gt;, Poli et.al&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Finite_impulse_response&quot;&gt;Finite Impulse Response&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
@@ -61,7 +64,7 @@
 		<updated>2023-04-13T02:25:07.127+00:00</updated>
 		<link rel="alternate" href="https://www.thomasantony.com/notes/202303121925-paper-generalization-through-memorization-nearest-neighbor-language-models/" type="text/html"/>
 		<id>https://www.thomasantony.com/notes/202303121925-paper-generalization-through-memorization-nearest-neighbor-language-models/</id>
-		<content type="html">&lt;p&gt;This paper&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Generalization through memorization: Nearest neighbor language models&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1911.00172.pdf&quot;&gt;1&lt;&#x2F;a&gt; describes a method for augmenting an existing language model with external memory to improve its performance without requiring any extra training. The datastore is initialized for a given dataset and used during inference time. The authors demonstrate performance improvements (measured in perplexity over a given dataset) even when operating on data-stores for datasets the model was not trained on.&lt;&#x2F;p&gt;
+		<content type="html">&lt;p&gt;This paper&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; describes a method for augmenting an existing language model with external memory to improve its performance without requiring any extra training. The datastore is initialized for a given dataset and used during inference time. The authors demonstrate performance improvements (measured in perplexity over a given dataset) even when operating on data-stores for datasets the model was not trained on.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;how-it-works&quot;&gt;How it works&lt;&#x2F;h2&gt;
 &lt;p&gt;The method essentially involves “memorizing” the training set and using it to directly augment the model at inference time. This can also be used for memorizing data &lt;em&gt;other than the training set&lt;&#x2F;em&gt; and give similar improvements.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;indexing-or-memorizing&quot;&gt;Indexing or “Memorizing”&lt;&#x2F;h3&gt;
@@ -88,10 +91,13 @@ $$
 P(y|x) = \lambda P_{kNN}(y|x) + (1 - \lambda) P_{LM}(y|x)
 $$
 &lt;&#x2F;div&gt;
-&lt;p&gt;where $\lambda$ is a fixed coefficient. Reference &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;You can&#x27;t pick your neighbors, or can you? When and how to rely on retrieval in the kNN-LM&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2210.15859&quot;&gt;2&lt;&#x2F;a&gt; talks about selecting $\lambda$ based on “semantic similarity” (the cosine distance?) between the closest key from the search results and the search query. They trained a model to predict what the coefficient-profile should be for a given dataset (i.e how to map semantic similarity to the interpolation coefficient $\lambda$).&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
-&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;Generalization through memorization: Nearest neighbor language models&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1911.00172.pdf&quot;&gt;1&lt;&#x2F;a&gt;] Khandelwal, U., Levy, O., Jurafsky, D., Zettlemoyer, L., &amp;amp; Lewis, M. (2019). Generalization through memorization: Nearest neighbor language models. &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1911.00172.pdf&quot;&gt;arXiv preprint arXiv:1911.00172&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
-&lt;p&gt;[&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; title=&quot;You can&#x27;t pick your neighbors, or can you? When and how to rely on retrieval in the kNN-LM&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2210.15859&quot;&gt;2&lt;&#x2F;a&gt;] Drozdov, A., Wang, S., Rahimi, R., McCallum, A., Zamani, H., &amp;amp; Iyyer, M. (2022). You can’t pick your neighbors, or can you? When and how to rely on retrieval in the kNN-LM. &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2210.15859&quot;&gt;arXiv preprint arXiv:2210.15859&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;where $\lambda$ is a fixed coefficient. Reference &lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; talks about selecting $\lambda$ based on “semantic similarity” (the cosine distance?) between the closest key from the search results and the search query. They trained a model to predict what the coefficient-profile should be for a given dataset (i.e how to map semantic similarity to the interpolation coefficient $\lambda$).&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1911.00172.pdf&quot;&gt;Generalization through memorization: Nearest neighbor language models&lt;&#x2F;a&gt;, Khandelwal, U., Levy, O., Jurafsky, D., Zettlemoyer, L., &amp;amp; Lewis, M. (2019)&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2210.15859&quot;&gt;You can’t pick your neighbors, or can you? When and how to rely on retrieval in the kNN-LM&lt;&#x2F;a&gt;, Drozdov, A., Wang, S., Rahimi, R., McCallum, A., Zamani, H., &amp;amp; Iyyer, M. (2022)&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
 </content>
 	</entry>
 </feed>

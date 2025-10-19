@@ -87,7 +87,7 @@
 <section>
 <p id="post">
   <h1>How to steal file descriptors aka fdleak</h1>
-  <article><p>This is a strategy for taking over a network socket or other file descriptor opened by a privileged process. I was directed to this <a rel="noopener" target="_blank" href="http://www.phearless.org/istorija/razno/fdleak.txt">reference</a> by a user on the SmashTheStack Discord server after I was stuck on level 2 of the “amateria” CTF challenge.</p>
+  <article><p>This is a strategy for taking over a network socket or other file descriptor opened by a privileged process. I was directed to this reference<sup class="footnote-reference"><a href="#1">1</a></sup> by a user on the SmashTheStack Discord server after I was stuck on level 2 of the “amateria” CTF challenge.</p>
 <h2 id="premise">Premise</h2>
 <p>The challenge involved a constantly running privileged server that would accept connections and spawn a child process, which would in turn prompt for a username and password. If they username matched “level3” it would spawn a “level3” privileged shell while the level2 username/password would spawn a level2 shell. There was also a hint in the README saying there was a script that mimiced a user with valid credentials using the service. The wording of this hint led me to believe that there was an existing privileged session that I was supposed to take over. But in fact, it was much simpler than that. The script in question would hit the service at a certain (frequent) interval and send the correct username and password for level 3. If we could take over the listening socket, we could intervene and capture this information when the script connects.</p>
 <h2 id="procedure">Procedure</h2>
@@ -98,8 +98,9 @@
 </span><span>
 </span><span style="color:#bf616a;">fcntl</span><span>(fd,FD_CLOEXEC);
 </span></code></pre>
-<h2 id="references">References</h2>
-<p>[<a rel="noopener" target="_blank" href="http://www.phearless.org/istorija/razno/fdleak.txt">1</a>] <a rel="noopener" target="_blank" href="http://www.phearless.org/istorija/razno/fdleak.txt">http://www.phearless.org/istorija/razno/fdleak.txt</a></p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a rel="noopener" target="_blank" href="http://www.phearless.org/istorija/razno/fdleak.txt">fdleak.txt</a></p>
+</div>
 </article>
 </p>
 <p>

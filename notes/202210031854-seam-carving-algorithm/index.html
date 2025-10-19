@@ -87,11 +87,12 @@
 <section>
 <p id="post">
   <h1>Seam carving algorithm</h1>
-  <article><p>Seam carving is an algorithm that can be used to resize an image while removing the least important pixels from it. </p>
-<p>One possible implementation is to use an edge-detection algorithm first to create an edge-map[<a rel="noopener" target="_blank" title="Seam Carving | Week 2 | 18.S191 MIT Fall 2020 | Grant Sanderson" href="https://www.youtube.com/watch?v=rpB6zQNsbQU">1</a>]. This is followed by finding continuous lines that run from top to the bottom, where the only directions of movement allowed are “south”, “south-east” and “south-west”, that minimize the sum of “edge” values. This can be solved using a dynamic programming approach of starting at the bottom and assigning the “minimum-cost-to-bottom” to each cell.</p>
-<p>Once this is done, we can find the path throug hthe image with the least cost and remove it. </p>
-<h2 id="references">References</h2>
-<p>[<a rel="noopener" target="_blank" title="Seam Carving | Week 2 | 18.S191 MIT Fall 2020 | Grant Sanderson" href="https://www.youtube.com/watch?v=rpB6zQNsbQU">1</a>] “Seam Carving | Week 2 | 18.S191 MIT Fall 2020 | Grant Sanderson”</p>
+  <article><p>Seam carving is an algorithm that can be used to resize an image while removing the least important pixels from it.</p>
+<p>One possible implementation is to use an edge-detection algorithm first to create an edge-map<sup class="footnote-reference"><a href="#1">1</a></sup>. This is followed by finding continuous lines that run from top to the bottom, where the only directions of movement allowed are “south”, “south-east” and “south-west”, that minimize the sum of “edge” values. This can be solved using a dynamic programming approach of starting at the bottom and assigning the “minimum-cost-to-bottom” to each cell.</p>
+<p>Once this is done, we can find the path throug hthe image with the least cost and remove it.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=rpB6zQNsbQU">Seam Carving | Week 2 | 18.S191 MIT Fall 2020 | Grant Sanderson</a></p>
+</div>
 </article>
 </p>
 <p>

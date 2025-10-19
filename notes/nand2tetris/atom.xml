@@ -117,10 +117,12 @@ col % 16 -&amp;gt; bit index within word&lt;&#x2F;p&gt;
 (x - 1) = x + 0b1111….
 (x - y) = ~(~x + y)
 (y - x) = ~(x + y)&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
-&lt;p&gt;[1] Nand2Tetris Unit 2.3
-[2]: https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Two%27s_complement#Addition
-[[2]] &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Two%27s_complement#Addition&quot;&gt;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Two%27s_complement#Addition&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;Nand2Tetris Unit 2.3&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Two%27s_complement#Addition&quot;&gt;Two’s complement - Wikipedia&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
