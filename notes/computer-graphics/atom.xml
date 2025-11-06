@@ -8,11 +8,11 @@
 	<updated>2025-11-06T05:38:34.009+00:00</updated>
 	<id>https://www.thomasantony.com/notes/computer-graphics/atom.xml</id>
 	<entry xml:lang="en">
-		<title>Volumetric Rendering</title>
+		<title>Volume Rendering</title>
 		<published>2025-11-06T05:38:34.009+00:00</published>
 		<updated>2025-11-06T05:38:34.009+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202510052138-volumetric-rendering/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202510052138-volumetric-rendering/</id>
+		<link rel="alternate" href="https://www.thomasantony.com/notes/202510052138-volume-rendering/" type="text/html"/>
+		<id>https://www.thomasantony.com/notes/202510052138-volume-rendering/</id>
 		<content type="html">&lt;p&gt;Volumetric rendering is an algorithm used for rendering radiance fields such as [[NeRFs]] and [[3D Gaussian Splats]]&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;You start with some implicit or explicit representation that can be sampled at 3D positions along a ray in a scene, to return a color, $c$, and an opacity $\alpha$. &lt;&#x2F;p&gt;
 &lt;div&gt;
