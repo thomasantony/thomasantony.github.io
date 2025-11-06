@@ -5,8 +5,32 @@
 	<link href="https://www.thomasantony.com/notes/computer-graphics/atom.xml" rel="self" type="application/atom+xml"/>
   <link href="https://www.thomasantony.com"/>
 	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2023-11-16T02:42:56.608+00:00</updated>
+	<updated>2025-11-06T05:38:34.009+00:00</updated>
 	<id>https://www.thomasantony.com/notes/computer-graphics/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Volumetric Rendering</title>
+		<published>2025-11-06T05:38:34.009+00:00</published>
+		<updated>2025-11-06T05:38:34.009+00:00</updated>
+		<link rel="alternate" href="https://www.thomasantony.com/notes/202510052138-volumetric-rendering/" type="text/html"/>
+		<id>https://www.thomasantony.com/notes/202510052138-volumetric-rendering/</id>
+		<content type="html">&lt;p&gt;Volumetric rendering is an algorithm used for rendering radiance fields such as [[NeRFs]] and [[3D Gaussian Splats]]&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;You start with some implicit or explicit representation that can be sampled at 3D positions along a ray in a scene, to return a color, $c$, and an opacity $\alpha$. &lt;&#x2F;p&gt;
+&lt;div&gt;
+    $$
+C = \sum_{i=1}^{N} T_i \alpha_i c_i ~\text{ where } T_i = \prod_{j=1}^{i-1} (1 - \alpha_i)
+$$
+&lt;&#x2F;div&gt;
+&lt;p&gt;The “output” of this gives the color $C$ of a single pixel by sampling a ray at multiple discrete points in the scene. Depending on the underlying representation (NeRF, 3DGS etc.), the opacity $\alpha_i$ and the color $c_i$ are computed in different ways. $T_i$ is the cumulative “transmittance” of all the pixels so far in the ray. This essentially zeros out all the pixels “behind” an opaque surface. Once the ray reaches an opaque surface (i.e. $\alpha_i \approx 1$), $T_i$ for all subsequent values of $i$ will be multiplied by $(1- \alpha_i) = 0$.&lt;&#x2F;p&gt;
+&lt;p&gt;This allows a continuous, differentiable function for the color which also “switches off” once an opaque function is encountered.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;repo-sam.inria.fr&#x2F;fungraph&#x2F;3d-gaussian-splatting&#x2F;3d_gaussian_splatting_low.pdf&quot;&gt;3D Gaussian Splatting for Real-Time Radiance Field Rendering&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=Ikqj1B-AfUE&quot;&gt;3D Gaussian Splatting for Real-Time Radiance Field Rendering&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</content>
+	</entry>
 	<entry xml:lang="en">
 		<title>Fragment Shaders</title>
 		<published>2023-11-16T02:42:56.608+00:00</published>
