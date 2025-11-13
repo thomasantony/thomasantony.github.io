@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Thomas Antony - Computer Vision</title>
+	<subtitle>My personal website and notes</subtitle>
+	<link href="https://www.thomasantony.com/notes/computer-vision/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.thomasantony.com"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2025-11-11T19:19:52.957+00:00</updated>
+	<id>https://www.thomasantony.com/notes/computer-vision/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Volumetric Scene Representations</title>
+		<published>2025-11-11T19:19:52.957+00:00</published>
+		<updated>2025-11-11T19:19:52.957+00:00</updated>
+		<link rel="alternate" href="https://www.thomasantony.com/notes/202510111119-scene-representations/" type="text/html"/>
+		<id>https://www.thomasantony.com/notes/202510111119-scene-representations/</id>
+		<content type="html">&lt;p&gt;A volumetric scene represenation is a data structure or algorithmic representation of a scene - typically associated with computer vision. It can be either “implicit” or “explicit”. Some examples of scene representations are:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Point Clouds&lt;&#x2F;li&gt;
+&lt;li&gt;Depth Maps&lt;&#x2F;li&gt;
+&lt;li&gt;Meshes&lt;&#x2F;li&gt;
+&lt;li&gt;Voxel Grids&lt;&#x2F;li&gt;
+&lt;li&gt;Octrees&lt;&#x2F;li&gt;
+&lt;li&gt;Signed Distance Functions&lt;&#x2F;li&gt;
+&lt;li&gt;Neural Fields
+&lt;ul&gt;
+&lt;li&gt;NeRF - Neural Radiance Fields&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;3D Gaussian Splats&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+	</entry>
+</feed>

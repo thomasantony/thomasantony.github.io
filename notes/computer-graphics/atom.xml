@@ -14,7 +14,7 @@
 		<link rel="alternate" href="https://www.thomasantony.com/notes/202510052138-volume-rendering/" type="text/html"/>
 		<id>https://www.thomasantony.com/notes/202510052138-volume-rendering/</id>
 		<content type="html">&lt;p&gt;Volumetric rendering is an algorithm used for rendering radiance fields such as [[NeRFs]] and [[3D Gaussian Splats]]&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
-&lt;p&gt;You start with some implicit or explicit representation that can be sampled at 3D positions along a ray in a scene, to return a color, $c$, and an opacity $\alpha$. &lt;&#x2F;p&gt;
+&lt;p&gt;You start with some implicit or explicit &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202510111119-scene-representations&#x2F;&quot;&gt;scene representation&lt;&#x2F;a&gt; that can be sampled at 3D positions along a ray in a scene, to return a color, $c$, and an opacity $\alpha$.&lt;&#x2F;p&gt;
 &lt;div&gt;
     $$
 C = \sum_{i=1}^{N} T_i \alpha_i c_i ~\text{ where } T_i = \prod_{j=1}^{i-1} (1 - \alpha_i)
@@ -27,7 +27,7 @@ $$
 &lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;repo-sam.inria.fr&#x2F;fungraph&#x2F;3d-gaussian-splatting&#x2F;3d_gaussian_splatting_low.pdf&quot;&gt;3D Gaussian Splatting for Real-Time Radiance Field Rendering&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;&#x2F;div&gt;
 &lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
-&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=Ikqj1B-AfUE&quot;&gt;3D Gaussian Splatting for Real-Time Radiance Field Rendering&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=Ikqj1B-AfUE&quot;&gt;3D Gaussian Splatting for Real-Time Radiance Field Rendering - YouTube&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;&#x2F;div&gt;
 </content>
 	</entry>

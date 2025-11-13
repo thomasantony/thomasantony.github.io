@@ -22,38 +22,38 @@
         
         
 
-        <title>Volume Rendering</title>
+        <title>Thomas Antony</title>
         
-        <meta name="title" content="Volume Rendering">
+        <meta name="title" content="Thomas Antony">
         
         <meta name="description" content="My personal website and notes">
         <meta name="generator" content="Zola v0.16.1">
 
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://www.thomasantony.com/notes/202510052138-volume-rendering/">
+        <meta property="og:url" content="https://www.thomasantony.com">
         <meta property="og:site_name" content="Thomas Antony">
-        <meta property="og:title" content="Volume Rendering">
+        <meta property="og:title" content="Thomas Antony">
         <meta property="og:description" content="My personal website and notes">
         
 
         
         
         <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content="https://www.thomasantony.com/notes/202510052138-volume-rendering/">
-        <meta property="twitter:title" content="Volume Rendering">
+        <meta property="twitter:url" content="https://www.thomasantony.com">
+        <meta property="twitter:title" content="Thomas Antony">
         <meta property="twitter:description" content="My personal website and notes">
         
         
 
-        <link rel="canonical" href="https://www.thomasantony.com/notes/202510052138-volume-rendering/">
+        <link rel="canonical" href="https://www.thomasantony.com">
         
         <script type="application/ld+json">
             {
                 "description":"My personal website and notes",
-                "url":"https://www.thomasantony.com/notes/202510052138-volume-rendering/",
+                "url":"https://www.thomasantony.com",
                 "@type":"WebSite",
-                "headline":"Volume Rendering",
-                "name":"Volume Rendering",
+                "headline":"Thomas Antony",
+                "name":"Thomas Antony",
                 
                 "@context":"https://schema.org"
             }
@@ -64,10 +64,6 @@
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
-        
-            <!-- MathJax configuration -->
-            <script src="https://www.thomasantony.com/js/math.js" type="text/javascript"></script>
-            <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML,Safe"> </script>
         
     </head>
     <body>
@@ -125,40 +121,13 @@
             </header>
             <main class="page-content" aria-label="Content">
                 
-<section>
-<p id="post">
-  <h1>Volume Rendering</h1>
-  <article><p>Volumetric rendering is an algorithm used for rendering radiance fields such as [[NeRFs]] and [[3D Gaussian Splats]]<sup class="footnote-reference"><a href="#1">1</a></sup><sup class="footnote-reference"><a href="#2">2</a></sup>.</p>
-<p>You start with some implicit or explicit <a href="https://www.thomasantony.com/notes/202510111119-scene-representations/">scene representation</a> that can be sampled at 3D positions along a ray in a scene, to return a color, $c$, and an opacity $\alpha$.</p>
-<div>
-    $$
-C = \sum_{i=1}^{N} T_i \alpha_i c_i ~\text{ where } T_i = \prod_{j=1}^{i-1} (1 - \alpha_i)
-$$
-</div>
-<p>The “output” of this gives the color $C$ of a single pixel by sampling a ray at multiple discrete points in the scene. Depending on the underlying representation (NeRF, 3DGS etc.), the opacity $\alpha_i$ and the color $c_i$ are computed in different ways. $T_i$ is the cumulative “transmittance” of all the pixels so far in the ray. This essentially zeros out all the pixels “behind” an opaque surface. Once the ray reaches an opaque surface (i.e. $\alpha_i \approx 1$), $T_i$ for all subsequent values of $i$ will be multiplied by $(1- \alpha_i) = 0$.</p>
-<p>This allows a continuous, differentiable function for the color which also “switches off” once an opaque function is encountered.</p>
-<h2 id="references">References</h2>
-<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
-<p><a rel="noopener" target="_blank" href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/3d_gaussian_splatting_low.pdf">3D Gaussian Splatting for Real-Time Radiance Field Rendering</a></p>
-</div>
-<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
-<p><a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=Ikqj1B-AfUE">3D Gaussian Splatting for Real-Time Radiance Field Rendering - YouTube</a></p>
-</div>
-</article>
-</p>
-<p>
-  <h2>Backlinks</h2>
-  
-  
-  
-  
-  <li><a href="https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;computer-graphics&#x2F;">Computer Graphics</a></li>
-  
-  
-</p>
-</section>
 
-
+<h2>Computer Vision</h2>
+    <ul>
+        
+        <li><a href="https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202510111119-scene-representations&#x2F;">Volumetric Scene Representations</a></li>
+        
+    </ul>
 
             </main>
             <footer>
