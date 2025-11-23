@@ -19,13 +19,13 @@
 \langle u, v \rangle = \sum_{i} u_i v_i
 $$
 &lt;&#x2F;div&gt;
-&lt;p&gt;Following on from how we defined a &lt;a href=&quot;@notes&#x2F;202510231156_norm-of-a-function.md&quot;&gt;norm&lt;&#x2F;a&gt; for &lt;a href=&quot;@notes&#x2F;202510231154_functions-form-a-vector&quot;&gt;square integrable functions&lt;&#x2F;a&gt;, we can similarly define an inner product for such functions in $\mathbb{L}^2$:&lt;&#x2F;p&gt;
+&lt;p&gt;Following on from how we defined a &lt;a href=&quot;@notes&#x2F;202510231156_norm-of-a-function.md&quot;&gt;norm&lt;&#x2F;a&gt; for &lt;a href=&quot;@notes&#x2F;202510231154_functions-form-a-vector.md&quot;&gt;square integrable functions&lt;&#x2F;a&gt;, we can similarly define an inner product for such functions in $\mathbb{L}^2$:&lt;&#x2F;p&gt;
 &lt;div&gt;
     $$
 \langle f, g \rangle = \int_{-\infty}^{\infty} f(x) g(x) dx
 $$
 &lt;&#x2F;div&gt;
-&lt;p&gt;This inner product can now be used to define a &lt;a href=&quot;@notes&#x2F;202510231156_norm-of-a-function&quot;&gt;norm&lt;&#x2F;a&gt;&#x2F;length for our space:&lt;&#x2F;p&gt;
+&lt;p&gt;This inner product can now be used to define a &lt;a href=&quot;@notes&#x2F;202510231156_norm-of-a-function.md&quot;&gt;norm&lt;&#x2F;a&gt;&#x2F;length for our space:&lt;&#x2F;p&gt;
 &lt;div&gt;
     $$
 || f || = \sqrt{ \langle f, f \rangle } = \sqrt{\int_{-\infty}^{\infty} |f(x)|^2 dx}
@@ -39,7 +39,7 @@ $$
 		<updated>2025-11-23T19:56:54.213+00:00</updated>
 		<link rel="alternate" href="https://www.thomasantony.com/notes/202510231156-norm-of-a-function/" type="text/html"/>
 		<id>https://www.thomasantony.com/notes/202510231156-norm-of-a-function/</id>
-		<content type="html">&lt;p&gt;We know that &lt;a href=&quot;@notes&#x2F;202510231154_functions-form-a-vector&quot;&gt;functions can be treated as infinite dimensional vectors&lt;&#x2F;a&gt;. A vector has a norm or length defined for it. How do we do that for a function?&lt;&#x2F;p&gt;
+		<content type="html">&lt;p&gt;We know that &lt;a href=&quot;@notes&#x2F;202510231154_functions-form-a-vector.md&quot;&gt;functions can be treated as infinite dimensional vectors&lt;&#x2F;a&gt;. A vector has a norm or length defined for it. How do we do that for a function?&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;square-integrable-functions&quot;&gt;Square integrable functions&lt;&#x2F;h2&gt;
 &lt;p&gt;Assume that we have a function: $f: \mathbb{R} \to \mathbb{C}$. It is said to be &lt;em&gt;square integrable&lt;&#x2F;em&gt; if it satisfies the following condition:&lt;&#x2F;p&gt;
 &lt;div&gt;
@@ -48,7 +48,7 @@ $$
 $$
 &lt;&#x2F;div&gt;
 &lt;p&gt;This is similar to the squared sum of all elements in a vector and can be considered equivalent to a squared Euclidean norm ($\sum_i v_i$). This is a measure of &lt;em&gt;length&lt;&#x2F;em&gt; and the condition above is asserting that this “length” is finite for the given function (vector). For functions, this quantity is typically called &lt;em&gt;energy&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
-&lt;p&gt;The set of such functions are commonly denoted as $\mathbb{L}^2$ and is a subset of the &lt;a href=&quot;@notes&#x2F;202510231154_functions-form-a-vector&quot;&gt;vector space of all functions&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The set of such functions are commonly denoted as $\mathbb{L}^2$ and is a subset of the &lt;a href=&quot;@notes&#x2F;202510231154_functions-form-a-vector.md&quot;&gt;vector space of all functions&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
@@ -91,8 +91,8 @@ $$
 		<updated>2025-11-23T19:37:16.546+00:00</updated>
 		<link rel="alternate" href="https://www.thomasantony.com/notes/202510231137-hilbert-spaces/" type="text/html"/>
 		<id>https://www.thomasantony.com/notes/202510231137-hilbert-spaces/</id>
-		<content type="html">&lt;p&gt;A Hilbert space is an &lt;a href=&quot;@notes&#x2F;202510231139_inner-product-space&quot;&gt;inner product space&lt;&#x2F;a&gt; that is also “complete” w.r.t the inner product - i.e. no sequence of elements in the set converges to an element outside the set. This is a generalization of the Euclidean vector space to infinite dimensions.&lt;&#x2F;p&gt;
-&lt;p&gt;The key intuition behind this is to treat &lt;a href=&quot;@notes&#x2F;202510231154_functions-form-a-vector.md&quot;&gt;functions as infinite dimensional vectors&lt;&#x2F;a&gt;, which have &lt;a href=&quot;@notes&#x2F;202510231206_inner-product-of-functions.md&quot;&gt;inner products&lt;&#x2F;a&gt; and &lt;a href=&quot;@notes&#x2F;202510231156_norm-of-a-function&quot;&gt;norms&lt;&#x2F;a&gt; just like Euclidean vectors. This allows us to generalize many concepts from vectors to apply to functions.&lt;&#x2F;p&gt;
+		<content type="html">&lt;p&gt;A Hilbert space is an &lt;a href=&quot;@notes&#x2F;202510231139_inner-product-space.md&quot;&gt;inner product space&lt;&#x2F;a&gt; that is also “complete” w.r.t the inner product - i.e. no sequence of elements in the set converges to an element outside the set. This is a generalization of the Euclidean vector space to infinite dimensions.&lt;&#x2F;p&gt;
+&lt;p&gt;The key intuition behind this is to treat &lt;a href=&quot;@notes&#x2F;202510231154_functions-form-a-vector.md&quot;&gt;functions as infinite dimensional vectors&lt;&#x2F;a&gt;, which have &lt;a href=&quot;@notes&#x2F;202510231206_inner-product-of-functions.md&quot;&gt;inner products&lt;&#x2F;a&gt; and &lt;a href=&quot;@notes&#x2F;202510231156_norm-of-a-function.md&quot;&gt;norms&lt;&#x2F;a&gt; just like Euclidean vectors. This allows us to generalize many concepts from vectors to apply to functions.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;generalized-fourier-series&quot;&gt;Generalized Fourier Series&lt;&#x2F;h2&gt;
 &lt;p&gt;A fourier series&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; is a way of expressing a perioding function as a weighted sum of sines and cosines of different frequencies. &lt;&#x2F;p&gt;
 &lt;p&gt;For functions in $\mathbb{L}^2$, the inner product allows us to define the concepts of &lt;em&gt;orthogonality&lt;&#x2F;em&gt; and &lt;em&gt;basis vectors&lt;&#x2F;em&gt;. This in turn lets us express these functions as a weighted sum of of a series of &lt;em&gt;orthogonal basis functions&lt;&#x2F;em&gt; that span the space. This allows us to apply concepts from Linear Algebra such as the Gram-Schmidt process&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#3&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; to the space of functions. This is how we get orthogonal basis functions such as Chebyshev polynomials &lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#4&quot;&gt;3&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; and Legendre polynomials&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#5&quot;&gt;4&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
