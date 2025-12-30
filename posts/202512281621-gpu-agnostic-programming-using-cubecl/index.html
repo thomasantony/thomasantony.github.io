@@ -129,7 +129,7 @@
 
   <div class="post-content">
     <p><a rel="noopener" target="_blank" href="https://crates.io/crates/cubecl">CubeCL</a> is a Rust crate that is used for writing GPU programs in pure Rust, which is compatible with a wide range of GPU platforms. It is the underlying library powering the “<a rel="noopener" target="_blank" href="https://burn.dev/">Burn</a>” machine learning framework.</p>
-<p>This article will look at some of the basics of how to use CubeCL and some of its quirks.</p>
+<p>This article will look at some of the basics of how to use CubeCL and some of its quirks. You can find the example code in this repository: <a rel="noopener" target="_blank" href="https://github.com/thomasantony/cubecl-recipes">thomasantony/cubecl-recipes</a>.</p>
 <h2 id="hello-world">Hello, World</h2>
 <p>We will start with a very simple parallel program - one that takes an array of numbers and doubles each element. Roughly the same as the following python function, except that it will be using the GPU and executing in parallel</p>
 <pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">double_array</span><span>(</span><span style="color:#bf616a;">numbers</span><span>):
