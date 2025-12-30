@@ -128,7 +128,7 @@
   </header>
 
   <div class="post-content">
-    <p><a rel="noopener" target="_blank" href="https://crates.io/crates/cubecl">CubeCL</a> is a Rust crate that is used for writing GPU programs in pure Rust, which is compatible with a wide range of GPU platforms. It is the underlying library powering the “Burn” machine learning framework.</p>
+    <p><a rel="noopener" target="_blank" href="https://crates.io/crates/cubecl">CubeCL</a> is a Rust crate that is used for writing GPU programs in pure Rust, which is compatible with a wide range of GPU platforms. It is the underlying library powering the “<a rel="noopener" target="_blank" href="https://burn.dev/">Burn</a>” machine learning framework.</p>
 <p>This article will look at some of the basics of how to use CubeCL and some of its quirks.</p>
 <h2 id="hello-world">Hello, World</h2>
 <p>We will start with a very simple parallel program - one that takes an array of numbers and doubles each element. Roughly the same as the following python function, except that it will be using the GPU and executing in parallel</p>
@@ -147,7 +147,7 @@
 <pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#bf616a;">cubecl </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.8.1</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">wgpu</span><span>&quot;] }
 </span></code></pre>
 <p>Build and run the program using <code>cargo run</code> and the program should build and print out “Hello, world!”.</p>
-<p>Just like in other GPU programming platforms, the basic unit of a parallel program in CubeCL is a “kernel”. This is a function that gets dispatched to execute on the GPU. See the <a rel="noopener" target="_blank" href="https://burn.dev/books/cubecl/getting-started/parallel_reduction.html">CubeCL book</a> for more details. Kernels do not have a return value and will be returning data instead by writing to mutable array references that are passed into it.</p>
+<p>Just like on other GPU programming platforms, the basic unit of a parallel program in CubeCL is a “kernel”. This is a function that gets dispatched to execute on the GPU. See the <a rel="noopener" target="_blank" href="https://burn.dev/books/cubecl/getting-started/parallel_reduction.html">CubeCL book</a> for more details. Kernels do not have a return value and will be returning data instead by writing to mutable array references that are passed into it.</p>
 <p>Here is the CubeCL version of the Python program given above:</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>cubecl::prelude::*;
 </span><span>
@@ -271,7 +271,7 @@
 <h2 id="scalar-arguments">Scalar Arguments</h2>
 <p>You are also able to pass scalar values to the kernel - lets say, an integer that will be used in place of <code>2</code> for scaling the arrays. This is done by passing in an instance of <code>ScalarArg</code>. Modify the kernel as follows:</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">cube</span><span>(launch)]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">kernel_double_numbers</span><span>(</span><span style="color:#bf616a;">input_data</span><span>: &amp;Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;, </span><span style="color:#bf616a;">scale</span><span>: </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#bf616a;">output_data</span><span>: &amp;</span><span style="color:#b48ead;">mut </span><span>Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;) {
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">kernel_scale_numbers</span><span>(</span><span style="color:#bf616a;">input_data</span><span>: &amp;Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;, </span><span style="color:#bf616a;">scale</span><span>: </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#bf616a;">output_data</span><span>: &amp;</span><span style="color:#b48ead;">mut </span><span>Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;) {
 </span><span>    </span><span style="color:#b48ead;">let</span><span> block_id = </span><span style="color:#d08770;">CUBE_POS</span><span>;
 </span><span>    </span><span style="color:#b48ead;">let</span><span> thread_id = </span><span style="color:#d08770;">UNIT_POS</span><span>;
 </span><span>
@@ -282,7 +282,7 @@
 </span></code></pre>
 <p>The kernel is then launched as:</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#b48ead;">unsafe </span><span>{
-</span><span>        kernel_double_numbers::launch::&lt;cubecl::wgpu::WgpuRuntime&gt;(
+</span><span>        kernel_scale_numbers::launch::&lt;cubecl::wgpu::WgpuRuntime&gt;(
 </span><span>            &amp;client,
 </span><span>            CubeCount::Static(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>),
 </span><span>            CubeDim::new(num_elements as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>),
@@ -296,9 +296,9 @@
 <pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Input: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 </span><span>Output: [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
 </span></code></pre>
-<h2 id="runtime-agnostic-functions">Runtime-Agnostic Functions</h2>
+<h2 id="backend-agnostic-code">Backend-Agnostic Code</h2>
 <p>The examples above hardcoded the WGPU runtime as the CubeCL backend to use for running the code. This is not ideal if the code is to be distributed as a crate/library. CubeCL offers a generics-based pattern for making your code agnostic to the GPU platform. The kernel itself remains identical as it does not have any platform-specific references. However, the launching of the kernel needs to be extracted out into a separate function.</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">launch_double_numbers_kernel</span><span>&lt;R: Runtime&gt;(
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">launch_scale_numbers_kernel</span><span>&lt;R: Runtime&gt;(
 </span><span>    </span><span style="color:#bf616a;">client</span><span>: &amp;ComputeClient&lt;</span><span style="color:#b48ead;">R::</span><span>Server&gt;,
 </span><span>    </span><span style="color:#bf616a;">input</span><span>: &amp;Handle,
 </span><span>    </span><span style="color:#bf616a;">scale</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
@@ -306,7 +306,7 @@
 </span><span>    </span><span style="color:#bf616a;">num_elements</span><span>: </span><span style="color:#b48ead;">usize</span><span>,
 </span><span>) {
 </span><span>    </span><span style="color:#b48ead;">unsafe </span><span>{
-</span><span>        kernel_double_numbers::launch::&lt;R&gt;(
+</span><span>        kernel_scale_numbers::launch::&lt;R&gt;(
 </span><span>            &amp;client,
 </span><span>            CubeCount::Static(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>),
 </span><span>            CubeDim::new(num_elements as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>),
@@ -318,7 +318,7 @@
 </span><span>}
 </span></code></pre>
 <p>The function is then called as:</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    launch_double_numbers_kernel::&lt;cubecl::wgpu::WgpuRuntime&gt;(
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    launch_scale_numbers_kernel::&lt;cubecl::wgpu::WgpuRuntime&gt;(
 </span><span>        &amp;client,
 </span><span>        &amp;input_data_gpu,
 </span><span>        </span><span style="color:#d08770;">3</span><span>,
@@ -326,7 +326,7 @@
 </span><span>        num_elements,
 </span><span>    );
 </span></code></pre>
-<p>The <code>launch_double_numbers_kernel</code> could be in a separate crate and is completely agnostic to the specific GPU platform that it will be deployed to. The platform is only specified when the function is called.</p>
+<p>The <code>launch_scale_numbers_kernel</code> could be in a separate crate and is completely agnostic to the specific GPU platform that it will be deployed to. The platform is only specified when the function is called.</p>
 <h2 id="cube-functions">Cube functions</h2>
 <p>You may want to split out small chunks of your kernel code so that it can be reused in multiple kernels. This is done using by defining functions that use the <code>#[cube]</code> macro and comes with a few caveats. The arguments to such functions can either be scalar values (<code>u32</code>, <code>f32</code> etc.), or a type like <code>Array</code>.</p>
 <p>Example:</p>
@@ -369,6 +369,177 @@
 <h2 id="plane-intrinsics">Plane Intrinsics</h2>
 <p>In CubeCL, there is a concept of something called a “plane”. This is a sub-set of the threads in a block. This has to do with how the threads are actually scheduled on the GPU for execution. On NVIDIA GPUs, threads are scheduled for execution as sets of 32 threads called “warps”. These are guaranteed to be running simultaneously on a GPU. If you schedule blocks that are larger than the warp-size on the GPU, the block gets split up into warps (aka planes in CubeCL), and gets swapped in and out.</p>
 <p>CubeCL offers some GPU primitives that operate at the level of all threads on the plane. These are not very well documented at the time of writing unless you wade through some of the unit tests.</p>
+<h3 id="plane-exclusive-sum">Plane Exclusive Sum</h3>
+<p>Here is an example where we use plane intrinsics to compute an “<a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Prefix_sum#Inclusive_and_exclusive_scans">exclusive sum</a>”. The algorithm will take an array like <code>[1, 1, 1, 1]</code> and return <code>[0, 1, 2, 3]</code>. It uses the <a rel="noopener" target="_blank" href="https://docs.rs/cubecl/latest/cubecl/frontend/fn.plane_exclusive_sum.html">plane_exclusive_sum</a> function.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">cube</span><span>(launch)]
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">kernel_plane_exclusive_sum</span><span>(</span><span style="color:#bf616a;">input_data</span><span>: &amp;Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;, </span><span style="color:#bf616a;">output_data</span><span>: &amp;</span><span style="color:#b48ead;">mut </span><span>Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;) {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> block_id = </span><span style="color:#d08770;">CUBE_POS</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> thread_id = </span><span style="color:#d08770;">UNIT_POS</span><span>;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">let</span><span> local_data = input_data[block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id];
+</span><span>    </span><span style="color:#b48ead;">let</span><span> local_sum = </span><span style="color:#96b5b4;">plane_exclusive_sum</span><span>(local_data);
+</span><span>
+</span><span>    output_data[block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id] = local_sum;
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>()
+</span><span>{
+</span><span>    </span><span style="color:#b48ead;">let</span><span> device = Default::default();
+</span><span>    </span><span style="color:#b48ead;">let</span><span> client = cubecl::wgpu::WgpuRuntime::client(&amp;device);
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">type </span><span>R = cubecl::wgpu::WgpuRuntime;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">let</span><span> input_data = vec![</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">u32</span><span>; </span><span style="color:#d08770;">16</span><span>];
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Input: </span><span style="color:#d08770;">{:?}</span><span>&quot;, &amp;input_data);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> num_elements = input_data.</span><span style="color:#96b5b4;">len</span><span>();
+</span><span>    </span><span style="color:#b48ead;">let</span><span> zeros = vec![</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">u32</span><span>; num_elements];
+</span><span>    </span><span style="color:#b48ead;">let</span><span> input_data_gpu = client.</span><span style="color:#96b5b4;">create</span><span>(</span><span style="color:#b48ead;">u32</span><span>::as_bytes(&amp;input_data));
+</span><span>    </span><span style="color:#b48ead;">let</span><span> output_data_gpu = client.</span><span style="color:#96b5b4;">create</span><span>(</span><span style="color:#b48ead;">u32</span><span>::as_bytes(&amp;zeros));
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">SMALL_BLOCK_SIZE</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">8</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> num_blocks = num_elements / </span><span style="color:#d08770;">SMALL_BLOCK_SIZE</span><span>;
+</span><span>    </span><span style="color:#b48ead;">unsafe </span><span>{
+</span><span>        kernel_plane_exclusive_sum::launch::&lt;R&gt;(
+</span><span>            &amp;client,
+</span><span>            CubeCount::Static(num_blocks as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>),
+</span><span>            CubeDim::new(</span><span style="color:#d08770;">SMALL_BLOCK_SIZE </span><span>as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>),
+</span><span>            ArrayArg::from_raw_parts::&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;(&amp;input_data_gpu, num_elements, </span><span style="color:#d08770;">1</span><span>),
+</span><span>            ArrayArg::from_raw_parts::&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;(&amp;output_data_gpu, num_elements, </span><span style="color:#d08770;">1</span><span>),
+</span><span>        )
+</span><span>    }
+</span><span>    </span><span style="color:#b48ead;">let</span><span> result = client.</span><span style="color:#96b5b4;">read_one</span><span>(output_data_gpu.</span><span style="color:#96b5b4;">clone</span><span>());
+</span><span>    </span><span style="color:#b48ead;">let</span><span> output = </span><span style="color:#b48ead;">u32</span><span>::from_bytes(&amp;result).</span><span style="color:#96b5b4;">to_vec</span><span>();
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Plane Exclusive Sum: </span><span style="color:#d08770;">{:?}</span><span style="color:#96b5b4;">\n</span><span>&quot;, output);
+</span><span>}
+</span></code></pre>
+<p>The magic happens in these lines:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#b48ead;">let</span><span> local_data = input_data[block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id];
+</span><span>    </span><span style="color:#b48ead;">let</span><span> local_sum = </span><span style="color:#96b5b4;">plane_exclusive_sum</span><span>(local_data);
+</span><span>
+</span><span>    output_data[block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id] = local_sum;
+</span></code></pre>
+<p>The <code>plane_exclusive_sum</code> takes the value of <code>local_data</code> from every other unit/thread in the current plane/warp and computes an exclusive sum, and returns the value that should be returned by the current thread.</p>
+<p>One caveat here is that this is limited to the plane (usually a maximum of 32-64 threads depending on the GPU platform). In the above example, we use an array with 16 elements and enforce a block-size (and hence plane size) of 8. This will give us the following result:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Input: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+</span><span>Plane Exclusive Sum: [0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7]
+</span></code></pre>
+<p>If you want to perform an exclusive scan over the entire block (possibly multiple planes), we need to use a more complicated algorithm where shared memory is used to accumulate results between planes.</p>
+<h3 id="block-exclusive-sum">Block Exclusive Sum</h3>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">/// Performs exclusive sum over all elements in a block, using plane primitives
+</span><span>#[</span><span style="color:#bf616a;">cube</span><span>(launch)]
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">kernel_block_exclusive_sum</span><span>(</span><span style="color:#bf616a;">input_data</span><span>: &amp;Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;, </span><span style="color:#bf616a;">output_data</span><span>: &amp;</span><span style="color:#b48ead;">mut </span><span>Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;) {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> num_planes: </span><span style="color:#b48ead;">u32 </span><span>= </span><span style="color:#d08770;">CUBE_DIM </span><span>/ </span><span style="color:#d08770;">PLANE_DIM</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> block_id = </span><span style="color:#d08770;">CUBE_POS</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> thread_id = </span><span style="color:#d08770;">UNIT_POS</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> plane_thread_idx = </span><span style="color:#d08770;">UNIT_POS_PLANE</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> plane_idx = thread_id / </span><span style="color:#d08770;">PLANE_DIM</span><span>;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">let</span><span> thread_idx = block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id;
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Select plane size as the smaller of the current block size or the max plane size
+</span><span>    </span><span style="color:#65737e;">// So if block size is 8, plane size will be 8
+</span><span>    </span><span style="color:#65737e;">// If block size is 64, plane size will be 32 (if that is the maximum)
+</span><span>    </span><span style="color:#b48ead;">let</span><span> plane_size = </span><span style="color:#b48ead;">if </span><span style="color:#d08770;">CUBE_DIM </span><span>&lt; </span><span style="color:#d08770;">PLANE_DIM </span><span>{
+</span><span>        </span><span style="color:#d08770;">CUBE_DIM
+</span><span>    } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>        </span><span style="color:#d08770;">PLANE_DIM
+</span><span>    };
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Define shared memory for inter-plane communication
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> shared_totals = SharedMemory::&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;::new(</span><span style="color:#d08770;">2</span><span>);
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// 1. local scan
+</span><span>    </span><span style="color:#b48ead;">let</span><span> original = input_data[thread_idx];
+</span><span>    </span><span style="color:#b48ead;">let</span><span> local_scan = </span><span style="color:#96b5b4;">plane_exclusive_sum</span><span>(original);
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// 2. plane totals → shared mem
+</span><span>    </span><span style="color:#b48ead;">let</span><span> plane_total =
+</span><span>        </span><span style="color:#96b5b4;">plane_shuffle</span><span>(local_scan, plane_size - </span><span style="color:#d08770;">1</span><span>) + </span><span style="color:#96b5b4;">plane_shuffle</span><span>(original, plane_size - </span><span style="color:#d08770;">1</span><span>);
+</span><span>    </span><span style="color:#b48ead;">if</span><span> plane_thread_idx == </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        shared_totals[plane_idx] = plane_total;
+</span><span>    }
+</span><span>    </span><span style="color:#96b5b4;">sync_cube</span><span>();
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// 3. scan totals (single plane or serial)
+</span><span>    </span><span style="color:#b48ead;">if</span><span> plane_idx == </span><span style="color:#d08770;">0 </span><span>&amp;&amp; plane_thread_idx &lt; num_planes {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> offset = </span><span style="color:#96b5b4;">plane_exclusive_sum</span><span>(shared_totals[plane_thread_idx]);
+</span><span>        </span><span style="color:#65737e;">// reuse shared_totals for storing offsets
+</span><span>        shared_totals[plane_thread_idx] = offset;
+</span><span>    }
+</span><span>    </span><span style="color:#96b5b4;">sync_cube</span><span>();
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// 4. apply offset
+</span><span>    </span><span style="color:#b48ead;">let</span><span> result = local_scan + shared_totals[plane_idx];
+</span><span>
+</span><span>    output_data[block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id] = result;
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>()
+</span><span>{
+</span><span>    </span><span style="color:#b48ead;">let</span><span> device = Default::default();
+</span><span>    </span><span style="color:#b48ead;">let</span><span> client = cubecl::wgpu::WgpuRuntime::client(&amp;device);
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">type </span><span>R = cubecl::wgpu::WgpuRuntime;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">let</span><span> input_data = vec![</span><span style="color:#d08770;">1</span><span style="color:#b48ead;">u32</span><span>; </span><span style="color:#d08770;">64</span><span>];
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Input: </span><span style="color:#d08770;">{:?}</span><span>&quot;, &amp;input_data);
+</span><span>    </span><span style="color:#b48ead;">let</span><span> num_elements = input_data.</span><span style="color:#96b5b4;">len</span><span>();
+</span><span>    </span><span style="color:#b48ead;">let</span><span> input_data_gpu = client.</span><span style="color:#96b5b4;">create</span><span>(</span><span style="color:#b48ead;">u32</span><span>::as_bytes(&amp;input_data));
+</span><span>    </span><span style="color:#b48ead;">let</span><span> zeros = vec![</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">u32</span><span>; num_elements];
+</span><span>    </span><span style="color:#b48ead;">let</span><span> output_data_gpu = client.</span><span style="color:#96b5b4;">create</span><span>(</span><span style="color:#b48ead;">u32</span><span>::as_bytes(&amp;zeros));
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">BIG_BLOCK_SIZE</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">64</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> num_blocks = num_elements / </span><span style="color:#d08770;">BIG_BLOCK_SIZE</span><span>;
+</span><span>    </span><span style="color:#b48ead;">unsafe </span><span>{
+</span><span>        kernel_block_exclusive_sum::launch::&lt;R&gt;(
+</span><span>            &amp;client,
+</span><span>            CubeCount::Static(num_blocks as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>),
+</span><span>            CubeDim::new(</span><span style="color:#d08770;">BIG_BLOCK_SIZE </span><span>as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>),
+</span><span>            ArrayArg::from_raw_parts::&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;(&amp;input_data_gpu, num_elements, </span><span style="color:#d08770;">1</span><span>),
+</span><span>            ArrayArg::from_raw_parts::&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;(&amp;output_data_gpu, num_elements, </span><span style="color:#d08770;">1</span><span>),
+</span><span>        )
+</span><span>    }
+</span><span>    </span><span style="color:#b48ead;">let</span><span> result = client.</span><span style="color:#96b5b4;">read_one</span><span>(output_data_gpu.</span><span style="color:#96b5b4;">clone</span><span>());
+</span><span>    </span><span style="color:#b48ead;">let</span><span> output = </span><span style="color:#b48ead;">u32</span><span>::from_bytes(&amp;result).</span><span style="color:#96b5b4;">to_vec</span><span>();
+</span><span>    println!(&quot;</span><span style="color:#a3be8c;">Block Exclusive Sum: </span><span style="color:#d08770;">{:?}</span><span style="color:#96b5b4;">\n</span><span>&quot;, output);
+</span><span>}
+</span></code></pre>
+<p>Here, we use a larger array with 64 elements to make sure that the block size exceeds the plane size (on WGPU) of 32.</p>
+<p>The algorithm works as follows:</p>
+<ol>
+<li>
+<p>The local scan takes the 64-long array <code>[1, 1, ... 1]</code> and converts it into <code>[0, 1, ... 31, 0, 1, ... 31]</code>.</p>
+</li>
+<li>
+<p>The next step is to compute the “shared totals”. This is the total sum from each plane accumulated into a shared memory array. In this case, it would be <code>[32, 32]</code>. This is done by adding the last value of the local scan in the current plane, with the last value of the input array processed by the current plane.</p>
+</li>
+</ol>
+<p>To compute this, we use another plane-intrinsic function called <a rel="noopener" target="_blank" href="https://docs.rs/cubecl/latest/cubecl/frontend/fn.plane_shuffle.html">plane_shuffle</a>. </p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#96b5b4;">plane_shuffle</span><span>(local_scan, plane_size - </span><span style="color:#d08770;">1</span><span>)
+</span></code></pre>
+<p>The above function call returns the value of <code>local_scan</code> from the thread index <code>plane_size - 1</code> (aka the final thread in the plane). So the shared total is computed as:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#b48ead;">let</span><span> plane_total =
+</span><span>        </span><span style="color:#96b5b4;">plane_shuffle</span><span>(local_scan, plane_size - </span><span style="color:#d08770;">1</span><span>) + </span><span style="color:#96b5b4;">plane_shuffle</span><span>(original, plane_size - </span><span style="color:#d08770;">1</span><span>);
+</span><span>    </span><span style="color:#b48ead;">if</span><span> plane_thread_idx == </span><span style="color:#d08770;">0 </span><span>{
+</span><span>        shared_totals[plane_idx] = plane_total;
+</span><span>    }
+</span></code></pre>
+<p>The value is then stored into the shared memory by a single thread (gated by the <code>if</code> condition). There is no point in all of the threads trying to write the exact same value to the shared array.</p>
+<ol start="3">
+<li>Compute the offsets from the shared totals using another exclusive scan, i.e. <code>[32, 32]</code> becomes <code>[0, 32]</code>. These are the values to be added to each plane’s local scan results. So we add <code>0</code> to the local scan results from plane 0, <code>32</code> to the local scan results from plane 1, etc.</li>
+</ol>
+<p>This exclusive scan can also be performed using the <code>plane_exclusive_sum</code> function - except that we make sure to not use more threads than are required.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>        </span><span style="color:#b48ead;">let</span><span> offset = </span><span style="color:#96b5b4;">plane_exclusive_sum</span><span>(shared_totals[plane_thread_idx]);
+</span><span>        </span><span style="color:#65737e;">// reuse shared_totals for storing offsets
+</span><span>        shared_totals[plane_thread_idx] = offset;
+</span></code></pre>
+<ol start="4">
+<li>Now applying the offset is as simple as taking the current thread’s local scan result (<code>local_scan</code>) and adding the appropriate offset to it.</li>
+</ol>
+<p><em>Note</em>: <code>sync_cube()</code> is used to synchronize processing between all the threads/units in a block. All the threads will wait at these points until every other thread in the block has reached the same point.</p>
+<p>This should now give the result:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Input: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+</span><span>Block Exclusive Sum: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63]
+</span></code></pre>
 <h2 id="gotchas">Gotchas</h2>
 <ul>
 <li>CubeCL does not like mutable unused variables without a type definition.</li>
@@ -376,7 +547,7 @@
 <p>If you add the following to a kernel or a #[cube] function :</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let mut</span><span> mynumber = </span><span style="color:#d08770;">0</span><span>;
 </span></code></pre>
-<p>If you do not use this value anywhere in way that lets the compiler infer its type, you will get an error message like:</p>
+<p>If you do not use this value anywhere in a way that lets the compiler infer its type, you will get an error message like:</p>
 <pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>error[E0283]: type annotations needed
 </span><span>  --&gt; src/main.rs:88:1
 </span><span>   |
