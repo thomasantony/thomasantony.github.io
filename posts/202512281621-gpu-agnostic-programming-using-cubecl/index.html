@@ -363,8 +363,33 @@
 <p>Shared Memory is allocated in kernels and used for sharing information between threads in the same “cube” (aka block). Since this is implemented as on-chip SRAM, it is significantly faster than the “global” GPU memory. It is allocated in a kernel using the <code>SharedMemory</code> type:</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> smem_histogram = SharedMemory::&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;::new(</span><span style="color:#d08770;">SIZE</span><span>);
 </span></code></pre>
-<p>In the above example, <code>SIZE</code> must be a constant known at compile-time.</p>
-<p>It can then be used like any other array, except that the data in it is only shared across the threads in the same cube.</p>
+<p>In the above example, <code>SIZE</code> must be a constant known at compile-time. This can be limiting when you want to write flexible kernels where the shared memory size depends on launch parameters. CubeCL’s <code>#[comptime]</code> feature (described in the next section) provides a solution to this constraint.</p>
+<p>Shared memory can be used like any other array, except that the data in it is only shared across the threads in the same cube.</p>
+<h2 id="comptime-parameters">Comptime Parameters</h2>
+<p>CubeCL provides a <code>#[comptime]</code> attribute for kernel parameters that need to be known at kernel compile time, but can vary between different kernel invocations. This is particularly useful for <code>SharedMemory</code> sizes that depend on launch configuration.</p>
+<p>When you mark a parameter with <code>#[comptime]</code>, the value is baked into the kernel during JIT compilation. CubeCL will compile a specialized version of the kernel for each unique combination of comptime values you use.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">cube</span><span>(launch)]
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">kernel_with_comptime</span><span>(
+</span><span>    </span><span style="color:#bf616a;">data</span><span>: &amp;</span><span style="color:#b48ead;">mut </span><span>Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;,
+</span><span>    #[comptime] </span><span style="color:#bf616a;">buffer_size</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
+</span><span>) {
+</span><span>    </span><span style="color:#65737e;">// buffer_size is known at kernel compile time
+</span><span>    </span><span style="color:#b48ead;">let</span><span> shared_buffer = SharedMemory::&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;::new(buffer_size);
+</span><span>    </span><span style="color:#65737e;">// ... use shared_buffer
+</span><span>}
+</span></code></pre>
+<p>The kernel is launched by passing the comptime value as a regular argument:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">unsafe </span><span>{
+</span><span>    kernel_with_comptime::launch::&lt;R&gt;(
+</span><span>        &amp;client,
+</span><span>        cube_count,
+</span><span>        cube_dim,
+</span><span>        ArrayArg::from_raw_parts::&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;(&amp;data_gpu, num_elements, </span><span style="color:#d08770;">1</span><span>),
+</span><span>        buffer_size,  </span><span style="color:#65737e;">// comptime parameter - no wrapper needed
+</span><span>    )
+</span><span>}
+</span></code></pre>
+<p>A practical example of this pattern is shown in the <a href="https://www.thomasantony.com/posts/202512281621-gpu-agnostic-programming-using-cubecl/#block-exclusive-sum">Block Exclusive Sum</a> section below, where <code>#[comptime]</code> is used to configure the number of planes for shared memory allocation.</p>
 <h2 id="atomic-variables">Atomic Variables</h2>
 <p>The <code>Atomic</code> type allows definition of variables that are used for atomic read/write operations. Such operations are useful for avoiding race conditions. For Shared Memory, this is defined as:</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> smem_histogram = SharedMemory::&lt;Atomic&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;&gt;::new(</span><span style="color:#d08770;">SIZE</span><span>);
@@ -436,10 +461,14 @@
 </span></code></pre>
 <p>If you want to perform an exclusive scan over the entire block (possibly multiple planes), we need to use a more complicated algorithm where shared memory is used to accumulate results between planes.</p>
 <h3 id="block-exclusive-sum">Block Exclusive Sum</h3>
+<p>This example demonstrates the <code>#[comptime]</code> pattern described earlier. Instead of hardcoding the shared memory size, we pass <code>num_planes</code> as a comptime parameter, making the kernel flexible for different block sizes.</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">/// Performs exclusive sum over all elements in a block, using plane primitives
 </span><span>#[</span><span style="color:#bf616a;">cube</span><span>(launch)]
-</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">kernel_block_exclusive_sum</span><span>(</span><span style="color:#bf616a;">input_data</span><span>: &amp;Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;, </span><span style="color:#bf616a;">output_data</span><span>: &amp;</span><span style="color:#b48ead;">mut </span><span>Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;) {
-</span><span>    </span><span style="color:#b48ead;">let</span><span> num_planes: </span><span style="color:#b48ead;">u32 </span><span>= </span><span style="color:#d08770;">CUBE_DIM </span><span>/ </span><span style="color:#d08770;">PLANE_DIM</span><span>;
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">kernel_block_exclusive_sum</span><span>(
+</span><span>    </span><span style="color:#bf616a;">input_data</span><span>: &amp;Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;,
+</span><span>    </span><span style="color:#bf616a;">output_data</span><span>: &amp;</span><span style="color:#b48ead;">mut </span><span>Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;,
+</span><span>    #[comptime] </span><span style="color:#bf616a;">num_planes</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
+</span><span>) {
 </span><span>    </span><span style="color:#b48ead;">let</span><span> block_id = </span><span style="color:#d08770;">CUBE_POS</span><span>;
 </span><span>    </span><span style="color:#b48ead;">let</span><span> thread_id = </span><span style="color:#d08770;">UNIT_POS</span><span>;
 </span><span>    </span><span style="color:#b48ead;">let</span><span> plane_thread_idx = </span><span style="color:#d08770;">UNIT_POS_PLANE</span><span>;
@@ -457,7 +486,8 @@
 </span><span>    };
 </span><span>
 </span><span>    </span><span style="color:#65737e;">// Define shared memory for inter-plane communication
-</span><span>    </span><span style="color:#b48ead;">let mut</span><span> shared_totals = SharedMemory::&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;::new(</span><span style="color:#d08770;">2</span><span>);
+</span><span>    </span><span style="color:#65737e;">// Size is determined at kernel compile time via comptime parameter
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> shared_totals = SharedMemory::&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;::new(num_planes);
 </span><span>
 </span><span>    </span><span style="color:#65737e;">// 1. local scan
 </span><span>    </span><span style="color:#b48ead;">let</span><span> original = input_data[thread_idx];
@@ -498,15 +528,19 @@
 </span><span>    </span><span style="color:#b48ead;">let</span><span> input_data_gpu = client.</span><span style="color:#96b5b4;">create</span><span>(</span><span style="color:#b48ead;">u32</span><span>::as_bytes(&amp;input_data));
 </span><span>    </span><span style="color:#b48ead;">let</span><span> zeros = vec![</span><span style="color:#d08770;">0</span><span style="color:#b48ead;">u32</span><span>; num_elements];
 </span><span>    </span><span style="color:#b48ead;">let</span><span> output_data_gpu = client.</span><span style="color:#96b5b4;">create</span><span>(</span><span style="color:#b48ead;">u32</span><span>::as_bytes(&amp;zeros));
-</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">BIG_BLOCK_SIZE</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">64</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> num_blocks = num_elements / </span><span style="color:#d08770;">BIG_BLOCK_SIZE</span><span>;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">BLOCK_SIZE</span><span>: </span><span style="color:#b48ead;">usize </span><span>= </span><span style="color:#d08770;">64</span><span>;
+</span><span>    </span><span style="color:#b48ead;">const </span><span style="color:#d08770;">NUM_PLANES</span><span>: </span><span style="color:#b48ead;">u32 </span><span>= (</span><span style="color:#d08770;">BLOCK_SIZE </span><span>/ </span><span style="color:#d08770;">PLANE_DIM </span><span>as </span><span style="color:#b48ead;">usize</span><span>) as </span><span style="color:#b48ead;">u32</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> num_blocks = num_elements / </span><span style="color:#d08770;">BLOCK_SIZE</span><span>;
+</span><span>
 </span><span>    </span><span style="color:#b48ead;">unsafe </span><span>{
 </span><span>        kernel_block_exclusive_sum::launch::&lt;R&gt;(
 </span><span>            &amp;client,
 </span><span>            CubeCount::Static(num_blocks as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>),
-</span><span>            CubeDim::new(</span><span style="color:#d08770;">BIG_BLOCK_SIZE </span><span>as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>),
+</span><span>            CubeDim::new(</span><span style="color:#d08770;">BLOCK_SIZE </span><span>as </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>),
 </span><span>            ArrayArg::from_raw_parts::&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;(&amp;input_data_gpu, num_elements, </span><span style="color:#d08770;">1</span><span>),
 </span><span>            ArrayArg::from_raw_parts::&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;(&amp;output_data_gpu, num_elements, </span><span style="color:#d08770;">1</span><span>),
+</span><span>            </span><span style="color:#d08770;">NUM_PLANES</span><span>,  </span><span style="color:#65737e;">// comptime parameter for shared memory size
 </span><span>        )
 </span><span>    }
 </span><span>    </span><span style="color:#b48ead;">let</span><span> result = client.</span><span style="color:#96b5b4;">read_one</span><span>(output_data_gpu.</span><span style="color:#96b5b4;">clone</span><span>());
@@ -514,7 +548,7 @@
 </span><span>    println!(&quot;</span><span style="color:#a3be8c;">Block Exclusive Sum: </span><span style="color:#d08770;">{:?}</span><span style="color:#96b5b4;">\n</span><span>&quot;, output);
 </span><span>}
 </span></code></pre>
-<p>Here, we use a larger array with 64 elements to make sure that the block size exceeds the plane size (on WGPU) of 32.</p>
+<p>Here, we use a larger array with 64 elements to make sure that the block size exceeds the plane size (on WGPU) of 32. The <code>NUM_PLANES</code> constant is computed from <code>BLOCK_SIZE / PLANE_DIM</code> and passed to the kernel, where it determines the shared memory allocation size.</p>
 <p>The algorithm works as follows:</p>
 <ol>
 <li>
