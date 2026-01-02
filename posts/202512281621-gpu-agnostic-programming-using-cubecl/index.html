@@ -188,10 +188,8 @@
 </span><span>
 </span><span>#[</span><span style="color:#bf616a;">cube</span><span>(launch)]
 </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">kernel_double_numbers</span><span>(</span><span style="color:#bf616a;">input_data</span><span>: &amp;Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;, </span><span style="color:#bf616a;">output_data</span><span>: &amp;</span><span style="color:#b48ead;">mut </span><span>Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;) {
-</span><span>    </span><span style="color:#b48ead;">let</span><span> block_id = </span><span style="color:#d08770;">CUBE_POS</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> thread_id = </span><span style="color:#d08770;">UNIT_POS</span><span>;
-</span><span>
-</span><span>    </span><span style="color:#b48ead;">let</span><span> index = block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id;
+</span><span>    </span><span style="color:#65737e;">// ABSOLUTE_POS is equivalent to CUBE_POS * CUBE_DIM + UNIT_POS
+</span><span>    </span><span style="color:#b48ead;">let</span><span> index = </span><span style="color:#d08770;">ABSOLUTE_POS</span><span>;
 </span><span>    output_data[index] = input_data[index] * </span><span style="color:#d08770;">2</span><span>;
 </span><span>}
 </span><span>
@@ -235,11 +233,9 @@
 </span><span> ^.............^   ^.............^
 </span><span>      Block 0           Block 1
 </span></code></pre>
-<p>This is accomplished by computing the index of the element as:</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#b48ead;">let</span><span> block_id = </span><span style="color:#d08770;">CUBE_POS</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> thread_id = </span><span style="color:#d08770;">UNIT_POS</span><span>;
-</span><span>
-</span><span>    </span><span style="color:#b48ead;">let</span><span> index = block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id;
+<p>This is accomplished by using <code>ABSOLUTE_POS</code>:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#65737e;">// ABSOLUTE_POS is equivalent to CUBE_POS * CUBE_DIM + UNIT_POS
+</span><span>    </span><span style="color:#b48ead;">let</span><span> index = </span><span style="color:#d08770;">ABSOLUTE_POS</span><span>;
 </span></code></pre>
 <h3 id="initializing-the-cubecl-device-and-runtime">Initializing the CubeCL Device and Runtime</h3>
 <p>Going to the <code>main()</code> function, the first step is initializing the GPU and the CubeCL runtime:</p>
@@ -283,10 +279,8 @@
 <p>You are also able to pass scalar values to the kernel - lets say, an integer that will be used in place of <code>2</code> for scaling the arrays. This is done by passing in an instance of <code>ScalarArg</code>. Modify the kernel as follows:</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">cube</span><span>(launch)]
 </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">kernel_scale_numbers</span><span>(</span><span style="color:#bf616a;">input_data</span><span>: &amp;Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;, </span><span style="color:#bf616a;">scale</span><span>: </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#bf616a;">output_data</span><span>: &amp;</span><span style="color:#b48ead;">mut </span><span>Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;) {
-</span><span>    </span><span style="color:#b48ead;">let</span><span> block_id = </span><span style="color:#d08770;">CUBE_POS</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> thread_id = </span><span style="color:#d08770;">UNIT_POS</span><span>;
-</span><span>
-</span><span>    </span><span style="color:#b48ead;">let</span><span> index = block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id;
+</span><span>    </span><span style="color:#65737e;">// ABSOLUTE_POS is equivalent to CUBE_POS * CUBE_DIM + UNIT_POS
+</span><span>    </span><span style="color:#b48ead;">let</span><span> index = </span><span style="color:#d08770;">ABSOLUTE_POS</span><span>;
 </span><span>    output_data[index] = input_data[index] * scale;
 </span><span>    </span><span style="color:#65737e;">//                                       ^ used instead of 2
 </span><span>}
@@ -343,19 +337,15 @@
 <p>Example:</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">cube</span><span>]
 </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">do_scale</span><span>(</span><span style="color:#bf616a;">input</span><span>: &amp;Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;, </span><span style="color:#bf616a;">scale</span><span>: </span><span style="color:#b48ead;">u32</span><span>) -&gt; </span><span style="color:#b48ead;">u32 </span><span>{
-</span><span>    </span><span style="color:#b48ead;">let</span><span> block_id = </span><span style="color:#d08770;">CUBE_POS</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> thread_id = </span><span style="color:#d08770;">UNIT_POS</span><span>;
-</span><span>
-</span><span>    </span><span style="color:#b48ead;">let</span><span> index = block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id;
+</span><span>    </span><span style="color:#65737e;">// ABSOLUTE_POS is equivalent to CUBE_POS * CUBE_DIM + UNIT_POS
+</span><span>    </span><span style="color:#b48ead;">let</span><span> index = </span><span style="color:#d08770;">ABSOLUTE_POS</span><span>;
 </span><span>    input[index] * scale
 </span><span>}
 </span><span>
 </span><span>#[</span><span style="color:#bf616a;">cube</span><span>(launch)]
 </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">kernel_scale_numbers</span><span>(</span><span style="color:#bf616a;">input_data</span><span>: &amp;Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;, </span><span style="color:#bf616a;">scale</span><span>: </span><span style="color:#b48ead;">u32</span><span>, </span><span style="color:#bf616a;">output_data</span><span>: &amp;</span><span style="color:#b48ead;">mut </span><span>Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;) {
-</span><span>    </span><span style="color:#b48ead;">let</span><span> block_id = </span><span style="color:#d08770;">CUBE_POS</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> thread_id = </span><span style="color:#d08770;">UNIT_POS</span><span>;
-</span><span>
-</span><span>    </span><span style="color:#b48ead;">let</span><span> index = block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id;
+</span><span>    </span><span style="color:#65737e;">// ABSOLUTE_POS is equivalent to CUBE_POS * CUBE_DIM + UNIT_POS
+</span><span>    </span><span style="color:#b48ead;">let</span><span> index = </span><span style="color:#d08770;">ABSOLUTE_POS</span><span>;
 </span><span>    output_data[index] = </span><span style="color:#96b5b4;">do_scale</span><span>(input_data, scale);
 </span><span>}
 </span></code></pre>
@@ -409,13 +399,13 @@
 <p>Here is an example where we use plane intrinsics to compute an “<a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Prefix_sum#Inclusive_and_exclusive_scans">exclusive sum</a>”. The algorithm will take an array like <code>[1, 1, 1, 1]</code> and return <code>[0, 1, 2, 3]</code>. It uses the <a rel="noopener" target="_blank" href="https://docs.rs/cubecl/latest/cubecl/frontend/fn.plane_exclusive_sum.html">plane_exclusive_sum</a> function.</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">cube</span><span>(launch)]
 </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">kernel_plane_exclusive_sum</span><span>(</span><span style="color:#bf616a;">input_data</span><span>: &amp;Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;, </span><span style="color:#bf616a;">output_data</span><span>: &amp;</span><span style="color:#b48ead;">mut </span><span>Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;) {
-</span><span>    </span><span style="color:#b48ead;">let</span><span> block_id = </span><span style="color:#d08770;">CUBE_POS</span><span>;
-</span><span>    </span><span style="color:#b48ead;">let</span><span> thread_id = </span><span style="color:#d08770;">UNIT_POS</span><span>;
+</span><span>    </span><span style="color:#65737e;">// ABSOLUTE_POS is equivalent to CUBE_POS * CUBE_DIM + UNIT_POS
+</span><span>    </span><span style="color:#b48ead;">let</span><span> index = </span><span style="color:#d08770;">ABSOLUTE_POS</span><span>;
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">let</span><span> local_data = input_data[block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id];
+</span><span>    </span><span style="color:#b48ead;">let</span><span> local_data = input_data[index];
 </span><span>    </span><span style="color:#b48ead;">let</span><span> local_sum = </span><span style="color:#96b5b4;">plane_exclusive_sum</span><span>(local_data);
 </span><span>
-</span><span>    output_data[block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id] = local_sum;
+</span><span>    output_data[index] = local_sum;
 </span><span>}
 </span><span>
 </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>()
@@ -449,10 +439,10 @@
 </span><span>}
 </span></code></pre>
 <p>The magic happens in these lines:</p>
-<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#b48ead;">let</span><span> local_data = input_data[block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id];
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#b48ead;">let</span><span> local_data = input_data[index];
 </span><span>    </span><span style="color:#b48ead;">let</span><span> local_sum = </span><span style="color:#96b5b4;">plane_exclusive_sum</span><span>(local_data);
 </span><span>
-</span><span>    output_data[block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id] = local_sum;
+</span><span>    output_data[index] = local_sum;
 </span></code></pre>
 <p>The <code>plane_exclusive_sum</code> takes the value of <code>local_data</code> from every other unit/thread in the current plane/warp and computes an exclusive sum, and returns the value that should be returned by the current thread.</p>
 <p>One caveat here is that this is limited to the plane (usually a maximum of 32-64 threads depending on the GPU platform). In the above example, we use an array with 16 elements and enforce a block-size (and hence plane size) of 8. This will give us the following result:</p>
@@ -469,12 +459,12 @@
 </span><span>    </span><span style="color:#bf616a;">output_data</span><span>: &amp;</span><span style="color:#b48ead;">mut </span><span>Array&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;,
 </span><span>    #[comptime] </span><span style="color:#bf616a;">num_planes</span><span>: </span><span style="color:#b48ead;">u32</span><span>,
 </span><span>) {
-</span><span>    </span><span style="color:#b48ead;">let</span><span> block_id = </span><span style="color:#d08770;">CUBE_POS</span><span>;
 </span><span>    </span><span style="color:#b48ead;">let</span><span> thread_id = </span><span style="color:#d08770;">UNIT_POS</span><span>;
 </span><span>    </span><span style="color:#b48ead;">let</span><span> plane_thread_idx = </span><span style="color:#d08770;">UNIT_POS_PLANE</span><span>;
 </span><span>    </span><span style="color:#b48ead;">let</span><span> plane_idx = thread_id / </span><span style="color:#d08770;">PLANE_DIM</span><span>;
 </span><span>
-</span><span>    </span><span style="color:#b48ead;">let</span><span> thread_idx = block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id;
+</span><span>    </span><span style="color:#65737e;">// ABSOLUTE_POS is equivalent to CUBE_POS * CUBE_DIM + UNIT_POS
+</span><span>    </span><span style="color:#b48ead;">let</span><span> thread_idx = </span><span style="color:#d08770;">ABSOLUTE_POS</span><span>;
 </span><span>
 </span><span>    </span><span style="color:#65737e;">// Select plane size as the smaller of the current block size or the max plane size
 </span><span>    </span><span style="color:#65737e;">// So if block size is 8, plane size will be 8
@@ -512,7 +502,7 @@
 </span><span>    </span><span style="color:#65737e;">// 4. apply offset
 </span><span>    </span><span style="color:#b48ead;">let</span><span> result = local_scan + shared_totals[plane_idx];
 </span><span>
-</span><span>    output_data[block_id * </span><span style="color:#d08770;">CUBE_DIM </span><span>+ thread_id] = result;
+</span><span>    output_data[thread_idx] = result;
 </span><span>}
 </span><span>
 </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>()
