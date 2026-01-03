@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -131,8 +135,8 @@
 <p>The representation of kinetic energy in terms of the inertia tensor involved a rectangular coordinate frame with basis vectors, $\hat{e}$. However the kinetic energy must be the same regardless of the coordinate frame use. This fact can be used to derive how the inertia tensor transforms if the body or the coordinate frame are rotated.</p>
 <h4 id="active-and-passive-rotations">Active and passive rotations</h4>
 <p>Rotating the vector $\vec{x}$ by the rotation $R$ produces a new vector $\vec{x’} = R\vec{x}$. $\vec{x}$ may be written in terms of some arbitrary rectangular coordinate system with the basis vectors ($\hat{e_1}$, $\hat{e_2}$, $\hat{e_3}$). Let $\mathbf{x}$ represent the <em>column vector</em> components $x^0$, $x^1$ and $x^2$ fo the vector in this coordinate frame. Let $\mathbf{R}$ be the matrix representation of the rotaton $R$ w.r.t the same coordinate frame. With these definitions, the rotation can be written as: $\mathbf{x}’ = \mathbf{R}\mathbf{x}$. Since this rotation carries the vectors to new vectors, it is an <strong>active rotation</strong>.</p>
-<p>Alternately, we can rotate the basis vectors used to represent the vectors. While the vectors themselves may be unchanged, the components used to represent them are changed because the basis vectors are now in new orientations. If the new, rotated basis vector are represented by $\hat{e}‘_i = R\hat{e}_i$. The componenet along the rotated basis vector is the dot product of the vector $\vec{x}$ with the new basis vector, that is: $(x’)^i = \vec{x} \cdot \hat{e}’_i = \vec{x} \cdot (R \hat{e}_i)$. </p>
-<p>Since the rotation of two vectors preserves the angle (and hence the dot product), between them, </p>
+<p>Alternately, we can rotate the basis vectors used to represent the vectors. While the vectors themselves may be unchanged, the components used to represent them are changed because the basis vectors are now in new orientations. If the new, rotated basis vector are represented by $\hat{e}‘_i = R\hat{e}_i$. The componenet along the rotated basis vector is the dot product of the vector $\vec{x}$ with the new basis vector, that is: $(x’)^i = \vec{x} \cdot \hat{e}’_i = \vec{x} \cdot (R \hat{e}_i)$.</p>
+<p>Since the rotation of two vectors preserves the angle (and hence the dot product), between them,</p>
 <div>
     $$
 \begin{align*}
@@ -141,7 +145,7 @@
 \end{align*}
 $$
 </div>
-<p>Therefore, </p>
+<p>Therefore,</p>
 <div>
     $$
 (x&#x27;)^i = \vec{x} \cdot (\mathbf{R} \hat{e}_i) = R^{-1} \vec{x} \cdot \hat{e}_i \\

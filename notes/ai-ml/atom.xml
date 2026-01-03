@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title>Thomas Antony - AI&#x2F;ML</title>
-	<subtitle>My personal website and notes</subtitle>
-	<link href="https://www.thomasantony.com/notes/ai-ml/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.thomasantony.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2024-08-05T20:18:21.325+00:00</updated>
-	<id>https://www.thomasantony.com/notes/ai-ml/atom.xml</id>
-	<entry xml:lang="en">
-		<title>SINDy: Sparse Identification of Nonlinear Dynamics</title>
-		<published>2024-08-05T20:18:21.325+00:00</published>
-		<updated>2024-08-05T20:18:21.325+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/</id>
-		<content type="html">&lt;p&gt;SINDy&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; is an algorithm for identifying a nonlinear dynamic model from data. The algorithm fits a dynamic model, $\dot{x} = f(\mathbf{x}(t))$, for a state vector $\mathbf{x}$. Steps:&lt;&#x2F;p&gt;
+    <title>Thomas Antony - AI&#x2F;ML</title>
+    <subtitle>My personal website and notes</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://www.thomasantony.com/notes/ai-ml/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://www.thomasantony.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-08-05T20:18:21.325+00:00</updated>
+    <id>https://www.thomasantony.com/notes/ai-ml/atom.xml</id>
+    <entry xml:lang="en">
+        <title>SINDy: Sparse Identification of Nonlinear Dynamics</title>
+        <published>2024-08-05T20:18:21.325+00:00</published>
+        <updated>2024-08-05T20:18:21.325+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/"/>
+        <id>https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/">&lt;p&gt;SINDy&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; is an algorithm for identifying a nonlinear dynamic model from data. The algorithm fits a dynamic model, $\dot{x} = f(\mathbf{x}(t))$, for a state vector $\mathbf{x}$. Steps:&lt;&#x2F;p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Sample $\mathbf{x}$ and $\mathbf{\dot{x}}$ at $m$ points in time into matrices $\mathbf{X}$ and $\mathbf{\dot{X}}$
@@ -34,14 +44,25 @@
 &lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;pysindy.readthedocs.io&#x2F;en&#x2F;latest&#x2F;examples&#x2F;index.html&quot;&gt;PySINDy Examples&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;&#x2F;div&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Hyena Hierarchy: Towards Larger Convolutional Language Models</title>
-		<published>2023-04-23T04:10:30.070+00:00</published>
-		<updated>2023-04-23T04:10:30.070+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202303222110-hyena-hierarchy-towards-larger-convolutional-language-models/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202303222110-hyena-hierarchy-towards-larger-convolutional-language-models/</id>
-		<content type="html">&lt;p&gt;Here are some rough notes on the “Hyena Hierarchy” architecture described in the paper &lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Hyena Hierarchy: Towards Larger Convolutional Language Models</title>
+        <published>2023-04-23T04:10:30.070+00:00</published>
+        <updated>2023-04-23T04:10:30.070+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202303222110-hyena-hierarchy-towards-larger-convolutional-language-models/"/>
+        <id>https://www.thomasantony.com/notes/202303222110-hyena-hierarchy-towards-larger-convolutional-language-models/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202303222110-hyena-hierarchy-towards-larger-convolutional-language-models/">&lt;p&gt;Here are some rough notes on the “Hyena Hierarchy” architecture described in the paper &lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;This is a new way of getting sub-quadratic scaling for attention&lt;&#x2F;p&gt;
@@ -85,18 +106,29 @@
 &lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Finite_impulse_response&quot;&gt;Finite Impulse Response&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;&#x2F;div&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Generalization through memorization: Nearest neighbor language models</title>
-		<published>2023-04-13T02:25:07.127+00:00</published>
-		<updated>2023-04-13T02:25:07.127+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202303121925-paper-generalization-through-memorization-nearest-neighbor-language-models/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202303121925-paper-generalization-through-memorization-nearest-neighbor-language-models/</id>
-		<content type="html">&lt;p&gt;This paper&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; describes a method for augmenting an existing language model with external memory to improve its performance without requiring any extra training. The datastore is initialized for a given dataset and used during inference time. The authors demonstrate performance improvements (measured in perplexity over a given dataset) even when operating on data-stores for datasets the model was not trained on.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Generalization through memorization: Nearest neighbor language models</title>
+        <published>2023-04-13T02:25:07.127+00:00</published>
+        <updated>2023-04-13T02:25:07.127+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202303121925-paper-generalization-through-memorization-nearest-neighbor-language-models/"/>
+        <id>https://www.thomasantony.com/notes/202303121925-paper-generalization-through-memorization-nearest-neighbor-language-models/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202303121925-paper-generalization-through-memorization-nearest-neighbor-language-models/">&lt;p&gt;This paper&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; describes a method for augmenting an existing language model with external memory to improve its performance without requiring any extra training. The datastore is initialized for a given dataset and used during inference time. The authors demonstrate performance improvements (measured in perplexity over a given dataset) even when operating on data-stores for datasets the model was not trained on.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;how-it-works&quot;&gt;How it works&lt;&#x2F;h2&gt;
 &lt;p&gt;The method essentially involves “memorizing” the training set and using it to directly augment the model at inference time. This can also be used for memorizing data &lt;em&gt;other than the training set&lt;&#x2F;em&gt; and give similar improvements.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;indexing-or-memorizing&quot;&gt;Indexing or “Memorizing”&lt;&#x2F;h3&gt;
-&lt;p&gt;The data-store is a “key-value” database, similar to &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;facebookresearch&#x2F;faiss&quot;&gt;faiss&lt;&#x2F;a&gt; or &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.pinecone.io&#x2F;&quot;&gt;pinecone&lt;&#x2F;a&gt; with vectors (of floating point numbers) that form keys and some arbitrary data as value. To “memorize” a data set, the existing LLM is evaluated on the data split into some chunk size, and the outputs of the network right before the final “softmax” layer is used as the “key” for the database, while the subsequent token in the dataset (which the model is supposed to predict) is stored as the value. &lt;&#x2F;p&gt;
+&lt;p&gt;The data-store is a “key-value” database, similar to &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;facebookresearch&#x2F;faiss&quot;&gt;faiss&lt;&#x2F;a&gt; or &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.pinecone.io&#x2F;&quot;&gt;pinecone&lt;&#x2F;a&gt; with vectors (of floating point numbers) that form keys and some arbitrary data as value. To “memorize” a data set, the existing LLM is evaluated on the data split into some chunk size, and the outputs of the network right before the final “softmax” layer is used as the “key” for the database, while the subsequent token in the dataset (which the model is supposed to predict) is stored as the value.&lt;&#x2F;p&gt;
 &lt;p&gt;Assume that $x_0$, $x_1$ … $x_{n-1}$, are the different tokens in a chunk of text from the dataset. Let &lt;code&gt;f&lt;&#x2F;code&gt; be a function that converts this token sequence into the “key” vector. In the paper, they examined different layer outputs for this and showed that the output of the final layer, right before the soft-max activation, is a good candidate for this. So for a given token-sequence, the key and value are given by&lt;&#x2F;p&gt;
 &lt;div&gt;
     $$
@@ -127,14 +159,25 @@ $$
 &lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2210.15859&quot;&gt;You can’t pick your neighbors, or can you? When and how to rely on retrieval in the kNN-LM&lt;&#x2F;a&gt;, Drozdov, A., Wang, S., Rahimi, R., McCallum, A., Zamani, H., &amp;amp; Iyyer, M. (2022)&lt;&#x2F;p&gt;
 &lt;&#x2F;div&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>How was ChatGPT trained?</title>
-		<published>2023-03-15T06:19:22.987+00:00</published>
-		<updated>2023-03-15T06:19:22.987+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202302142319-how-was-chatgpt-trained/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202302142319-how-was-chatgpt-trained/</id>
-		<content type="html">&lt;ol&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>How was ChatGPT trained?</title>
+        <published>2023-03-15T06:19:22.987+00:00</published>
+        <updated>2023-03-15T06:19:22.987+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202302142319-how-was-chatgpt-trained/"/>
+        <id>https://www.thomasantony.com/notes/202302142319-how-was-chatgpt-trained/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202302142319-how-was-chatgpt-trained/">&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Train a GPT-like model to “understand langauge”. This could be based on a data-set of prompts and expected responses.&lt;&#x2F;p&gt;
 &lt;&#x2F;li&gt;
@@ -149,5 +192,6 @@ $$
 &lt;p&gt;[1] https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=_MPJ3CyDokU&lt;&#x2F;p&gt;
 &lt;p&gt;[2] “Learning to summarize from human feedback” https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2009.01325.pdf&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

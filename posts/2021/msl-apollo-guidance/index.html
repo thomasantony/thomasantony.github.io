@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -157,7 +161,7 @@ This post is a companion to the <a rel="noopener" target="_blank" href="https://
 \end{align*}
 $$
 </div>
-<p>where </p>
+<p>where</p>
 <div>
     $$
 \begin{align*}
@@ -174,8 +178,8 @@ $$
 <p>Surface atmospheric density, $\rho_0$ and scale height, $H$ define the exponential atmospheric model. $g$ is a constant value for acceleration due to gravity. $u$ is the bank angle of the vehicle. The states are collectively referred to as $\mathbf{x}$. The equations of motions may be collectively referred to as $\mathbf{f}(\mathbf{x}, u, t)$.</p>
 <h2 id="deriving-the-apollo-entry-guidance-algorithm">Deriving the Apollo Entry Guidance Algorithm</h2>
 <h3 id="note-on-the-variation-operator">Note on the Variation Operator</h3>
-<p>This derivation requires the use of the “variation operator”, denoted by $\delta$, sometimes called a <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Functional_derivative">functional derivative</a> or variational derivative. A functional is a function that acts on functions. For example, $J(y(t))$ is a functional because $y$ is itself a function of time. Here $J$ is a scalar quantity derived from a function $y(t)$, that essentially consists of an infinite number of points. </p>
-<p>The variational operator is to functionals, what derivatives are to functions. Similar to how a stationary point of a function can be found by setting its derivative to zero, the stationary point of a functional can be found by setting its variation to zero. </p>
+<p>This derivation requires the use of the “variation operator”, denoted by $\delta$, sometimes called a <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Functional_derivative">functional derivative</a> or variational derivative. A functional is a function that acts on functions. For example, $J(y(t))$ is a functional because $y$ is itself a function of time. Here $J$ is a scalar quantity derived from a function $y(t)$, that essentially consists of an infinite number of points.</p>
+<p>The variational operator is to functionals, what derivatives are to functions. Similar to how a stationary point of a function can be found by setting its derivative to zero, the stationary point of a functional can be found by setting its variation to zero.</p>
 <p>Please check the following links if you want to learn more:</p>
 <p><a rel="noopener" target="_blank" href="https://www.youtube.com/watch?v=vqDHO2eKXcs">https://www.youtube.com/watch?v=vqDHO2eKXcs</a></p>
 <p><a rel="noopener" target="_blank" href="https://canvas.vt.edu/files/1315932/download?download_frd=1">https://canvas.vt.edu/files/1315932/download?download_frd=1</a></p>
@@ -316,7 +320,7 @@ $$
 \mathbf{\lambda}^\intercal(t_0) \delta\mathbf{x}(t_0) = \lambda_h(t_0) \delta h(t_0) + \lambda_s(t_0) \delta s(t_0) + \lambda_v(t_0) \delta v(t_0) + \lambda_\gamma(t_0) \delta \gamma(t_0)
 $$
 </div>
-<p>Since we are trying to keep $J$ stationary about the reference trajectory, all of the terms here must be evaluated w.r.t the reference trajectory (denoted by the $^*$). We also change the independent variable to the velocity, $v$ as that is a better value for matching up the current state of the vehicle to the reference state (for computing the $\delta$’s). </p>
+<p>Since we are trying to keep $J$ stationary about the reference trajectory, all of the terms here must be evaluated w.r.t the reference trajectory (denoted by the $^*$). We also change the independent variable to the velocity, $v$ as that is a better value for matching up the current state of the vehicle to the reference state (for computing the $\delta$’s).</p>
 <div>
     $$
 \begin{align}
@@ -324,7 +328,7 @@ $$
 \end{align}
 $$
 </div>
-<p>Also, the altitude rate $\dot{h}$ and drag acceleration $D/m$ are more accurately estimated by sensors on board the spacecraft than the altitude or flight-path angle. </p>
+<p>Also, the altitude rate $\dot{h}$ and drag acceleration $D/m$ are more accurately estimated by sensors on board the spacecraft than the altitude or flight-path angle.</p>
 <div>
     $$
 \begin{align}
@@ -376,9 +380,9 @@ $$
 $$
 </div>
 <h2 id="apollo-guidance-bank-angle-policy">Apollo Guidance Bank Angle Policy</h2>
-<p>When we actually implement this guidance algorithm, $t_0$ and $\mathbf{\mathbf{x}_0}$ corresponds to the “current” time and state of the spacecraft. All the $\delta{\mathbf{x}}$ values are therefore computed by comparing the current trajectory to the reference trajectory. For example, </p>
-<p>$\delta h(v_0) = h(v_0) - h^{*}(v_0)$ </p>
-<p>where $h(v_0)$ is the current altitude and $h^*(v_0)$ is the altitude on the reference trajectory corresponding to the current speed. </p>
+<p>When we actually implement this guidance algorithm, $t_0$ and $\mathbf{\mathbf{x}_0}$ corresponds to the “current” time and state of the spacecraft. All the $\delta{\mathbf{x}}$ values are therefore computed by comparing the current trajectory to the reference trajectory. For example,</p>
+<p>$\delta h(v_0) = h(v_0) - h^{*}(v_0)$</p>
+<p>where $h(v_0)$ is the current altitude and $h^*(v_0)$ is the altitude on the reference trajectory corresponding to the current speed.</p>
 <p>Putting it all together, $\eqref{eqn:delu_1}$ becomes</p>
 <div>
     $$
@@ -395,7 +399,7 @@ F_3(v_0) &amp;= \lambda_u^*(v_0)
 \end{align}
 $$
 </div>
-<p>Also, it can be found that $\lambda_s$ has a constant value of 1 since $\frac{\partial \mathbf{s}}{\partial s} = 0$ and $\lambda_s(t_f) = 1$. </p>
+<p>Also, it can be found that $\lambda_s$ has a constant value of 1 since $\frac{\partial \mathbf{s}}{\partial s} = 0$ and $\lambda_s(t_f) = 1$.</p>
 <p>So the final expression for $\delta u$ becomes:</p>
 <div>
     $$

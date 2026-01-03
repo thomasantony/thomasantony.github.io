@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -138,10 +142,10 @@ x &amp;= F(t, x&#x27;) \\
 \end{align*}
 $$
 </div>
-<p>This last step is an example from a more general scenario where we want to abstract a local tuple function from a path function. Consider a function, $f$ of the local tuple. We typically apply $f$ to a path by composing it with $\Gamma$. $\Gamma$ is a function which extracts the local tuple from a path (the path itself is usually denoted computationally as symbolic coordinate functions like $x(t)$, $y(t)$ etc.). Given $f$, a corresponding path-dependent function $\bar{f}[q]$ can be defined using $\Gamma$ as $\bar{f}[q] = f \circ \Gamma[q]$. The question now is given $\bar{f}$, how can we reconstitute $f$. </p>
-<p>We know that $f$ depends only on a certain finite number of components, $n$ of the local-tuple (say, $t$, $x$ and $v$). Therefore $\bar{f}$ also depends only on the corresponding local components of the path. It is important to note that the path may be more complex than can be represented by $n$ components. Even so, the path-dependent function $\bar{f}$ <em>still</em> has same value for all the paths that share the same first $n$ local components. </p>
+<p>This last step is an example from a more general scenario where we want to abstract a local tuple function from a path function. Consider a function, $f$ of the local tuple. We typically apply $f$ to a path by composing it with $\Gamma$. $\Gamma$ is a function which extracts the local tuple from a path (the path itself is usually denoted computationally as symbolic coordinate functions like $x(t)$, $y(t)$ etc.). Given $f$, a corresponding path-dependent function $\bar{f}[q]$ can be defined using $\Gamma$ as $\bar{f}[q] = f \circ \Gamma[q]$. The question now is given $\bar{f}$, how can we reconstitute $f$.</p>
+<p>We know that $f$ depends only on a certain finite number of components, $n$ of the local-tuple (say, $t$, $x$ and $v$). Therefore $\bar{f}$ also depends only on the corresponding local components of the path. It is important to note that the path may be more complex than can be represented by $n$ components. Even so, the path-dependent function $\bar{f}$ <em>still</em> has same value for all the paths that share the same first $n$ local components.</p>
 <p>By “reconstituting” $f$, what we mean here is that we want to find the value of $f$ for some local tuple argument, when we only know the function definition of $\bar{f}$. To do this, we take the argument of $f$ (which is a finite initial segment of the local tuple), constructing a path that has this local description (say, using a power series), and then finding the value of $\bar{f}$ for this path.</p>
-<p>Two paths that have the same $n$ initial components of the local tuple in its description (or “have the same local description up to the nth derivative”) are said to <em>osculate with order $n$ contact</em>. One example of this is a path, and a truncated power series representation of the path up to order $n$, have order $n$ contact. If we have a power-series representation of the path available up to $n$-th order, and a local tuple function takes fewer than $n$ components of the local tuple, then as far as this function is concerned, the path and the trunctated power series are equivalent. </p>
+<p>Two paths that have the same $n$ initial components of the local tuple in its description (or “have the same local description up to the nth derivative”) are said to <em>osculate with order $n$ contact</em>. One example of this is a path, and a truncated power series representation of the path up to order $n$, have order $n$ contact. If we have a power-series representation of the path available up to $n$-th order, and a local tuple function takes fewer than $n$ components of the local tuple, then as far as this function is concerned, the path and the trunctated power series are equivalent.</p>
 <p>Let $O$ be a function that generates an osculating path with the given local tuple components, i.e.</p>
 <div>
     $$
@@ -235,7 +239,7 @@ $$
 </span><span>  ((</span><span style="color:#bf616a;">super-F-&gt;C</span><span> p2r)
 </span><span>   (</span><span style="color:#bf616a;">up </span><span>&#39;t (</span><span style="color:#bf616a;">up </span><span>&#39;r &#39;theta) (</span><span style="color:#bf616a;">up </span><span>&#39;rdot &#39;thetadot) (</span><span style="color:#bf616a;">up </span><span>&#39;rdotdot &#39;thetadotdot))))
 </span></code></pre>
-<p>This is a very convoluted function at first look but also elegant in certain ways. My understanding is that we go through this roundabout way of path-&gt;tuple-&gt;path-&gt;tuple so that we can expand/contract the number of components of the path description that we are interested in. One example of this can be seen when applying <code>F-&gt;C</code> to the <code>coordinate</code> function which simply extracts the position out of the local tuple (it returns the same local tuple that was passed in). </p>
+<p>This is a very convoluted function at first look but also elegant in certain ways. My understanding is that we go through this roundabout way of path-&gt;tuple-&gt;path-&gt;tuple so that we can expand/contract the number of components of the path description that we are interested in. One example of this can be seen when applying <code>F-&gt;C</code> to the <code>coordinate</code> function which simply extracts the position out of the local tuple (it returns the same local tuple that was passed in).</p>
 <pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>(rendertex
 </span><span>  ((super-F-&gt;C coordinate)
 </span><span>   (up &#39;t (up &#39;r &#39;theta) (up &#39;rdot &#39;thetadot) (up &#39;rdotdot &#39;thetadotdot))))
@@ -246,7 +250,7 @@ $$
 $$
 </div>
 <p>The <code>F</code> function “contracts” (probably inaccurate terminology here) the local tuple that is passed in into just the position coordinates aka “path”. And to extract out more components from this, it is necessary to wrap the input in <code>Gamma</code> and the function itself in <code>Gamma-bar</code>.</p>
-<p><code>Gamma-bar</code> can also be used to compute the total time derivative $D_t F$ of the local tuple function $F$. </p>
+<p><code>Gamma-bar</code> can also be used to compute the total time derivative $D_t F$ of the local tuple function $F$.</p>
 <div>
     $$
 D_t (F \circ \Gamma[q]) = \bar{\Gamma}[ D(F \circ \Gamma[q]) ]
@@ -272,7 +276,7 @@ $$
 \bar{\mathscr{E}}[L][q] = D_t(\partial_2 L \circ \Gamma[q]) - \partial_1 L \circ \Gamma[q]
 $$
 </div>
-<p>These path-dependent E-L equations can be converted to local-tuple function, $\mathscr{E}[L]$ using <code>Gamma-bar</code>. </p>
+<p>These path-dependent E-L equations can be converted to local-tuple function, $\mathscr{E}[L]$ using <code>Gamma-bar</code>.</p>
 <div>
     $$
 \mathscr{E}[L] = \bar{\Gamma}(\bar{\mathcal{E}}[L]) \\
@@ -303,7 +307,7 @@ $$
 </span><span> &#39;t)
 </span><span>    )
 </span></code></pre>
-<p>The <strong>Euler-Lagrange operator</strong> takes in a Lagrangian function as input and directly create a new function which will define the Euler-Lagrange equations on passing in the local tuple. </p>
+<p>The <strong>Euler-Lagrange operator</strong> takes in a Lagrangian function as input and directly create a new function which will define the Euler-Lagrange equations on passing in the local tuple.</p>
 <h3 id="summary">Summary</h3>
 <p>The functions/operators introduced in this section such as <code>Gamma-bar</code>, <code>Dt</code> and <code>Euler-Lagrange-operator</code> seem to be aimed at delaying evaluation as much as possible. We can stay in the realm of functions until the very end where we evaluate it on a local tuple to get the answer. Because these functions are eventually operating on paths, we need to make sure they are represented as path-dependent functions before transforming them. However, we wrap the path-dependant function in <code>Gamma-bar</code> at the end to make sure that we can still pass in the input as a local tuple.</p>
 <p>While there is still more I could understand about the mechanism/logic by which this is possible, this is where I will stop for now.</p>

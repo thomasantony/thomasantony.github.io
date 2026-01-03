@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -138,7 +142,7 @@
 <h2 id="16-bit-register">16-bit register</h2>
 <p>A 16-bit register chip has a 16-bit input <code>in</code>, a single bit <code>load</code> input and a 16-bit output, <code>out</code>. This can be implemented by stacking 8 one-bit register and fanning out the load input to all of them. The inputs and outputs of each “bit” chip is wired to the individual bits of <code>in</code> and <code>out</code> respectively.</p>
 <h2 id="ram8-chip">RAM8 chip</h2>
-<p>This is a chip that can store 8 “words” (in this case 16-bit words). The chip has a 16-bit <code>in</code> input, 3-bit <code>address</code>  input and a 16-bit output, <code>out</code>. It uses a Demuxer to split out the <code>address</code> into 8 different <code>load</code> bits which are then fed into <code>Register</code> chips. <code>in</code> is fanned out to all the underlying <code>Register</code> chips. The outputs of the registers are then connected to the <code>out</code> pin through a Multiplexer with the <code>address</code> as its selector. </p>
+<p>This is a chip that can store 8 “words” (in this case 16-bit words). The chip has a 16-bit <code>in</code> input, 3-bit <code>address</code>  input and a 16-bit output, <code>out</code>. It uses a Demuxer to split out the <code>address</code> into 8 different <code>load</code> bits which are then fed into <code>Register</code> chips. <code>in</code> is fanned out to all the underlying <code>Register</code> chips. The outputs of the registers are then connected to the <code>out</code> pin through a Multiplexer with the <code>address</code> as its selector.</p>
 <h2 id="ram64-ram512-ram4k-and-ram16k">RAM64, RAM512, RAM4K and RAM16K</h2>
 <p>These are built in the same manner as <code>RAM8</code> but by composing <code>RAMx</code> chips using a Demuxer and Muxer. <code>RAM64</code> has a 6-bit <code>address</code> input, where the 3 most-significant bits select the underlying <code>RAM8</code> chip and the 3 LSBs signify the address in the underlying <code>RAM8</code>. Therefore the <code>load</code> bit is wired to the <code>RAM8</code> chips through a Demuxer with <code>address[3..5]</code> as the <code>sel</code> input and <code>address[0..2]</code> is passed through directly to the underlying chips. The output is similarly muxed using <code>address[3..5]</code> as the selector. The higher capacity chips are built in the same way by stacking 4 or 8 lower capacity chips and an appropriately sized Demuxer and Muxer.</p>
 </article>

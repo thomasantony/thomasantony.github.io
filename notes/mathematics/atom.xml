@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title>Thomas Antony - Mathematics</title>
-	<subtitle>My personal website and notes</subtitle>
-	<link href="https://www.thomasantony.com/notes/mathematics/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.thomasantony.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2025-11-23T20:06:28.023+00:00</updated>
-	<id>https://www.thomasantony.com/notes/mathematics/atom.xml</id>
-	<entry xml:lang="en">
-		<title>Inner Product of Functions</title>
-		<published>2025-11-23T20:06:28.023+00:00</published>
-		<updated>2025-11-23T20:06:28.023+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202510231206-inner-product-of-functions/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202510231206-inner-product-of-functions/</id>
-		<content type="html">&lt;p&gt;The inner&#x2F;dot product for Euclidean vectors is defined as:&lt;&#x2F;p&gt;
+    <title>Thomas Antony - Mathematics</title>
+    <subtitle>My personal website and notes</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://www.thomasantony.com/notes/mathematics/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://www.thomasantony.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-11-23T20:06:28.023+00:00</updated>
+    <id>https://www.thomasantony.com/notes/mathematics/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Inner Product of Functions</title>
+        <published>2025-11-23T20:06:28.023+00:00</published>
+        <updated>2025-11-23T20:06:28.023+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202510231206-inner-product-of-functions/"/>
+        <id>https://www.thomasantony.com/notes/202510231206-inner-product-of-functions/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202510231206-inner-product-of-functions/">&lt;p&gt;The inner&#x2F;dot product for Euclidean vectors is defined as:&lt;&#x2F;p&gt;
 &lt;div&gt;
     $$
 \langle u, v \rangle = \sum_{i} u_i v_i
@@ -32,14 +42,25 @@ $$
 $$
 &lt;&#x2F;div&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Norm of a Function or Square integrable functions</title>
-		<published>2025-11-23T19:56:54.213+00:00</published>
-		<updated>2025-11-23T19:56:54.213+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202510231156-norm-of-a-function/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202510231156-norm-of-a-function/</id>
-		<content type="html">&lt;p&gt;We know that &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202510231154-functions-form-a-vector-space&#x2F;&quot;&gt;functions can be treated as infinite dimensional vectors&lt;&#x2F;a&gt;. A vector has a norm or length defined for it. How do we do that for a function?&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Norm of a Function or Square integrable functions</title>
+        <published>2025-11-23T19:56:54.213+00:00</published>
+        <updated>2025-11-23T19:56:54.213+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202510231156-norm-of-a-function/"/>
+        <id>https://www.thomasantony.com/notes/202510231156-norm-of-a-function/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202510231156-norm-of-a-function/">&lt;p&gt;We know that &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202510231154-functions-form-a-vector-space&#x2F;&quot;&gt;functions can be treated as infinite dimensional vectors&lt;&#x2F;a&gt;. A vector has a norm or length defined for it. How do we do that for a function?&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;square-integrable-functions&quot;&gt;Square integrable functions&lt;&#x2F;h2&gt;
 &lt;p&gt;Assume that we have a function: $f: \mathbb{R} \to \mathbb{C}$. It is said to be &lt;em&gt;square integrable&lt;&#x2F;em&gt; if it satisfies the following condition:&lt;&#x2F;p&gt;
 &lt;div&gt;
@@ -50,14 +71,25 @@ $$
 &lt;p&gt;This is similar to the squared sum of all elements in a vector and can be considered equivalent to a squared Euclidean norm ($\sum_i v_i$). This is a measure of &lt;em&gt;length&lt;&#x2F;em&gt; and the condition above is asserting that this “length” is finite for the given function (vector). For functions, this quantity is typically called &lt;em&gt;energy&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;The set of such functions are commonly denoted as $\mathbb{L}^2$ and is a subset of the &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202510231154-functions-form-a-vector-space&#x2F;&quot;&gt;vector space of all functions&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Functions form a Vector Space</title>
-		<published>2025-11-23T19:54:51.959+00:00</published>
-		<updated>2025-11-23T19:54:51.959+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202510231154-functions-form-a-vector-space/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202510231154-functions-form-a-vector-space/</id>
-		<content type="html">&lt;p&gt;Functions can be treated as infinite dimensional vectors. For example, typically a vector is interpreted as an ordered list of numbers. This could also be interpreted as a function mapping the indices to the values. E.g. a vector in $\mathbb{R}^3$ can be considered to be a function mapping the domain $1, 2, 3$ to the codomain $\mathbb{R}$ (since the values in the vector are real numbers).&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Functions form a Vector Space</title>
+        <published>2025-11-23T19:54:51.959+00:00</published>
+        <updated>2025-11-23T19:54:51.959+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202510231154-functions-form-a-vector-space/"/>
+        <id>https://www.thomasantony.com/notes/202510231154-functions-form-a-vector-space/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202510231154-functions-form-a-vector-space/">&lt;p&gt;Functions can be treated as infinite dimensional vectors. For example, typically a vector is interpreted as an ordered list of numbers. This could also be interpreted as a function mapping the indices to the values. E.g. a vector in $\mathbb{R}^3$ can be considered to be a function mapping the domain $1, 2, 3$ to the codomain $\mathbb{R}$ (since the values in the vector are real numbers).&lt;&#x2F;p&gt;
 &lt;div&gt;
     $$
 v: \{1, 2, 3\} \to \mathbb{R}
@@ -70,31 +102,53 @@ $$
 &lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;eli.thegreenplace.net&#x2F;2025&#x2F;hilbert-space-treating-functions-as-vectors&#x2F;&quot;&gt;Hilbert space: treating functions as vectors - Appendix A&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;&#x2F;div&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Inner Product Space</title>
-		<published>2025-11-23T19:39:29.694+00:00</published>
-		<updated>2025-11-23T19:39:29.694+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202510231139-inner-product-space/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202510231139-inner-product-space/</id>
-		<content type="html">&lt;p&gt;An inner product space&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; is a real or complex vector space that has an operation called an “inner product” defined for it. The inner product of two vectors is a scalar, and is typically denoted by angle brackets like $\langle a, b\rangle$.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Inner Product Space</title>
+        <published>2025-11-23T19:39:29.694+00:00</published>
+        <updated>2025-11-23T19:39:29.694+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202510231139-inner-product-space/"/>
+        <id>https://www.thomasantony.com/notes/202510231139-inner-product-space/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202510231139-inner-product-space/">&lt;p&gt;An inner product space&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; is a real or complex vector space that has an operation called an “inner product” defined for it. The inner product of two vectors is a scalar, and is typically denoted by angle brackets like $\langle a, b\rangle$.&lt;&#x2F;p&gt;
 &lt;p&gt;This is a generalization of the dot product that is defined in Euclidean vector spaces ($a \cdot b = \sum a_i b_i $). The existence of an inner product also allows generalized definition of other concepts such as angles, lengths and orthogonality (zero inner product) between the vectors in the vector space.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
 &lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
 &lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Inner_product_space&quot;&gt;Inner Product Space&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;&#x2F;div&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Hilbert Spaces</title>
-		<published>2025-11-23T19:37:16.546+00:00</published>
-		<updated>2025-11-23T19:37:16.546+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202510231137-hilbert-spaces/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202510231137-hilbert-spaces/</id>
-		<content type="html">&lt;p&gt;A Hilbert space is an &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202510231139-inner-product-space&#x2F;&quot;&gt;inner product space&lt;&#x2F;a&gt; that is also “complete” w.r.t the inner product - i.e. no sequence of elements in the set converges to an element outside the set. This is a generalization of the Euclidean vector space to infinite dimensions.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Hilbert Spaces</title>
+        <published>2025-11-23T19:37:16.546+00:00</published>
+        <updated>2025-11-23T19:37:16.546+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202510231137-hilbert-spaces/"/>
+        <id>https://www.thomasantony.com/notes/202510231137-hilbert-spaces/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202510231137-hilbert-spaces/">&lt;p&gt;A Hilbert space is an &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202510231139-inner-product-space&#x2F;&quot;&gt;inner product space&lt;&#x2F;a&gt; that is also “complete” w.r.t the inner product - i.e. no sequence of elements in the set converges to an element outside the set. This is a generalization of the Euclidean vector space to infinite dimensions.&lt;&#x2F;p&gt;
 &lt;p&gt;The key intuition behind this is to treat &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202510231154-functions-form-a-vector-space&#x2F;&quot;&gt;functions as infinite dimensional vectors&lt;&#x2F;a&gt;, which have &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202510231206-inner-product-of-functions&#x2F;&quot;&gt;inner products&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202510231156-norm-of-a-function&#x2F;&quot;&gt;norms&lt;&#x2F;a&gt; just like Euclidean vectors. This allows us to generalize many concepts from vectors to apply to functions.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;generalized-fourier-series&quot;&gt;Generalized Fourier Series&lt;&#x2F;h2&gt;
-&lt;p&gt;A fourier series&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; is a way of expressing a perioding function as a weighted sum of sines and cosines of different frequencies. &lt;&#x2F;p&gt;
+&lt;p&gt;A fourier series&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; is a way of expressing a perioding function as a weighted sum of sines and cosines of different frequencies.&lt;&#x2F;p&gt;
 &lt;p&gt;For functions in $\mathbb{L}^2$, the inner product allows us to define the concepts of &lt;em&gt;orthogonality&lt;&#x2F;em&gt; and &lt;em&gt;basis vectors&lt;&#x2F;em&gt;. This in turn lets us express these functions as a weighted sum of of a series of &lt;em&gt;orthogonal basis functions&lt;&#x2F;em&gt; that span the space. This allows us to apply concepts from Linear Algebra such as the Gram-Schmidt process&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#3&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; to the space of functions. This is how we get orthogonal basis functions such as Chebyshev polynomials &lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#4&quot;&gt;3&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; and Legendre polynomials&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#5&quot;&gt;4&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
 &lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;5&lt;&#x2F;sup&gt;
@@ -113,14 +167,25 @@ $$
 &lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Legendre_polynomials&quot;&gt;Legendre Polynomials&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;&#x2F;div&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Generating Perpendicular Basis Vectors in a Plane</title>
-		<published>2022-10-14T03:14:56.441+00:00</published>
-		<updated>2022-10-14T03:14:56.441+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202209132014-generating-perpendicular-basis-vectors-in-a-plane/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202209132014-generating-perpendicular-basis-vectors-in-a-plane/</id>
-		<content type="html">&lt;p&gt;This is an easier&#x2F;less computationally expensive method compared to the one described in &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202207231849-points-in-a-plane-using-null-space&#x2F;&quot;&gt;Points in a plane using null space&lt;&#x2F;a&gt;. This is based on &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202209132012-cross-product-by-matrix-multiplication&#x2F;&quot;&gt;Cross Product By Matrix Multiplication&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Generating Perpendicular Basis Vectors in a Plane</title>
+        <published>2022-10-14T03:14:56.441+00:00</published>
+        <updated>2022-10-14T03:14:56.441+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202209132014-generating-perpendicular-basis-vectors-in-a-plane/"/>
+        <id>https://www.thomasantony.com/notes/202209132014-generating-perpendicular-basis-vectors-in-a-plane/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202209132014-generating-perpendicular-basis-vectors-in-a-plane/">&lt;p&gt;This is an easier&#x2F;less computationally expensive method compared to the one described in &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202207231849-points-in-a-plane-using-null-space&#x2F;&quot;&gt;Points in a plane using null space&lt;&#x2F;a&gt;. This is based on &lt;a href=&quot;https:&#x2F;&#x2F;www.thomasantony.com&#x2F;notes&#x2F;202209132012-cross-product-by-matrix-multiplication&#x2F;&quot;&gt;Cross Product By Matrix Multiplication&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;We start with the unit vector $\mathbf{u}$, normal to the plane of interest. We compute the cross product matrix $U_\times$ as:&lt;&#x2F;p&gt;
 &lt;div&gt;
     $$
@@ -131,7 +196,7 @@ u_3  &amp;amp; 0  &amp;amp; -u_1\\
 \end{bmatrix}
 $$
 &lt;&#x2F;div&gt;
-&lt;p&gt;where $u_1$, $u_2$ and $u_3$ are the components of $\mathbf{u}$. Since $\mathbf{u}$ is a non-null unit vector, either the first or the second column of $U_\times$ will be a non-null vector. This vector will also be perpendicular to $\mathbf{u}$. This can be verified by the dot product: &lt;&#x2F;p&gt;
+&lt;p&gt;where $u_1$, $u_2$ and $u_3$ are the components of $\mathbf{u}$. Since $\mathbf{u}$ is a non-null unit vector, either the first or the second column of $U_\times$ will be a non-null vector. This vector will also be perpendicular to $\mathbf{u}$. This can be verified by the dot product:&lt;&#x2F;p&gt;
 &lt;div&gt;
     $$
 \begin{align*}
@@ -148,14 +213,25 @@ $$
 &lt;&#x2F;div&gt;
 &lt;p&gt;Linear combinations of $\mathbf{v}$ and $\mathbf{w}$ can be used to generate vectors in the plane normal to $\mathbf{u}$.&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Cross Product by Matrix Multiplication</title>
-		<published>2022-10-14T03:12:52.909+00:00</published>
-		<updated>2022-10-14T03:12:52.909+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202209132012-cross-product-by-matrix-multiplication/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202209132012-cross-product-by-matrix-multiplication/</id>
-		<content type="html">&lt;p&gt;For two vectors $\vec{a}$ and $\vec{b}$, the cross product $\vec{a} \times \vec{b}$ can be computed using matrix multiplcation&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; as:&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Cross Product by Matrix Multiplication</title>
+        <published>2022-10-14T03:12:52.909+00:00</published>
+        <updated>2022-10-14T03:12:52.909+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202209132012-cross-product-by-matrix-multiplication/"/>
+        <id>https://www.thomasantony.com/notes/202209132012-cross-product-by-matrix-multiplication/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202209132012-cross-product-by-matrix-multiplication/">&lt;p&gt;For two vectors $\vec{a}$ and $\vec{b}$, the cross product $\vec{a} \times \vec{b}$ can be computed using matrix multiplcation&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; as:&lt;&#x2F;p&gt;
 &lt;div&gt;
     $$
 \vec{a} \times \vec{b} = A_\times \vec{b}
@@ -176,20 +252,31 @@ $$
 &lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cross_product#Conversion_to_matrix_multiplication&quot;&gt;Cross Product: Conversion to Matrix Multiplication&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;&#x2F;div&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Two&#x27;s Complement Notation for Binary Addition</title>
-		<published>2022-09-04T03:41:18.681+00:00</published>
-		<updated>2022-09-04T03:41:18.681+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/</id>
-		<content type="html">&lt;p&gt;Two’s complement is a format for representing negative numbers in binary. A number &lt;code&gt;-X&lt;&#x2F;code&gt; is represented as an &lt;code&gt;N&lt;&#x2F;code&gt; bit value using the binary value of &lt;code&gt;2^N-X&lt;&#x2F;code&gt;. E.g. -5 in 4-bit integers would be &lt;code&gt;2^4 - 5&lt;&#x2F;code&gt; = &lt;code&gt;11&lt;&#x2F;code&gt; (or &lt;code&gt;0b1010&lt;&#x2F;code&gt;). The advantage of using this representation is that it makes addition of negative numbers possible with existing binary adder circuits (or logic gate implementation). The reason this works is that the output we get from an adder circuit is actually the “modulo 2^n” representation. &lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Two&#x27;s Complement Notation for Binary Addition</title>
+        <published>2022-09-04T03:41:18.681+00:00</published>
+        <updated>2022-09-04T03:41:18.681+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/"/>
+        <id>https://www.thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202208032041-two-s-complement-notation-for-binary-addition/">&lt;p&gt;Two’s complement is a format for representing negative numbers in binary. A number &lt;code&gt;-X&lt;&#x2F;code&gt; is represented as an &lt;code&gt;N&lt;&#x2F;code&gt; bit value using the binary value of &lt;code&gt;2^N-X&lt;&#x2F;code&gt;. E.g. -5 in 4-bit integers would be &lt;code&gt;2^4 - 5&lt;&#x2F;code&gt; = &lt;code&gt;11&lt;&#x2F;code&gt; (or &lt;code&gt;0b1010&lt;&#x2F;code&gt;). The advantage of using this representation is that it makes addition of negative numbers possible with existing binary adder circuits (or logic gate implementation). The reason this works is that the output we get from an adder circuit is actually the “modulo 2^n” representation.&lt;&#x2F;p&gt;
 &lt;p&gt;Example: -2 + -3 using 4-bit integers&lt;&#x2F;p&gt;
 &lt;p&gt;-2 in 2’s complement is 2^4 - 2 = 16-2 = 14 or &lt;code&gt;0b1110&lt;&#x2F;code&gt;
 -3 in 2’s complement is 2^4 - 3 = 16-3 = 13 or &lt;code&gt;0b1101&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
 &lt;p&gt;Performing binary addition of &lt;code&gt;0b1110&lt;&#x2F;code&gt; and &lt;code&gt;0b1101&lt;&#x2F;code&gt; we get, &lt;code&gt;0b1011&lt;&#x2F;code&gt; and a carry bit of 1 which is discarded. &lt;code&gt;0b1011&lt;&#x2F;code&gt; is &lt;code&gt;11&lt;&#x2F;code&gt; in decimal. This is equal to &lt;code&gt;-5&lt;&#x2F;code&gt; in 2’s complement representation which is the correct answer.&lt;&#x2F;p&gt;
 &lt;p&gt;In order to do subtractions using a digital adder circuit, it becomes necessary to compute “-x” given a value “x”. This is done as follows:&lt;&#x2F;p&gt;
-&lt;p&gt;Negative value of X in 2’s complement notation is given by &lt;&#x2F;p&gt;
+&lt;p&gt;Negative value of X in 2’s complement notation is given by&lt;&#x2F;p&gt;
 &lt;p&gt;2^n - x = 1 + 2^n - 1 - x = 1 + (2^n -1 ) - x
 = 1 + (0b111111… - x)
 = 1 + ~X where ~ is the bitwise inverse
@@ -206,14 +293,25 @@ $$
 &lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Two%27s_complement#Addition&quot;&gt;Two’s complement - Wikipedia&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;&#x2F;div&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Points in a plane using null space</title>
-		<published>2022-08-24T01:49:19.119+00:00</published>
-		<updated>2022-08-24T01:49:19.119+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202207231849-points-in-a-plane-using-null-space/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202207231849-points-in-a-plane-using-null-space/</id>
-		<content type="html">&lt;p&gt;A plane can be defined using its normal vector &lt;code&gt;n&lt;&#x2F;code&gt;. Points in the plane represented by this vector can be generated by first computing the null space of this vector. This gives the two basis vectors (assuming 3D space) for the plane. These basis vectors can then be scaled as necessary to generate points. For example, to generate a circle of points in a plane:&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Points in a plane using null space</title>
+        <published>2022-08-24T01:49:19.119+00:00</published>
+        <updated>2022-08-24T01:49:19.119+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202207231849-points-in-a-plane-using-null-space/"/>
+        <id>https://www.thomasantony.com/notes/202207231849-points-in-a-plane-using-null-space/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202207231849-points-in-a-plane-using-null-space/">&lt;p&gt;A plane can be defined using its normal vector &lt;code&gt;n&lt;&#x2F;code&gt;. Points in the plane represented by this vector can be generated by first computing the null space of this vector. This gives the two basis vectors (assuming 3D space) for the plane. These basis vectors can then be scaled as necessary to generate points. For example, to generate a circle of points in a plane:&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;numpy &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;as &lt;&#x2F;span&gt;&lt;span&gt;np
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;scipy &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;as &lt;&#x2F;span&gt;&lt;span&gt;sp
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;scipy.linalg
@@ -231,19 +329,30 @@ $$
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;An easier&#x2F;less expensive method can be found at [[202209132014_generating-perpendicular-basis-vectors-in-a-plane]]&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Solve Wordle Using Information Theory</title>
-		<published>2022-02-06T17:05:33.089+00:00</published>
-		<updated>2022-02-06T17:05:33.089+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/</id>
-		<content type="html">&lt;p&gt;This is a note about how to use information theory to create an optimal strategy for solving “Wordle”.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Solve Wordle Using Information Theory</title>
+        <published>2022-02-06T17:05:33.089+00:00</published>
+        <updated>2022-02-06T17:05:33.089+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/"/>
+        <id>https://www.thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202201061105-solve-wordle-using-information-theory/">&lt;p&gt;This is a note about how to use information theory to create an optimal strategy for solving “Wordle”.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;initial-ideas&quot;&gt;Initial ideas&lt;&#x2F;h2&gt;
 &lt;p&gt;For any given word, we can find a distribution for probabilities for each pattern of colors that could be revealed. Example, for “WEARY”, there is some number of words that do not contain any of the letters, some that contain W, some with W and E, some with E at the first position, etc.&lt;&#x2F;p&gt;
 &lt;p&gt;We can geenrate the list of all possible outcomes for a given word, and check how many words in the list match the patterns to come up with a probability.&lt;&#x2F;p&gt;
 &lt;p&gt;&lt;strong&gt;Key&lt;&#x2F;strong&gt; A guess is “informative” if it is unlikely, i.e., the more unlikely the  pattern, the fewer possibilities remain to be checked. A highly unlikely guess, if correct, significantly cuts down the solution space.&lt;&#x2F;p&gt;
-&lt;p&gt;The expected amount of information from the distribution for a certain word is &lt;&#x2F;p&gt;
+&lt;p&gt;The expected amount of information from the distribution for a certain word is&lt;&#x2F;p&gt;
 &lt;p&gt;$$
 E[\text{Information}] = \sum_x {p(x) \cdot \text{Something}}
 $$&lt;&#x2F;p&gt;
@@ -275,20 +384,31 @@ $$&lt;&#x2F;p&gt;
 &lt;p&gt;First give a guess based on the word that gives the highest expected number of bits of information. Then for the next guess use the more restricted list of words based on the result of the first guess, and so on.&lt;&#x2F;p&gt;
 &lt;p&gt;The solver can be run across every single word in the word-list to work out an average score.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;a-better-strategy&quot;&gt;A better strategy?&lt;&#x2F;h2&gt;
-&lt;p&gt;Assign a probability for each word for being in the final list based on frequency of use in the English language instead of a uniform distribution. Grant ranks them by frequency and uses a sigmoid function to assign probabilities. Use this to measure the “remaining uncertainty” of the possible word candidates left. So even if the number of possible words is higher, the uncertainty would be lower thanks to the weighted distribution. &lt;&#x2F;p&gt;
+&lt;p&gt;Assign a probability for each word for being in the final list based on frequency of use in the English language instead of a uniform distribution. Grant ranks them by frequency and uses a sigmoid function to assign probabilities. Use this to measure the “remaining uncertainty” of the possible word candidates left. So even if the number of possible words is higher, the uncertainty would be lower thanks to the weighted distribution.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;expected-score&quot;&gt;Expected Score&lt;&#x2F;h2&gt;
 &lt;p&gt;TBD.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
 &lt;p&gt;[1] &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=v68zYyaEmEA&quot;&gt;The mathematically optimal Wordle strategy&lt;&#x2F;a&gt;, 3Blue1Brown&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>What is the Gamma Function?</title>
-		<published>2021-12-13T03:06:04.286+00:00</published>
-		<updated>2021-12-13T03:06:04.286+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202111122106-what-is-the-gamma-function/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202111122106-what-is-the-gamma-function/</id>
-		<content type="html">&lt;p&gt;The gamma function is a generalization of the factorial to complex numbers. The factorial is function defined for positive natural numbers as the product of all the positive numbers preceding it.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>What is the Gamma Function?</title>
+        <published>2021-12-13T03:06:04.286+00:00</published>
+        <updated>2021-12-13T03:06:04.286+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202111122106-what-is-the-gamma-function/"/>
+        <id>https://www.thomasantony.com/notes/202111122106-what-is-the-gamma-function/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202111122106-what-is-the-gamma-function/">&lt;p&gt;The gamma function is a generalization of the factorial to complex numbers. The factorial is function defined for positive natural numbers as the product of all the positive numbers preceding it.&lt;&#x2F;p&gt;
 &lt;div&gt;
     $$
 n! = n (n-1) (n-2) ...
@@ -311,5 +431,6 @@ $$
 &lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=dGnIJFzkLI4&quot;&gt;The Gamma Function&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;&#x2F;div&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

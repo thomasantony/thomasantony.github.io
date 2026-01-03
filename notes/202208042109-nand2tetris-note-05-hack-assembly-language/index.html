@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -139,9 +143,9 @@
 denotes “C”</p>
 <p>a through c6 defines the computation to be performed as inputs to the ALU. There is a table describing every operation allowed here. d1 d2 d3 defines the destination of the computation (or 0 0 0 for null), j1 j2 j3 reperesents a jump instruction (conditional, uncondtional, null etc.)</p>
 <h2 id="i-o">I/O</h2>
-<p>I/O is performed by writing/reading from specific memory addresses. Display on the screen is accomplished by writing to 8K 16-bit registers starting at address <code>16384</code>. Each bit represents a pixel in a 256x512 matrix stored in row-major form. </p>
+<p>I/O is performed by writing/reading from specific memory addresses. Display on the screen is accomplished by writing to 8K 16-bit registers starting at address <code>16384</code>. Each bit represents a pixel in a 256x512 matrix stored in row-major form.</p>
 <p>For pixel at (row, col):
-32*row + col/16  -&gt; word index 
+32*row + col/16  -&gt; word index
 col % 16 -&gt; bit index within word</p>
 <p>The keyboard value is represented by a single 16-bit value at the address <code>24576</code>.</p>
 <h2 id="assembly-language">Assembly language</h2>

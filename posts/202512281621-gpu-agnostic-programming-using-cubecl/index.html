@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -548,7 +552,7 @@
 <p>The next step is to compute the “shared totals”. This is the total sum from each plane accumulated into a shared memory array. In this case, it would be <code>[32, 32]</code>. This is done by adding the last value of the local scan in the current plane, with the last value of the input array processed by the current plane.</p>
 </li>
 </ol>
-<p>To compute this, we use another plane-intrinsic function called <a rel="noopener" target="_blank" href="https://docs.rs/cubecl/latest/cubecl/frontend/fn.plane_shuffle.html">plane_shuffle</a>. </p>
+<p>To compute this, we use another plane-intrinsic function called <a rel="noopener" target="_blank" href="https://docs.rs/cubecl/latest/cubecl/frontend/fn.plane_shuffle.html">plane_shuffle</a>.</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#96b5b4;">plane_shuffle</span><span>(local_scan, plane_size - </span><span style="color:#d08770;">1</span><span>)
 </span></code></pre>
 <p>The above function call returns the value of <code>local_scan</code> from the thread index <code>plane_size - 1</code> (aka the final thread in the plane). So the shared total is computed as:</p>

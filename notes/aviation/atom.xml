@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title>Thomas Antony - Aviation</title>
-	<subtitle>My personal website and notes</subtitle>
-	<link href="https://www.thomasantony.com/notes/aviation/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.thomasantony.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2025-05-26T18:00:35.953+00:00</updated>
-	<id>https://www.thomasantony.com/notes/aviation/atom.xml</id>
-	<entry xml:lang="en">
-		<title>IFR Alternate Requirements</title>
-		<published>2025-05-26T18:00:35.953+00:00</published>
-		<updated>2025-05-26T18:00:35.953+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202504261100-ifr-alternate-requirements/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202504261100-ifr-alternate-requirements/</id>
-		<content type="html">&lt;h2 id=&quot;the-1-2-3-rule&quot;&gt;The 1-2-3 Rule&lt;&#x2F;h2&gt;
+    <title>Thomas Antony - Aviation</title>
+    <subtitle>My personal website and notes</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://www.thomasantony.com/notes/aviation/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://www.thomasantony.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-05-26T18:00:35.953+00:00</updated>
+    <id>https://www.thomasantony.com/notes/aviation/atom.xml</id>
+    <entry xml:lang="en">
+        <title>IFR Alternate Requirements</title>
+        <published>2025-05-26T18:00:35.953+00:00</published>
+        <updated>2025-05-26T18:00:35.953+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202504261100-ifr-alternate-requirements/"/>
+        <id>https://www.thomasantony.com/notes/202504261100-ifr-alternate-requirements/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202504261100-ifr-alternate-requirements/">&lt;h2 id=&quot;the-1-2-3-rule&quot;&gt;The 1-2-3 Rule&lt;&#x2F;h2&gt;
 &lt;p&gt;For an IFR flight, you &lt;strong&gt;do not&lt;&#x2F;strong&gt; have to file an alternative if the following conditions are forecast at ETA +&#x2F;- &lt;strong&gt;1&lt;&#x2F;strong&gt; hour:&lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;At least &lt;strong&gt;2&lt;&#x2F;strong&gt;000 ft ceiling&lt;&#x2F;li&gt;
@@ -27,14 +37,25 @@
 &lt;&#x2F;ul&gt;
 &lt;p&gt;If the airport has non-standard alternate minimums defined for it (identified by an “A” icon in the notes section of their FAA approach plates)), those values apply instead. These non-standard minima are published in the U.S. Terminal Procedures Publication (TPP).&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Engine start procedure for Cirrus SR22T-G6</title>
-		<published>2025-05-24T19:45:38.319+00:00</published>
-		<updated>2025-05-24T19:45:38.319+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202504241245-engine-start-procedure-for-cirrus-sr22t-g6/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202504241245-engine-start-procedure-for-cirrus-sr22t-g6/</id>
-		<content type="html">&lt;h2 id=&quot;cold-start-first-start-of-the-day-or-oil-temp-100f&quot;&gt;Cold Start (First start of the day or Oil temp &amp;lt; 100F)&lt;&#x2F;h2&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Engine start procedure for Cirrus SR22T-G6</title>
+        <published>2025-05-24T19:45:38.319+00:00</published>
+        <updated>2025-05-24T19:45:38.319+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202504241245-engine-start-procedure-for-cirrus-sr22t-g6/"/>
+        <id>https://www.thomasantony.com/notes/202504241245-engine-start-procedure-for-cirrus-sr22t-g6/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202504241245-engine-start-procedure-for-cirrus-sr22t-g6/">&lt;h2 id=&quot;cold-start-first-start-of-the-day-or-oil-temp-100f&quot;&gt;Cold Start (First start of the day or Oil temp &amp;lt; 100F)&lt;&#x2F;h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Mixture: Full Rich&lt;&#x2F;li&gt;
 &lt;li&gt;Power Lever: Full Forward&lt;&#x2F;li&gt;
@@ -47,7 +68,7 @@
 &lt;h2 id=&quot;hot-start-oil-temp-100f&quot;&gt;Hot Start (Oil temp &amp;gt; 100F)&lt;&#x2F;h2&gt;
 &lt;p&gt;If the engine is warm, no priming is required. Remaining procedure is the same.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;hot-start-oil-temp-is-nw-150f-and-200f&quot;&gt;Hot Start (Oil temp is nw&#x2F; 150F and 200F)&lt;&#x2F;h2&gt;
-&lt;p&gt;Alternate technique: &lt;&#x2F;p&gt;
+&lt;p&gt;Alternate technique:&lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;No priming&lt;&#x2F;li&gt;
 &lt;li&gt;Mixture at cutoff, power at half (“W”)&lt;&#x2F;li&gt;
@@ -70,14 +91,25 @@
 [2] Cirrus SR22T-G6 POH - Section 4-11
 [3] https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=eFAb9JK–HM&lt;&#x2F;p&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Cirrus SR22T: Abnormal Procedures for the Turbocharger</title>
-		<published>2025-05-18T19:40:25.631+00:00</published>
-		<updated>2025-05-18T19:40:25.631+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202504181240-cirrus-sr22t-abnormal-procedures-for-the-turbocharger/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202504181240-cirrus-sr22t-abnormal-procedures-for-the-turbocharger/</id>
-		<content type="html">&lt;p&gt;In the event of an unexplained loss of manifold pressure in an SR22T, the engine reverts to operating like a naturally aspirated engine. However, depending on the cause of the anomaly, this could be anything from a benign to a serious event. However, since it is not possible to accurately determine the exact cause, any such event should require an immediate diversion.&lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Cirrus SR22T: Abnormal Procedures for the Turbocharger</title>
+        <published>2025-05-18T19:40:25.631+00:00</published>
+        <updated>2025-05-18T19:40:25.631+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202504181240-cirrus-sr22t-abnormal-procedures-for-the-turbocharger/"/>
+        <id>https://www.thomasantony.com/notes/202504181240-cirrus-sr22t-abnormal-procedures-for-the-turbocharger/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202504181240-cirrus-sr22t-abnormal-procedures-for-the-turbocharger/">&lt;p&gt;In the event of an unexplained loss of manifold pressure in an SR22T, the engine reverts to operating like a naturally aspirated engine. However, depending on the cause of the anomaly, this could be anything from a benign to a serious event. However, since it is not possible to accurately determine the exact cause, any such event should require an immediate diversion.&lt;&#x2F;p&gt;
 &lt;ol&gt;
 &lt;li&gt;Induction leak&lt;&#x2F;li&gt;
 &lt;&#x2F;ol&gt;
@@ -99,5 +131,6 @@
 &lt;li&gt;https:&#x2F;&#x2F;itunes.apple.com&#x2F;WebObjects&#x2F;MZStore.woa&#x2F;wa&#x2F;viewBook?id=1072487639&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

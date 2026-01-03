@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -146,7 +150,7 @@
 A\,B\,C\,{\sin}^{2}\left(\theta\right)
 $$
 </div>
-<p>So we cannot solve for the second derivatives when $\theta = 0$ and the Euler angles may change drastically when $\theta$ is small. This does not mean the actual motion of the rigid body is anything but well-behaved. The problem lies entirely in the representation of the motion using Euler angles. We may use another set of Euler angles when necessary to avoid this problem, but this tends to be cumbersome. In this section, we will be limiting our focus to trajectories that will not contain singularities for the chosen Euler angle set. </p>
+<p>So we cannot solve for the second derivatives when $\theta = 0$ and the Euler angles may change drastically when $\theta$ is small. This does not mean the actual motion of the rigid body is anything but well-behaved. The problem lies entirely in the representation of the motion using Euler angles. We may use another set of Euler angles when necessary to avoid this problem, but this tends to be cumbersome. In this section, we will be limiting our focus to trajectories that will not contain singularities for the chosen Euler angle set.</p>
 <p>To obtain trjectories, we numerically integrate the Lagrange equations. The system derivative can be obtained directly from the Lagrangian using <code>Lagrangian-&gt;state-derivative</code></p>
 <p>TBD: Figure out plotting in Clojupyter</p>
 <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">rigid-sysder </span><span>[A B C]

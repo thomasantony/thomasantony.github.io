@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -124,7 +128,7 @@
 <section>
 <p id="post">
   <h1>Transparent Rust bindings for C++ structs</h1>
-  <article><p>This is a short note about the things I discovered about creating transparent bindings for C++ structs into Rust using <a rel="noopener" target="_blank" href="https://cxx.rs">cxx</a>. </p>
+  <article><p>This is a short note about the things I discovered about creating transparent bindings for C++ structs into Rust using <a rel="noopener" target="_blank" href="https://cxx.rs">cxx</a>.</p>
 <h2 id="c-types">C types</h2>
 <p>For scalar types like DWORD, and pointer types that reslve down to void*, a ctype wrapper macro can be used to generate a “new-type” that transparently resolves to the underlying type on the C++ side without having to use <code>Box</code> or <code>unique_ptr</code>.</p>
 <p>This is can be further simplified using a macro adapted from the one at <a rel="noopener" target="_blank" href="https://github.com/dtolnay/cxx/issues/254#issuecomment-747860504">https://github.com/dtolnay/cxx/issues/254#issuecomment-747860504</a>. The macro looks something like this:</p>
@@ -158,7 +162,7 @@
 <p>The macro has two variants that are almost the same. They generate a newtype wrapping the given underling type and also implements the <code>cxx::ExternType</code> trait for it allowing to pass it by value to/from C++ code. The variant with 3 arguments can be used to create a type alias for at the same time. For example:</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>ctype_wrapper!(</span><span style="color:#d08770;">THRUSTER_HANDLE</span><span>, </span><span style="color:#b48ead;">usize</span><span>, ThrusterHandle);
 </span></code></pre>
-<p>will generate a new-type called <code>THRUSTER_HANDLE</code> wrapping <code>usize</code> as well as an alias called <code>ThrusterHandle</code>. Eithe the type or its alias now be used within an <code>extern &quot;C++&quot;</code> section as:</p>
+<p>will generate a new-type called <code>THRUSTER_HANDLE</code> wrapping <code>usize</code> as well as an alias called <code>ThrusterHandle</code>. Eithe the type or its alias now be used within an <code>extern "C++"</code> section as:</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>...
 </span><span style="color:#b48ead;">extern </span><span>&quot;</span><span style="color:#a3be8c;">C++</span><span>&quot; {
 </span><span>    </span><span style="color:#b48ead;">type </span><span>THRUSTER_HANDLE = </span><span style="color:#b48ead;">crate</span><span>::ThrusterHandle;

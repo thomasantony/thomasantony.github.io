@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -168,7 +172,7 @@ $$
 \mathscr{M}(\theta, \varphi, \psi) = \mathbf{R}_x(\varphi) \mathbf{R}_y(\theta) \mathbf{R}_z(\psi)
 $$
 </div>
-<p>The rotation matrices and their products can be computed as shown below. These can then be combined with the procedures <code> M-of-q-&gt;omega-of-t</code> and <code>M-of-q-&gt;omega-body-of-t</code> from <a href="/projects/sicm-workbook/section-2.2-kinematics-of-rotation">section 2.2</a> to compute the components of the angular velocity vector and the body components of the angular velocity vector. </p>
+<p>The rotation matrices and their products can be computed as shown below. These can then be combined with the procedures <code> M-of-q-&gt;omega-of-t</code> and <code>M-of-q-&gt;omega-body-of-t</code> from <a href="/projects/sicm-workbook/section-2.2-kinematics-of-rotation">section 2.2</a> to compute the components of the angular velocity vector and the body components of the angular velocity vector.</p>
 <p>The code below computes the components of the angular velocity vector for the given Euler angle set.</p>
 <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">defn </span><span style="color:#8fa1b3;">Rz-matrix </span><span>[angle]
 </span><span>  (</span><span style="color:#bf616a;">matrix-by-rows

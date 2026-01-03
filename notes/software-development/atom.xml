@@ -1,53 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title>Thomas Antony - Software Development</title>
-	<subtitle>My personal website and notes</subtitle>
-	<link href="https://www.thomasantony.com/notes/software-development/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.thomasantony.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2025-10-12T19:03:44.388+00:00</updated>
-	<id>https://www.thomasantony.com/notes/software-development/atom.xml</id>
-	<entry xml:lang="en">
-		<title>Git Worktrees</title>
-		<published>2025-10-12T19:03:44.388+00:00</published>
-		<updated>2025-10-12T19:03:44.388+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202509121203-git-worktrees/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202509121203-git-worktrees/</id>
-		<content type="html">&lt;p&gt;Git worktrees allow you to check out multiple branches simultaneously without re-cloning the repository multiple times &lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. This is an alternative to using “stash” to save uncommited changes and switching branches.&lt;&#x2F;p&gt;
+    <title>Thomas Antony - Software Development</title>
+    <subtitle>My personal website and notes</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://www.thomasantony.com/notes/software-development/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://www.thomasantony.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-10-12T19:03:44.388+00:00</updated>
+    <id>https://www.thomasantony.com/notes/software-development/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Git Worktrees</title>
+        <published>2025-10-12T19:03:44.388+00:00</published>
+        <updated>2025-10-12T19:03:44.388+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202509121203-git-worktrees/"/>
+        <id>https://www.thomasantony.com/notes/202509121203-git-worktrees/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202509121203-git-worktrees/">&lt;p&gt;Git worktrees allow you to check out multiple branches simultaneously without re-cloning the repository multiple times &lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. This is an alternative to using “stash” to save uncommited changes and switching branches.&lt;&#x2F;p&gt;
 &lt;p&gt;For example, if we are currently on branch &lt;code&gt;feature&#x2F;ticket-number-xxxx&lt;&#x2F;code&gt; and want to go work on &lt;code&gt;bugfix&#x2F;ticket-yyyy&lt;&#x2F;code&gt;, we can run the command&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span&gt; worktree add ..&#x2F;proj-ticket-yyyy bugfix&#x2F;ticket-yyyy
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;The command is to be run from the root directory of your repo, but the worktree itself will be created in the parent directory (or elsewhere). There is no &lt;code&gt;.git&lt;&#x2F;code&gt; folder in the new folder that gets created, but instead it has a &lt;code&gt;.git&lt;&#x2F;code&gt; file. It is recommended to do it this way to avoid confusion from nesting folders in the same repo. &lt;&#x2F;p&gt;
+&lt;p&gt;The command is to be run from the root directory of your repo, but the worktree itself will be created in the parent directory (or elsewhere). There is no &lt;code&gt;.git&lt;&#x2F;code&gt; folder in the new folder that gets created, but instead it has a &lt;code&gt;.git&lt;&#x2F;code&gt; file. It is recommended to do it this way to avoid confusion from nesting folders in the same repo.&lt;&#x2F;p&gt;
 &lt;p&gt;You can run git commands such as commit, push, pull, rebase etc. in the separate worktree folder even while another branch is checked out in your original folder.&lt;&#x2F;p&gt;
 &lt;p&gt;Once you are done with the branch, you can run &lt;code&gt;git worktree remove .&lt;&#x2F;code&gt; to remove the folder with the worktree.&lt;&#x2F;p&gt;
 &lt;p&gt;A worktree is also useful when doing code reviews if you want to check out an existing branch without moving away from whatever branch you were working on. This is especially useful on projects with long compile times when switching between branches.&lt;&#x2F;p&gt;
 &lt;p&gt;Worktrees are also very useful when working with agentic coding tools like Claude Code. You can have multiple parallel instances of the AI working on different branches of the code simultaneously &lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;references&quot;&gt;References&lt;&#x2F;h2&gt;
 &lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
-&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=ntM7utSjeVU&quot;&gt;Git Worktrees - An Alternative to Git Stash&lt;&#x2F;a&gt;
-&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;: &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;blog.fsck.com&#x2F;2025&#x2F;10&#x2F;05&#x2F;how-im-using-coding-agents-in-september-2025&#x2F;&quot;&gt;How I am using Coding Agents in September 2025&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=ntM7utSjeVU&quot;&gt;Git Worktrees - An Alternative to Git Stash&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;blog.fsck.com&#x2F;2025&#x2F;10&#x2F;05&#x2F;how-im-using-coding-agents-in-september-2025&#x2F;&quot;&gt;How I am using Coding Agents in September 2025&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;&#x2F;div&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Python extension debugging in Vscode</title>
-		<published>2023-03-27T15:14:29.276+00:00</published>
-		<updated>2023-03-27T15:14:29.276+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202302271614-python-extension-debugging-in-vscode/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202302271614-python-extension-debugging-in-vscode/</id>
-		<content type="html">&lt;h2 id=&quot;troubleshooting&quot;&gt;Troubleshooting&lt;&#x2F;h2&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Python extension debugging in Vscode</title>
+        <published>2023-03-27T15:14:29.276+00:00</published>
+        <updated>2023-03-27T15:14:29.276+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202302271614-python-extension-debugging-in-vscode/"/>
+        <id>https://www.thomasantony.com/notes/202302271614-python-extension-debugging-in-vscode/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202302271614-python-extension-debugging-in-vscode/">&lt;h2 id=&quot;troubleshooting&quot;&gt;Troubleshooting&lt;&#x2F;h2&gt;
 &lt;ul&gt;
 &lt;li&gt;If you get EXC_BAD_INSTRUCTION on M1 Mac, downgrade openssl from 3.1.0 to 3.0.7 (and Python to 3.10.9)&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 </content>
-	</entry>
-	<entry xml:lang="en">
-		<title>Transparent Rust bindings for C++ structs</title>
-		<published>2022-01-11T03:28:20.283+00:00</published>
-		<updated>2022-01-11T03:28:20.283+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/</id>
-		<content type="html">&lt;p&gt;This is a short note about the things I discovered about creating transparent bindings for C++ structs into Rust using &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;cxx.rs&quot;&gt;cxx&lt;&#x2F;a&gt;. &lt;&#x2F;p&gt;
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Transparent Rust bindings for C++ structs</title>
+        <published>2022-01-11T03:28:20.283+00:00</published>
+        <updated>2022-01-11T03:28:20.283+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/"/>
+        <id>https://www.thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202200102128-transparent-rust-bindings-for-c-structs/">&lt;p&gt;This is a short note about the things I discovered about creating transparent bindings for C++ structs into Rust using &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;cxx.rs&quot;&gt;cxx&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;c-types&quot;&gt;C types&lt;&#x2F;h2&gt;
 &lt;p&gt;For scalar types like DWORD, and pointer types that reslve down to void*, a ctype wrapper macro can be used to generate a “new-type” that transparently resolves to the underlying type on the C++ side without having to use &lt;code&gt;Box&lt;&#x2F;code&gt; or &lt;code&gt;unique_ptr&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;This is can be further simplified using a macro adapted from the one at &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;dtolnay&#x2F;cxx&#x2F;issues&#x2F;254#issuecomment-747860504&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;dtolnay&#x2F;cxx&#x2F;issues&#x2F;254#issuecomment-747860504&lt;&#x2F;a&gt;. The macro looks something like this:&lt;&#x2F;p&gt;
@@ -81,7 +115,7 @@
 &lt;p&gt;The macro has two variants that are almost the same. They generate a newtype wrapping the given underling type and also implements the &lt;code&gt;cxx::ExternType&lt;&#x2F;code&gt; trait for it allowing to pass it by value to&#x2F;from C++ code. The variant with 3 arguments can be used to create a type alias for at the same time. For example:&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;ctype_wrapper!(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;THRUSTER_HANDLE&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;usize&lt;&#x2F;span&gt;&lt;span&gt;, ThrusterHandle);
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;will generate a new-type called &lt;code&gt;THRUSTER_HANDLE&lt;&#x2F;code&gt; wrapping &lt;code&gt;usize&lt;&#x2F;code&gt; as well as an alias called &lt;code&gt;ThrusterHandle&lt;&#x2F;code&gt;. Eithe the type or its alias now be used within an &lt;code&gt;extern &amp;quot;C++&amp;quot;&lt;&#x2F;code&gt; section as:&lt;&#x2F;p&gt;
+&lt;p&gt;will generate a new-type called &lt;code&gt;THRUSTER_HANDLE&lt;&#x2F;code&gt; wrapping &lt;code&gt;usize&lt;&#x2F;code&gt; as well as an alias called &lt;code&gt;ThrusterHandle&lt;&#x2F;code&gt;. Eithe the type or its alias now be used within an &lt;code&gt;extern &quot;C++&quot;&lt;&#x2F;code&gt; section as:&lt;&#x2F;p&gt;
 &lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;...
 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;extern &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;C++&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; {
 &lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;type &lt;&#x2F;span&gt;&lt;span&gt;THRUSTER_HANDLE = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;crate&lt;&#x2F;span&gt;&lt;span&gt;::ThrusterHandle;
@@ -110,5 +144,6 @@
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
 &lt;p&gt;This type can also now be passed by value to&#x2F;from C++ code without requiring any other wrapper around it.&lt;&#x2F;p&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

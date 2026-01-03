@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -140,11 +144,11 @@
 <p><code>:qall!</code> quits vim discarding all changes in all buffers</p>
 <p><code>:wall</code> writes all modified buffers to disk</p>
 <h2 id="hidden-setting">Hidden setting</h2>
-<p>This is used when we want to disable the “nags” from vim when we try to switch from a modified buffer. This is useful when applying batches of commands to the arg list or buffers using <code>:argdo</code> or <code>:bufdo</code>. </p>
+<p>This is used when we want to disable the “nags” from vim when we try to switch from a modified buffer. This is useful when applying batches of commands to the arg list or buffers using <code>:argdo</code> or <code>:bufdo</code>.</p>
 <p>Use <code>:set hidden</code> or <code>:set hid</code> to enable this.
 Use <code>:set nohidden</code> or <code>:set nohid</code> to disable this.</p>
 <h2 id="relative-paths-in-commandline">Relative paths in commandline</h2>
-<p><code>%</code> represents the full path to the current file. 
+<p><code>%</code> represents the full path to the current file.
 <code>%:h</code> gets expanded to the  path of the  directory of the current file when used in the vim command line. For example: <code>mkdir -p %:h</code>  creates the directory for the current file’s path in cases where it does not exist.</p>
 <p>Pressing <code>&lt;Tab&gt;</code> after typing %:h also auto-completes the text with the directory of the current file.</p>
 <h2 id="save-file-as-super-user">Save file as super-user</h2>

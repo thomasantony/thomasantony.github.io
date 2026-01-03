@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -128,7 +132,7 @@
 <p>Ironically, the ideas that most profoundly shape the way a future generation thinks will end up looking, to that future generation, simpler than they really are ~ Grant Sanderson (3Blue1Brown)</p>
 </blockquote>
 <p>Hamming code is an error correction system that can be used to correct a single error in a message or detect the presence of two errors. This is more advanced version of <a href="https://www.thomasantony.com/notes/202108162030-parity-check/">Parity Check</a> which can recover the original message if there was only a single error/bit-flip during transmission.</p>
-<p>Assume the following 16-bit message packet with the positions numbered as shown. </p>
+<p>Assume the following 16-bit message packet with the positions numbered as shown.</p>
 <pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[ 0  1  2  3]
 </span><span>[ 4  5  6  7]
 </span><span>[ 8  9 10 11]
@@ -138,8 +142,8 @@
 <p>In bit#1, store the parity bit for the even columns with bits [1, 5, 9, 13] and [3, 7, 11, 15]. Bit#2 holds parity information for the right two columns. These two combined, specify the column with the error.</p>
 <p>Bit#4 similarly holds parity information for the even rows and bit#8 holds parity information for the lower two rows. These two bits combined, specify the row containing the error, effectively locating the position of the error which can then be removed by flipping the bit.</p>
 <p>If all four parity checks pass, then either the message is error free or it has an error in bit#0. This is because the checks said there is no error in even columns, last two columns, even rows and last two rows, leaving just the first row and column. To account for this, we could just ignore bit#0, resulting in 11 bits of information and 4 bits of check bits -&gt; a <strong>(15, 11) Hamming Code</strong>.</p>
-<p>To add double error detection capability, bit#0 could also hold the parity bit for the whole message. If there is a single bit error, the parity of the whole block will fail which can then get corrected by the other bits. However if there are two errors, the whole-message parity check will pass while the error correction using the remaining bits will still indicate the presence of an error. This would indicate the presence of at least two errors in the message. This is called an <strong>Extended Hamming Code</strong>. </p>
-<p>So in summary, the message packet holds 11 bits of data and 5 bits of parity bits. </p>
+<p>To add double error detection capability, bit#0 could also hold the parity bit for the whole message. If there is a single bit error, the parity of the whole block will fail which can then get corrected by the other bits. However if there are two errors, the whole-message parity check will pass while the error correction using the remaining bits will still indicate the presence of an error. This would indicate the presence of at least two errors in the message. This is called an <strong>Extended Hamming Code</strong>.</p>
+<p>So in summary, the message packet holds 11 bits of data and 5 bits of parity bits.</p>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="https://www.thomasantony.com/notes/202108162030-parity-check/">Parity Check</a></li>

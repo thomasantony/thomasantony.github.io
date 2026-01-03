@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -147,7 +151,7 @@
 A\,\dot {\varphi}\,{\sin}^{2}\left(\psi\right)\,{\sin}^{2}\left(\theta\right) + B\,\dot {\varphi}\,{\sin}^{2}\left(\theta\right)\,{\cos}^{2}\left(\psi\right) + A\,\dot {\theta}\,\sin\left(\psi\right)\,\sin\left(\theta\right)\,\cos\left(\psi\right) - B\,\dot {\theta}\,\sin\left(\psi\right)\,\sin\left(\theta\right)\,\cos\left(\psi\right) + C\,\dot {\varphi}\,{\cos}^{2}\left(\theta\right) + C\,\dot {\psi}\,\cos\left(\theta\right)
 $$
 </div>
-<p>Due to the symmetries in the Lagrangian, we know that the quantity described above ($p_\varphi$) is conserved during the motion of a rigid body. </p>
+<p>Due to the symmetries in the Lagrangian, we know that the quantity described above ($p_\varphi$) is conserved during the motion of a rigid body.</p>
 <p>In the absence of external torques, we would also expect the angular momentum to be conserved. This can be verified by the Lagrangian formulation. The quantity computed above, $p_\varphi$, can be shown to be the $z$ component of the angular momentum. This is verified below:</p>
 <pre data-lang="clojure" style="background-color:#2b303b;color:#c0c5ce;" class="language-clojure "><code class="language-clojure" data-lang="clojure"><span>(</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">L_z </span><span>(</span><span style="color:#bf616a;">ref </span><span>((</span><span style="color:#bf616a;">rigid/Euler-state-&gt;L-space </span><span>&#39;A &#39;B &#39;C) Euler-state)
 </span><span>        </span><span style="color:#d08770;">2</span><span>))

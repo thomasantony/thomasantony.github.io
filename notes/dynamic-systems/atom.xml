@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<title>Thomas Antony - Dynamic Systems</title>
-	<subtitle>My personal website and notes</subtitle>
-	<link href="https://www.thomasantony.com/notes/dynamic-systems/atom.xml" rel="self" type="application/atom+xml"/>
-  <link href="https://www.thomasantony.com"/>
-	<generator uri="https://www.getzola.org/">Zola</generator>
-	<updated>2024-08-05T20:18:21.325+00:00</updated>
-	<id>https://www.thomasantony.com/notes/dynamic-systems/atom.xml</id>
-	<entry xml:lang="en">
-		<title>SINDy: Sparse Identification of Nonlinear Dynamics</title>
-		<published>2024-08-05T20:18:21.325+00:00</published>
-		<updated>2024-08-05T20:18:21.325+00:00</updated>
-		<link rel="alternate" href="https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/" type="text/html"/>
-		<id>https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/</id>
-		<content type="html">&lt;p&gt;SINDy&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; is an algorithm for identifying a nonlinear dynamic model from data. The algorithm fits a dynamic model, $\dot{x} = f(\mathbf{x}(t))$, for a state vector $\mathbf{x}$. Steps:&lt;&#x2F;p&gt;
+    <title>Thomas Antony - Dynamic Systems</title>
+    <subtitle>My personal website and notes</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://www.thomasantony.com/notes/dynamic-systems/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://www.thomasantony.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-08-05T20:18:21.325+00:00</updated>
+    <id>https://www.thomasantony.com/notes/dynamic-systems/atom.xml</id>
+    <entry xml:lang="en">
+        <title>SINDy: Sparse Identification of Nonlinear Dynamics</title>
+        <published>2024-08-05T20:18:21.325+00:00</published>
+        <updated>2024-08-05T20:18:21.325+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/"/>
+        <id>https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/</id>
+        
+        <content type="html" xml:base="https://www.thomasantony.com/notes/202407052118-sindy-sparse-identification-of-nonlinear-dynamics/">&lt;p&gt;SINDy&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; is an algorithm for identifying a nonlinear dynamic model from data. The algorithm fits a dynamic model, $\dot{x} = f(\mathbf{x}(t))$, for a state vector $\mathbf{x}$. Steps:&lt;&#x2F;p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Sample $\mathbf{x}$ and $\mathbf{\dot{x}}$ at $m$ points in time into matrices $\mathbf{X}$ and $\mathbf{\dot{X}}$
@@ -34,5 +44,6 @@
 &lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;pysindy.readthedocs.io&#x2F;en&#x2F;latest&#x2F;examples&#x2F;index.html&quot;&gt;PySINDy Examples&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;&#x2F;div&gt;
 </content>
-	</entry>
+        
+    </entry>
 </feed>

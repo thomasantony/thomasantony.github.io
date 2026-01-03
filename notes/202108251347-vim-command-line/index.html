@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -127,14 +131,14 @@
   <article><blockquote>
 <p>Ex commands strike far and wide</p>
 </blockquote>
-<p>Using the <code>:</code> key in vim activates command mode. This allows us to enter commands that were originally built for the “ex” editor. Most operations performed in Normal mode have an analaogue in the command line. </p>
+<p>Using the <code>:</code> key in vim activates command mode. This allows us to enter commands that were originally built for the “ex” editor. Most operations performed in Normal mode have an analaogue in the command line.</p>
 <p>Simple example:</p>
 <p><code>:print</code> or <code>:p</code> prints current line
 <code>:delete</code> or <code>:d</code> deletes current line
 <code>:substitute</code> or <code>:s</code> is used for find/replace. Skipping the “find” pattern applies it to selections made using a previous “find”, such as using “*”</p>
 <h2 id="specifying-ranges">Specifying ranges</h2>
 <p>Move to line using <code>:{number}</code>
-This can be combiend with commands as <code>:1p</code>. A range of lines is specified as <code>:{start}{end}</code>. <code>$</code> denotes the last line and <code>%</code> denotes <em>all</em> lines and is equivalent to <code>1,$</code>. </p>
+This can be combiend with commands as <code>:1p</code>. A range of lines is specified as <code>:{start}{end}</code>. <code>$</code> denotes the last line and <code>%</code> denotes <em>all</em> lines and is equivalent to <code>1,$</code>.</p>
 <p><code>:%p</code> prints all lines
 <code>:%s/find/replace</code> does a find/replace on the entire file</p>
 <h2 id="visual-selection-for-ranges">Visual selection for ranges</h2>
@@ -151,7 +155,7 @@ This can be combiend with commands as <code>:1p</code>. A range of lines is spec
 <h2 id="normal-mode-commands-on-ranges">Normal mode commands on ranges</h2>
 <p><code>:normal {command}</code> can be used to apply a normal mode command to a range (visual or otherwise).</p>
 <p>Example:</p>
-<p><code>'&lt;,'&gt;normal .</code> applies the last change to each line in the selected visual range. 
+<p><code>'&lt;,'&gt;normal .</code> applies the last change to each line in the selected visual range.
 <code>:%normal A;</code> append a semi-colon to the end of each line in the file.</p>
 <p><code>:normal</code> moves the cursor to the beginning of each line before executing the command.</p>
 <h2 id="copy-word-to-command-line">Copy word to command line</h2>

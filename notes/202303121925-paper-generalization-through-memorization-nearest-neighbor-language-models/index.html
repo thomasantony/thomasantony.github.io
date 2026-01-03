@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -132,7 +136,7 @@
 <h2 id="how-it-works">How it works</h2>
 <p>The method essentially involves “memorizing” the training set and using it to directly augment the model at inference time. This can also be used for memorizing data <em>other than the training set</em> and give similar improvements.</p>
 <h3 id="indexing-or-memorizing">Indexing or “Memorizing”</h3>
-<p>The data-store is a “key-value” database, similar to <a rel="noopener" target="_blank" href="https://github.com/facebookresearch/faiss">faiss</a> or <a rel="noopener" target="_blank" href="https://www.pinecone.io/">pinecone</a> with vectors (of floating point numbers) that form keys and some arbitrary data as value. To “memorize” a data set, the existing LLM is evaluated on the data split into some chunk size, and the outputs of the network right before the final “softmax” layer is used as the “key” for the database, while the subsequent token in the dataset (which the model is supposed to predict) is stored as the value. </p>
+<p>The data-store is a “key-value” database, similar to <a rel="noopener" target="_blank" href="https://github.com/facebookresearch/faiss">faiss</a> or <a rel="noopener" target="_blank" href="https://www.pinecone.io/">pinecone</a> with vectors (of floating point numbers) that form keys and some arbitrary data as value. To “memorize” a data set, the existing LLM is evaluated on the data split into some chunk size, and the outputs of the network right before the final “softmax” layer is used as the “key” for the database, while the subsequent token in the dataset (which the model is supposed to predict) is stored as the value.</p>
 <p>Assume that $x_0$, $x_1$ … $x_{n-1}$, are the different tokens in a chunk of text from the dataset. Let <code>f</code> be a function that converts this token sequence into the “key” vector. In the paper, they examined different layer outputs for this and showed that the output of the final layer, right before the soft-max activation, is a good candidate for this. So for a given token-sequence, the key and value are given by</p>
 <div>
     $$

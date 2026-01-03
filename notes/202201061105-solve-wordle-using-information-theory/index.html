@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -129,7 +133,7 @@
 <p>For any given word, we can find a distribution for probabilities for each pattern of colors that could be revealed. Example, for “WEARY”, there is some number of words that do not contain any of the letters, some that contain W, some with W and E, some with E at the first position, etc.</p>
 <p>We can geenrate the list of all possible outcomes for a given word, and check how many words in the list match the patterns to come up with a probability.</p>
 <p><strong>Key</strong> A guess is “informative” if it is unlikely, i.e., the more unlikely the  pattern, the fewer possibilities remain to be checked. A highly unlikely guess, if correct, significantly cuts down the solution space.</p>
-<p>The expected amount of information from the distribution for a certain word is </p>
+<p>The expected amount of information from the distribution for a certain word is</p>
 <p>$$
 E[\text{Information}] = \sum_x {p(x) \cdot \text{Something}}
 $$</p>
@@ -161,7 +165,7 @@ $$</p>
 <p>First give a guess based on the word that gives the highest expected number of bits of information. Then for the next guess use the more restricted list of words based on the result of the first guess, and so on.</p>
 <p>The solver can be run across every single word in the word-list to work out an average score.</p>
 <h2 id="a-better-strategy">A better strategy?</h2>
-<p>Assign a probability for each word for being in the final list based on frequency of use in the English language instead of a uniform distribution. Grant ranks them by frequency and uses a sigmoid function to assign probabilities. Use this to measure the “remaining uncertainty” of the possible word candidates left. So even if the number of possible words is higher, the uncertainty would be lower thanks to the weighted distribution. </p>
+<p>Assign a probability for each word for being in the final list based on frequency of use in the English language instead of a uniform distribution. Grant ranks them by frequency and uses a sigmoid function to assign probabilities. Use this to measure the “remaining uncertainty” of the possible word candidates left. So even if the number of possible words is higher, the uncertainty would be lower thanks to the weighted distribution.</p>
 <h2 id="expected-score">Expected Score</h2>
 <p>TBD.</p>
 <h2 id="references">References</h2>

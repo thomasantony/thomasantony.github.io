@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -133,11 +137,11 @@
 </span><span>[ 1100  1101  1110  1111]
 </span></code></pre>
 <p>When checking if the even columns pass parity, what we are really checking is this question:</p>
-<p>“If there is an error, is the last bit of its position index a 1?”. This is because the positions in these two columns all have the last bit equal to one. Similarly the other parity checks follow through for the other bits of the error position. This is the reason for the parity bits being places where they are. At those position indices, the only a single bit is “on”. </p>
+<p>“If there is an error, is the last bit of its position index a 1?”. This is because the positions in these two columns all have the last bit equal to one. Similarly the other parity checks follow through for the other bits of the error position. This is the reason for the parity bits being places where they are. At those position indices, the only a single bit is “on”.</p>
 <h2 id="a-note-on-xor">A note on XOR</h2>
 <p>The XOR operation in binary is essentially “add mod 2”. This is also equivalent to a parity check as XOR returns one for an odd number of ones and zero for an even number of ones.</p>
 <h2 id="hamming-code-using-xor">Hamming code using XOR</h2>
-<p>Each column/row being checked can be XORed with each other to get the parity check. So the way to do all four parity checks at once, is to take the <strong>positions of all the ones</strong> in the message and XOR them together to get the position of the error. Each bit in a position index is denoting what parity group it is part of. </p>
+<p>Each column/row being checked can be XORed with each other to get the parity check. So the way to do all four parity checks at once, is to take the <strong>positions of all the ones</strong> in the message and XOR them together to get the position of the error. Each bit in a position index is denoting what parity group it is part of.</p>
 <p>For example, if bit#3 and bit#15, part of the last column are ones, then we XOR 0011 and 1111 resulting in 1100. This means if these were the only ones in the message, parity group “1” and “2”, or even columns and the last two columns have parity of zero, the rows checks have odd parity.</p>
 <h2 id="python-implementation">Python Implementation</h2>
 <p>If <code>bits</code> is a numpy array of zeros and ones.</p>

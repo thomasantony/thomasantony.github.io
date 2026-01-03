@@ -61,6 +61,10 @@
         
         
         
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://www.thomasantony.com/atom.xml">
+        
+        
+        
         <link rel="stylesheet" href="https://www.thomasantony.com/style.css"/>
         
 
@@ -132,13 +136,13 @@
 <h2 id="why-rust">Why Rust?</h2>
 <p>Rust is a relatively new high level systems programming language with a focus on safety. Orbiter is written in C++ and therefore its addons are also typically written in C++. Rust development for Orbiter is facilitated using the <a rel="noopener" target="_blank" href="https://cxx.rs">cxx</a> crate.</p>
 <h2 id="design">Design</h2>
-<p>The repository in its current form produces a DLL file as its build artifact that can be loaded into Orbiter as an addon module. <del>Anyone wanting to create a Rust addon will clone/fork the repository and build it along with the the Rust code for their addon.</del>(See update below). </p>
+<p>The repository in its current form produces a DLL file as its build artifact that can be loaded into Orbiter as an addon module. <del>Anyone wanting to create a Rust addon will clone/fork the repository and build it along with the the Rust code for their addon.</del>(See update below).</p>
 <p>There are a limited number of Orbiter SDK functions currently available as Rust bindings in this prototype.
 This will expand in the future to hopefully encompass the majority of the API. The repository includes a demo addon that models NASA’s <a rel="noopener" target="_blank" href="https://en.wikipedia.org/wiki/Surveyor_program">Surveyor</a> probe. This follows from the C++ tutorial at <a rel="noopener" target="_blank" href="https://www.orbiterwiki.org/wiki/Vessel_Tutorial_1">OrbiterWiki</a> and implements retro-thruster staging and differential thrust attitude control.</p>
 <h2 id="developing-custom-spacecraft-addons">Developing custom spacecraft addons</h2>
 <p><em><strong>Update 01/11/2022: This section has been changed to reflect changes to the crate</strong></em>
 <del>All the spacecraft-specific code in the repository lives in its own file (<code>src/shuttle_pb.rs</code> for example).</del>
-An addon crate implementing a spacecraft should import the <code>orbiter_rs</code> crate. It should then set its crate-type to <code>cdylib</code>. </p>
+An addon crate implementing a spacecraft should import the <code>orbiter_rs</code> crate. It should then set its crate-type to <code>cdylib</code>.</p>
 <pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[package]
 </span><span style="color:#bf616a;">name </span><span>= &quot;</span><span style="color:#a3be8c;">shuttlepb</span><span>&quot;
 </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.1.0</span><span>&quot;
