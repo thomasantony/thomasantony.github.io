@@ -30,7 +30,7 @@
         <meta name="generator" content="Zola v0.16.1">
 
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://www.thomasantony.com/posts/2025/gpu-agnostic-programming-using-cubecl/">
+        <meta property="og:url" content="https://www.thomasantony.com/posts/gpu-agnostic-programming-using-cubecl/">
         <meta property="og:site_name" content="Thomas Antony">
         <meta property="og:title" content="GPU-Agnostic Programming using CubeCL">
         <meta property="og:description" content="My personal website and notes">
@@ -39,18 +39,18 @@
         
         
         <meta property="twitter:card" content="summary_large_image">
-        <meta property="twitter:url" content="https://www.thomasantony.com/posts/2025/gpu-agnostic-programming-using-cubecl/">
+        <meta property="twitter:url" content="https://www.thomasantony.com/posts/gpu-agnostic-programming-using-cubecl/">
         <meta property="twitter:title" content="GPU-Agnostic Programming using CubeCL">
         <meta property="twitter:description" content="My personal website and notes">
         
         
 
-        <link rel="canonical" href="https://www.thomasantony.com/posts/2025/gpu-agnostic-programming-using-cubecl/">
+        <link rel="canonical" href="https://www.thomasantony.com/posts/gpu-agnostic-programming-using-cubecl/">
         
         <script type="application/ld+json">
             {
                 "description":"My personal website and notes",
-                "url":"https://www.thomasantony.com/posts/2025/gpu-agnostic-programming-using-cubecl/",
+                "url":"https://www.thomasantony.com/posts/gpu-agnostic-programming-using-cubecl/",
                 "@type":"WebSite",
                 "headline":"GPU-Agnostic Programming using CubeCL",
                 "name":"GPU-Agnostic Programming using CubeCL",
@@ -125,12 +125,13 @@
             </header>
             <main class="page-content" aria-label="Content">
                 
-<article class="page">
-  <header class="page-header">
+<article class="post">
+  <header class="post-header">
     <h1>GPU-Agnostic Programming using CubeCL</h1>
+    <time datetime="2025-12-29T01:23:21Z">December 29, 2025</time>
   </header>
 
-  <div class="page-content">
+  <div class="post-content">
     <p><a rel="noopener" target="_blank" href="https://crates.io/crates/cubecl">CubeCL</a> is a Rust crate that is used for writing GPU programs in pure Rust, which is compatible with a wide range of GPU platforms. It is the underlying library powering the “<a rel="noopener" target="_blank" href="https://burn.dev/">Burn</a>” machine learning framework.</p>
 <p>This article will look at some of the basics of how to use CubeCL and some of its quirks. You can find the example code in this repository: <a rel="noopener" target="_blank" href="https://github.com/thomasantony/cubecl-recipes">thomasantony/cubecl-recipes</a>.</p>
 <h2 id="cubecl-topology">CubeCL Topology</h2>
@@ -230,7 +231,7 @@
 <h3 id="defining-the-kernel">Defining the Kernel</h3>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">cube</span><span>(launch)]
 </span></code></pre>
-<p>This is a Rust macro that converts a Rust function into a GPU kernel that can be dispatched. It generates the <code>::launch</code> method that is used to dispatch the kernel to the GPU. Within the kernel, you write the code for <em>one</em> of the threads. You identify the element of the array that you are supposed to operate on using the intrinsic values <code>CUBE_POS</code>, <code>UNIT_POS</code> etc. (see <a href="https://www.thomasantony.com/posts/2025/gpu-agnostic-programming-using-cubecl/#cubecl-topology">CubeCL Topology</a> above for details on these constants).</p>
+<p>This is a Rust macro that converts a Rust function into a GPU kernel that can be dispatched. It generates the <code>::launch</code> method that is used to dispatch the kernel to the GPU. Within the kernel, you write the code for <em>one</em> of the threads. You identify the element of the array that you are supposed to operate on using the intrinsic values <code>CUBE_POS</code>, <code>UNIT_POS</code> etc. (see <a href="https://www.thomasantony.com/posts/gpu-agnostic-programming-using-cubecl/#cubecl-topology">CubeCL Topology</a> above for details on these constants).</p>
 <p>In the example code, we assume that the array is to be accessed in the following manner:</p>
 <pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[x x x x x x x x | x x x x x x x x]
 </span><span> ^.............^   ^.............^
@@ -382,7 +383,7 @@
 </span><span>    )
 </span><span>}
 </span></code></pre>
-<p>A practical example of this pattern is shown in the <a href="https://www.thomasantony.com/posts/2025/gpu-agnostic-programming-using-cubecl/#block-exclusive-sum">Block Exclusive Sum</a> section below, where <code>#[comptime]</code> is used to configure the number of planes for shared memory allocation.</p>
+<p>A practical example of this pattern is shown in the <a href="https://www.thomasantony.com/posts/gpu-agnostic-programming-using-cubecl/#block-exclusive-sum">Block Exclusive Sum</a> section below, where <code>#[comptime]</code> is used to configure the number of planes for shared memory allocation.</p>
 <h2 id="atomic-variables">Atomic Variables</h2>
 <p>The <code>Atomic</code> type allows definition of variables that are used for atomic read/write operations. Such operations are useful for avoiding race conditions. For Shared Memory, this is defined as:</p>
 <pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> smem_histogram = SharedMemory::&lt;Atomic&lt;</span><span style="color:#b48ead;">u32</span><span>&gt;&gt;::new(</span><span style="color:#d08770;">SIZE</span><span>);
